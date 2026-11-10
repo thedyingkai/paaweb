@@ -1,0 +1,73 @@
+{
+  "school": "北京电子科技学院",
+  "updatedAt": "2026-11-10",
+  "coverage": "已收录 2009—2026 年公开 ICPC / CCPC 成绩；未公开或未被来源收录的奖项可由成员补充核验。",
+  "recordCount": 136,
+  "eventCount": 64,
+  "medals": {
+    "银牌": 7,
+    "铜牌": 4
+  },
+  "sourceCounts": {
+    "XCPCIO": 107,
+    "CPCFinder": 17,
+    "XCPCRating": 135
+  },
+  "ratingSnapshot": "2026-11-08T18:05:59.759128+00:00",
+  "xcpcioCommit": "c7f374b729bb160c73fba1172e8c09306fc5dab0",
+  "unconfirmedAwards": [
+    "c4e43f5f5674e98aded0",
+    "61cf8c1546ca2135aace",
+    "858c55cf350aed92aabe",
+    "917853b7056ea035808d"
+  ],
+  "excluded": [
+    {
+      "id": "provincial/bj/bjcpc2026",
+      "reason": "不在此次指定的统一组织赛事系列中",
+      "teams": 1
+    },
+    {
+      "id": "icpc/2014/wpu_onsite",
+      "reason": "与 icpc/2014/nwpu_onsite 原始提交数据完全相同，重复归档",
+      "teams": 1
+    }
+  ],
+  "rankingDisagreements": [
+    {
+      "uid": "1b7cf83a0b6b2b3d9a0c",
+      "xcpcioRank": 96,
+      "displayRank": 95
+    },
+    {
+      "uid": "71acd4b3961cdc74a73e",
+      "xcpcioRank": 393,
+      "displayRank": 392
+    },
+    {
+      "uid": "133d1cf46286e51aa4f1",
+      "xcpcioRank": 564,
+      "displayRank": 562
+    },
+    {
+      "uid": "5f7f1657688156a436a9",
+      "xcpcioRank": 790,
+      "displayRank": 791
+    },
+    {
+      "uid": "8e9e3ec816a934302f5c",
+      "xcpcioRank": 730,
+      "displayRank": 750
+    },
+    {
+      "uid": "ba0a83f0f641d6c32721",
+      "xcpcioRank": 296,
+      "displayRank": 295
+    },
+    {
+      "uid": "02ae99bf3b4f216efb1c",
+      "xcpcioRank": 296,
+      "displayRank": 295
+    }
+  ]
+}

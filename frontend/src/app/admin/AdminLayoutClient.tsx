@@ -176,10 +176,10 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     if (hasPerm('manage_sys')) {
       items.push(getItem('内容展示', 'content-display', <GlobalOutlined />, [
         getItem('首页背景轮播图', '/admin/content/showcase-background'),
-        getItem('协会荣誉墙设置', '/admin/content/honors'),
-        getItem('协会简介', '/admin/content/association'),
+        getItem('校队荣誉墙设置', '/admin/content/honors'),
+        getItem('校队简介', '/admin/content/association'),
         getItem('基本规则', '/admin/content/rules'),
-        getItem('协会成员', '/admin/content/members'),
+        getItem('校队成员', '/admin/content/members'),
       ]));
     }
 
@@ -315,10 +315,10 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     '/admin/intro': '内容展示',
     '/admin/content': '内容展示',
     '/admin/content/showcase-background': '首页背景轮播图',
-    '/admin/content/honors': '协会荣誉墙设置',
-    '/admin/content/association': '协会简介',
+    '/admin/content/honors': '校队荣誉墙设置',
+    '/admin/content/association': '校队简介',
     '/admin/content/rules': '基本规则',
-    '/admin/content/members': '协会成员',
+    '/admin/content/members': '校队成员',
     '/admin/system': '系统配置',
     '/admin/system/register': '是否开放注册',
     '/admin/system/email': '邮箱发送设置',
@@ -409,7 +409,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
       >
         <style>{`.ant-layout-sider-children::-webkit-scrollbar{display:none;}`}</style>
         <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', overflow: 'hidden' }}>
-          {collapsed ? 'PAA' : 'PAA Admin'}
+          {collapsed ? 'BESTI ACM' : 'BESTI ACM 管理中心'}
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <Menu 
@@ -459,7 +459,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
           </div>
         </Content>
         <Footer className="admin-footer" style={{ textAlign: 'center', color: 'rgba(0, 0, 0, 0.45)', fontSize: 12, lineHeight: '1.5', padding: '12px 0' }}>
-          <span>PAA 竞赛管理平台 · 管理中心</span>
+          <span>北京电子科技学院 ACM 校队 · 管理中心</span>
         </Footer>
       </Layout>
     </Layout>

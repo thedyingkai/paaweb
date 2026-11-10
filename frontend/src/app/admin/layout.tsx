@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   keywords: [],
   openGraph: null as never,
   twitter: null as never,
+  icons: { icon: "/besti-acm-mark.svg", apple: "/besti-acm-mark.svg" },
   robots: {
     index: false,
     follow: false,

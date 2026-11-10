@@ -1,0 +1,37 @@
+# Copy next to docker-compose.yml on the production host.
+# Images are built on the workstation, so production never needs a build cache.
+services:
+  db:
+    image: postgres@sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7
+    mem_limit: 384m
+    command: [postgres, -c, shared_buffers=64MB, -c, max_connections=60]
+    logging: &bounded_logs
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+  backend:
+    image: paaweb-school-backend:20261110-besti-r2
+    mem_limit: 1024m
+    logging: *bounded_logs
+  frontend:
+    image: paaweb-school-frontend:20261110-besti-r2
+    mem_limit: 768m
+    environment:
+      NODE_OPTIONS: --max-old-space-size=384
+    logging: *bounded_logs
+  gateway:
+    image: nginx@sha256:1881968aff6f7cdcc4b888c00a11f4ce241ad7ec957e0cb4a9e19e93a3ff87ea
+    healthcheck:
+      test: [CMD-SHELL, 'curl -fsS http://127.0.0.1/healthz | grep -q ok']
+    mem_limit: 192m
+    volumes:
+      - ./deploy/school/gateway.conf:/etc/nginx/nginx.conf:ro
+      - ./deploy/school/proxy_headers.conf:/etc/nginx/proxy_headers.conf:ro
+    logging: *bounded_logs
+networks:
+  app_network:
+    ipam:
+      config:
+        - subnet: 172.30.34.0/24
+          gateway: 172.30.34.1

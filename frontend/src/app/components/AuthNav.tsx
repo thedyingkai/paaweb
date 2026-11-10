@@ -58,6 +58,8 @@ const AuthNav = () => {
 
   const name = user.userName || user.realName || user.userAccount || '用户';
   const items: MenuProps['items'] = [
+    { key: 'team-space', label: '维护我的奖项与职务', onClick: () => router.push('/team-space') },
+    { key: 'community', label: '校队内部交流区', onClick: () => router.push('/community') },
     {
       key: 'profile',
       icon: <UserOutlined />,

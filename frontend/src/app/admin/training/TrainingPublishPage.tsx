@@ -32,7 +32,7 @@ import MarkdownContent from '../../components/content/MarkdownContent';
 import { readStoredUser } from '@/utils/auth';
 
 const { RangePicker } = DatePicker;
-const DEFAULT_PUBLISHER_NAME = '程序设计算法协会';
+const DEFAULT_PUBLISHER_NAME = 'ACM 校队';
 
 interface TermItem {
   termId: number;

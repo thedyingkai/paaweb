@@ -1,0 +1,10 @@
+[Unit]
+Description=Renew the PAA school platform TLS certificate when needed
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/paaweb/deploy/school/renew-certificate.sh
+TimeoutStartSec=240
+UMask=0077

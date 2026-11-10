@@ -24,8 +24,8 @@ export default function SiteFooter() {
         <div className="site-footer-main">
           <div className="site-footer-left">
             <div className="site-footer-intro">
-              <Link href="/" className="site-footer-brand" aria-label="PAA 竞赛管理平台首页">
-                <img src="/paa-logo.svg" alt="PAA 竞赛管理平台" />
+              <Link href="/" className="site-footer-brand" aria-label="北京电子科技学院 ACM 校队首页">
+                <img src="/besti-acm-wordmark.svg" alt="北京电子科技学院 ACM 校队" />
               </Link>
               <span>编程、算法竞赛与工程实践的学习平台</span>
             </div>
@@ -41,7 +41,7 @@ export default function SiteFooter() {
             </nav>
           </div>
         </div>
-        <div className="site-footer-meta"><span>PAA 竞赛管理平台</span></div>
+        <div className="site-footer-meta"><span>北京电子科技学院 ACM 校队</span></div>
       </div>
     </footer>
   );

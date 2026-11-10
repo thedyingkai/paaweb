@@ -18,7 +18,7 @@ const defaults = {
     auth: true,
     sslEnabled: true,
     startTlsEnabled: false,
-    fromName: '程序设计算法协会',
+    fromName: 'ACM 校队',
   },
   storage: {
     enabled: false,

@@ -102,8 +102,8 @@ const HonorWallClient = () => {
         {/* Hero Section */}
         <section className="content-hero content-hero-centered content-hero-980">
           <Tag className="bits-pill" icon={<TrophyOutlined />}>HONOR WALL</Tag>
-          <Title className="content-hero-title">协会荣誉墙</Title>
-          <Paragraph>记录程序设计算法协会历年在各类竞赛与活动中取得的优异成绩</Paragraph>
+          <Title className="content-hero-title">校队荣誉墙</Title>
+          <Paragraph>记录ACM 校队历年在各类竞赛与活动中取得的优异成绩</Paragraph>
         </section>
 
         {/* Filter & Search Bar */}
@@ -214,7 +214,7 @@ const HonorWallClient = () => {
                         overflow: 'hidden',
                         minHeight: 48,
                       }}>
-                        {item.title || '协会荣誉'}
+                        {item.title || '校队荣誉'}
                       </div>
                       {availableYears.find(y => y === item.academicYear) && (
                         <Tag color="blue" style={{ marginTop: 12 }}>
@@ -237,7 +237,7 @@ const HonorWallClient = () => {
                 icon={<ArrowRightOutlined />}
                 style={{ padding: '0 28px', height: 42 }}
               >
-                了解协会更多
+                了解校队更多
               </Button>
             </Link>
           </div>

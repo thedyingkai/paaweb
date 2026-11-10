@@ -44,10 +44,10 @@ type IntroCategory = 'showcase_bg' | 'honors' | 'association' | 'rules' | 'assoc
 
 const categoryTitles: Record<IntroCategory, string> = {
     showcase_bg: '首页背景轮播图',
-    honors: '协会荣誉墙设置',
-    association: '协会简介',
+    honors: '校队荣誉墙设置',
+    association: '校队简介',
     rules: '基本规则',
-    association_member: '协会成员',
+    association_member: '校队成员',
     system_config: '是否开放注册',
 };
 
@@ -865,7 +865,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                     </Modal>
 
                     <Modal
-                        title="批量导入协会干部"
+                        title="批量导入校队成员"
                         open={isBatchImportModalOpen}
                         onOk={handleBatchImportMembers}
                         onCancel={closeBatchImport}
@@ -908,7 +908,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                             </Form.Item>
                             <Form.Item label="导入文件" extra="每行 5 列：部门、职位、姓名、学校、学号。学校须填写实名认证中的学校（大学）全称；学校+学号匹配不到账号时会作为无账号成员添加。">
                                 <Space wrap>
-                                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '协会干部导入模板.xlsx', headers: MEMBER_IMPORT_HEADERS, examples: [['技术部', '副部长', '示例同学', '示例大学', '20260001']] })}>下载 Excel 模板</Button>
+                                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '校队成员导入模板.xlsx', headers: MEMBER_IMPORT_HEADERS, examples: [['技术部', '副部长', '示例同学', '示例大学', '20260001']] })}>下载 Excel 模板</Button>
                                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectMemberImportFile(file as File)} onRemove={() => { setBatchImportRows([]); setBatchImportPreview(null); }}>
                                         <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>
                                     </Upload>

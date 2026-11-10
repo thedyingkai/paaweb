@@ -148,7 +148,7 @@ const NoticeListClient = ({ type: defaultType }: NoticeListClientProps) => {
                       </div>
                       <p>{stripMarkdown(item.content).slice(0, 128) || '暂无摘要'}</p>
                       <div className="notice-meta">
-                        <Text><UserOutlined /> {item.publisherName || '协会'}</Text>
+                        <Text><UserOutlined /> {item.publisherName || '校队'}</Text>
                         <Text>{dayjs(item.createTime).isValid() ? dayjs(item.createTime).format('YYYY-MM-DD') : '时间未知'}</Text>
                         <Text><EyeOutlined /> {item.viewCount || 0}</Text>
                       </div>

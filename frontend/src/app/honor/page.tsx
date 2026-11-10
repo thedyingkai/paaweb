@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import HonorWallClient from './HonorWallClient';
+import HonorWallClient from './SchoolHonorsClient';
 
 export const metadata: Metadata = {
-  title: '荣誉墙',
+  title: '校队荣誉与参赛档案 · BESTI ACM',
 };
 
 export default function HonorWallPage() {

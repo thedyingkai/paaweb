@@ -36,6 +36,9 @@ export interface CarouselItem {
 export interface HonorItem {
     imageUrl: string;
     title?: string;
+    award?: string;
+    team?: string;
+    sources?: {name: string; url: string}[];
 }
 
 export interface NoticeItem {
@@ -69,14 +72,6 @@ export interface TrainingItem {
     maxCount?: number;
 }
 
-export interface UnifiedContest {
-    id: number;
-    name: string;
-    startTime: string;
-    url: string;
-    platform: string;
-}
-
 export interface CadreMember {
     memberId: number;
     userId?: number;
@@ -96,7 +91,6 @@ interface ShowcaseProps {
     initialPublicity: NoticeItem[];
     initialTrainings: TrainingItem[];
     initialEvents: EventItem[];
-    initialTrackerContests: UnifiedContest[];
     initialCadres: CadreMember[];
 }
 
@@ -124,17 +118,6 @@ const sortDepartments = (departments: string[]) => {
         if (indexB !== -1) return 1;
         return a.localeCompare(b);
     });
-};
-
-const derivePlatform = (url: string = '', ojName: string = ''): string => {
-    if (ojName && ojName !== 'Unknown') return ojName;
-    const u = url.toLowerCase();
-    if (u.includes('codeforces')) return 'Codeforces';
-    if (u.includes('atcoder')) return 'AtCoder';
-    if (u.includes('nowcoder')) return 'Nowcoder';
-    if (u.includes('luogu')) return 'Luogu';
-    if (u.includes('leetcode')) return 'LeetCode';
-    return 'Other';
 };
 
 const getTrainingStatus = (item: TrainingItem) => {
@@ -171,19 +154,6 @@ const sortEvents = (items: EventItem[]) => {
     });
 };
 
-const normalizeTrackerContests = (items: Record<string, unknown>[]) => {
-    return items.map((item) => {
-        const url = String(item.link || item.url || '#');
-        return {
-            id: Number(item.id || item.upcomingContestsId || 0),
-            name: String(item.contestName || item.contestsName || '未命名比赛'),
-            startTime: String(item.startTime || item.contestsStarttime || ''),
-            url,
-            platform: derivePlatform(url, String(item.ojName || ''))
-        };
-    });
-};
-
 const ShowcaseHome: React.FC<ShowcaseProps> = ({
     initialBgs,
     initialHonors,
@@ -192,7 +162,6 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
     initialPublicity,
     initialTrainings,
     initialEvents,
-    initialTrackerContests,
     initialCadres
 }) => {
 
@@ -218,7 +187,6 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
     const [publicityList, setPublicityList] = useState<NoticeItem[]>(initialPublicity || []);
     const [trainingList, setTrainingList] = useState<TrainingItem[]>(initialTrainings || []);
     const [localEvents, setLocalEvents] = useState<EventItem[]>(initialEvents || []);
-    const [trackerContests, setTrackerContests] = useState<UnifiedContest[]>(initialTrackerContests || []);
     const initialSortedCadres = sortCadres(initialCadres || []);
     const initialDepartments = sortDepartments(Array.from(new Set(initialSortedCadres.map((m) => String(m.department)))));
     const [cadreList, setCadreList] = useState<CadreMember[]>(initialSortedCadres);
@@ -294,23 +262,19 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                 setPublicityList(publicityRes.data.data.records || []);
             }
         }).catch(error => {
-            console.error("协会要闻加载失败", error);
+            console.error("校队要闻加载失败", error);
         });
 
         // 4. Fetch trainings and contests
         const eventsRequest = Promise.allSettled([
             axios.get('/api/training/list'),
-            axios.get('/api/event/list'),
-            axios.get('/api/tracker/upcoming/list')
-        ]).then(([trainingRes, eventRes, trackerRes]) => {
+            axios.get('/api/event/list')
+        ]).then(([trainingRes, eventRes]) => {
             if (trainingRes.status === 'fulfilled' && trainingRes.value.data.code === 200) {
                 setTrainingList(sortTrainings(trainingRes.value.data.data || []).slice(0, 4));
             }
             if (eventRes.status === 'fulfilled' && eventRes.value.data.code === 200) {
                 setLocalEvents(sortEvents(eventRes.value.data.data || []).slice(0, 4));
-            }
-            if (trackerRes.status === 'fulfilled' && trackerRes.value.data.code === 200) {
-                setTrackerContests(normalizeTrackerContests(trackerRes.value.data.data || []).slice(0, 4));
             }
         }).catch(error => {
             console.error("培训赛事加载失败", error);
@@ -575,27 +539,6 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
             </Link>
         );
     };
-
-    const getOjColor = (platform: string) => {
-        const p = (platform || '').toLowerCase();
-        if (p.includes('codeforces')) return '#f50';
-        if (p.includes('nowcoder')) return '#faad14';
-        if (p.includes('atcoder')) return '#2f54eb';
-        if (p.includes('luogu')) return '#fa8c16';
-        return '#13c2c2';
-    };
-
-    const renderTrackerCard = (item: UnifiedContest) => (
-        <div key={`${item.platform}-${item.id}-${item.name}`} style={{ padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', minWidth: 0 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, marginBottom: 8 }}>
-                <Tag color={getOjColor(item.platform)} style={{ margin: 0 }}>{item.platform}</Tag>
-                <span style={{ color: '#8c8c8c', fontSize: 12 }}>{dayjs(item.startTime).format('MM-DD HH:mm')}</span>
-            </div>
-            <a href={item.url} target="_blank" rel="noreferrer" style={{ color: '#262626', fontSize: 15, fontWeight: 700, display: 'block', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {item.name}
-            </a>
-        </div>
-    );
 
     return (
         <div className="showcase-root" style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: 'visible' }}>
@@ -909,10 +852,10 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                         />
                         {/* Logo image in public */}
                         <img
-                            src="/paa-mark.svg"
-                            alt="PAA LOGO"
+                            src="/besti-acm-mark.svg"
+                            alt="BESTI ACM"
                             className="loader-logo"
-                            style={{ position: 'relative', width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', background: '#fff', padding: 4 }}
+                            style={{ position: 'relative', width: 120, height: 120, borderRadius: 0, objectFit: 'contain', background: '#fff', padding: 4 }}
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
                             }}
@@ -1044,7 +987,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 transition: 'all 0.5s ease'
                             }}
                         >
-                            领航校内算法竞技 · 赋能算法学习成长
+                            北京电子科技学院 · ACM 校队
                         </Tag>
                         
                         <h1 
@@ -1059,7 +1002,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 transition: 'all 0.5s ease'
                             }}
                         >
-                            Welcome to Program <br/>
+                            Welcome to <br/>
                             <span 
                                 style={{ 
                                     background: 'linear-gradient(90deg, #1890ff 0%, #13c2c2 100%)', 
@@ -1069,7 +1012,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                     transition: 'all 0.5s ease'
                                 }}
                             >
-                                Algorithm Association
+                                BESTI ACM
                             </span>
                         </h1>
                         
@@ -1085,7 +1028,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 transition: 'all 0.5s ease'
                             }}
                         >
-                            欢迎来到PAA 竞赛管理平台
+                            欢迎来到北京电子科技学院 ACM 校队
                         </p>
                         
                         <div className="reveal-item reveal-delay-3 showcase-hero-action" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -1095,7 +1038,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                     shape="round" 
                                     style={infoBtnStyle}
                                 >
-                                    了解协会简介
+                                    了解校队简介
                                 </Button>
                             </Link>
                         </div>
@@ -1164,18 +1107,18 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                             </div>
                         ) : (
                             <Row gutter={[24, 24]} className="reveal-item reveal-delay-1" justify="center">
-                                {honorsList.slice(0, 3).map((item, idx) => (
+                                {honorsList.filter(item => item.award || item.imageUrl).slice(0, 3).map((item, idx) => (
                                     <Col xs={24} md={8} key={idx}>
                                         <Card
                                             hoverable
                                             cover={
                                                 <div style={{ height: 200, overflow: 'hidden', position: 'relative' }}>
-                                                    <img 
+                                                    {item.imageUrl ? <img
                                                         alt={item.title} 
                                                         src={item.imageUrl} 
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                                                         className="honor-img"
-                                                    />
+                                                    /> : <div style={{height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:14,background:'linear-gradient(135deg,#123c6a,#397797)',color:'white'}}><TrophyOutlined style={{fontSize:58}}/><span style={{fontSize:26,fontWeight:700}}>{item.award}</span></div>}
                                                 </div>
                                             }
                                             style={{ borderRadius: 12, overflow: 'hidden', border: 'none', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}
@@ -1183,7 +1126,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                         >
                                             <Card.Meta 
                                                 title={<span style={{ fontSize: 16, fontWeight: 700, color: '#262626', whiteSpace: 'normal', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', minHeight: 48 }}>{item.title}</span>} 
-                                                description={<span style={{ fontSize: 13, color: '#8c8c8c' }}>协会官方荣誉壁报记录</span>}
+                                                description={<span style={{ fontSize: 13, color: '#65758b' }}>{item.team || '校队历年竞赛成绩与获奖记录'}</span>}
                                             />
                                         </Card>
                                     </Col>
@@ -1211,7 +1154,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                     <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 30, borderBottom: '1px solid rgba(0,0,0,0.06)', paddingBottom: 14 }} className="reveal-item showcase-section-heading-row">
                             <div>
-                                <Title level={2} className="showcase-font-title" style={{ fontSize: '32px', fontWeight: 800, margin: 0 }}>协会要闻</Title>
+                                <Title level={2} className="showcase-font-title" style={{ fontSize: '32px', fontWeight: 800, margin: 0 }}>校队要闻</Title>
                                 <p style={{ color: '#8c8c8c', margin: '8px 0 0 0', fontSize: 14 }}>实时获取通知、新闻、公示三类主要内容</p>
                             </div>
                             <Link href="/notice">
@@ -1255,7 +1198,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 30, borderBottom: '1px solid rgba(0,0,0,0.06)', paddingBottom: 14 }} className="reveal-item showcase-section-heading-row">
                             <div>
                                 <Title level={2} className="showcase-font-title" style={{ fontSize: '32px', fontWeight: 800, margin: 0 }}>近期安排</Title>
-                                <p style={{ color: '#8c8c8c', margin: '8px 0 0 0', fontSize: 14 }}>近期培训、近期线下赛、近期线上赛一屏速览</p>
+                                <p style={{ color: '#8c8c8c', margin: '8px 0 0 0', fontSize: 14 }}>校队培训、统一组织赛事与个人自愿登记</p>
                             </div>
                             <Link href="/training">
                                 <Button type="link" icon={<ArrowRightOutlined />} style={{ color: '#1890ff', fontSize: 15, fontWeight: 600 }}>
@@ -1280,7 +1223,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 <Card style={{ height: '100%', borderRadius: 12, border: 'none', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.025)' }} bodyStyle={{ padding: '22px 22px 16px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                                         <div className="showcase-schedule-card-title" style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 18, fontWeight: 800, color: '#262626' }}>
-                                            <TrophyOutlined style={{ color: '#faad14' }} /> 近期线下赛
+                                            <TrophyOutlined style={{ color: '#faad14' }} /> 校队组织赛事
                                         </div>
                                         <Link href="/contest/signup"><Button type="link" size="small" style={{ paddingInline: 0 }}>全部</Button></Link>
                                     </div>
@@ -1291,11 +1234,11 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 <Card style={{ height: '100%', borderRadius: 12, border: 'none', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.025)' }} bodyStyle={{ padding: '22px 22px 16px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                                         <div className="showcase-schedule-card-title" style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 18, fontWeight: 800, color: '#262626' }}>
-                                            <GlobalOutlined style={{ color: '#13c2c2' }} /> 近期线上赛
+                                            <GlobalOutlined style={{ color: '#13c2c2' }} /> 个人自愿登记
                                         </div>
-                                        <Link href="/tracker"><Button type="link" size="small" style={{ paddingInline: 0 }}>全部</Button></Link>
+                                        <Link href="/team-space"><Button type="link" size="small" style={{ paddingInline: 0 }}>全部</Button></Link>
                                     </div>
-                                    {trackerContests.length > 0 ? trackerContests.slice(0, 4).map(renderTrackerCard) : renderEmpty('暂无线上赛')}
+                                    <p style={{lineHeight:1.9}}>蓝桥杯、马蹄杯、百度之星、CCSP、CNCC。由成员本人自愿申请登记。</p><Link href="/competitions">查看赛事范围与登记方式 →</Link>
                                 </Card>
                             </div>
                         </div>
@@ -1306,8 +1249,8 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                 <section ref={setSectionRef(4)} data-showcase-section="4" className={`showcase-section ${visibleSections.has(4) ? 'section-active' : ''}`} style={{ zIndex: 10 }}>
                     <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
                         <div style={{ textAlign: 'center', marginBottom: 32 }} className="reveal-item">
-                            <Title level={2} className="showcase-font-title" style={{ fontSize: '32px', fontWeight: 800, letterSpacing: 2 }}>协会干部</Title>
-                            <p style={{ color: '#8c8c8c', margin: '8px 0 0 0', fontSize: 14 }}>引领技术浪潮，服务协会会员的精英管理骨干</p>
+                            <Title level={2} className="showcase-font-title" style={{ fontSize: '32px', fontWeight: 800, letterSpacing: 2 }}>校队成员</Title>
+                            <p style={{ color: '#8c8c8c', margin: '8px 0 0 0', fontSize: 14 }}>一起训练、比赛，记录每一段校队经历</p>
                             <div style={{ width: 48, height: 4, background: '#13c2c2', margin: '12px auto 0', borderRadius: 2 }} />
                         </div>
 
@@ -1432,7 +1375,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                     icon={<UserOutlined />} 
                                     style={{ padding: '0 24px', height: 40, background: 'rgba(255,255,255,0.5)', borderColor: '#d9d9d9' }}
                                 >
-                                    了解历届协会干部成员
+                                    了解历届校队成员
                                 </Button>
                             </Link>
                         </div>

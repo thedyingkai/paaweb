@@ -77,7 +77,7 @@ const NoticePublish: React.FC = () => {
     return userStr ? JSON.parse(userStr) : null;
   }, [userStr]);
   const defaultPublisherName = useMemo(() => {
-    return user?.realName || user?.userName || '协会';
+    return user?.realName || user?.userName || '校队';
   }, [user]);
 
   useEffect(() => {
@@ -236,7 +236,7 @@ const NoticePublish: React.FC = () => {
               </Form.Item>
               
               <Form.Item name="publisherName" label="发布人" rules={[{ required: true, message: '请输入发布人' }, { max: 100, message: '发布人不能超过100字' }]}>
-                  <Input placeholder="请输入发布人，例如：程序设计协会" size="large" />
+                  <Input placeholder="请输入发布人，例如：程序设计校队" size="large" />
               </Form.Item>
 
               <Form.Item name="createTime" label="发布时间" rules={[{ required: true, message: '请选择发布时间' }]}>

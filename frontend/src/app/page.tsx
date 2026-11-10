@@ -1,5 +1,5 @@
 import ShowcaseClient from './ShowcaseClient';
-import type { CadreMember, CarouselItem, EventItem, HonorItem, NoticeItem, TrainingItem, UnifiedContest } from './ShowcaseClient';
+import type { CadreMember, CarouselItem, EventItem, HonorItem, NoticeItem, TrainingItem } from './ShowcaseClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,7 +33,6 @@ export default async function Page() {
     const publicityRes = await fetchApi('/notice/list?type=publicity&size=5');
     const trainingRes = await fetchApi('/training/list');
     const eventRes = await fetchApi('/event/list');
-    const trackerRes = await fetchApi('/tracker/upcoming/list');
     
     // 干事数据需要两步
     let cadres: CadreMember[] = [];
@@ -70,27 +69,6 @@ export default async function Page() {
     const initialPublicity = getRecords(publicityRes);
     const initialTrainings = getList(trainingRes).slice(0, 4) as unknown as TrainingItem[];
     const initialEvents = getList(eventRes).slice(0, 4) as unknown as EventItem[];
-    const initialTrackerContests: UnifiedContest[] = trackerRes?.code === 200
-        ? getList(trackerRes).slice(0, 4).map((item: ApiRecord) => {
-            const url = String(item.link || item.url || '#');
-            const lowerUrl = url.toLowerCase();
-            let platform = item.ojName && item.ojName !== 'Unknown' ? String(item.ojName) : 'Other';
-            if (platform === 'Other') {
-                if (lowerUrl.includes('codeforces')) platform = 'Codeforces';
-                else if (lowerUrl.includes('atcoder')) platform = 'AtCoder';
-                else if (lowerUrl.includes('nowcoder')) platform = 'Nowcoder';
-                else if (lowerUrl.includes('luogu')) platform = 'Luogu';
-                else if (lowerUrl.includes('leetcode')) platform = 'LeetCode';
-            }
-            return {
-                id: Number(item.id || item.upcomingContestsId || 0),
-                name: String(item.contestName || item.contestsName || '未命名比赛'),
-                startTime: String(item.startTime || item.contestsStarttime || ''),
-                url,
-                platform
-            };
-        })
-        : [];
 
     return (
         <ShowcaseClient 
@@ -101,7 +79,6 @@ export default async function Page() {
             initialPublicity={initialPublicity}
             initialTrainings={initialTrainings}
             initialEvents={initialEvents}
-            initialTrackerContests={initialTrackerContests}
             initialCadres={cadres}
         />
     );

@@ -35,6 +35,7 @@ import SiteHeader from '../../components/SiteHeader';
 import EditProfileModal from './EditProfileModal';
 import ProfileDataAnalysis from './ProfileDataAnalysis';
 import TeamManager from './TeamManager';
+import MemberRecordSummary from '../../components/MemberRecordSummary';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -339,6 +340,7 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
                   ]}
                 />
               </section>
+              <MemberRecordSummary userId={userId} />
               {isOwnProfile && (
                 <EditProfileModal
                   open={editOpen}

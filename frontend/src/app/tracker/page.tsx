@@ -149,7 +149,6 @@ export default function TrackerPage() {
   const [loading, setLoading] = useState(true);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [accounts, setAccounts] = useState<OjAccounts>({});
-  const [upcoming, setUpcoming] = useState<UpcomingContest[]>([]);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [syncPlatforms, setSyncPlatforms] = useState<string[]>([]);
   const [syncing, setSyncing] = useState(false);
@@ -190,15 +189,13 @@ export default function TrackerPage() {
   const loadAllData = async () => {
     setLoading(true);
     try {
-      const [dashboardRes, accountRes, upcomingRes] = await Promise.all([
+      const [dashboardRes, accountRes] = await Promise.all([
         axios.get<{ code: number; data?: DashboardData }>('/api/tracker/dashboard'),
-        axios.get<{ code: number; data?: OjAccounts }>(`/api/user/profile/${user?.userId}`),
-        axios.get<{ code: number; data?: UpcomingContest[] }>('/api/tracker/upcoming-contests')
+        axios.get<{ code: number; data?: OjAccounts }>(`/api/user/profile/${user?.userId}`)
       ]);
 
       setDashboard(dashboardRes.data?.data || null);
       setAccounts(accountRes.data?.data || {});
-      setUpcoming(upcomingRes.data?.data || []);
       loadSubmissions();
     } catch (error) {
       console.error(error);
@@ -531,41 +528,10 @@ export default function TrackerPage() {
       </div>
 
       <div className="tracker-sidebar-block">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <Title level={5} style={{ margin: 0 }}>近期比赛</Title>
-          <CalendarOutlined style={{ color: '#888' }} />
-        </div>
-        <div style={{ maxHeight: 'calc(100vh - 400px)', overflowY: 'auto' }}>
-          {upcoming.length === 0 ? <div style={{ color: '#999', fontSize: 12, textAlign: 'center', padding: 20 }}>暂无比赛</div> : (
-            <List
-              size="small"
-              dataSource={upcoming}
-              renderItem={item => {
-                let platformName = 'Unknown';
-                if (item.contestsName.includes('Codeforces')) platformName = 'CodeForces';
-                else if (item.contestsName.includes('AtCoder')) platformName = 'AtCoder';
-                else if (item.contestsName.includes('牛客') || item.url.includes('nowcoder')) platformName = 'NowCoder';
-                const barColor = getPlatformColor(platformName);
-
-                return (
-                  <button className="tracker-contest-item" type="button" onClick={() => window.open(item.url, '_blank')}>
-                    <span style={{ width: 4, backgroundColor: barColor, flexShrink: 0 }} />
-                    <span style={{ padding: 10, flex: 1 }}>
-                      <strong>{item.contestsName}</strong>
-                      <span>
-                        <Text type="secondary" style={{ fontSize: 11, display: 'flex', alignItems: 'center' }}>
-                          <CalendarOutlined style={{ marginRight: 4, fontSize: 10 }} />
-                          {dayjs(item.contestsStarttime).format('MM-DD HH:mm')}
-                        </Text>
-                        <RightOutlined style={{ fontSize: 10, color: '#ddd' }} />
-                      </span>
-                    </span>
-                  </button>
-                );
-              }}
-            />
-          )}
-        </div>
+        <Title level={5}>校队赛事与登记</Title>
+        <p>联盟主办比赛、ICPC、CCPC、天梯赛由校队统一组织。</p>
+        <p>蓝桥杯、马蹄杯、百度之星、CCSP、CNCC 由成员自愿登记。</p>
+        <Button type="link" onClick={() => router.push('/competitions')}>查看登记方式</Button>
       </div>
     </Card>
   );

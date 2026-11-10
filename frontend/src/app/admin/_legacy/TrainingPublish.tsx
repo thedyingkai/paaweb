@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-const DEFAULT_PUBLISHER_NAME = '程序设计算法协会';
+const DEFAULT_PUBLISHER_NAME = 'ACM 校队';
 
 // 手写防抖函数
 const debounce = <F extends (...args: any[]) => void>(func: F, wait: number) => {

@@ -352,7 +352,7 @@ const PermissionManager: React.FC<{ mode?: 'roles' | 'permissions' }> = ({ mode 
                     type="info"
                     showIcon
                     style={{ marginBottom: 16 }}
-                    message="本页面按当前最新学年的协会干部分部门展示管理员；不属于最新干部名单的管理员会归入“其他管理员”。"
+                    message="本页面按当前最新学年的校队成员分部门展示管理员；不属于最新干部名单的管理员会归入“其他管理员”。"
                 />
 
                 {groupedData.map(group => (

@@ -135,6 +135,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         boolean isAdminPath = isAdministrativePath(uri);
 
         if ("GET".equalsIgnoreCase(method) && "/user/me".equals(uri)) return true;
+        if ("GET".equalsIgnoreCase(method) && "/team-space/public-records".equals(uri)) return true;
 
         if ("GET".equalsIgnoreCase(method)) {
             if (!isAdminPath && (uri.contains("/notice") ||

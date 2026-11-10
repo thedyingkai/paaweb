@@ -123,7 +123,7 @@ const LoginPage = () => {
           <Tag className="bits-pill" icon={<StarOutlined />}>Algorithm Portal</Tag>
           <Title className="bits-gradient-title">欢迎回来</Title>
           <Paragraph>
-            继续查看协会要闻、培训安排、赛事报名与个人算法成长轨迹。
+            继续查看校队要闻、培训安排、赛事报名与个人算法成长轨迹。
           </Paragraph>
           <div className="auth-metric-row">
             <div><strong>ICPC</strong><span>集训协作</span></div>

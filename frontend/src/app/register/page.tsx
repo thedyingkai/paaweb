@@ -314,7 +314,7 @@ const RegisterPage = () => {
 
       <section className="register-layout">
         <div className="auth-copy-panel register-copy">
-          <Tag className="bits-pill" icon={<RocketOutlined />}>Join PAA</Tag>
+          <Tag className="bits-pill" icon={<RocketOutlined />}>加入BESTI ACM</Tag>
           <Title className="bits-gradient-title">创建你的算法档案</Title>
           <Paragraph>
             注册后可报名培训与校内赛事，绑定个人身份信息，沉淀属于你的算法成长记录。
@@ -324,7 +324,7 @@ const RegisterPage = () => {
 
         <Card className="register-card bits-card" bordered={false} extra={<Button type="link" onClick={() => router.push('/login')}>已有账号？去登录</Button>}>
           <div className="auth-card-heading">
-            <Title level={2}>注册 程序设计算法协会</Title>
+            <Title level={2}>注册 ACM 校队</Title>
             <Text>三步完成账号创建与身份认证</Text>
           </div>
 

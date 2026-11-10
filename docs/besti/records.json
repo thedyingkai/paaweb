@@ -1,0 +1,4868 @@
+[
+  {
+    "uid": "c67ea87ca3a9436c81d9",
+    "academicYear": "2026",
+    "date": "2026-11-08",
+    "event": "第十二届中国大学生程序设计竞赛（乐山）",
+    "family": "CCPC",
+    "tier": "regional",
+    "team": "来自瓦纳海姆",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "冷亚纹"
+    ],
+    "award": "银牌",
+    "official": true,
+    "rank": 92,
+    "officialRank": 84,
+    "solved": 5,
+    "penalty": 481,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026leshan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/88"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026leshan",
+      "cpcfinder": 38006
+    },
+    "notes": "",
+    "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
+    "title": "第十二届中国大学生程序设计竞赛（乐山） · 银牌",
+    "imageUrl": "",
+    "sortOrder": 0
+  },
+  {
+    "uid": "4adeafb12b36db0188d5",
+    "academicYear": "2026",
+    "date": "2026-10-18",
+    "event": "第 51 届 ICPC 国际大学生程序设计竞赛区域赛西安站 - 正式赛",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "来自瓦纳海姆",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "冷亚纹"
+    ],
+    "award": "铜牌",
+    "official": true,
+    "rank": 171,
+    "officialRank": 159,
+    "solved": 3,
+    "penalty": 266,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/xian"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/79"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026xi_an",
+      "xcpcio": "icpc/51st/xian",
+      "cpcfinder": 36198
+    },
+    "notes": "",
+    "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
+    "title": "第 51 届 ICPC 国际大学生程序设计竞赛区域赛西安站 - 正式赛 · 铜牌",
+    "imageUrl": "",
+    "sortOrder": 1
+  },
+  {
+    "uid": "a964f5ab0e948f19a31f",
+    "academicYear": "2026",
+    "date": "2026-07-29",
+    "event": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "邱贤达"
+    ],
+    "award": "银牌",
+    "official": true,
+    "rank": 30,
+    "officialRank": 30,
+    "solved": 6,
+    "penalty": 1015,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026invitational-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/shenyang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026invitational-shenyang",
+      "xcpcio": "icpc/51st/shenyang-invitational"
+    },
+    "notes": "",
+    "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳） · 银牌",
+    "imageUrl": "",
+    "sortOrder": 2
+  },
+  {
+    "uid": "1b7cf83a0b6b2b3d9a0c",
+    "academicYear": "2026",
+    "date": "2026-05-17",
+    "event": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（南昌）暨江西省赛",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "邱贤达"
+    ],
+    "award": "银牌",
+    "official": true,
+    "rank": 95,
+    "officialRank": 86,
+    "solved": 4,
+    "penalty": 172,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/jiangxi-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026invitational-nanchang",
+      "xcpcio": "icpc/51st/jiangxi-invitational"
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（南昌）暨江西省赛 · 银牌",
+    "imageUrl": "",
+    "sortOrder": 3
+  },
+  {
+    "uid": "ecaf24ec434f07f59afc",
+    "academicYear": "2026",
+    "date": "2026-05-02",
+    "event": "第 51 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 - 正式赛",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "邱贤达"
+    ],
+    "award": "银牌",
+    "official": true,
+    "rank": 98,
+    "officialRank": 76,
+    "solved": 6,
+    "penalty": 772,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026invitational-xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/xian-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026invitational-xi_an",
+      "xcpcio": "icpc/51st/xian-invitational"
+    },
+    "notes": "",
+    "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
+    "title": "第 51 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 - 正式赛 · 银牌",
+    "imageUrl": "",
+    "sortOrder": 4
+  },
+  {
+    "uid": "39357933f49fe178fa09",
+    "academicYear": "2026",
+    "date": "2026-04-11",
+    "event": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（深圳）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "邱贤达"
+    ],
+    "award": "银牌",
+    "official": true,
+    "rank": 111,
+    "officialRank": 68,
+    "solved": 5,
+    "penalty": 834,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026invitational-shenzhen"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/shenzhen-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026invitational-shenzhen",
+      "xcpcio": "icpc/51st/shenzhen-invitational"
+    },
+    "notes": "",
+    "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（深圳） · 银牌",
+    "imageUrl": "",
+    "sortOrder": 5
+  },
+  {
+    "uid": "51f81e3d86876f1d566e",
+    "academicYear": "2025",
+    "date": "2025-11-23",
+    "event": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "邱贤达",
+      "岳金涛"
+    ],
+    "award": "铜牌",
+    "official": true,
+    "rank": 135,
+    "officialRank": 121,
+    "solved": 3,
+    "penalty": 476,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025shanghai"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/50th/shanghai"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/73"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025shanghai",
+      "xcpcio": "icpc/50th/shanghai",
+      "cpcfinder": 33260
+    },
+    "notes": "",
+    "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
+    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛上海站 · 铜牌",
+    "imageUrl": "",
+    "sortOrder": 6
+  },
+  {
+    "uid": "3d34ad2113acb537028f",
+    "academicYear": "2025",
+    "date": "2025-06-08",
+    "event": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "华风夏韵,洛水天依",
+    "members": [],
+    "award": "铜牌",
+    "official": true,
+    "rank": 86,
+    "officialRank": 86,
+    "solved": null,
+    "penalty": null,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2025/icpc2025srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025srni"
+    },
+    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。 原始归档仅有名次，未提供过题数与真实罚时。",
+    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
+    "title": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 铜牌",
+    "imageUrl": "",
+    "sortOrder": 7
+  },
+  {
+    "uid": "ef84cd38be987ba81cff",
+    "academicYear": "2025",
+    "date": "2025-06-08",
+    "event": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "丢掉幻想准备斗争",
+    "members": [],
+    "award": "银牌",
+    "official": true,
+    "rank": 40,
+    "officialRank": 40,
+    "solved": null,
+    "penalty": null,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2025/icpc2025srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025srni"
+    },
+    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。 原始归档仅有名次，未提供过题数与真实罚时。",
+    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
+    "title": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 银牌",
+    "imageUrl": "",
+    "sortOrder": 8
+  },
+  {
+    "uid": "0d824880d9a948c47a00",
+    "academicYear": "2024",
+    "date": "2024-06-09",
+    "event": "2024 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "废水零液体排放",
+    "members": [],
+    "award": "银牌",
+    "official": true,
+    "rank": 51,
+    "officialRank": 51,
+    "solved": 9,
+    "penalty": 560,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2024/icpc2024srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024srni"
+    },
+    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。",
+    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
+    "title": "2024 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 银牌",
+    "imageUrl": "",
+    "sortOrder": 9
+  },
+  {
+    "uid": "4ca8b929f5a30abced9a",
+    "academicYear": "2024",
+    "date": "2024-05-19",
+    "event": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "知识盲区",
+    "members": [],
+    "award": "铜牌",
+    "official": true,
+    "rank": 216,
+    "officialRank": 205,
+    "solved": 3,
+    "penalty": 378,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024invitational-xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/xian-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024invitational-xi_an",
+      "xcpcio": "icpc/49th/xian-invitational"
+    },
+    "notes": "",
+    "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 · 铜牌",
+    "imageUrl": "",
+    "sortOrder": 10
+  },
+  {
+    "uid": "3f6bed8335c95b42a82d",
+    "academicYear": "2026",
+    "date": "2026-11-01",
+    "event": "「华为杯」第 51 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "想不出来的话我去厕所问一下 Astra",
+    "members": [
+      "于凯",
+      "朱子睿",
+      "彭子皓"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 193,
+    "officialRank": null,
+    "solved": 3,
+    "penalty": 253,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/wuhan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/81"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026wuhan",
+      "xcpcio": "icpc/51st/wuhan",
+      "cpcfinder": 37303
+    },
+    "notes": "",
+    "title": "「华为杯」第 51 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "imageUrl": "",
+    "sortOrder": 11
+  },
+  {
+    "uid": "f9b0cb121a2de4d0cde3",
+    "academicYear": "2026",
+    "date": "2026-09-19",
+    "event": "2026年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "无穷暴龙团2.0",
+    "members": [
+      "汪子涵",
+      "胡宸轩",
+      "任泓睿"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1583,
+    "officialRank": 1580,
+    "solved": 4,
+    "penalty": 458,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026preliminary"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/online-qualification"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026preliminary",
+      "xcpcio": "ccpc/12th/online-qualification"
+    },
+    "notes": "",
+    "title": "2026年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 12
+  },
+  {
+    "uid": "780cccefec0aa52fdb24",
+    "academicYear": "2026",
+    "date": "2026-09-19",
+    "event": "2026年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "为什么要演奏春日影队",
+    "members": [
+      "龙子航",
+      "艾家程",
+      "曾一恒"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1498,
+    "officialRank": 1495,
+    "solved": 5,
+    "penalty": 918,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026preliminary"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/online-qualification"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026preliminary",
+      "xcpcio": "ccpc/12th/online-qualification"
+    },
+    "notes": "",
+    "title": "2026年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 13
+  },
+  {
+    "uid": "285467822e88f491fe2d",
+    "academicYear": "2026",
+    "date": "2026-09-19",
+    "event": "2026年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "RING0",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "祝际斌"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1272,
+    "officialRank": 1269,
+    "solved": 5,
+    "penalty": 570,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026preliminary"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/online-qualification"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026preliminary",
+      "xcpcio": "ccpc/12th/online-qualification"
+    },
+    "notes": "",
+    "title": "2026年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 14
+  },
+  {
+    "uid": "a14e75f33dc8db3d71b0",
+    "academicYear": "2026",
+    "date": "2026-09-19",
+    "event": "2026年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "来自瓦纳海姆•带我飞去你的身旁放声地歌唱",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "冷亚纹"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 771,
+    "officialRank": 768,
+    "solved": 6,
+    "penalty": 572,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026preliminary"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/online-qualification"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026preliminary",
+      "xcpcio": "ccpc/12th/online-qualification"
+    },
+    "notes": "",
+    "title": "2026年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 15
+  },
+  {
+    "uid": "b8beb7cd77697bbbc77b",
+    "academicYear": "2026",
+    "date": "2026-09-12",
+    "event": "2026 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "来自瓦纳海姆『带我飞去你的身旁放声地歌唱』",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "高熠斌"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 950,
+    "officialRank": 950,
+    "solved": 3,
+    "penalty": 473,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026preliminary-2"
+    },
+    "notes": "",
+    "title": "2026 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 16
+  },
+  {
+    "uid": "ea7bd50b020bf78f6e81",
+    "academicYear": "2026",
+    "date": "2026-09-06",
+    "event": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "为什么要演奏春日影队",
+    "members": [
+      "龙子航",
+      "曾一恒",
+      "艾家程"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1949,
+    "officialRank": 1949,
+    "solved": 2,
+    "penalty": 45,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026preliminary-1"
+    },
+    "notes": "",
+    "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 17
+  },
+  {
+    "uid": "70da14768052f81d46cb",
+    "academicYear": "2026",
+    "date": "2026-09-06",
+    "event": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "RING0",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "祝际斌"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1910,
+    "officialRank": 1910,
+    "solved": 2,
+    "penalty": 41,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026preliminary-1"
+    },
+    "notes": "",
+    "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 18
+  },
+  {
+    "uid": "e4baa1a25965ec0cf782",
+    "academicYear": "2026",
+    "date": "2026-09-06",
+    "event": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "无穷暴龙团2.0",
+    "members": [
+      "汪子涵",
+      "任泓睿",
+      "胡宸轩"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1801,
+    "officialRank": 1801,
+    "solved": 2,
+    "penalty": 33,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026preliminary-1"
+    },
+    "notes": "",
+    "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 19
+  },
+  {
+    "uid": "8d6f4527df66cb4acaa1",
+    "academicYear": "2026",
+    "date": "2026-09-06",
+    "event": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "来自瓦纳海姆『带我飞去你的身旁放声地歌唱』",
+    "members": [
+      "于凯",
+      "岳金涛",
+      "邱贤达"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 799,
+    "officialRank": 799,
+    "solved": 5,
+    "penalty": 609,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026preliminary-1"
+    },
+    "notes": "",
+    "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 20
+  },
+  {
+    "uid": "e40578c4f6c336cbdc05",
+    "academicYear": "2026",
+    "date": "2026-07-29",
+    "event": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "RING0",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "祝际斌"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 269,
+    "officialRank": 265,
+    "solved": 2,
+    "penalty": 124,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2026__icpc2026invitational-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/51st/shenyang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2026__icpc2026invitational-shenyang",
+      "xcpcio": "icpc/51st/shenyang-invitational"
+    },
+    "notes": "",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
+    "imageUrl": "",
+    "sortOrder": 21
+  },
+  {
+    "uid": "513532f6e247ed1f2403",
+    "academicYear": "2026",
+    "date": "2026-06-07",
+    "event": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "求求别WA了",
+    "members": [
+      "任泓睿",
+      "余岢璇",
+      "胡谐"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 148,
+    "officialRank": 142,
+    "solved": 4,
+    "penalty": 533,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026invitational-guizhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/guizhou-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026invitational-guizhou",
+      "xcpcio": "ccpc/12th/guizhou-invitational"
+    },
+    "notes": "",
+    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "imageUrl": "",
+    "sortOrder": 22
+  },
+  {
+    "uid": "f0f63fc801414e4b44a8",
+    "academicYear": "2026",
+    "date": "2026-06-07",
+    "event": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "RING0",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "祝际斌"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 145,
+    "officialRank": 139,
+    "solved": 4,
+    "penalty": 481,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026invitational-guizhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/guizhou-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026invitational-guizhou",
+      "xcpcio": "ccpc/12th/guizhou-invitational"
+    },
+    "notes": "",
+    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "imageUrl": "",
+    "sortOrder": 23
+  },
+  {
+    "uid": "ba0a83f0f641d6c32721",
+    "academicYear": "2026",
+    "date": "2026-05-24",
+    "event": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "无穷暴龙团",
+    "members": [
+      "马新宇",
+      "胡宸轩",
+      "汪子涵"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 295,
+    "officialRank": 267,
+    "solved": 3,
+    "penalty": 193,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026invitational-nanchang",
+      "xcpcio": "ccpc/12th/nanchang-invitational"
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "imageUrl": "",
+    "sortOrder": 24
+  },
+  {
+    "uid": "c21b11961587c18c0e35",
+    "academicYear": "2026",
+    "date": "2026-05-24",
+    "event": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "为什么要演奏春日影队",
+    "members": [
+      "龙子航",
+      "艾家程",
+      "曾一恒"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 282,
+    "officialRank": 255,
+    "solved": 4,
+    "penalty": 898,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026invitational-nanchang",
+      "xcpcio": "ccpc/12th/nanchang-invitational"
+    },
+    "notes": "",
+    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "imageUrl": "",
+    "sortOrder": 25
+  },
+  {
+    "uid": "497963179fc3ebb57016",
+    "academicYear": "2026",
+    "date": "2026-05-24",
+    "event": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "零基础猫猫一队",
+    "members": [
+      "于凯",
+      "廖洋",
+      "罗靖豪"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 67,
+    "officialRank": null,
+    "solved": 7,
+    "penalty": 1213,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2026__ccpc2026invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/12th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2026__ccpc2026invitational-nanchang",
+      "xcpcio": "ccpc/12th/nanchang-invitational"
+    },
+    "notes": "",
+    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "imageUrl": "",
+    "sortOrder": 26
+  },
+  {
+    "uid": "beeedaff7cc12942eb96",
+    "academicYear": "2025",
+    "date": "2025-11-16",
+    "event": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
+    "family": "CCPC",
+    "tier": "regional",
+    "team": "优秀元务工大队",
+    "members": [
+      "李炫睿",
+      "岳金涛",
+      "汪子涵"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 297,
+    "officialRank": 250,
+    "solved": 1,
+    "penalty": 22,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025jinan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/jinan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/72"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025jinan",
+      "xcpcio": "ccpc/11th/jinan",
+      "cpcfinder": 32550
+    },
+    "notes": "",
+    "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
+    "imageUrl": "",
+    "sortOrder": 27
+  },
+  {
+    "uid": "a46f54bc5328d9f9ad27",
+    "academicYear": "2025",
+    "date": "2025-11-16",
+    "event": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
+    "family": "CCPC",
+    "tier": "regional",
+    "team": "三个烧火",
+    "members": [
+      "于凯",
+      "王一鸣",
+      "罗靖豪"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 285,
+    "officialRank": null,
+    "solved": 2,
+    "penalty": 398,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025jinan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/jinan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/72"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025jinan",
+      "xcpcio": "ccpc/11th/jinan",
+      "cpcfinder": 32602
+    },
+    "notes": "",
+    "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
+    "imageUrl": "",
+    "sortOrder": 28
+  },
+  {
+    "uid": "2db3e2e364b44d33a09a",
+    "academicYear": "2025",
+    "date": "2025-11-02",
+    "event": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "从零到一的指针",
+    "members": [
+      "叶抒宇",
+      "王乐天",
+      "段锦坤"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 496,
+    "officialRank": null,
+    "solved": 1,
+    "penalty": 95,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/50th/wuhan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/68"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025wuhan",
+      "xcpcio": "icpc/50th/wuhan",
+      "cpcfinder": 33132
+    },
+    "notes": "",
+    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "imageUrl": "",
+    "sortOrder": 29
+  },
+  {
+    "uid": "179ed60749093041fa19",
+    "academicYear": "2025",
+    "date": "2025-11-02",
+    "event": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "学弟将带领电科院走向辉煌",
+    "members": [
+      "于凯",
+      "邱贤达",
+      "岳金涛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 389,
+    "officialRank": 342,
+    "solved": 3,
+    "penalty": 559,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/50th/wuhan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/68"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025wuhan",
+      "xcpcio": "icpc/50th/wuhan",
+      "cpcfinder": 32961
+    },
+    "notes": "",
+    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "imageUrl": "",
+    "sortOrder": 30
+  },
+  {
+    "uid": "4c4863c4ccdc5e73ef3f",
+    "academicYear": "2025",
+    "date": "2025-09-20",
+    "event": "2025年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "丢掉幻想准备斗争",
+    "members": [
+      "张锐",
+      "李炫睿",
+      "邱贤达"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2036,
+    "officialRank": null,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025preliminary"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025preliminary"
+    },
+    "notes": "",
+    "title": "2025年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 31
+  },
+  {
+    "uid": "1158df01f0b447c30cf8",
+    "academicYear": "2025",
+    "date": "2025-09-20",
+    "event": "2025年CCPC网络预选赛",
+    "family": "CCPC",
+    "tier": "preliminary",
+    "team": "罚时罚到外婆桥",
+    "members": [
+      "于凯",
+      "林丹阳",
+      "于笑尘"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2036,
+    "officialRank": null,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025preliminary"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025preliminary"
+    },
+    "notes": "",
+    "title": "2025年CCPC网络预选赛",
+    "imageUrl": "",
+    "sortOrder": 32
+  },
+  {
+    "uid": "beeaa0dca8cc24fe8aff",
+    "academicYear": "2025",
+    "date": "2025-09-14",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "罚时罚到外婆桥",
+    "members": [
+      "于凯",
+      "于笑尘",
+      "林丹阳"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1729,
+    "officialRank": 1729,
+    "solved": 1,
+    "penalty": 352,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-2"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 33
+  },
+  {
+    "uid": "8f7e4f8161156995c5c0",
+    "academicYear": "2025",
+    "date": "2025-09-14",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "不知道叫什么队",
+    "members": [
+      "马新宇",
+      "洪子轩",
+      "汪子涵"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1625,
+    "officialRank": 1625,
+    "solved": 1,
+    "penalty": 259,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-2"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 34
+  },
+  {
+    "uid": "a9de1374fc0c10097bb0",
+    "academicYear": "2025",
+    "date": "2025-09-14",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "从零到一的指针",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "王乐天"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1620,
+    "officialRank": 1620,
+    "solved": 1,
+    "penalty": 251,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-2"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 35
+  },
+  {
+    "uid": "848378f7c79672dd0395",
+    "academicYear": "2025",
+    "date": "2025-09-14",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "蒙的全队",
+    "members": [
+      "余岢璇",
+      "胡谐",
+      "戴露"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1583,
+    "officialRank": 1583,
+    "solved": 1,
+    "penalty": 234,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-2"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 36
+  },
+  {
+    "uid": "838100771d503bfe35aa",
+    "academicYear": "2025",
+    "date": "2025-09-14",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "丢掉幻想准备斗争",
+    "members": [
+      "张锐",
+      "邱贤达",
+      "李炫睿"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1335,
+    "officialRank": 1335,
+    "solved": 1,
+    "penalty": 84,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-2"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
+    "imageUrl": "",
+    "sortOrder": 37
+  },
+  {
+    "uid": "789896b23769f1fcbac3",
+    "academicYear": "2025",
+    "date": "2025-09-13",
+    "event": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "不知道叫什么队",
+    "members": [
+      "马新宇",
+      "汪子涵",
+      "洪子轩"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 256,
+    "officialRank": 246,
+    "solved": 2,
+    "penalty": 50,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-nanchang",
+      "xcpcio": "ccpc/11th/nanchang-invitational"
+    },
+    "notes": "",
+    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 38
+  },
+  {
+    "uid": "24252d41d507423b40f1",
+    "academicYear": "2025",
+    "date": "2025-09-13",
+    "event": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "从零到一的指针",
+    "members": [
+      "叶抒宇",
+      "王乐天",
+      "段锦坤"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 185,
+    "officialRank": 175,
+    "solved": 4,
+    "penalty": 312,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-nanchang",
+      "xcpcio": "ccpc/11th/nanchang-invitational"
+    },
+    "notes": "",
+    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 39
+  },
+  {
+    "uid": "0620acccbe9564c3b259",
+    "academicYear": "2025",
+    "date": "2025-09-13",
+    "event": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "饱饱和宝宝和宝饱一起跨校打星",
+    "members": [
+      "于凯",
+      "罗靖豪",
+      "陈弘毅"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 20,
+    "officialRank": null,
+    "solved": 7,
+    "penalty": 702,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-nanchang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/nanchang-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-nanchang",
+      "xcpcio": "ccpc/11th/nanchang-invitational"
+    },
+    "notes": "",
+    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 40
+  },
+  {
+    "uid": "54aa425d6716e494561d",
+    "academicYear": "2025",
+    "date": "2025-09-07",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "从零到一的指针",
+    "members": [
+      "叶抒宇",
+      "段锦坤",
+      "王乐天"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2040,
+    "officialRank": 2040,
+    "solved": 1,
+    "penalty": 55,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-1"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 41
+  },
+  {
+    "uid": "9d0859cc6d803477071e",
+    "academicYear": "2025",
+    "date": "2025-09-07",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "蒙的全队",
+    "members": [
+      "余岢璇",
+      "胡谐",
+      "戴露"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1953,
+    "officialRank": 1953,
+    "solved": 2,
+    "penalty": 386,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-1"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 42
+  },
+  {
+    "uid": "d0f2d0c0a46d831e9d9c",
+    "academicYear": "2025",
+    "date": "2025-09-07",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "不知道叫什么队",
+    "members": [
+      "马新宇",
+      "洪子轩",
+      "汪子涵"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1855,
+    "officialRank": 1855,
+    "solved": 2,
+    "penalty": 279,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-1"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 43
+  },
+  {
+    "uid": "dafe87fb741087a77904",
+    "academicYear": "2025",
+    "date": "2025-09-07",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "罚时罚到外婆桥",
+    "members": [
+      "于凯",
+      "于笑尘",
+      "林丹阳"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1588,
+    "officialRank": 1588,
+    "solved": 3,
+    "penalty": 568,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-1"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 44
+  },
+  {
+    "uid": "6cafff24e9ffe73b92fe",
+    "academicYear": "2025",
+    "date": "2025-09-07",
+    "event": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "丢掉幻想准备斗争",
+    "members": [
+      "张锐",
+      "邱贤达",
+      "李炫睿"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1587,
+    "officialRank": 1587,
+    "solved": 3,
+    "penalty": 566,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025preliminary-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2025__icpc2025preliminary-1"
+    },
+    "notes": "",
+    "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
+    "imageUrl": "",
+    "sortOrder": 45
+  },
+  {
+    "uid": "fdc7dfb891a5b4412565",
+    "academicYear": "2025",
+    "date": "2025-06-21",
+    "event": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "罚时罚到外婆桥",
+    "members": [
+      "于凯",
+      "林丹阳",
+      "于笑尘"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 225,
+    "officialRank": 224,
+    "solved": 2,
+    "penalty": 200,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-fujian"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-fujian"
+    },
+    "notes": "",
+    "title": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛",
+    "imageUrl": "",
+    "sortOrder": 46
+  },
+  {
+    "uid": "ee7f6c9f579522a414f0",
+    "academicYear": "2025",
+    "date": "2025-05-25",
+    "event": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "不知道叫什么名",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 360,
+    "officialRank": 349,
+    "solved": 2,
+    "penalty": 350,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-northeast"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/northeastern"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-northeast",
+      "xcpcio": "ccpc/11th/northeastern"
+    },
+    "notes": "",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 47
+  },
+  {
+    "uid": "02ae99bf3b4f216efb1c",
+    "academicYear": "2025",
+    "date": "2025-05-25",
+    "event": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "从零到一的指针",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 295,
+    "officialRank": 284,
+    "solved": 3,
+    "penalty": 458,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-northeast"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/northeastern"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-northeast",
+      "xcpcio": "ccpc/11th/northeastern"
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 48
+  },
+  {
+    "uid": "25e0d3071f9588c1be04",
+    "academicYear": "2025",
+    "date": "2025-05-25",
+    "event": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "family": "CCPC",
+    "tier": "invitational",
+    "team": "罚时罚到外婆桥",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 289,
+    "officialRank": 278,
+    "solved": 3,
+    "penalty": 423,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/ccpc__ccpc2025__ccpc2025invitational-northeast"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/ccpc/11th/northeastern"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "ccpc__ccpc2025__ccpc2025invitational-northeast",
+      "xcpcio": "ccpc/11th/northeastern"
+    },
+    "notes": "",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "imageUrl": "",
+    "sortOrder": 49
+  },
+  {
+    "uid": "71acd4b3961cdc74a73e",
+    "academicYear": "2024",
+    "date": "2024-12-01",
+    "event": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛昆明站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "丢掉幻想准备斗争队",
+    "members": [
+      "林渤程",
+      "张锐",
+      "邱贤达"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 392,
+    "officialRank": null,
+    "solved": 3,
+    "penalty": 778,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024kunming"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/kunming"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/62"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024kunming",
+      "xcpcio": "icpc/49th/kunming",
+      "cpcfinder": 21609
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛昆明站",
+    "imageUrl": "",
+    "sortOrder": 50
+  },
+  {
+    "uid": "423261cf93e0a60875a1",
+    "academicYear": "2024",
+    "date": "2024-11-17",
+    "event": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "废水零液体排放",
+    "members": [
+      "郑宇泉",
+      "李炫睿",
+      "戴露"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 332,
+    "officialRank": 316,
+    "solved": 2,
+    "penalty": 618,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024shanghai"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/shanghai"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/59"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024shanghai",
+      "xcpcio": "icpc/49th/shanghai",
+      "cpcfinder": 35454
+    },
+    "notes": "",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
+    "imageUrl": "",
+    "sortOrder": 51
+  },
+  {
+    "uid": "242d3a78f5cc928e5da0",
+    "academicYear": "2024",
+    "date": "2024-09-21",
+    "event": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "超级编编编",
+    "members": [
+      "林子沐",
+      "雷明烨",
+      "林渤程"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2109,
+    "officialRank": 2109,
+    "solved": 2,
+    "penalty": 287,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-2",
+      "xcpcio": "icpc/49th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 52
+  },
+  {
+    "uid": "2665387b245986a1b570",
+    "academicYear": "2024",
+    "date": "2024-09-21",
+    "event": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "该取个队名了",
+    "members": [
+      "陈嘉树",
+      "黄湛",
+      "付安旭"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1888,
+    "officialRank": 1888,
+    "solved": 3,
+    "penalty": 519,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-2",
+      "xcpcio": "icpc/49th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 53
+  },
+  {
+    "uid": "9784348f522f54760df7",
+    "academicYear": "2024",
+    "date": "2024-09-21",
+    "event": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "废水零液体排放",
+    "members": [
+      "郑宇泉",
+      "李炫睿",
+      "戴露"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1631,
+    "officialRank": 1631,
+    "solved": 4,
+    "penalty": 846,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-2",
+      "xcpcio": "icpc/49th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 54
+  },
+  {
+    "uid": "0b2a5cedd3b36922fceb",
+    "academicYear": "2024",
+    "date": "2024-09-15",
+    "event": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "超级编编编",
+    "members": [
+      "林子沐",
+      "雷明烨",
+      "林渤程"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2138,
+    "officialRank": 2138,
+    "solved": 1,
+    "penalty": 246,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-1",
+      "xcpcio": "icpc/49th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 55
+  },
+  {
+    "uid": "c58e595c37e0fe6a317a",
+    "academicYear": "2024",
+    "date": "2024-09-15",
+    "event": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "该取个队名了",
+    "members": [
+      "陈嘉树",
+      "黄湛",
+      "付安旭"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1556,
+    "officialRank": 1556,
+    "solved": 2,
+    "penalty": 147,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-1",
+      "xcpcio": "icpc/49th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 56
+  },
+  {
+    "uid": "0a123ee82100a4a2f581",
+    "academicYear": "2024",
+    "date": "2024-09-15",
+    "event": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "废水零液体排放",
+    "members": [
+      "郑宇泉",
+      "李炫睿",
+      "戴露"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1104,
+    "officialRank": 1104,
+    "solved": 3,
+    "penalty": 388,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024preliminary-1",
+      "xcpcio": "icpc/49th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 49th ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 57
+  },
+  {
+    "uid": "332853b38fd518e10154",
+    "academicYear": "2024",
+    "date": "2024-05-19",
+    "event": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "颗粒不知道阿",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 309,
+    "officialRank": 295,
+    "solved": 2,
+    "penalty": 268,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024invitational-xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/49th/xian-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2024__icpc2024invitational-xi_an",
+      "xcpcio": "icpc/49th/xian-invitational"
+    },
+    "notes": "",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
+    "imageUrl": "",
+    "sortOrder": 58
+  },
+  {
+    "uid": "2dbc72081995798ba72d",
+    "academicYear": "2023",
+    "date": "2023-12-10",
+    "event": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "颗粒不知道阿",
+    "members": [
+      "林子沐",
+      "陈嘉树",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 362,
+    "officialRank": 326,
+    "solved": 3,
+    "penalty": 472,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023hangzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/hangzhou"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/3"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023hangzhou",
+      "xcpcio": "icpc/48th/hangzhou",
+      "cpcfinder": 811
+    },
+    "notes": "",
+    "title": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "imageUrl": "",
+    "sortOrder": 59
+  },
+  {
+    "uid": "31c873123fb48ecd6867",
+    "academicYear": "2023",
+    "date": "2023-09-23",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "喜过样例",
+    "members": [
+      "冀彦丞",
+      "陈俊有",
+      "黄人和"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1123,
+    "officialRank": 1123,
+    "solved": 3,
+    "penalty": 330,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-2",
+      "xcpcio": "icpc/48th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 60
+  },
+  {
+    "uid": "d642aa6284a3b370463f",
+    "academicYear": "2023",
+    "date": "2023-09-23",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "DKYer勇争下游",
+    "members": [
+      "付安旭",
+      "崔志鹏",
+      "郑贤承"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1010,
+    "officialRank": 1010,
+    "solved": 3,
+    "penalty": 202,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-2",
+      "xcpcio": "icpc/48th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 61
+  },
+  {
+    "uid": "311ea000658b64fca10d",
+    "academicYear": "2023",
+    "date": "2023-09-23",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "爱丽丝不觉得电科院没有魔法",
+    "members": [
+      "林子沐",
+      "陈嘉树",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 500,
+    "officialRank": 500,
+    "solved": 5,
+    "penalty": 602,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-2",
+      "xcpcio": "icpc/48th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 62
+  },
+  {
+    "uid": "d497951f9f5904d16983",
+    "academicYear": "2023",
+    "date": "2023-09-17",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "DKYer勇争下游",
+    "members": [
+      "付安旭",
+      "崔志鹏",
+      "郑贤承"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1152,
+    "officialRank": 1152,
+    "solved": 4,
+    "penalty": 589,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-1",
+      "xcpcio": "icpc/48th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 63
+  },
+  {
+    "uid": "19ef0ecbe26bffbffab8",
+    "academicYear": "2023",
+    "date": "2023-09-17",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "爱丽丝不觉得电科院没有魔法",
+    "members": [
+      "林子沐",
+      "陈嘉树",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1077,
+    "officialRank": 1077,
+    "solved": 4,
+    "penalty": 491,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-1",
+      "xcpcio": "icpc/48th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 64
+  },
+  {
+    "uid": "04498ca640e2aa94e56c",
+    "academicYear": "2023",
+    "date": "2023-09-17",
+    "event": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "喜过样例",
+    "members": [
+      "冀彦丞",
+      "陈俊有",
+      "黄人和"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1005,
+    "officialRank": 1005,
+    "solved": 4,
+    "penalty": 428,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023preliminary-1"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/online-qualification-1"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023preliminary-1",
+      "xcpcio": "icpc/48th/online-qualification-1"
+    },
+    "notes": "",
+    "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
+    "imageUrl": "",
+    "sortOrder": 65
+  },
+  {
+    "uid": "c4e43f5f5674e98aded0",
+    "academicYear": "2023",
+    "date": "2023-06-04",
+    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "1_6_我在阿萨姆博金迈银恋铜打铁的奇妙生活",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 74,
+    "officialRank": 74,
+    "solved": 4,
+    "penalty": 268,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023srni"
+    },
+    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
+    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "imageUrl": "",
+    "sortOrder": 66
+  },
+  {
+    "uid": "61cf8c1546ca2135aace",
+    "academicYear": "2023",
+    "date": "2023-06-04",
+    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "1_2_青春DKYer不会梦见ACM铁牌",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 44,
+    "officialRank": 44,
+    "solved": 6,
+    "penalty": 841,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023srni"
+    },
+    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
+    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "imageUrl": "",
+    "sortOrder": 67
+  },
+  {
+    "uid": "858c55cf350aed92aabe",
+    "academicYear": "2023",
+    "date": "2023-06-04",
+    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "2_10_用湛神十年单身换一块铜牌",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 10,
+    "officialRank": 10,
+    "solved": 9,
+    "penalty": 1349,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
+      },
+      {
+        "name": "原始榜单",
+        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2023__icpc2023srni"
+    },
+    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
+    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
+    "imageUrl": "",
+    "sortOrder": 68
+  },
+  {
+    "uid": "917853b7056ea035808d",
+    "academicYear": "2023",
+    "date": "2023-05-14",
+    "event": "第 48 届 ICPC 国际大学生程序设计竞赛西安邀请赛（正式赛）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "趁热打铁",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 317,
+    "officialRank": 310,
+    "solved": 2,
+    "penalty": 228,
+    "sources": [
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/48th/xian-invitational"
+      }
+    ],
+    "sourceRefs": {
+      "xcpcio": "icpc/48th/xian-invitational"
+    },
+    "notes": " XCPCIO 配置未给出奖牌线，暂仅收录参赛成绩。",
+    "title": "第 48 届 ICPC 国际大学生程序设计竞赛西安邀请赛（正式赛）",
+    "imageUrl": "",
+    "sortOrder": 69
+  },
+  {
+    "uid": "133d1cf46286e51aa4f1",
+    "academicYear": "2022",
+    "date": "2022-12-04",
+    "event": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "加载不出来",
+    "members": [
+      "庄京生",
+      "曲经民",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 562,
+    "officialRank": 485,
+    "solved": 2,
+    "penalty": 177,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022hangzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/hangzhou"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/16"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022hangzhou",
+      "xcpcio": "icpc/47th/hangzhou",
+      "cpcfinder": 4849
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "imageUrl": "",
+    "sortOrder": 70
+  },
+  {
+    "uid": "322d57c0a6513ffb43e4",
+    "academicYear": "2022",
+    "date": "2022-12-04",
+    "event": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "加载出来了",
+    "members": [
+      "冀彦丞",
+      "林子沐",
+      "黄人和"
+    ],
+    "award": "",
+    "official": false,
+    "rank": 503,
+    "officialRank": null,
+    "solved": 2,
+    "penalty": 106,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022hangzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/hangzhou"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/16"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022hangzhou",
+      "xcpcio": "icpc/47th/hangzhou",
+      "cpcfinder": 4788
+    },
+    "notes": "",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "imageUrl": "",
+    "sortOrder": 71
+  },
+  {
+    "uid": "1b610872166659115b21",
+    "academicYear": "2022",
+    "date": "2022-11-27",
+    "event": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "小猪佩奇",
+    "members": [
+      "冀彦丞",
+      "庄京生",
+      "黄人和"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 460,
+    "officialRank": 415,
+    "solved": 3,
+    "penalty": 663,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022jinan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/jinan"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/17"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022jinan",
+      "xcpcio": "icpc/47th/jinan",
+      "cpcfinder": 5404
+    },
+    "notes": "",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站",
+    "imageUrl": "",
+    "sortOrder": 72
+  },
+  {
+    "uid": "93b302b96363b2a9da63",
+    "academicYear": "2022",
+    "date": "2022-11-06",
+    "event": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "matlab",
+    "members": [
+      "史婧怡",
+      "陈振烨",
+      "黄人和"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 668,
+    "officialRank": 640,
+    "solved": 1,
+    "penalty": 4,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/shenyang"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/22"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022shenyang",
+      "xcpcio": "icpc/47th/shenyang",
+      "cpcfinder": 7786
+    },
+    "notes": "",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "imageUrl": "",
+    "sortOrder": 73
+  },
+  {
+    "uid": "ad294b6c92e8913fdb71",
+    "academicYear": "2022",
+    "date": "2022-11-06",
+    "event": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "python",
+    "members": [
+      "冀彦丞",
+      "曲经民",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 656,
+    "officialRank": 629,
+    "solved": 2,
+    "penalty": 416,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/shenyang"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/22"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022shenyang",
+      "xcpcio": "icpc/47th/shenyang",
+      "cpcfinder": 7773
+    },
+    "notes": "",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "imageUrl": "",
+    "sortOrder": 74
+  },
+  {
+    "uid": "dcdf402e8cbbdb13cae1",
+    "academicYear": "2022",
+    "date": "2022-09-25",
+    "event": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "松涛三剑客",
+    "members": [
+      "张天宇",
+      "李昱辰",
+      "赵炽野"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2361,
+    "officialRank": 2361,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022preliminary-2",
+      "xcpcio": "icpc/47th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 75
+  },
+  {
+    "uid": "c15b9964832ac26c6319",
+    "academicYear": "2022",
+    "date": "2022-09-25",
+    "event": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "DKY4队",
+    "members": [
+      "史婧怡",
+      "张敦敏",
+      "徐少飞"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2078,
+    "officialRank": 2078,
+    "solved": 1,
+    "penalty": 84,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022preliminary-2",
+      "xcpcio": "icpc/47th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 76
+  },
+  {
+    "uid": "ebe2a900fb5a59aae489",
+    "academicYear": "2022",
+    "date": "2022-09-25",
+    "event": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "第一队",
+    "members": [
+      "李经纬",
+      "陈旭东",
+      "黄人和"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 2004,
+    "officialRank": 2004,
+    "solved": 1,
+    "penalty": 57,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022preliminary-2",
+      "xcpcio": "icpc/47th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 77
+  },
+  {
+    "uid": "98762c22d336856939f6",
+    "academicYear": "2022",
+    "date": "2022-09-25",
+    "event": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "一二三队",
+    "members": [
+      "冀彦丞",
+      "曲经民",
+      "黄湛"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 1812,
+    "officialRank": 1812,
+    "solved": 2,
+    "penalty": 488,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2022__icpc2022preliminary-2"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/47th/online-qualification-2"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2022__icpc2022preliminary-2",
+      "xcpcio": "icpc/47th/online-qualification-2"
+    },
+    "notes": "",
+    "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
+    "imageUrl": "",
+    "sortOrder": 78
+  },
+  {
+    "uid": "9dc1a52ebfdc2266fd7e",
+    "academicYear": "2022",
+    "date": "2022-04-17",
+    "event": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "电科院女生",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 809,
+    "officialRank": 697,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2021__icpc2021kunming"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/46th/kunming"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2021__icpc2021kunming",
+      "xcpcio": "icpc/46th/kunming"
+    },
+    "notes": "",
+    "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "imageUrl": "",
+    "sortOrder": 79
+  },
+  {
+    "uid": "5f7f1657688156a436a9",
+    "academicYear": "2022",
+    "date": "2022-04-17",
+    "event": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "电科院",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 791,
+    "officialRank": 683,
+    "solved": 1,
+    "penalty": 434,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2021__icpc2021kunming"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/46th/kunming"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2021__icpc2021kunming",
+      "xcpcio": "icpc/46th/kunming"
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "imageUrl": "",
+    "sortOrder": 80
+  },
+  {
+    "uid": "c26159b5dde89d00d563",
+    "academicYear": "2021",
+    "date": "2021-05-16",
+    "event": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "草原上的王者",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 472,
+    "officialRank": 464,
+    "solved": 2,
+    "penalty": 533,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2020__icpc2020yinchuan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2020/yinchuan"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2020__icpc2020yinchuan",
+      "xcpcio": "icpc/2020/yinchuan"
+    },
+    "notes": "",
+    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "imageUrl": "",
+    "sortOrder": 81
+  },
+  {
+    "uid": "f56b088de52d913313e3",
+    "academicYear": "2021",
+    "date": "2021-05-16",
+    "event": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "新手上路",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 424,
+    "officialRank": 416,
+    "solved": 3,
+    "penalty": 751,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2020__icpc2020yinchuan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2020/yinchuan"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2020__icpc2020yinchuan",
+      "xcpcio": "icpc/2020/yinchuan"
+    },
+    "notes": "",
+    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "imageUrl": "",
+    "sortOrder": 82
+  },
+  {
+    "uid": "8e9e3ec816a934302f5c",
+    "academicYear": "2021",
+    "date": "2021-04-03",
+    "event": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "3+2",
+    "members": [
+      "张启帆",
+      "朱家婧",
+      "林紫欣"
+    ],
+    "award": "",
+    "official": true,
+    "rank": 750,
+    "officialRank": 710,
+    "solved": 1,
+    "penalty": 4,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2020__icpc2020kunming"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2020/kunming"
+      },
+      {
+        "name": "CPCFinder",
+        "url": "https://cpcfinder.com/contest/36"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2020__icpc2020kunming",
+      "xcpcio": "icpc/2020/kunming",
+      "cpcfinder": 26552
+    },
+    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "title": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛）",
+    "imageUrl": "",
+    "sortOrder": 83
+  },
+  {
+    "uid": "f5408b2b5718d6cddfdf",
+    "academicYear": "2019",
+    "date": "2019-10-20",
+    "event": "The 44th ICPC Asia Yinchuan Regional Programming Contest",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "顽强拼搏",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 346,
+    "officialRank": 344,
+    "solved": 2,
+    "penalty": 92,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019yinchuan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2019/yinchuan"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2019__icpc2019yinchuan",
+      "xcpcio": "icpc/2019/yinchuan"
+    },
+    "notes": "",
+    "title": "The 44th ICPC Asia Yinchuan Regional Programming Contest",
+    "imageUrl": "",
+    "sortOrder": 84
+  },
+  {
+    "uid": "6bdf427fa69d5d69b0ab",
+    "academicYear": "2019",
+    "date": "2019-06-01",
+    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "趣多多",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 318,
+    "officialRank": 298,
+    "solved": 1,
+    "penalty": 6,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
+    },
+    "notes": "",
+    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "imageUrl": "",
+    "sortOrder": 85
+  },
+  {
+    "uid": "549fc98e11be34a373d3",
+    "academicYear": "2019",
+    "date": "2019-06-01",
+    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "吴彦祖保佑不wa",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 313,
+    "officialRank": 297,
+    "solved": 1,
+    "penalty": 1,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
+    },
+    "notes": "",
+    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "imageUrl": "",
+    "sortOrder": 86
+  },
+  {
+    "uid": "b7632876ec52c706bc1d",
+    "academicYear": "2019",
+    "date": "2019-06-01",
+    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "family": "ICPC",
+    "tier": "invitational",
+    "team": "还没有账号?立即注册",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 273,
+    "officialRank": 268,
+    "solved": 3,
+    "penalty": 308,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
+    },
+    "notes": "",
+    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
+    "imageUrl": "",
+    "sortOrder": 87
+  },
+  {
+    "uid": "7d1fff4584fd96e745b2",
+    "academicYear": "2018",
+    "date": "2018-10-14",
+    "event": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "%d%d%d",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 310,
+    "officialRank": 294,
+    "solved": 1,
+    "penalty": 145,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2018__icpc2018nanjing"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2018__icpc2018nanjing"
+    },
+    "notes": "",
+    "title": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学）",
+    "imageUrl": "",
+    "sortOrder": 88
+  },
+  {
+    "uid": "03c24f5f0145c5204962",
+    "academicYear": "2017",
+    "date": "2017-11-19",
+    "event": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "eyesofBJ",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 192,
+    "officialRank": 183,
+    "solved": 1,
+    "penalty": 261,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2017__icpc2017beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2017/pku_onsite"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2017__icpc2017beijing",
+      "xcpcio": "icpc/2017/pku_onsite"
+    },
+    "notes": "",
+    "title": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学）",
+    "imageUrl": "",
+    "sortOrder": 89
+  },
+  {
+    "uid": "4cdc0d25e0070508a987",
+    "academicYear": "2016",
+    "date": "2016-09-18",
+    "event": "ICPC 2016 沈阳赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0037",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 512,
+    "officialRank": 512,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2016__icpc2016preliminary-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2016/neu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2016__icpc2016preliminary-shenyang",
+      "xcpcio": "icpc/2016/neu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2016 沈阳赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 90
+  },
+  {
+    "uid": "ec08d977090bab65c827",
+    "academicYear": "2016",
+    "date": "2016-09-17",
+    "event": "ICPC 2016 青岛网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0431",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 1137,
+    "officialRank": 1137,
+    "solved": 2,
+    "penalty": 649,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2016__icpc2016preliminary-qingdao"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2016/upc_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2016__icpc2016preliminary-qingdao",
+      "xcpcio": "icpc/2016/upc_online"
+    },
+    "notes": "",
+    "title": "ICPC 2016 青岛网络赛",
+    "imageUrl": "",
+    "sortOrder": 91
+  },
+  {
+    "uid": "b2055fafed5e1fc6a7c8",
+    "academicYear": "2016",
+    "date": "2016-09-10",
+    "event": "ICPC 2016 大连赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0039",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 891,
+    "officialRank": 891,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2016__icpc2016preliminary-dalian"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2016/dlmu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2016__icpc2016preliminary-dalian",
+      "xcpcio": "icpc/2016/dlmu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2016 大连赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 92
+  },
+  {
+    "uid": "d2eb7b52115588e8fd7c",
+    "academicYear": "2015",
+    "date": "2015-11-15",
+    "event": "2015 北京赛区现场赛 （北京大学）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "BEST",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 194,
+    "officialRank": 194,
+    "solved": 1,
+    "penalty": 173,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/pku_onsite"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015beijing",
+      "xcpcio": "icpc/2015/pku_onsite"
+    },
+    "notes": "",
+    "title": "2015 北京赛区现场赛 （北京大学）",
+    "imageUrl": "",
+    "sortOrder": 93
+  },
+  {
+    "uid": "fced42082dec4fbea6cf",
+    "academicYear": "2015",
+    "date": "2015-09-27",
+    "event": "ICPC 2015 合肥赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0826",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 723,
+    "officialRank": 723,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-hefei"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ustc_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-hefei",
+      "xcpcio": "icpc/2015/ustc_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 合肥赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 94
+  },
+  {
+    "uid": "9eb3a0de850a46bf9267",
+    "academicYear": "2015",
+    "date": "2015-09-27",
+    "event": "ICPC 2015 合肥赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0827",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 548,
+    "officialRank": 548,
+    "solved": 1,
+    "penalty": 181,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-hefei"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ustc_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-hefei",
+      "xcpcio": "icpc/2015/ustc_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 合肥赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 95
+  },
+  {
+    "uid": "c2158c6aa8330dcb9141",
+    "academicYear": "2015",
+    "date": "2015-09-27",
+    "event": "ICPC 2015 合肥赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0825",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 523,
+    "officialRank": 523,
+    "solved": 1,
+    "penalty": 152,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-hefei"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ustc_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-hefei",
+      "xcpcio": "icpc/2015/ustc_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 合肥赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 96
+  },
+  {
+    "uid": "20b217e1e44956e659d9",
+    "academicYear": "2015",
+    "date": "2015-09-26",
+    "event": "ICPC 2015 上海赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team1196",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 1015,
+    "officialRank": 1015,
+    "solved": 1,
+    "penalty": 498,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shanghai"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ecust_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shanghai",
+      "xcpcio": "icpc/2015/ecust_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 上海赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 97
+  },
+  {
+    "uid": "93e605092855ea4cd932",
+    "academicYear": "2015",
+    "date": "2015-09-26",
+    "event": "ICPC 2015 上海赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team1195",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 744,
+    "officialRank": 744,
+    "solved": 1,
+    "penalty": 53,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shanghai"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ecust_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shanghai",
+      "xcpcio": "icpc/2015/ecust_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 上海赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 98
+  },
+  {
+    "uid": "70c87613e7c4149e31b0",
+    "academicYear": "2015",
+    "date": "2015-09-26",
+    "event": "ICPC 2015 上海赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team1194",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 550,
+    "officialRank": 550,
+    "solved": 2,
+    "penalty": 280,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shanghai"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/ecust_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shanghai",
+      "xcpcio": "icpc/2015/ecust_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 上海赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 99
+  },
+  {
+    "uid": "c69582641da1e3e95c75",
+    "academicYear": "2015",
+    "date": "2015-09-20",
+    "event": "ICPC 2015 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0232",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 966,
+    "officialRank": 966,
+    "solved": 1,
+    "penalty": 225,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/pku_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-beijing",
+      "xcpcio": "icpc/2015/pku_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 100
+  },
+  {
+    "uid": "00b7b5e2afef5ddc869c",
+    "academicYear": "2015",
+    "date": "2015-09-20",
+    "event": "ICPC 2015 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0233",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 633,
+    "officialRank": 633,
+    "solved": 2,
+    "penalty": 248,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/pku_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-beijing",
+      "xcpcio": "icpc/2015/pku_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 101
+  },
+  {
+    "uid": "a477c416197fbd626816",
+    "academicYear": "2015",
+    "date": "2015-09-20",
+    "event": "ICPC 2015 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0234",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 550,
+    "officialRank": 550,
+    "solved": 2,
+    "penalty": 197,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/pku_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-beijing",
+      "xcpcio": "icpc/2015/pku_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 102
+  },
+  {
+    "uid": "0e253ee749e147bcbb3f",
+    "academicYear": "2015",
+    "date": "2015-09-20",
+    "event": "ICPC 2015 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0231",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 497,
+    "officialRank": 497,
+    "solved": 2,
+    "penalty": 171,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/pku_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-beijing",
+      "xcpcio": "icpc/2015/pku_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 103
+  },
+  {
+    "uid": "ae9587f846545eaa7702",
+    "academicYear": "2015",
+    "date": "2015-09-19",
+    "event": "ICPC 2015 沈阳赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0036",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 946,
+    "officialRank": 946,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/neu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shenyang",
+      "xcpcio": "icpc/2015/neu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 沈阳赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 104
+  },
+  {
+    "uid": "03713845693793de2643",
+    "academicYear": "2015",
+    "date": "2015-09-19",
+    "event": "ICPC 2015 沈阳赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0034",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 893,
+    "officialRank": 893,
+    "solved": 1,
+    "penalty": 260,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/neu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shenyang",
+      "xcpcio": "icpc/2015/neu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 沈阳赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 105
+  },
+  {
+    "uid": "1b8844e55be1e5ca0f75",
+    "academicYear": "2015",
+    "date": "2015-09-19",
+    "event": "ICPC 2015 沈阳赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0035",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 851,
+    "officialRank": 851,
+    "solved": 1,
+    "penalty": 159,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/neu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shenyang",
+      "xcpcio": "icpc/2015/neu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 沈阳赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 106
+  },
+  {
+    "uid": "ecc3049778e854f698a8",
+    "academicYear": "2015",
+    "date": "2015-09-19",
+    "event": "ICPC 2015 沈阳赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0033",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 474,
+    "officialRank": 474,
+    "solved": 3,
+    "penalty": 540,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-shenyang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/neu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-shenyang",
+      "xcpcio": "icpc/2015/neu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 沈阳赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 107
+  },
+  {
+    "uid": "e263becaf47508e577df",
+    "academicYear": "2015",
+    "date": "2015-09-13",
+    "event": "ICPC 2015 长春赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0026",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 1005,
+    "officialRank": 1005,
+    "solved": 1,
+    "penalty": 74,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-changchun"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/nenu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-changchun",
+      "xcpcio": "icpc/2015/nenu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 长春赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 108
+  },
+  {
+    "uid": "48774c275970c66f9e2b",
+    "academicYear": "2015",
+    "date": "2015-09-13",
+    "event": "ICPC 2015 长春赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0028",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 994,
+    "officialRank": 994,
+    "solved": 1,
+    "penalty": 66,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-changchun"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/nenu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-changchun",
+      "xcpcio": "icpc/2015/nenu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 长春赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 109
+  },
+  {
+    "uid": "b7c53e7397e6c8872946",
+    "academicYear": "2015",
+    "date": "2015-09-13",
+    "event": "ICPC 2015 长春赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0027",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 962,
+    "officialRank": 962,
+    "solved": 1,
+    "penalty": 45,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-changchun"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/nenu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-changchun",
+      "xcpcio": "icpc/2015/nenu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 长春赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 110
+  },
+  {
+    "uid": "5eeaa913b63c6234383c",
+    "academicYear": "2015",
+    "date": "2015-09-13",
+    "event": "ICPC 2015 长春赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team0025",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 497,
+    "officialRank": 497,
+    "solved": 3,
+    "penalty": 343,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2015__icpc2015preliminary-changchun"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2015/nenu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2015__icpc2015preliminary-changchun",
+      "xcpcio": "icpc/2015/nenu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2015 长春赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 111
+  },
+  {
+    "uid": "3023309ac6fa5d16fa61",
+    "academicYear": "2014",
+    "date": "2014-10-26",
+    "event": "2014 西安赛区现场赛 （西北工业大学）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "BTEAM",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 260,
+    "officialRank": 254,
+    "solved": 1,
+    "penalty": 43,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/nwpu_onsite"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014xi_an",
+      "xcpcio": "icpc/2014/nwpu_onsite"
+    },
+    "notes": "",
+    "title": "2014 西安赛区现场赛 （西北工业大学）",
+    "imageUrl": "",
+    "sortOrder": 112
+  },
+  {
+    "uid": "976fff347270f793979e",
+    "academicYear": "2014",
+    "date": "2014-09-21",
+    "event": "ICPC 2014 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "小男孩 (team0220)",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 749,
+    "officialRank": 749,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/bnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-beijing",
+      "xcpcio": "icpc/2014/bnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 113
+  },
+  {
+    "uid": "575296ce38528a807833",
+    "academicYear": "2014",
+    "date": "2014-09-21",
+    "event": "ICPC 2014 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "小男孩 (team0221)",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 749,
+    "officialRank": 749,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/bnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-beijing",
+      "xcpcio": "icpc/2014/bnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 114
+  },
+  {
+    "uid": "1cb88db47c52de1cba11",
+    "academicYear": "2014",
+    "date": "2014-09-21",
+    "event": "ICPC 2014 北京赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "电科院ACM",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 557,
+    "officialRank": 557,
+    "solved": 1,
+    "penalty": 104,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/bnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-beijing",
+      "xcpcio": "icpc/2014/bnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 北京赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 115
+  },
+  {
+    "uid": "f98d113018b74c180a1c",
+    "academicYear": "2014",
+    "date": "2014-09-20",
+    "event": "ICPC 2014 广州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "小男孩",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 644,
+    "officialRank": 644,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-guangzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/scut_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-guangzhou",
+      "xcpcio": "icpc/2014/scut_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 广州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 116
+  },
+  {
+    "uid": "e92a047c15f6bc8f43b9",
+    "academicYear": "2014",
+    "date": "2014-09-14",
+    "event": "ICPC 2014 西安赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "小男孩",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 745,
+    "officialRank": 745,
+    "solved": 1,
+    "penalty": 45,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-xi_an"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/nwpu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-xi_an",
+      "xcpcio": "icpc/2014/nwpu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 西安赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 117
+  },
+  {
+    "uid": "b6a07326afae808da764",
+    "academicYear": "2014",
+    "date": "2014-09-13",
+    "event": "ICPC 2014 鞍山赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team225",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 872,
+    "officialRank": 872,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-anshan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/ustl_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-anshan",
+      "xcpcio": "icpc/2014/ustl_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 鞍山赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 118
+  },
+  {
+    "uid": "5e92719730c597e07e47",
+    "academicYear": "2014",
+    "date": "2014-09-13",
+    "event": "ICPC 2014 鞍山赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team224",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 820,
+    "officialRank": 820,
+    "solved": 1,
+    "penalty": 186,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-anshan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/ustl_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-anshan",
+      "xcpcio": "icpc/2014/ustl_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 鞍山赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 119
+  },
+  {
+    "uid": "3aec45aa5d9355dabb78",
+    "academicYear": "2014",
+    "date": "2014-09-07",
+    "event": "ICPC 2014 牡丹江赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "小男孩",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 716,
+    "officialRank": 716,
+    "solved": 1,
+    "penalty": 33,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2014__icpc2014preliminary-mudanjiang"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2014/mdjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2014__icpc2014preliminary-mudanjiang",
+      "xcpcio": "icpc/2014/mdjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2014 牡丹江赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 120
+  },
+  {
+    "uid": "e093dcc6cf8cc1cc6804",
+    "academicYear": "2012",
+    "date": "2012-09-16",
+    "event": "ICPC 2012 成都赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team724",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 474,
+    "officialRank": 474,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2012__icpc2012preliminary-chengdu"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2012/nsu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2012__icpc2012preliminary-chengdu",
+      "xcpcio": "icpc/2012/nsu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2012 成都赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 121
+  },
+  {
+    "uid": "dd0052d87dff8b7b34a8",
+    "academicYear": "2011",
+    "date": "2011-10-23",
+    "event": "2011 北京赛区现场赛 （北京邮电大学）",
+    "family": "ICPC",
+    "tier": "regional",
+    "team": "Besti1",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 129,
+    "officialRank": 114,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011beijing"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/bupt_onsite"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011beijing",
+      "xcpcio": "icpc/2011/bupt_onsite"
+    },
+    "notes": "",
+    "title": "2011 北京赛区现场赛 （北京邮电大学）",
+    "imageUrl": "",
+    "sortOrder": 122
+  },
+  {
+    "uid": "463a051069d6ce5adaf6",
+    "academicYear": "2011",
+    "date": "2011-10-07",
+    "event": "ICPC 2011 福州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team672",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 534,
+    "officialRank": 534,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011preliminary-fuzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/fjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011preliminary-fuzhou",
+      "xcpcio": "icpc/2011/fjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2011 福州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 123
+  },
+  {
+    "uid": "bff01db642a238565859",
+    "academicYear": "2011",
+    "date": "2011-10-07",
+    "event": "ICPC 2011 福州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team673",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 534,
+    "officialRank": 534,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011preliminary-fuzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/fjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011preliminary-fuzhou",
+      "xcpcio": "icpc/2011/fjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2011 福州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 124
+  },
+  {
+    "uid": "fadc98012ff894e70cf0",
+    "academicYear": "2011",
+    "date": "2011-10-07",
+    "event": "ICPC 2011 福州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team674",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 534,
+    "officialRank": 534,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011preliminary-fuzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/fjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011preliminary-fuzhou",
+      "xcpcio": "icpc/2011/fjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2011 福州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 125
+  },
+  {
+    "uid": "af1ecf64b121ea616f72",
+    "academicYear": "2011",
+    "date": "2011-10-07",
+    "event": "ICPC 2011 福州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team675",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 534,
+    "officialRank": 534,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011preliminary-fuzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/fjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011preliminary-fuzhou",
+      "xcpcio": "icpc/2011/fjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2011 福州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 126
+  },
+  {
+    "uid": "6a502f2b616e46f11b22",
+    "academicYear": "2011",
+    "date": "2011-10-07",
+    "event": "ICPC 2011 福州赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team676",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 534,
+    "officialRank": 534,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2011__icpc2011preliminary-fuzhou"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2011/fjnu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2011__icpc2011preliminary-fuzhou",
+      "xcpcio": "icpc/2011/fjnu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2011 福州赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 127
+  },
+  {
+    "uid": "0c9779f16727839a6ba3",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t39besti-3",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 571,
+    "officialRank": 571,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 128
+  },
+  {
+    "uid": "7401ccfbaca59bac134d",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t40besti-4",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 571,
+    "officialRank": 571,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 129
+  },
+  {
+    "uid": "9d326ae2d7041f925d06",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t41bestiacm",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 571,
+    "officialRank": 571,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 130
+  },
+  {
+    "uid": "a42423b6d29f353f61fc",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t42bestiteam",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 571,
+    "officialRank": 571,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 131
+  },
+  {
+    "uid": "f4da6a678eddd36e162c",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t37besti",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 492,
+    "officialRank": 492,
+    "solved": 1,
+    "penalty": 98,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 132
+  },
+  {
+    "uid": "4373ea9e41cfa955af8f",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 武汉赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "asia09_t38besti-2",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 407,
+    "officialRank": 407,
+    "solved": 2,
+    "penalty": 443,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-wuhan"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/whu_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-wuhan",
+      "xcpcio": "icpc/2009/whu_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 武汉赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 133
+  },
+  {
+    "uid": "676285d2c80337717fdc",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 哈尔滨赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team930",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 336,
+    "officialRank": 336,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-harbin"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/hit_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-harbin",
+      "xcpcio": "icpc/2009/hit_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 哈尔滨赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 134
+  },
+  {
+    "uid": "f65ac10ce8b43349b06a",
+    "academicYear": "2009",
+    "date": "2009-09-11",
+    "event": "ICPC 2009 哈尔滨赛区网络赛",
+    "family": "ICPC",
+    "tier": "preliminary",
+    "team": "team931",
+    "members": [],
+    "award": "",
+    "official": true,
+    "rank": 336,
+    "officialRank": 336,
+    "solved": 0,
+    "penalty": 0,
+    "sources": [
+      {
+        "name": "XCPCRating",
+        "url": "https://heimaom.cn/#/contest/icpc__icpc2009__icpc2009preliminary-harbin"
+      },
+      {
+        "name": "XCPCIO",
+        "url": "https://board.xcpcio.com/icpc/2009/hit_online"
+      }
+    ],
+    "sourceRefs": {
+      "rating": "icpc__icpc2009__icpc2009preliminary-harbin",
+      "xcpcio": "icpc/2009/hit_online"
+    },
+    "notes": "",
+    "title": "ICPC 2009 哈尔滨赛区网络赛",
+    "imageUrl": "",
+    "sortOrder": 135
+  }
+]

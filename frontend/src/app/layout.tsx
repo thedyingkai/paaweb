@@ -11,11 +11,12 @@ import ClientRuntime from "./components/ClientRuntime";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.PUBLIC_SITE_URL || "http://localhost:3403"),
   title: {
-    default: "PAA 竞赛管理平台",
+    default: "北京电子科技学院 ACM 校队",
     template: "%s",
   },
-  description: "PAA 竞赛管理平台",
-  keywords: ["竞赛管理平台", "程序设计", "PAA", "算法竞赛", "ACM", "ICPC"],
+  description: "北京电子科技学院 ACM 校队",
+  keywords: ["竞赛管理平台", "程序设计", "BESTI ACM", "算法竞赛", "ACM", "ICPC"],
+  icons: { icon: "/besti-acm-mark.svg", apple: "/besti-acm-mark.svg" },
   robots: {
     index: true,
     follow: true,
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    siteName: "PAA",
-    title: "PAA 竞赛管理平台",
+    siteName: "BESTI ACM",
+    title: "北京电子科技学院 ACM 校队",
     description: "开源竞赛管理平台，提供组织介绍、竞赛报名、培训活动、证书与排名信息。",
   },
 };

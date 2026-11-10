@@ -73,7 +73,7 @@ const NoticeDetailClient = ({ id }: NoticeDetailClientProps) => {
                   <Tag className="bits-pill" style={{ marginBottom: 12 }}>NOTICE DETAIL</Tag>
                   <Title level={2} style={{ margin: 0, fontSize: 32, fontWeight: 800 }}>{data.title}</Title>
                   <Space className="detail-meta" size={[18, 8]} wrap style={{ justifyContent: 'center', marginTop: 12 }}>
-                    <Text><UserOutlined /> {data.publisherName || '协会'}</Text>
+                    <Text><UserOutlined /> {data.publisherName || '校队'}</Text>
                     <Text><ClockCircleOutlined /> {data.createTime || '时间未知'}</Text>
                     <Text><EyeOutlined /> {data.viewCount || 0} 次浏览</Text>
                   </Space>

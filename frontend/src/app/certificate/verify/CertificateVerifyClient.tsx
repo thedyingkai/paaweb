@@ -72,7 +72,7 @@ export function CertificateVerifyPanel({ embedded = false }: CertificateVerifyPa
       <div style={{ textAlign: 'center', marginBottom: 28 }}>
         <SafetyCertificateOutlined style={{ fontSize: 52, color: '#1677ff' }} />
         <Typography.Title level={2} style={{ margin: '12px 0 6px' }}>电子证书真伪查询</Typography.Title>
-        <Typography.Text type="secondary">输入证书右下角的完整编号，核验协会电子证书签发信息</Typography.Text>
+        <Typography.Text type="secondary">输入证书右下角的完整编号，核验校队电子证书签发信息</Typography.Text>
       </div>
 
       <Card style={{ maxWidth: 720, margin: '0 auto' }}>

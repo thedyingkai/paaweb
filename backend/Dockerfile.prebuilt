@@ -1,0 +1,12 @@
+# Build the JAR on a workstation with Java 21 and Maven before building this image:
+# mvn -B -s settings.xml package -DskipTests
+ARG JRE_IMAGE=eclipse-temurin:21-jre-alpine
+FROM ${JRE_IMAGE}
+RUN for package in fontconfig freetype; do \
+        apk info -e "$package" >/dev/null || apk add --no-cache "$package"; \
+    done
+WORKDIR /app
+COPY target/backend-1.0.0.jar app.jar
+ENV TZ=Asia/Shanghai
+EXPOSE 8080
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar"]

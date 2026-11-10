@@ -1,0 +1,5 @@
+**
+!target/
+!target/backend-1.0.0.jar
+!Dockerfile.prebuilt
+!Dockerfile.prebuilt.dockerignore

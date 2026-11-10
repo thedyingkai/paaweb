@@ -324,7 +324,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
     Modal.confirm({
       title: '确认撤销身份认证？',
       icon: <ExclamationCircleOutlined />,
-      content: '仅待审核期间可以撤销当前申请。撤销后你可以重新上传认证材料并再次提交审核；审核通过后身份信息不可更改，如需更正请联系协会负责人。',
+      content: '仅待审核期间可以撤销当前申请。撤销后你可以重新上传认证材料并再次提交审核；审核通过后身份信息不可更改，如需更正请联系校队负责人。',
       okText: '确认撤销申请',
       okType: 'danger',
       cancelText: '暂不撤销',
@@ -534,7 +534,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
                       type="info"
                       showIcon
                       message="身份认证审核中"
-                      description="审核期间可撤销申请并重新上传认证材料；审核通过后身份信息不可更改，如需更正请联系协会负责人。"
+                      description="审核期间可撤销申请并重新上传认证材料；审核通过后身份信息不可更改，如需更正请联系校队负责人。"
                       action={<Button danger loading={revokeLoading} onClick={revokeAuth}>撤销申请</Button>}
                       style={{ marginBottom: 16 }}
                     />
@@ -544,7 +544,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
                       type="success"
                       showIcon
                       message="身份认证已通过"
-                      description="身份信息已锁定，不可撤销认证或自行修改。如需更正身份资料或认证材料，请联系协会负责人。"
+                      description="身份信息已锁定，不可撤销认证或自行修改。如需更正身份资料或认证材料，请联系校队负责人。"
                       style={{ marginBottom: 16 }}
                     />
                   )}

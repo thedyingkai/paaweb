@@ -65,10 +65,10 @@ const PageLoader = ({ loading, initialOnly = true }: PageLoaderProps) => {
         />
         {/* Logo */}
         <img
-          src="/paa-mark.svg"
-          alt="PAA LOGO"
+          src="/besti-acm-mark.svg"
+          alt="BESTI ACM"
           className="loader-logo"
-          style={{ position: 'relative', width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', background: '#fff', padding: 4 }}
+          style={{ position: 'relative', width: 120, height: 120, borderRadius: 0, objectFit: 'contain', background: '#fff', padding: 4 }}
           onError={(e) => {
             e.currentTarget.style.display = 'none';
           }}

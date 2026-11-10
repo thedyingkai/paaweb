@@ -102,27 +102,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
     },
   ];
 
-  const contestItems: MenuProps['items'] = [
-    {
-      key: 'intro',
-      label: <Link href="/contest/intro" style={{ display: 'block', padding: '4px 8px' }}>比赛介绍</Link>,
-    },
-    {
-      key: 'rule',
-      label: <Link href="/contest/rule" style={{ display: 'block', padding: '4px 8px' }}>比赛规则</Link>,
-    },
-    {
-      key: 'signup',
-      label: <Link href="/contest/signup" style={{ display: 'block', padding: '4px 8px' }}>比赛报名</Link>,
-    },
-    {
-      key: 'board',
-      label: <Link href="/contest/board" style={{ display: 'block', padding: '4px 8px' }}>比赛榜单</Link>,
-    },
-  ];
-
   const isNoticeActive = pathname.startsWith('/notice') || pathname.startsWith('/news') || pathname.startsWith('/publicity');
-  const isContestActive = pathname.startsWith('/contest');
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -136,14 +116,13 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
     { href: '/notice', label: '通知' },
     { href: '/news', label: '新闻' },
     { href: '/publicity', label: '公示' },
-    { href: '/contest/intro', label: '比赛介绍' },
-    { href: '/contest/rule', label: '比赛规则' },
-    { href: '/contest/signup', label: '比赛报名' },
-    { href: '/contest/board', label: '比赛榜单' },
+    { href: '/competitions', label: '赛事与登记' },
+    { href: '/team-space', label: '我的校队档案' },
+    { href: '/community', label: '校队交流区' },
     { href: '/training', label: '培训' },
     { href: '/certificate', label: '证书' },
     { href: '/honor', label: '荣誉墙' },
-    { href: '/tracker', label: 'CP Tracker' },
+    { href: '/tracker', label: '训练记录' },
     { href: '/rank', label: '排名' },
     ...(isAdmin ? [{ href: '/admin', label: '控制面板' }] : []),
   ];
@@ -151,7 +130,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
   return (
     <header className={`site-header auth-page-header ${transparent ? 'transparent-header' : ''}`}>
       <Link href="/" className="site-brand" onClick={handleBrandClick}>
-        <img src="/paa-logo.svg" alt="PAA" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+        <img src="/besti-acm-wordmark.svg" alt="BESTI ACM" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
       </Link>
       <div className="site-header-right">
         <nav className="site-nav-links">
@@ -165,16 +144,13 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
             </span>
           </Dropdown>
 
-          <Dropdown menu={{ items: contestItems }} trigger={['hover']}>
-            <span className="site-nav-dropdown-trigger" style={getParentLinkStyle(isContestActive)}>
-              赛事 <DownOutlined style={{ fontSize: '10px' }} />
-            </span>
-          </Dropdown>
+          <Link href="/competitions" style={getLinkStyle('/competitions')}>赛事</Link>
 
           <Link href="/training" style={getLinkStyle('/training')}>培训</Link>
           <Link href="/certificate" style={getLinkStyle('/certificate')}>证书</Link>
           <Link href="/honor" style={getLinkStyle('/honor')}>荣誉墙</Link>
-          <Link href="/tracker" style={getLinkStyle('/tracker')}>CP Tracker</Link>
+          <Link href="/community" style={getLinkStyle('/community')}>交流区</Link>
+          <Link href="/tracker" style={getLinkStyle('/tracker')}>训练记录</Link>
           <Link href="/rank" style={getLinkStyle('/rank')}>排名</Link>
           {isAdmin && <Link href="/admin" style={getLinkStyle('/admin')}>控制面板</Link>}
         </nav>
@@ -189,7 +165,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
       </div>
       <Drawer
         className="site-mobile-drawer"
-        title={<img src="/paa-logo.svg" alt="PAA" style={{ display: 'block', width: 180, maxWidth: '100%', height: 'auto' }} />}
+        title={<img src="/besti-acm-wordmark.svg" alt="BESTI ACM" style={{ display: 'block', width: 180, maxWidth: '100%', height: 'auto' }} />}
         placement="right"
         width="min(86vw, 320px)"
         open={mobileOpen}

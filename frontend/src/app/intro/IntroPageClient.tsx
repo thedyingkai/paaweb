@@ -54,23 +54,23 @@ interface MemberItem {
 }
 
 const titleMap: Record<IntroCategory, string> = {
-  association: '程序设计算法协会简介',
-  rules: '示例大学程序设计竞赛基本规则',
-  association_member: '协会干部'
+  association: 'ACM 校队简介',
+  rules: '校队赛事与登记规则',
+  association_member: '校队成员'
 };
 
 const subtitleMap: Record<IntroCategory, string> = {
-  association: '理解协会的目标、文化和日常活动',
+  association: '理解校队的目标、文化和日常活动',
   rules: '沉淀赛事规范，让每一次竞技更公平清晰',
-  association_member: '认识正在共同维护协会运转的同学们'
+  association_member: '认识正在共同维护校队运转的同学们'
 };
 
 const departmentOrder = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
 
 const tabItems = [
-  { key: 'association', label: '协会简介', icon: <InfoCircleOutlined /> },
+  { key: 'association', label: '校队简介', icon: <InfoCircleOutlined /> },
   { key: 'rules', label: '竞赛规则', icon: <BookOutlined /> },
-  { key: 'association_member', label: '协会干部', icon: <TeamOutlined /> }
+  { key: 'association_member', label: '校队成员', icon: <TeamOutlined /> }
 ];
 
 const routeMap: Record<IntroCategory, string> = {
@@ -180,7 +180,7 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
       <SiteHeader />
       <main className="content-page-shell">
         <section className={`content-hero content-hero-980 ${category === 'association_member' ? 'member-hero-centered' : ''}`}>
-          <Tag className="bits-pill">ABOUT PAA</Tag>
+          <Tag className="bits-pill">关于BESTI ACM</Tag>
           <Title className={`content-hero-title ${category === 'association_member' ? 'member-hero-title' : ''}`}>
             {titleMap[category]}
           </Title>
@@ -243,7 +243,7 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
                             options={terms.map(term => ({ label: term, value: term }))}
                           />
                         </div>
-                        <div className="member-dept-tabs" aria-label="协会干部部门筛选">
+                        <div className="member-dept-tabs" aria-label="校队成员部门筛选">
                           {groupedMembers.map(group => (
                             <Button
                               key={group.department}

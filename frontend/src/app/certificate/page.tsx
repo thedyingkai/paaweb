@@ -685,7 +685,7 @@ const GuestDownloadPanel: React.FC = () => {
                     <Input
                         style={{ flex: 1, minWidth: 200 }}
                         size="large"
-                        placeholder="学校（如：示例大学）"
+                        placeholder="学校（如：北京电子科技学院）"
                         value={school}
                         onChange={e => setSchool(e.target.value)}
                         onPressEnter={handleSearch}
@@ -798,7 +798,7 @@ const CertificateList: React.FC = () => {
               <h1 style={{ marginBottom: 8 }}><SafetyCertificateOutlined /> 证书中心</h1>
             </div>
             <div style={{ color: '#888' }}>
-                这里汇集了您主动申请认证的奖项以及协会官方颁发的电子证书。
+                这里汇集了您主动申请认证的奖项以及校队官方颁发的电子证书。
             </div>
           </div>
           

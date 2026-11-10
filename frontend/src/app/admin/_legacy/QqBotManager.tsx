@@ -53,13 +53,13 @@ const recurrenceOptions: { value: QqBotRecurrence; label: string }[] = [
 
 const commands = [
   ['offline contest / 近期线下赛', '查询官网尚未开始报名、正在报名、正在进行的赛事'],
-  ['online contest / 近期线上赛', '查询协会 OJ 的 System 域比赛及 CP Tracker 的近期线上赛'],
+  ['online contest / 近期线上赛', '查询校队 OJ 的 System 域比赛及 CP Tracker 的近期线上赛'],
   ['training / 培训', '查询官网近期培训及报名信息'],
   ['notice / 通知', '查询最近 5 条通知'],
   ['news / 新闻', '查询最近 5 条新闻'],
   ['publicity / 公示', '查询最近 5 条公示'],
   ['board / 外榜', '查询最近 5 条外榜及比赛时间'],
-  ['/rating 用户名', '按官网用户名及绑定邮箱查询协会 OJ Rating，回复信息卡片'],
+  ['/rating 用户名', '按官网用户名及绑定邮箱查询校队 OJ Rating，回复信息卡片'],
   ['/tracker 用户名', '按官网用户名查询五个平台的解题数量，回复信息卡片'],
   ['help / 帮助', '查看全部查询指令及用法'],
 ];
@@ -328,7 +328,7 @@ export default function QqBotManager() {
               </Row>
               <Form.Item name="accessToken" label={<Space>OneBot Access Token <Tag color={secretState.accessTokenConfigured ? 'green' : 'default'}>{secretState.accessTokenConfigured ? '已配置' : '未配置'}</Tag></Space>} extra="填写后更新，留空保留已保存的凭据。凭据不会回显。" rules={[{ pattern: /^[^\r\n]*$/, message: 'Access Token 不能包含换行' }]}><Input.Password placeholder="需要更新时填写" maxLength={512} autoComplete="new-password" /></Form.Item>
               <Row gutter={24}>
-                <Col xs={24} lg={12}><Form.Item name="hydroBaseUrl" label="协会 Hydro OJ 地址" rules={[
+                <Col xs={24} lg={12}><Form.Item name="hydroBaseUrl" label="校队 Hydro OJ 地址" rules={[
                   { required: true, message: '请输入 Hydro OJ 地址' },
                   { validator: (_, value) => validateUrl(value, ['https:', 'http:']) ? Promise.resolve() : Promise.reject(new Error('请输入不含用户名、密码或片段的 http(s) 地址')) },
                 ]}><Input placeholder="https://oj.example.com" maxLength={1024} /></Form.Item></Col>
@@ -350,10 +350,10 @@ export default function QqBotManager() {
               <Row gutter={24}>
                 <Col xs={24} md={12}><Form.Item name="pushOffline" label="线下赛：报名开始前 1 天" valuePropName="checked"><Switch /></Form.Item></Col>
                 <Col xs={24} md={12}><Form.Item name="pushTraining" label="培训：报名开始前 1 天" valuePropName="checked"><Switch /></Form.Item></Col>
-                <Col xs={24} md={12}><Form.Item name="pushOnline" label="协会 OJ 线上赛：开始前 1 天和 3 小时" valuePropName="checked"><Switch /></Form.Item></Col>
+                <Col xs={24} md={12}><Form.Item name="pushOnline" label="校队 OJ 线上赛：开始前 1 天和 3 小时" valuePropName="checked"><Switch /></Form.Item></Col>
                 <Col xs={24} md={12}><Form.Item name="pushBoard" label="外榜：比赛开始前 10 分钟" valuePropName="checked"><Switch /></Form.Item></Col>
               </Row>
-              <Alert type="info" showIcon title="线上赛自动推送仅包含协会 OJ System 系统的比赛；AtCoder、Codeforces、牛客仅通过查询指令展示。" />
+              <Alert type="info" showIcon title="线上赛自动推送仅包含校队 OJ System 系统的比赛；AtCoder、Codeforces、牛客仅通过查询指令展示。" />
             </Form>
           </Card>,
         },
@@ -377,7 +377,7 @@ export default function QqBotManager() {
                 <li>在 NapCat / OneBot 11 中登录机器人 QQ，开启正向 WebSocket 服务，并设置 Access Token。</li>
                 <li>将机器人 QQ 加入需要服务的群；如需推送 @全体成员，为机器人授予相应群权限。</li>
                 <li>在此页填写官网后端可访问的 WebSocket 地址和 Access Token，保存并启用机器人，确认状态为“已连接”。</li>
-                <li>在 Hydro 的 rating-system 插件中配置查询 API Key，并在此页填写相同的 Key 与协会 OJ 地址。</li>
+                <li>在 Hydro 的 rating-system 插件中配置查询 API Key，并在此页填写相同的 Key 与校队 OJ 地址。</li>
                 <li>配置查询群、推送群及推送类型，保存后可在群内发送“帮助”验证。定时消息需另行指定目标群和执行时间。</li>
               </ol>
             </Card>
@@ -386,7 +386,7 @@ export default function QqBotManager() {
                 { title: '指令', dataIndex: 'command', key: 'command', render: value => <Text code>{value}</Text> },
                 { title: '功能', dataIndex: 'description', key: 'description' },
               ]} />
-              <Paragraph type="secondary" style={{ marginTop: 16, marginBottom: 0 }}>用户名为协会官网用户名。Rating 查询通过官网用户绑定邮箱匹配协会 OJ 用户；Tracker 使用官网已绑定的平台账号。指令格式错误时机器人会 @ 发起者并返回使用帮助。</Paragraph>
+              <Paragraph type="secondary" style={{ marginTop: 16, marginBottom: 0 }}>用户名为校队官网用户名。Rating 查询通过官网用户绑定邮箱匹配校队 OJ 用户；Tracker 使用官网已绑定的平台账号。指令格式错误时机器人会 @ 发起者并返回使用帮助。</Paragraph>
             </Card>
           </Space>,
         },
@@ -406,7 +406,7 @@ export default function QqBotManager() {
                 return url.hostname === window.location.hostname && (!url.port || url.port === '443');
               }) ? Promise.resolve() : Promise.reject(new Error('图片仅允许当前站点的公开 HTTPS 链接'));
             },
-          }]}><Input.TextArea rows={3} placeholder="https://example.com/paa-logo.svg" /></Form.Item>
+          }]}><Input.TextArea rows={3} placeholder="https://example.com/besti-acm-wordmark.svg" /></Form.Item>
           <Row gutter={16}>
             <Col xs={24} sm={12}><Form.Item name="recurrence" label="重复方式" rules={[{ required: true }]}><Select options={recurrenceOptions} /></Form.Item></Col>
             <Col xs={24} sm={12}><Form.Item name="dueAt" label="首次执行时间（北京时间）" rules={[
