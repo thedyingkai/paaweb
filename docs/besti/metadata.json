@@ -1,24 +1,21 @@
 {
   "school": "北京电子科技学院",
-  "updatedAt": "2026-11-10",
+  "updatedAt": "2026-11-11",
   "coverage": "已收录 2009—2026 年公开 ICPC / CCPC 成绩；未公开或未被来源收录的奖项可由成员补充核验。",
-  "recordCount": 136,
-  "eventCount": 64,
+  "recordCount": 127,
+  "eventCount": 60,
   "medals": {
-    "银牌": 7,
-    "铜牌": 4
+    "银牌": 5,
+    "铜牌": 3
   },
   "sourceCounts": {
     "XCPCIO": 107,
     "CPCFinder": 17,
-    "XCPCRating": 135
+    "XCPCRating": 126
   },
   "ratingSnapshot": "2026-11-08T18:05:59.759128+00:00",
   "xcpcioCommit": "c7f374b729bb160c73fba1172e8c09306fc5dab0",
   "unconfirmedAwards": [
-    "c4e43f5f5674e98aded0",
-    "61cf8c1546ca2135aace",
-    "858c55cf350aed92aabe",
     "917853b7056ea035808d"
   ],
   "excluded": [
@@ -31,6 +28,26 @@
       "id": "icpc/2014/wpu_onsite",
       "reason": "与 icpc/2014/nwpu_onsite 原始提交数据完全相同，重复归档",
       "teams": 1
+    },
+    {
+      "id": "icpc__icpc2025__icpc2025srni",
+      "reason": "维护者要求移除该赛事",
+      "teams": 2
+    },
+    {
+      "id": "icpc__icpc2024__icpc2024srni",
+      "reason": "维护者要求移除该赛事",
+      "teams": 1
+    },
+    {
+      "id": "icpc__icpc2023__icpc2023srni",
+      "reason": "维护者要求移除该赛事",
+      "teams": 3
+    },
+    {
+      "id": "icpc__icpc2019__icpc2019invitational-nanchang",
+      "reason": "维护者要求移除该赛事",
+      "teams": 3
     }
   ],
   "rankingDisagreements": [

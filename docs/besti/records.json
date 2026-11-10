@@ -283,108 +283,6 @@
     "sortOrder": 6
   },
   {
-    "uid": "3d34ad2113acb537028f",
-    "academicYear": "2025",
-    "date": "2025-06-08",
-    "event": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "华风夏韵,洛水天依",
-    "members": [],
-    "award": "铜牌",
-    "official": true,
-    "rank": 86,
-    "officialRank": 86,
-    "solved": null,
-    "penalty": null,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2025/icpc2025srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2025__icpc2025srni"
-    },
-    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。 原始归档仅有名次，未提供过题数与真实罚时。",
-    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
-    "title": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 铜牌",
-    "imageUrl": "",
-    "sortOrder": 7
-  },
-  {
-    "uid": "ef84cd38be987ba81cff",
-    "academicYear": "2025",
-    "date": "2025-06-08",
-    "event": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "丢掉幻想准备斗争",
-    "members": [],
-    "award": "银牌",
-    "official": true,
-    "rank": 40,
-    "officialRank": 40,
-    "solved": null,
-    "penalty": null,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2025__icpc2025srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2025/icpc2025srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2025__icpc2025srni"
-    },
-    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。 原始归档仅有名次，未提供过题数与真实罚时。",
-    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
-    "title": "2025 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 银牌",
-    "imageUrl": "",
-    "sortOrder": 8
-  },
-  {
-    "uid": "0d824880d9a948c47a00",
-    "academicYear": "2024",
-    "date": "2024-06-09",
-    "event": "2024 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "废水零液体排放",
-    "members": [],
-    "award": "银牌",
-    "official": true,
-    "rank": 51,
-    "officialRank": 51,
-    "solved": 9,
-    "penalty": 560,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2024__icpc2024srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2024/icpc2024srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2024__icpc2024srni"
-    },
-    "notes": "上游对本场赛事作出争议提示，且缺少选手名单；奖项依据归档榜单的明确奖牌线，详见原始来源。",
-    "awardBasis": "XCPCRating 上游归档榜单的明确奖牌数量",
-    "title": "2024 ICPC 丝绸之路全国邀请赛（宁夏理工学院） · 银牌",
-    "imageUrl": "",
-    "sortOrder": 9
-  },
-  {
     "uid": "4ca8b929f5a30abced9a",
     "academicYear": "2024",
     "date": "2024-05-19",
@@ -417,7 +315,7 @@
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 · 铜牌",
     "imageUrl": "",
-    "sortOrder": 10
+    "sortOrder": 7
   },
   {
     "uid": "3f6bed8335c95b42a82d",
@@ -460,7 +358,7 @@
     "notes": "",
     "title": "「华为杯」第 51 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 11
+    "sortOrder": 8
   },
   {
     "uid": "f9b0cb121a2de4d0cde3",
@@ -498,7 +396,7 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 12
+    "sortOrder": 9
   },
   {
     "uid": "780cccefec0aa52fdb24",
@@ -536,7 +434,7 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 13
+    "sortOrder": 10
   },
   {
     "uid": "285467822e88f491fe2d",
@@ -574,7 +472,7 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 14
+    "sortOrder": 11
   },
   {
     "uid": "a14e75f33dc8db3d71b0",
@@ -612,7 +510,7 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 15
+    "sortOrder": 12
   },
   {
     "uid": "b8beb7cd77697bbbc77b",
@@ -645,7 +543,7 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 16
+    "sortOrder": 13
   },
   {
     "uid": "ea7bd50b020bf78f6e81",
@@ -678,7 +576,7 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 17
+    "sortOrder": 14
   },
   {
     "uid": "70da14768052f81d46cb",
@@ -711,7 +609,7 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 18
+    "sortOrder": 15
   },
   {
     "uid": "e4baa1a25965ec0cf782",
@@ -744,7 +642,7 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 19
+    "sortOrder": 16
   },
   {
     "uid": "8d6f4527df66cb4acaa1",
@@ -777,7 +675,7 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 20
+    "sortOrder": 17
   },
   {
     "uid": "e40578c4f6c336cbdc05",
@@ -815,7 +713,7 @@
     "notes": "",
     "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
     "imageUrl": "",
-    "sortOrder": 21
+    "sortOrder": 18
   },
   {
     "uid": "513532f6e247ed1f2403",
@@ -853,7 +751,7 @@
     "notes": "",
     "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
     "imageUrl": "",
-    "sortOrder": 22
+    "sortOrder": 19
   },
   {
     "uid": "f0f63fc801414e4b44a8",
@@ -891,7 +789,7 @@
     "notes": "",
     "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
     "imageUrl": "",
-    "sortOrder": 23
+    "sortOrder": 20
   },
   {
     "uid": "ba0a83f0f641d6c32721",
@@ -929,7 +827,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 24
+    "sortOrder": 21
   },
   {
     "uid": "c21b11961587c18c0e35",
@@ -967,7 +865,7 @@
     "notes": "",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 25
+    "sortOrder": 22
   },
   {
     "uid": "497963179fc3ebb57016",
@@ -1005,7 +903,7 @@
     "notes": "",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 26
+    "sortOrder": 23
   },
   {
     "uid": "beeedaff7cc12942eb96",
@@ -1048,7 +946,7 @@
     "notes": "",
     "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
     "imageUrl": "",
-    "sortOrder": 27
+    "sortOrder": 24
   },
   {
     "uid": "a46f54bc5328d9f9ad27",
@@ -1091,7 +989,7 @@
     "notes": "",
     "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
     "imageUrl": "",
-    "sortOrder": 28
+    "sortOrder": 25
   },
   {
     "uid": "2db3e2e364b44d33a09a",
@@ -1134,7 +1032,7 @@
     "notes": "",
     "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 29
+    "sortOrder": 26
   },
   {
     "uid": "179ed60749093041fa19",
@@ -1177,7 +1075,7 @@
     "notes": "",
     "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 30
+    "sortOrder": 27
   },
   {
     "uid": "4c4863c4ccdc5e73ef3f",
@@ -1210,7 +1108,7 @@
     "notes": "",
     "title": "2025年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 31
+    "sortOrder": 28
   },
   {
     "uid": "1158df01f0b447c30cf8",
@@ -1243,7 +1141,7 @@
     "notes": "",
     "title": "2025年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 32
+    "sortOrder": 29
   },
   {
     "uid": "beeaa0dca8cc24fe8aff",
@@ -1276,7 +1174,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 33
+    "sortOrder": 30
   },
   {
     "uid": "8f7e4f8161156995c5c0",
@@ -1309,7 +1207,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 34
+    "sortOrder": 31
   },
   {
     "uid": "a9de1374fc0c10097bb0",
@@ -1342,7 +1240,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 35
+    "sortOrder": 32
   },
   {
     "uid": "848378f7c79672dd0395",
@@ -1375,7 +1273,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 36
+    "sortOrder": 33
   },
   {
     "uid": "838100771d503bfe35aa",
@@ -1408,7 +1306,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 37
+    "sortOrder": 34
   },
   {
     "uid": "789896b23769f1fcbac3",
@@ -1446,7 +1344,7 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 38
+    "sortOrder": 35
   },
   {
     "uid": "24252d41d507423b40f1",
@@ -1484,7 +1382,7 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 39
+    "sortOrder": 36
   },
   {
     "uid": "0620acccbe9564c3b259",
@@ -1522,7 +1420,7 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 40
+    "sortOrder": 37
   },
   {
     "uid": "54aa425d6716e494561d",
@@ -1555,7 +1453,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 41
+    "sortOrder": 38
   },
   {
     "uid": "9d0859cc6d803477071e",
@@ -1588,7 +1486,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 42
+    "sortOrder": 39
   },
   {
     "uid": "d0f2d0c0a46d831e9d9c",
@@ -1621,7 +1519,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 43
+    "sortOrder": 40
   },
   {
     "uid": "dafe87fb741087a77904",
@@ -1654,7 +1552,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 44
+    "sortOrder": 41
   },
   {
     "uid": "6cafff24e9ffe73b92fe",
@@ -1687,7 +1585,7 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 45
+    "sortOrder": 42
   },
   {
     "uid": "fdc7dfb891a5b4412565",
@@ -1720,7 +1618,7 @@
     "notes": "",
     "title": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛",
     "imageUrl": "",
-    "sortOrder": 46
+    "sortOrder": 43
   },
   {
     "uid": "ee7f6c9f579522a414f0",
@@ -1754,7 +1652,7 @@
     "notes": "",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 47
+    "sortOrder": 44
   },
   {
     "uid": "02ae99bf3b4f216efb1c",
@@ -1788,7 +1686,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 48
+    "sortOrder": 45
   },
   {
     "uid": "25e0d3071f9588c1be04",
@@ -1822,7 +1720,7 @@
     "notes": "",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 49
+    "sortOrder": 46
   },
   {
     "uid": "71acd4b3961cdc74a73e",
@@ -1865,7 +1763,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛昆明站",
     "imageUrl": "",
-    "sortOrder": 50
+    "sortOrder": 47
   },
   {
     "uid": "423261cf93e0a60875a1",
@@ -1908,7 +1806,7 @@
     "notes": "",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
     "imageUrl": "",
-    "sortOrder": 51
+    "sortOrder": 48
   },
   {
     "uid": "242d3a78f5cc928e5da0",
@@ -1946,7 +1844,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 52
+    "sortOrder": 49
   },
   {
     "uid": "2665387b245986a1b570",
@@ -1984,7 +1882,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 53
+    "sortOrder": 50
   },
   {
     "uid": "9784348f522f54760df7",
@@ -2022,7 +1920,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 54
+    "sortOrder": 51
   },
   {
     "uid": "0b2a5cedd3b36922fceb",
@@ -2060,7 +1958,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 55
+    "sortOrder": 52
   },
   {
     "uid": "c58e595c37e0fe6a317a",
@@ -2098,7 +1996,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 56
+    "sortOrder": 53
   },
   {
     "uid": "0a123ee82100a4a2f581",
@@ -2136,7 +2034,7 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 57
+    "sortOrder": 54
   },
   {
     "uid": "332853b38fd518e10154",
@@ -2170,7 +2068,7 @@
     "notes": "",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
     "imageUrl": "",
-    "sortOrder": 58
+    "sortOrder": 55
   },
   {
     "uid": "2dbc72081995798ba72d",
@@ -2213,7 +2111,7 @@
     "notes": "",
     "title": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 59
+    "sortOrder": 56
   },
   {
     "uid": "31c873123fb48ecd6867",
@@ -2251,7 +2149,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 60
+    "sortOrder": 57
   },
   {
     "uid": "d642aa6284a3b370463f",
@@ -2289,7 +2187,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 61
+    "sortOrder": 58
   },
   {
     "uid": "311ea000658b64fca10d",
@@ -2327,7 +2225,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 62
+    "sortOrder": 59
   },
   {
     "uid": "d497951f9f5904d16983",
@@ -2365,7 +2263,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 63
+    "sortOrder": 60
   },
   {
     "uid": "19ef0ecbe26bffbffab8",
@@ -2403,7 +2301,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 64
+    "sortOrder": 61
   },
   {
     "uid": "04498ca640e2aa94e56c",
@@ -2441,106 +2339,7 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 65
-  },
-  {
-    "uid": "c4e43f5f5674e98aded0",
-    "academicYear": "2023",
-    "date": "2023-06-04",
-    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "1_6_我在阿萨姆博金迈银恋铜打铁的奇妙生活",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 74,
-    "officialRank": 74,
-    "solved": 4,
-    "penalty": 268,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2023__icpc2023srni"
-    },
-    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
-    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "imageUrl": "",
-    "sortOrder": 66
-  },
-  {
-    "uid": "61cf8c1546ca2135aace",
-    "academicYear": "2023",
-    "date": "2023-06-04",
-    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "1_2_青春DKYer不会梦见ACM铁牌",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 44,
-    "officialRank": 44,
-    "solved": 6,
-    "penalty": 841,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2023__icpc2023srni"
-    },
-    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
-    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "imageUrl": "",
-    "sortOrder": 67
-  },
-  {
-    "uid": "858c55cf350aed92aabe",
-    "academicYear": "2023",
-    "date": "2023-06-04",
-    "event": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "2_10_用湛神十年单身换一块铜牌",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 10,
-    "officialRank": 10,
-    "solved": 9,
-    "penalty": 1349,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2023__icpc2023srni"
-      },
-      {
-        "name": "原始榜单",
-        "url": "https://raw.githubusercontent.com/algoux/srk-collection/master/official/icpc/icpc2023/icpc2023srni.srk.json"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2023__icpc2023srni"
-    },
-    "notes": "归档榜单未提供有效奖牌线，获奖情况待补充证明。",
-    "title": "2023 ICPC 丝绸之路全国邀请赛（宁夏理工学院）",
-    "imageUrl": "",
-    "sortOrder": 68
+    "sortOrder": 62
   },
   {
     "uid": "917853b7056ea035808d",
@@ -2569,7 +2368,7 @@
     "notes": " XCPCIO 配置未给出奖牌线，暂仅收录参赛成绩。",
     "title": "第 48 届 ICPC 国际大学生程序设计竞赛西安邀请赛（正式赛）",
     "imageUrl": "",
-    "sortOrder": 69
+    "sortOrder": 63
   },
   {
     "uid": "133d1cf46286e51aa4f1",
@@ -2612,7 +2411,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 70
+    "sortOrder": 64
   },
   {
     "uid": "322d57c0a6513ffb43e4",
@@ -2655,7 +2454,7 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 71
+    "sortOrder": 65
   },
   {
     "uid": "1b610872166659115b21",
@@ -2698,7 +2497,7 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站",
     "imageUrl": "",
-    "sortOrder": 72
+    "sortOrder": 66
   },
   {
     "uid": "93b302b96363b2a9da63",
@@ -2741,7 +2540,7 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
     "imageUrl": "",
-    "sortOrder": 73
+    "sortOrder": 67
   },
   {
     "uid": "ad294b6c92e8913fdb71",
@@ -2784,7 +2583,7 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
     "imageUrl": "",
-    "sortOrder": 74
+    "sortOrder": 68
   },
   {
     "uid": "dcdf402e8cbbdb13cae1",
@@ -2822,7 +2621,7 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 75
+    "sortOrder": 69
   },
   {
     "uid": "c15b9964832ac26c6319",
@@ -2860,7 +2659,7 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 76
+    "sortOrder": 70
   },
   {
     "uid": "ebe2a900fb5a59aae489",
@@ -2898,7 +2697,7 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 77
+    "sortOrder": 71
   },
   {
     "uid": "98762c22d336856939f6",
@@ -2936,7 +2735,7 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 78
+    "sortOrder": 72
   },
   {
     "uid": "9dc1a52ebfdc2266fd7e",
@@ -2970,7 +2769,7 @@
     "notes": "",
     "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
     "imageUrl": "",
-    "sortOrder": 79
+    "sortOrder": 73
   },
   {
     "uid": "5f7f1657688156a436a9",
@@ -3004,7 +2803,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
     "imageUrl": "",
-    "sortOrder": 80
+    "sortOrder": 74
   },
   {
     "uid": "c26159b5dde89d00d563",
@@ -3038,7 +2837,7 @@
     "notes": "",
     "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
     "imageUrl": "",
-    "sortOrder": 81
+    "sortOrder": 75
   },
   {
     "uid": "f56b088de52d913313e3",
@@ -3072,7 +2871,7 @@
     "notes": "",
     "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
     "imageUrl": "",
-    "sortOrder": 82
+    "sortOrder": 76
   },
   {
     "uid": "8e9e3ec816a934302f5c",
@@ -3115,7 +2914,7 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛）",
     "imageUrl": "",
-    "sortOrder": 83
+    "sortOrder": 77
   },
   {
     "uid": "f5408b2b5718d6cddfdf",
@@ -3149,94 +2948,7 @@
     "notes": "",
     "title": "The 44th ICPC Asia Yinchuan Regional Programming Contest",
     "imageUrl": "",
-    "sortOrder": 84
-  },
-  {
-    "uid": "6bdf427fa69d5d69b0ab",
-    "academicYear": "2019",
-    "date": "2019-06-01",
-    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "趣多多",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 318,
-    "officialRank": 298,
-    "solved": 1,
-    "penalty": 6,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
-    },
-    "notes": "",
-    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "imageUrl": "",
-    "sortOrder": 85
-  },
-  {
-    "uid": "549fc98e11be34a373d3",
-    "academicYear": "2019",
-    "date": "2019-06-01",
-    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "吴彦祖保佑不wa",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 313,
-    "officialRank": 297,
-    "solved": 1,
-    "penalty": 1,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
-    },
-    "notes": "",
-    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "imageUrl": "",
-    "sortOrder": 86
-  },
-  {
-    "uid": "b7632876ec52c706bc1d",
-    "academicYear": "2019",
-    "date": "2019-06-01",
-    "event": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "family": "ICPC",
-    "tier": "invitational",
-    "team": "还没有账号?立即注册",
-    "members": [],
-    "award": "",
-    "official": true,
-    "rank": 273,
-    "officialRank": 268,
-    "solved": 3,
-    "penalty": 308,
-    "sources": [
-      {
-        "name": "XCPCRating",
-        "url": "https://heimaom.cn/#/contest/icpc__icpc2019__icpc2019invitational-nanchang"
-      }
-    ],
-    "sourceRefs": {
-      "rating": "icpc__icpc2019__icpc2019invitational-nanchang"
-    },
-    "notes": "",
-    "title": "2019 ICPC 国际大学生程序设计竞赛中国邀请赛（南昌）暨国际丝绸之路程序设计竞赛（江西师范大学）",
-    "imageUrl": "",
-    "sortOrder": 87
+    "sortOrder": 78
   },
   {
     "uid": "7d1fff4584fd96e745b2",
@@ -3265,7 +2977,7 @@
     "notes": "",
     "title": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学）",
     "imageUrl": "",
-    "sortOrder": 88
+    "sortOrder": 79
   },
   {
     "uid": "03c24f5f0145c5204962",
@@ -3299,7 +3011,7 @@
     "notes": "",
     "title": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学）",
     "imageUrl": "",
-    "sortOrder": 89
+    "sortOrder": 80
   },
   {
     "uid": "4cdc0d25e0070508a987",
@@ -3333,7 +3045,7 @@
     "notes": "",
     "title": "ICPC 2016 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 90
+    "sortOrder": 81
   },
   {
     "uid": "ec08d977090bab65c827",
@@ -3367,7 +3079,7 @@
     "notes": "",
     "title": "ICPC 2016 青岛网络赛",
     "imageUrl": "",
-    "sortOrder": 91
+    "sortOrder": 82
   },
   {
     "uid": "b2055fafed5e1fc6a7c8",
@@ -3401,7 +3113,7 @@
     "notes": "",
     "title": "ICPC 2016 大连赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 92
+    "sortOrder": 83
   },
   {
     "uid": "d2eb7b52115588e8fd7c",
@@ -3435,7 +3147,7 @@
     "notes": "",
     "title": "2015 北京赛区现场赛 （北京大学）",
     "imageUrl": "",
-    "sortOrder": 93
+    "sortOrder": 84
   },
   {
     "uid": "fced42082dec4fbea6cf",
@@ -3469,7 +3181,7 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 94
+    "sortOrder": 85
   },
   {
     "uid": "9eb3a0de850a46bf9267",
@@ -3503,7 +3215,7 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 95
+    "sortOrder": 86
   },
   {
     "uid": "c2158c6aa8330dcb9141",
@@ -3537,7 +3249,7 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 96
+    "sortOrder": 87
   },
   {
     "uid": "20b217e1e44956e659d9",
@@ -3571,7 +3283,7 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 97
+    "sortOrder": 88
   },
   {
     "uid": "93e605092855ea4cd932",
@@ -3605,7 +3317,7 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 98
+    "sortOrder": 89
   },
   {
     "uid": "70c87613e7c4149e31b0",
@@ -3639,7 +3351,7 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 99
+    "sortOrder": 90
   },
   {
     "uid": "c69582641da1e3e95c75",
@@ -3673,7 +3385,7 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 100
+    "sortOrder": 91
   },
   {
     "uid": "00b7b5e2afef5ddc869c",
@@ -3707,7 +3419,7 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 101
+    "sortOrder": 92
   },
   {
     "uid": "a477c416197fbd626816",
@@ -3741,7 +3453,7 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 102
+    "sortOrder": 93
   },
   {
     "uid": "0e253ee749e147bcbb3f",
@@ -3775,7 +3487,7 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 103
+    "sortOrder": 94
   },
   {
     "uid": "ae9587f846545eaa7702",
@@ -3809,7 +3521,7 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 104
+    "sortOrder": 95
   },
   {
     "uid": "03713845693793de2643",
@@ -3843,7 +3555,7 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 105
+    "sortOrder": 96
   },
   {
     "uid": "1b8844e55be1e5ca0f75",
@@ -3877,7 +3589,7 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 106
+    "sortOrder": 97
   },
   {
     "uid": "ecc3049778e854f698a8",
@@ -3911,7 +3623,7 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 107
+    "sortOrder": 98
   },
   {
     "uid": "e263becaf47508e577df",
@@ -3945,7 +3657,7 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 108
+    "sortOrder": 99
   },
   {
     "uid": "48774c275970c66f9e2b",
@@ -3979,7 +3691,7 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 109
+    "sortOrder": 100
   },
   {
     "uid": "b7c53e7397e6c8872946",
@@ -4013,7 +3725,7 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 110
+    "sortOrder": 101
   },
   {
     "uid": "5eeaa913b63c6234383c",
@@ -4047,7 +3759,7 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 111
+    "sortOrder": 102
   },
   {
     "uid": "3023309ac6fa5d16fa61",
@@ -4081,7 +3793,7 @@
     "notes": "",
     "title": "2014 西安赛区现场赛 （西北工业大学）",
     "imageUrl": "",
-    "sortOrder": 112
+    "sortOrder": 103
   },
   {
     "uid": "976fff347270f793979e",
@@ -4115,7 +3827,7 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 113
+    "sortOrder": 104
   },
   {
     "uid": "575296ce38528a807833",
@@ -4149,7 +3861,7 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 114
+    "sortOrder": 105
   },
   {
     "uid": "1cb88db47c52de1cba11",
@@ -4183,7 +3895,7 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 115
+    "sortOrder": 106
   },
   {
     "uid": "f98d113018b74c180a1c",
@@ -4217,7 +3929,7 @@
     "notes": "",
     "title": "ICPC 2014 广州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 116
+    "sortOrder": 107
   },
   {
     "uid": "e92a047c15f6bc8f43b9",
@@ -4251,7 +3963,7 @@
     "notes": "",
     "title": "ICPC 2014 西安赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 117
+    "sortOrder": 108
   },
   {
     "uid": "b6a07326afae808da764",
@@ -4285,7 +3997,7 @@
     "notes": "",
     "title": "ICPC 2014 鞍山赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 118
+    "sortOrder": 109
   },
   {
     "uid": "5e92719730c597e07e47",
@@ -4319,7 +4031,7 @@
     "notes": "",
     "title": "ICPC 2014 鞍山赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 119
+    "sortOrder": 110
   },
   {
     "uid": "3aec45aa5d9355dabb78",
@@ -4353,7 +4065,7 @@
     "notes": "",
     "title": "ICPC 2014 牡丹江赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 120
+    "sortOrder": 111
   },
   {
     "uid": "e093dcc6cf8cc1cc6804",
@@ -4387,7 +4099,7 @@
     "notes": "",
     "title": "ICPC 2012 成都赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 121
+    "sortOrder": 112
   },
   {
     "uid": "dd0052d87dff8b7b34a8",
@@ -4421,7 +4133,7 @@
     "notes": "",
     "title": "2011 北京赛区现场赛 （北京邮电大学）",
     "imageUrl": "",
-    "sortOrder": 122
+    "sortOrder": 113
   },
   {
     "uid": "463a051069d6ce5adaf6",
@@ -4455,7 +4167,7 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 123
+    "sortOrder": 114
   },
   {
     "uid": "bff01db642a238565859",
@@ -4489,7 +4201,7 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 124
+    "sortOrder": 115
   },
   {
     "uid": "fadc98012ff894e70cf0",
@@ -4523,7 +4235,7 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 125
+    "sortOrder": 116
   },
   {
     "uid": "af1ecf64b121ea616f72",
@@ -4557,7 +4269,7 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 126
+    "sortOrder": 117
   },
   {
     "uid": "6a502f2b616e46f11b22",
@@ -4591,7 +4303,7 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 127
+    "sortOrder": 118
   },
   {
     "uid": "0c9779f16727839a6ba3",
@@ -4625,7 +4337,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 128
+    "sortOrder": 119
   },
   {
     "uid": "7401ccfbaca59bac134d",
@@ -4659,7 +4371,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 129
+    "sortOrder": 120
   },
   {
     "uid": "9d326ae2d7041f925d06",
@@ -4693,7 +4405,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 130
+    "sortOrder": 121
   },
   {
     "uid": "a42423b6d29f353f61fc",
@@ -4727,7 +4439,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 131
+    "sortOrder": 122
   },
   {
     "uid": "f4da6a678eddd36e162c",
@@ -4761,7 +4473,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 132
+    "sortOrder": 123
   },
   {
     "uid": "4373ea9e41cfa955af8f",
@@ -4795,7 +4507,7 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 133
+    "sortOrder": 124
   },
   {
     "uid": "676285d2c80337717fdc",
@@ -4829,7 +4541,7 @@
     "notes": "",
     "title": "ICPC 2009 哈尔滨赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 134
+    "sortOrder": 125
   },
   {
     "uid": "f65ac10ce8b43349b06a",
@@ -4863,6 +4575,6 @@
     "notes": "",
     "title": "ICPC 2009 哈尔滨赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 135
+    "sortOrder": 126
   }
 ]
