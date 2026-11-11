@@ -36,6 +36,8 @@ type Honor = {
   team?: string;
   members?: string[];
   award?: string;
+  contestAward?: string;
+  equivalentContestAward?: string;
   awardLevel?: string;
   awardGrade?: string;
   equivalentAwardLevel?: string;
@@ -65,6 +67,9 @@ type Meta = {
 };
 const awardName = (r: Honor) => r.awardLevel && r.awardGrade ? r.awardLevel + r.awardGrade : r.award || '';
 const equivalentName = (r: Honor) => r.equivalentAwardLevel && r.equivalentAwardGrade ? r.equivalentAwardLevel + r.equivalentAwardGrade : r.equivalentAward || '';
+const contestName = (r: Honor) => r.contestAward || r.award || '';
+const equivalentContestName = (r: Honor) => r.equivalentContestAward || r.equivalentAward || '';
+const awardColor = (name: string) => name === '金牌' ? 'gold' : name === '银牌' ? 'blue' : name === '铜牌' ? 'orange' : 'default';
 const tierNames: Record<string, string> = {
   regional: "区域赛",
   invitational: "邀请赛",
@@ -113,7 +118,7 @@ export default function SchoolHonorsClient() {
             (family === "all" || r.family === family) &&
             (mode === "all" || (mode === "awards" && !!awardName(r)) || (mode === "equivalent" && !!equivalentName(r))) &&
             (keyword.trim() === "" ||
-              [r.event, r.title, r.team, ...(r.members || [])]
+              [r.event, r.title, r.team, contestName(r), equivalentContestName(r), awardName(r), equivalentName(r), ...(r.members || [])]
                 .join(" ")
                 .toLowerCase()
                 .includes(keyword.trim().toLowerCase())),
@@ -131,11 +136,13 @@ export default function SchoolHonorsClient() {
       "日期",
       "赛事",
       "类别",
+      "赛事阶段",
       "队伍",
       "队员",
+      "赛事奖项",
       "学校认定奖项",
-      "原始榜单奖牌",
-      "打星等效奖项",
+      "打星等效赛事奖项",
+      "打星等效学校认定",
       "正式参赛",
       "总排名",
       "正式排名",
@@ -151,10 +158,12 @@ export default function SchoolHonorsClient() {
       r.date,
       r.event || r.title,
       r.family,
+      tierNames[r.tier || ''] || r.tier,
       r.team,
       r.members?.join("、"),
+      contestName(r),
       awardName(r),
-      r.award || "",
+      equivalentContestName(r),
       equivalentName(r),
       r.official === true
         ? "正式"
@@ -225,7 +234,7 @@ export default function SchoolHonorsClient() {
                 } })),
               ]}
             />
-            <p style={{ margin: '14px 0 0', color: '#64748b' }}>正式奖项（+打星等效奖项）。ICPC / CCPC 区域赛、总决赛按国家级，邀请赛按省部级；金、银、铜牌对应一、二、三等奖，打铁为优胜奖。蓝桥杯国赛按省部级，省赛按校级。</p>
+            <p style={{ margin: '14px 0 0', color: '#64748b' }}>学校认定统计：正式奖项（+打星等效奖项）。ICPC / CCPC 区域赛、总决赛按国家级，邀请赛按省部级；赛事金、银、铜牌分别认定为一、二、三等奖，优胜奖认定为优秀奖。蓝桥杯国赛按省部级，省赛按校级。</p>
           </Card>
           <Alert
             style={{ margin: "24px 0" }}
@@ -326,7 +335,7 @@ export default function SchoolHonorsClient() {
                 showSizeChanger: true,
                 showTotal: (n) => `共 ${n} 条记录`,
               }}
-              scroll={{ x: 1300 }}
+              scroll={{ x: 1450 }}
               locale={{ emptyText: <Empty description="当前筛选下暂无记录" /> }}
               expandable={{
                 expandedRowRender: (r) => (
@@ -335,7 +344,7 @@ export default function SchoolHonorsClient() {
                       <p>队员：{r.members.join("、")}</p>
                     )}
                     {r.notes && <p>{r.notes}</p>}
-                    {(awardName(r) || equivalentName(r)) && <p>原始榜单：{r.award || (r.equivalentAward ? `打星等效${r.equivalentAward}` : r.official === false ? '打星（未获金银铜牌）' : '未列金银铜牌')}。认定结果：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
+                    {(contestName(r) || equivalentContestName(r)) && <p>赛事奖项：{contestName(r) || `打星等效${equivalentContestName(r)}`}。学校认定：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
                     <p>总队伍数：{r.totalTeams ?? '待核实'}；正式队伍数：{r.totalOfficialTeams ?? '待核实'}。来源：{r.teamCountSource || '待核实'}。</p>
                     {r.equivalentAwardBasis && <p>打星等效名次：{r.equivalentRank}；{r.equivalentAwardBasis}</p>}
                     <p>
@@ -392,31 +401,25 @@ export default function SchoolHonorsClient() {
                   ),
                 },
                 {
-                  title: "奖项 / 身份",
+                  title: "赛事奖项 / 身份",
                   render: (_, r) => (
                     <Space orientation="vertical" size={3}>
-                      {awardName(r) ? (
-                        <Tag
-                          color={
-                            r.awardGrade === "优胜奖" ? "default" : r.award === "金牌"
-                              ? "gold"
-                              : r.award === "银牌"
-                                ? "blue"
-                                : "orange"
-                          }
-                        >
-                          {awardName(r)}
-                        </Tag>
-                      ) : (
-                        <span style={{ color: "#64748b" }}>参赛记录</span>
-                      )}
+                      {contestName(r) ? <Tag color={awardColor(contestName(r))}>{contestName(r)}</Tag>
+                        : r.official !== false && <span style={{ color: "#64748b" }}>参赛记录</span>}
                       {r.official === false && <>
                         <Tag>打星</Tag>
-                        {equivalentName(r) ? <Tag color={r.equivalentAward === '金牌' ? 'gold' : r.equivalentAward === '银牌' ? 'blue' : r.equivalentAward === '铜牌' ? 'orange' : 'default'}>（等效{equivalentName(r)}）</Tag>
+                        {equivalentContestName(r) ? <Tag color={awardColor(equivalentContestName(r))}>（等效{equivalentContestName(r)}）</Tag>
                           : <span style={{ fontSize: 12, color: '#64748b' }}>{r.equivalentAwardChecked ? '未达到奖牌线' : '等效奖项待核实'}</span>}
                       </>}
                     </Space>
                   ),
+                },
+                {
+                  title: '学校认定',
+                  width: 180,
+                  render: (_, r) => r.official === false
+                    ? (equivalentName(r) ? <span style={{ color: '#1677ff' }}>（等效{equivalentName(r)}）</span> : '—')
+                    : awardName(r) || '—',
                 },
                 { title: '时间', dataIndex: 'date', width: 110 },
                 { title: '地点', dataIndex: 'location', width: 75, render: v => v || '—' },

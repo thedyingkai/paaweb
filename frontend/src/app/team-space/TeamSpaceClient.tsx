@@ -23,7 +23,7 @@ import {
 import Link from "next/link";
 import axios from "axios";
 import SiteHeader from "../components/SiteHeader";
-import { memberRoles, memberRoleKey, positionStatusLabels, awardLevels, awardGrades, awardStages, academicTermDates, currentAcademicTerm } from "@/lib/besti-members";
+import { memberRoles, memberRoleKey, positionStatusLabels, awardLevels, awardGrades, awardStages, xcpcAwards, xcpcAwardGrades, contestStageLabels, academicTermDates, currentAcademicTerm } from "@/lib/besti-members";
 import {
   familyOptions,
   kindNames,
@@ -53,6 +53,7 @@ type Entry = {
   award_level?: string;
   award_grade?: string;
   contest_stage?: string;
+  contest_award?: string;
   source_url: string;
   notes: string;
   status: string;
@@ -76,6 +77,7 @@ type RecordForm = {
   awardLevel?: string;
   awardGrade?: string;
   contestStage?: string;
+  contestAward?: string;
 };
 export default function TeamSpaceClient() {
   const [identity, setIdentity] = useState<TeamIdentity>();
@@ -97,10 +99,15 @@ export default function TeamSpaceClient() {
   const kind = Form.useWatch("kind", form);
   const family = Form.useWatch("family", form);
   const stage = Form.useWatch("contestStage", form);
+  const contestAward = Form.useWatch("contestAward", form);
+  const isXcpc = family === 'ICPC' || family === 'CCPC';
   const fixedLevel = awardStages(family).find(option => option.value === stage)?.level;
   useEffect(() => {
     if (kind === 'award' && fixedLevel) form.setFieldsValue({ awardLevel: fixedLevel });
   }, [kind, fixedLevel, form]);
+  useEffect(() => {
+    if (kind === 'award' && isXcpc) form.setFieldsValue({ awardGrade: xcpcAwardGrades[contestAward || ''] });
+  }, [kind, isXcpc, contestAward, form]);
   useEffect(() => {
     teamApi<TeamIdentity>("/me")
       .then(setIdentity)
@@ -145,6 +152,7 @@ export default function TeamSpaceClient() {
             awardLevel: entry.award_level,
             awardGrade: entry.award_grade,
             contestStage: entry.contest_stage,
+            contestAward: entry.contest_award,
             sourceUrl: entry.source_url,
             notes: entry.notes,
           }
@@ -313,6 +321,7 @@ export default function TeamSpaceClient() {
                           {r.kind === "position" && <Tag color={r.position_status === "former" ? "default" : "blue"}>{positionStatusLabels[r.position_status || "unknown"]}</Tag>}
                           <div>
                             {r.family && <Tag>{r.family}</Tag>}
+                            {r.contest_stage && <Tag>{contestStageLabels[r.contest_stage] || r.contest_stage}</Tag>}
                             {r.team_name}
                           </div>
                         </>
@@ -321,7 +330,7 @@ export default function TeamSpaceClient() {
                     {
                       title: "奖项 / 结果",
                       dataIndex: "result",
-                      render: (v) => v || "—",
+                      render: (v, r) => r.contest_award ? <><Tag>{r.contest_award}</Tag><div style={{ color: '#64748b', fontSize: 12 }}>学校认定：{v}</div></> : v || "—",
                     },
                     {
                       title: "日期 / 任期",
@@ -438,7 +447,7 @@ export default function TeamSpaceClient() {
                 rules={[{ required: true }]}
               >
                 <Select
-                  onChange={() => form.setFieldsValue({ contestStage: undefined, awardLevel: undefined })}
+                  onChange={() => form.setFieldsValue({ contestStage: undefined, awardLevel: undefined, awardGrade: undefined, contestAward: undefined })}
                   options={
                     roster
                       ? familyOptions.filter((x) =>
@@ -505,11 +514,14 @@ export default function TeamSpaceClient() {
                     {awardStages(family).length > 0 && <Form.Item name="contestStage" label="赛事阶段" rules={[{ required: true, message: '请选择赛事阶段' }]}>
                       <Select options={awardStages(family)} placeholder="按赛事阶段确定学校认定级别" />
                     </Form.Item>}
-                    <Form.Item name="awardLevel" label="奖项级别" rules={[{ required: true, message: '请选择奖项级别' }]}>
+                    {isXcpc && <Form.Item name="contestAward" label="赛事奖项" rules={[{ required: true, message: '请选择赛事原始奖项' }]}>
+                      <Select options={xcpcAwards.map(value => ({ value, label: value }))} placeholder="金牌、银牌、铜牌或优胜奖" />
+                    </Form.Item>}
+                    <Form.Item name="awardLevel" label={isXcpc ? '学校认定级别' : '奖项级别'} rules={[{ required: true, message: '请选择奖项级别' }]}>
                       <Select disabled={awardStages(family).length > 0} placeholder="选择赛事阶段后自动确定" options={awardLevels.map(value => ({ value, label: value }))} />
                     </Form.Item>
-                    <Form.Item name="awardGrade" label="奖项等次" rules={[{ required: true, message: '请选择奖项等次' }]}>
-                      <Select options={awardGrades.map(value => ({ value, label: value }))} />
+                    <Form.Item name="awardGrade" label={isXcpc ? '学校认定等次' : '奖项等次'} rules={[{ required: true, message: isXcpc ? '请先选择赛事奖项' : '请选择奖项等次' }]} extra={isXcpc ? '金、银、铜牌分别认定为一、二、三等奖；优胜奖认定为优秀奖。' : undefined}>
+                      <Select disabled={isXcpc} options={awardGrades.map(value => ({ value, label: value }))} />
                     </Form.Item>
                   </>
                 ) : (
@@ -582,7 +594,7 @@ export default function TeamSpaceClient() {
           }
         >
           <p>
-            {review?.owner_name} · {review?.display_title || review?.title} · {review?.result}
+            {review?.owner_name} · {review?.display_title || review?.title} · {review?.contest_award ? `${review.contest_award}（学校认定：${review.result}）` : review?.result}
             <br />{[review?.start_date, review?.end_date].filter(Boolean).join(" — ")}
           </p>
           <p style={{ whiteSpace: "pre-wrap" }}>{review?.notes}</p>

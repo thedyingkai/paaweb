@@ -2,13 +2,16 @@
 import { useEffect, useState } from "react";
 import { Alert, Card, Empty, List, Tag } from "antd";
 import Link from "next/link";
-import { positionStatusLabels } from "@/lib/besti-members";
+import { positionStatusLabels, contestStageLabels } from "@/lib/besti-members";
 import { teamApi, teamError, kindNames } from "@/lib/besti";
 type RecordItem = {
   id: number;
   kind: string;
   title: string;
   result: string;
+  family?: string;
+  contest_stage?: string;
+  contest_award?: string;
   start_date?: string;
   end_date?: string;
   display_title?: string;
@@ -54,11 +57,12 @@ export default function MemberRecordSummary({
                     <Tag>{kindNames[r.kind]}</Tag>
                     {r.display_title || r.title}
                     {r.kind === "position" && <Tag color={r.position_status === "former" ? "default" : "blue"}>{positionStatusLabels[r.position_status || "unknown"]}</Tag>}
-                    {r.result && ` · ${r.result}`}
+                    {r.contest_award ? ` · ${contestStageLabels[r.contest_stage || ''] || ''}${r.contest_award}` : r.result && ` · ${r.result}`}
                   </>
                 }
                 description={
                   <>
+                    {r.contest_award && <div>学校认定：{r.result}</div>}
                     {[r.start_date, r.end_date].filter(Boolean).join(" — ")}
                     {r.source_url && (
                       <>

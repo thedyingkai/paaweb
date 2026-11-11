@@ -9,21 +9,23 @@ policy, records, meta = read('award-recognition.json'), read('records.json'), re
 for r in records:
     level = policy['levels'].get(r['family'], {}).get(r['tier'])
     r.pop('awardRecognitionBasis', None)
-    for original, prefix in [('award', 'award'), ('equivalentAward', 'equivalentAward')]:
-        grade = policy['grades'].get(r.get(original))
+    for original, prefix, contest_key in [('award', 'award', 'contestAward'), ('equivalentAward', 'equivalentAward', 'equivalentContestAward')]:
+        contest_award = r.get(original) or ''
         if r['family'] in ('ICPC', 'CCPC') and not r.get(original) and level and r['uid'] not in meta.get('unconfirmedAwards', []):
             if prefix == 'award' and r['official'] is True:
-                grade = policy['honorableGrade']
+                contest_award = policy['honorableAward']
                 r['awardRecognitionBasis'] = policy['honorableRule']
             elif prefix == 'equivalentAward' and r['official'] is False and r.get('equivalentAwardChecked'):
-                grade = policy['honorableGrade']
+                contest_award = policy['honorableAward']
+        r[contest_key] = contest_award
+        grade = policy['grades'].get(contest_award)
         r.pop(prefix + 'Level', None)
         r.pop(prefix + 'Grade', None)
         if grade and level:
             r[prefix + 'Level'], r[prefix + 'Grade'] = level, grade
         elif r.get(original):
             raise ValueError(f'Missing recognition rule for {r["uid"]}: {r["family"]} {r["tier"]}')
-    r['title'] = r['event'] + (f' · {r["awardLevel"]}{r["awardGrade"]}' if r.get('awardLevel') else '')
+    r['title'] = r['event'] + (f' · {r["contestAward"]}' if r.get('contestAward') else '')
 
 meta['recognitionSource'] = policy['source']
 meta['recognizedAwards'] = dict(collections.Counter(r['awardLevel'] + r['awardGrade'] for r in records if r.get('awardLevel')))

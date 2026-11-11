@@ -38,6 +38,7 @@ export interface HonorItem {
     imageUrl: string;
     title?: string;
     award?: string;
+    contestAward?: string;
     awardLevel?: string;
     awardGrade?: string;
     team?: string;
@@ -1125,7 +1126,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                                         src={item.imageUrl} 
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                                                         className="honor-img"
-                                                    /> : <div style={{height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:14,background:'linear-gradient(135deg,#123c6a,#397797)',color:'white'}}><TrophyOutlined style={{fontSize:58}}/><span style={{fontSize:26,fontWeight:700}}>{item.awardLevel && item.awardGrade ? item.awardLevel + item.awardGrade : item.award}</span></div>}
+                                                    /> : <div style={{height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:14,background:'linear-gradient(135deg,#123c6a,#397797)',color:'white'}}><TrophyOutlined style={{fontSize:58}}/><span style={{fontSize:26,fontWeight:700}}>{item.contestAward || item.award || (item.awardLevel && item.awardGrade ? item.awardLevel + item.awardGrade : '')}</span>{(item.contestAward || item.award) && item.awardLevel && item.awardGrade && <span>学校认定：{item.awardLevel}{item.awardGrade}</span>}</div>}
                                                 </div>
                                             }
                                             style={{ borderRadius: 12, overflow: 'hidden', border: 'none', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}

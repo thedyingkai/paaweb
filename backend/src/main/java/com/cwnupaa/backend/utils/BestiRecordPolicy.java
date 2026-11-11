@@ -14,7 +14,9 @@ public final class BestiRecordPolicy {
         "计算机工程师联盟", Set.of("负责人"),
         "ACM 校队", Set.of("校队队长", "队员"));
     public static final Set<String> AWARD_LEVELS = Set.of("省部级", "国家级", "校级");
-    public static final Set<String> AWARD_GRADES = Set.of("一等奖", "二等奖", "三等奖", "特等奖", "优胜奖", "优秀奖");
+    public static final Set<String> AWARD_GRADES = Set.of("一等奖", "二等奖", "三等奖", "特等奖", "优秀奖");
+    public static final Map<String, String> XCPC_AWARD_GRADES = Map.of("金牌", "一等奖", "银牌", "二等奖", "铜牌", "三等奖", "优胜奖", "优秀奖");
+    public static boolean isXcpc(String family) { return "ICPC".equals(family) || "CCPC".equals(family); }
     public static String recognizedLevel(String family, String stage) {
         if ("ICPC".equals(family) || "CCPC".equals(family)) {
             if ("regional".equals(stage) || "final".equals(stage)) return "国家级";

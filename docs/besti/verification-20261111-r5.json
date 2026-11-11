@@ -1,0 +1,46 @@
+{
+  "release": "20261111-besti-r5",
+  "passed": 24,
+  "checks": [
+    "published-records-match-snapshot",
+    "published-metadata-match-snapshot",
+    "original-and-recognized-awards-consistent:contestAward",
+    "original-and-recognized-awards-consistent:equivalentContestAward",
+    "39-formal-and-7-separate-star-awards",
+    "honorable-award-maps-to-excellent-grade",
+    "original-source-medals-preserved",
+    "event-titles-retain-competition-award",
+    "127-records-and-team-counts-preserved",
+    "preliminary-and-unknown-awards-remain-unclassified",
+    "persisted:ICPCregional金牌",
+    "persisted:ICPCregional银牌",
+    "persisted:CCPCregional铜牌",
+    "persisted:ICPCregional优胜奖",
+    "persisted:CCPCinvitational优胜奖",
+    "persisted:ICPCfinal优胜奖",
+    "public-profile-exposes-original-and-recognition-separately",
+    "editing-updates-both-awards-and-requires-review",
+    "rejects:wrong-grade",
+    "rejects:wrong-level",
+    "rejects:missing-original",
+    "rejects:honorable-is-not-recognition-grade",
+    "other-competitions-retain-ordinary-grade-selection",
+    "temporary-records-cleaned"
+  ],
+  "backendFocusedTestsPassed": 18,
+  "frontendProductionBuild": "passed (including TypeScript)",
+  "browserVerification": {
+    "browser": "Edge",
+    "url": "https://bestiacm.thedyingkai.cn/honor",
+    "checked": [
+      "competition award and school recognition displayed in separate columns",
+      "silver award retained alongside national second prize",
+      "honorable award retained alongside national or provincial excellent award",
+      "star equivalents remain separate in parentheses",
+      "school statistics use excellent rather than honorable grade",
+      "registration invitation plus gold automatically selects provincial first prize",
+      "registration invitation plus honorable automatically selects provincial excellent prize",
+      "browser verification form closed without saving"
+    ]
+  }
+}
