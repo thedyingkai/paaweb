@@ -13,7 +13,7 @@ cd backend
 mvn.cmd -B -s settings.xml package -DskipTests
 cd ..
 docker build --build-arg JRE_IMAGE=public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine -f backend/Dockerfile.prebuilt -t paaweb-school-backend:20261111-besti-r5 backend
-docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261111-besti-r5 frontend
+docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261111-besti-r6 frontend
 ```
 
 `Dockerfile.prebuilt` 使用刚刚构建的 JAR。前端构建运行 Next.js 编译和 TypeScript 检查。官方镜像的 ECR 地址用于 Docker Hub 不可达的网络；可通过构建参数切换回 Docker Hub。
@@ -87,3 +87,7 @@ r4 继续执行同一迁移，将奖项等次约束扩展为包含“优胜奖�
 在职务奖项迁移之后执行 `SQL/migration_besti_xcpc_awards.sql`。该迁移新增 `contest_award` 保存 XCPC 的金牌、银牌、铜牌、优胜奖，并按已有认定等次回填；旧版将 XCPC 优胜奖写入认定等次的记录修正为优秀奖。原始赛事阶段和认定级别保留。
 
 荣誉墙、首页、个人档案及公开个人主页均分别展示赛事奖项与学校认定；个人登记选择原始奖项后自动换算，后端拒绝原始奖项、阶段和认定结果不匹配的请求。历史快照保留原始来源 `award` / `equivalentAward`，使用 `contestAward` / `equivalentContestAward` 展示赛事奖项，`awardLevel` / `awardGrade` 等字段保存学校认定。打星只计在括号内。
+
+## 打星展示调整（r6）
+
+本次只升级前端至 `20261111-besti-r6`，后端继续使用 r5，无数据库迁移。比赛列表和展开详情移除打星的国家级／省部级认定文字，导出文件移除打星等效学校认定列；保留打星标记、等效赛事奖项以及统计表中的括号计数。

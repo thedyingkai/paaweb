@@ -66,7 +66,6 @@ type Meta = {
   eventCount?: number;
 };
 const awardName = (r: Honor) => r.awardLevel && r.awardGrade ? r.awardLevel + r.awardGrade : r.award || '';
-const equivalentName = (r: Honor) => r.equivalentAwardLevel && r.equivalentAwardGrade ? r.equivalentAwardLevel + r.equivalentAwardGrade : r.equivalentAward || '';
 const contestName = (r: Honor) => r.contestAward || r.award || '';
 const equivalentContestName = (r: Honor) => r.equivalentContestAward || r.equivalentAward || '';
 const awardColor = (name: string) => name === '金牌' ? 'gold' : name === '银牌' ? 'blue' : name === '铜牌' ? 'orange' : 'default';
@@ -116,9 +115,9 @@ export default function SchoolHonorsClient() {
           (r) =>
             (year === "all" || r.academicYear === year) &&
             (family === "all" || r.family === family) &&
-            (mode === "all" || (mode === "awards" && !!awardName(r)) || (mode === "equivalent" && !!equivalentName(r))) &&
+            (mode === "all" || (mode === "awards" && !!awardName(r)) || (mode === "equivalent" && !!equivalentContestName(r))) &&
             (keyword.trim() === "" ||
-              [r.event, r.title, r.team, contestName(r), equivalentContestName(r), awardName(r), equivalentName(r), ...(r.members || [])]
+              [r.event, r.title, r.team, contestName(r), equivalentContestName(r), awardName(r), ...(r.members || [])]
                 .join(" ")
                 .toLowerCase()
                 .includes(keyword.trim().toLowerCase())),
@@ -142,7 +141,6 @@ export default function SchoolHonorsClient() {
       "赛事奖项",
       "学校认定奖项",
       "打星等效赛事奖项",
-      "打星等效学校认定",
       "正式参赛",
       "总排名",
       "正式排名",
@@ -164,7 +162,6 @@ export default function SchoolHonorsClient() {
       contestName(r),
       awardName(r),
       equivalentContestName(r),
-      equivalentName(r),
       r.official === true
         ? "正式"
         : r.official === false
@@ -217,7 +214,7 @@ export default function SchoolHonorsClient() {
           <Row gutter={[16, 16]}>
             {[
               { label: '正式获奖（队次）', value: records.filter(r => awardName(r)).length },
-              { label: '打星等效获奖（队次）', value: records.filter(r => equivalentName(r)).length },
+              { label: '打星等效获奖（队次）', value: records.filter(r => equivalentContestName(r)).length },
               { label: '收录比赛', value: meta.eventCount || 0 },
               { label: '参赛记录（队次）', value: records.length },
             ].map(item => <Col xs={12} md={6} key={item.label}><Card><Statistic title={item.label} value={item.value} /></Card></Col>)}
@@ -344,7 +341,7 @@ export default function SchoolHonorsClient() {
                       <p>队员：{r.members.join("、")}</p>
                     )}
                     {r.notes && <p>{r.notes}</p>}
-                    {(contestName(r) || equivalentContestName(r)) && <p>赛事奖项：{contestName(r) || `打星等效${equivalentContestName(r)}`}。学校认定：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
+                    {(contestName(r) || equivalentContestName(r)) && <p>赛事奖项：{contestName(r) || `打星等效${equivalentContestName(r)}`}。{r.official !== false && awardName(r) && <>学校认定：{awardName(r)}。</>}</p>}
                     <p>总队伍数：{r.totalTeams ?? '待核实'}；正式队伍数：{r.totalOfficialTeams ?? '待核实'}。来源：{r.teamCountSource || '待核实'}。</p>
                     {r.equivalentAwardBasis && <p>打星等效名次：{r.equivalentRank}；{r.equivalentAwardBasis}</p>}
                     <p>
@@ -417,9 +414,7 @@ export default function SchoolHonorsClient() {
                 {
                   title: '学校认定',
                   width: 180,
-                  render: (_, r) => r.official === false
-                    ? (equivalentName(r) ? <span style={{ color: '#1677ff' }}>（等效{equivalentName(r)}）</span> : '—')
-                    : awardName(r) || '—',
+                  render: (_, r) => r.official === false ? '—' : awardName(r) || '—',
                 },
                 { title: '时间', dataIndex: 'date', width: 110 },
                 { title: '地点', dataIndex: 'location', width: 75, render: v => v || '—' },
