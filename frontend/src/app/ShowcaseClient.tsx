@@ -20,6 +20,7 @@ import {
 import axios from 'axios';
 import dayjs from 'dayjs';
 import SiteHeader from './components/SiteHeader';
+import { memberRoles, memberRoleKey, positionLabel } from '@/lib/besti-members';
 import Link from 'next/link';
 
 const { Title } = Typography;
@@ -37,6 +38,8 @@ export interface HonorItem {
     imageUrl: string;
     title?: string;
     award?: string;
+    awardLevel?: string;
+    awardGrade?: string;
     team?: string;
     sources?: {name: string; url: string}[];
 }
@@ -78,6 +81,10 @@ export interface CadreMember {
     realName: string;
     department: string;
     position: string;
+    displayPosition?: string;
+    positionStatus?: string;
+    startDate?: string;
+    endDate?: string;
     sortOrder?: number;
     avatarUrl?: string;
     introduction?: string;
@@ -94,12 +101,12 @@ interface ShowcaseProps {
     initialCadres: CadreMember[];
 }
 
-const defaultDeptOrder = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
+const defaultDeptOrder = memberRoles.map(role => role.value);
 
 const sortCadres = (members: CadreMember[]) => {
     return [...members].sort((a, b) => {
-        const indexA = defaultDeptOrder.indexOf(a.department);
-        const indexB = defaultDeptOrder.indexOf(b.department);
+        const indexA = defaultDeptOrder.indexOf(memberRoleKey(a.department, a.position));
+        const indexB = defaultDeptOrder.indexOf(memberRoleKey(b.department, b.position));
 
         if (indexA !== -1 && indexB !== -1 && indexA !== indexB) return indexA - indexB;
         if (indexA !== -1 && indexB === -1) return -1;
@@ -188,7 +195,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
     const [trainingList, setTrainingList] = useState<TrainingItem[]>(initialTrainings || []);
     const [localEvents, setLocalEvents] = useState<EventItem[]>(initialEvents || []);
     const initialSortedCadres = sortCadres(initialCadres || []);
-    const initialDepartments = sortDepartments(Array.from(new Set(initialSortedCadres.map((m) => String(m.department)))));
+    const initialDepartments = sortDepartments(Array.from(new Set(initialSortedCadres.map((m) => memberRoleKey(m.department, m.position)))));
     const [cadreList, setCadreList] = useState<CadreMember[]>(initialSortedCadres);
     const [selectedDept, setSelectedDept] = useState<string>(initialDepartments[0] || '');
     const backgroundImageCount = carouselList.length > 0 ? carouselList.length : defaultBgs.length;
@@ -280,7 +287,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
             console.error("培训赛事加载失败", error);
         });
 
-        // 5. Fetch cadres (including '干事')
+        // 5. Fetch member positions
         const cadresRequest = axios.get('/api/association-member/terms').then(termsRes => {
             if (termsRes.data.code === 200 && termsRes.data.data.length > 0) {
                 const latestTerm = termsRes.data.data.sort((a: string, b: string) => b.localeCompare(a))[0];
@@ -290,7 +297,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                         setCadreList(members);
 
                         if (members.length > 0) {
-                            const uniqueDepts = Array.from(new Set(members.map((m) => String(m.department))));
+                            const uniqueDepts = Array.from(new Set(members.map((m) => memberRoleKey(m.department, m.position))));
                             const sortedDepts = sortDepartments(uniqueDepts);
                             setSelectedDept(sortedDepts[0]);
                         }
@@ -389,7 +396,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
     };
 
     const formatCadrePosition = (member: CadreMember) => {
-        return `${member.department} · ${member.position}`;
+        return member.displayPosition || positionLabel(member.department, member.position, member.positionStatus);
     };
 
     // Header styling variables: premium light glassmorphism
@@ -1118,7 +1125,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                                         src={item.imageUrl} 
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                                                         className="honor-img"
-                                                    /> : <div style={{height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:14,background:'linear-gradient(135deg,#123c6a,#397797)',color:'white'}}><TrophyOutlined style={{fontSize:58}}/><span style={{fontSize:26,fontWeight:700}}>{item.award}</span></div>}
+                                                    /> : <div style={{height:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:14,background:'linear-gradient(135deg,#123c6a,#397797)',color:'white'}}><TrophyOutlined style={{fontSize:58}}/><span style={{fontSize:26,fontWeight:700}}>{item.awardLevel && item.awardGrade ? item.awardLevel + item.awardGrade : item.award}</span></div>}
                                                 </div>
                                             }
                                             style={{ borderRadius: 12, overflow: 'hidden', border: 'none', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}
@@ -1256,15 +1263,15 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
 
                         {cadreList.length === 0 ? (
                             <div className="reveal-item reveal-delay-1">
-                                <Empty description="暂无当前届别干部数据" />
+                                <Empty description="暂无成员职务数据" />
                             </div>
                         ) : (
                             <>
                                 {/* Department Switch Tabs */}
                                 <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 22, flexWrap: 'wrap' }} className="reveal-item reveal-delay-1">
-                                    {Array.from(new Set(cadreList.map(m => m.department)))
+                                    {Array.from(new Set(cadreList.map(m => memberRoleKey(m.department, m.position))))
                                         .sort((a, b) => {
-                                            const defaultDeptOrder = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
+                                            const defaultDeptOrder = memberRoles.map(role => role.value);
                                             const indexA = defaultDeptOrder.indexOf(a);
                                             const indexB = defaultDeptOrder.indexOf(b);
                                             if (indexA !== -1 && indexB !== -1) return indexA - indexB;
@@ -1291,7 +1298,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                                     color: '#595959'
                                                 }}
                                             >
-                                                {dept}
+                                                {memberRoles.find(role => role.value === dept)?.label || dept}
                                             </Button>
                                         ))
                                     }
@@ -1300,19 +1307,9 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                 {/* Active Department Members Grid */}
                                 <Row gutter={[20, 20]} className="reveal-item reveal-delay-2 showcase-cadres-scroll" justify="center" style={{ maxHeight: '55vh', overflowY: 'auto', padding: '10px 4px' }}>
                                     {cadreList
-                                        .filter(member => member.department === selectedDept)
+                                        .filter(member => memberRoleKey(member.department, member.position) === selectedDept)
                                         .map((member) => {
-                                            // 确定职位标签色彩
-                                            let tagColor = 'blue';
-                                            if (member.position === '理事长' || member.position === '部长') {
-                                                tagColor = 'gold';
-                                            } else if (member.position === '副理事长' || member.position === '副部长') {
-                                                tagColor = 'cyan';
-                                            } else if (member.position === '团支书') {
-                                                tagColor = 'purple';
-                                            } else {
-                                                tagColor = 'default';
-                                            }
+                                            const tagColor = member.positionStatus === 'former' ? 'default' : 'blue';
 
                                             return (
                                                 <Col xs={24} sm={12} md={6} key={member.memberId}>

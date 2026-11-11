@@ -28,6 +28,7 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import SiteHeader from '../components/SiteHeader';
+import { memberRoles, memberRoleKey, positionLabel, positionStatusLabels, currentAcademicTerm } from '@/lib/besti-members';
 import MarkdownContent from '../components/content/MarkdownContent';
 
 const { Title, Paragraph, Text } = Typography;
@@ -47,6 +48,10 @@ interface MemberItem {
   memberId: number | string;
   department?: string;
   position?: string;
+  displayPosition?: string;
+  positionStatus?: string;
+  startDate?: string;
+  endDate?: string;
   realName?: string;
   avatarUrl?: string;
   introduction?: string;
@@ -65,7 +70,6 @@ const subtitleMap: Record<IntroCategory, string> = {
   association_member: '认识正在共同维护校队运转的同学们'
 };
 
-const departmentOrder = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
 
 const tabItems = [
   { key: 'association', label: '校队简介', icon: <InfoCircleOutlined /> },
@@ -85,39 +89,15 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
   const [updateTime, setUpdateTime] = useState('');
   const [terms, setTerms] = useState<string[]>([]);
   const [selectedTerm, setSelectedTerm] = useState('');
-  const [selectedDept, setSelectedDept] = useState('');
+  const [selectedDept, setSelectedDept] = useState('all');
+  const [tenureFilter, setTenureFilter] = useState('all');
   const [members, setMembers] = useState<MemberItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const groupedMembers = useMemo(() => {
-    const groups = members.reduce<Record<string, MemberItem[]>>((acc, member) => {
-      const department = member.department || '其他';
-      acc[department] = acc[department] || [];
-      acc[department].push(member);
-      return acc;
-    }, {});
-
-    return Object.keys(groups)
-      .sort((a, b) => {
-        const ia = departmentOrder.indexOf(a);
-        const ib = departmentOrder.indexOf(b);
-        if (ia !== -1 && ib !== -1) return ia - ib;
-        if (ia !== -1) return -1;
-        if (ib !== -1) return 1;
-        return a.localeCompare(b);
-      })
-      .map(department => ({ department, list: groups[department] }));
-  }, [members]);
-
-  useEffect(() => {
-    if (groupedMembers.length > 0) {
-      if (!selectedDept || !groupedMembers.find(g => g.department === selectedDept)) {
-        setSelectedDept(groupedMembers[0].department);
-      }
-    } else {
-      setSelectedDept('');
-    }
-  }, [groupedMembers, selectedDept]);
+  const visibleMembers = useMemo(() => members
+    .filter(member => selectedDept === 'all' || memberRoleKey(member.department, member.position) === selectedDept)
+    .filter(member => tenureFilter === 'all' || member.positionStatus === tenureFilter),
+    [members, selectedDept, tenureFilter]);
 
   useEffect(() => {
     const fetchIntro = async () => {
@@ -129,7 +109,7 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
       try {
         if (category === 'association_member') {
           const termRes = await axios.get<{ code: number; data: string[] }>('/api/association-member/terms');
-          const termList = [...(termRes.data.data || [])].sort((a, b) => b.localeCompare(a));
+          const termList = Array.from(new Set([currentAcademicTerm(), ...(termRes.data.data || [])])).sort((a, b) => b.localeCompare(a));
           setTerms(termList);
           const defaultTerm = termList[0] || '';
           setSelectedTerm(defaultTerm);
@@ -166,13 +146,6 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const getPositionColor = (position?: string) => {
-    if (position === '理事长' || position === '部长') return 'gold';
-    if (position === '副理事长' || position === '副部长') return 'cyan';
-    if (position === '团支书') return 'purple';
-    return 'default';
   };
 
   return (
@@ -214,113 +187,42 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
             <Skeleton loading={loading} active paragraph={{ rows: 8 }}>
               {category === 'association_member' ? (
                 <div className="member-page">
-                  {groupedMembers.length === 0 ? (
-                    <>
-                      <div className="member-control-panel member-control-panel-empty">
-                        <div className="member-term-control">
-                          <Text strong>届别筛选</Text>
-                          <Select
-                            className="bits-select"
-                            value={selectedTerm || undefined}
-                            onChange={handleTermChange}
-                            placeholder="选择学年"
-                            options={terms.map(term => ({ label: term, value: term }))}
-                          />
-                        </div>
-                      </div>
-                      <Empty description="该学年暂无成员数据" />
-                    </>
-                  ) : (
-                    <>
-                      <div className="member-control-panel">
-                        <div className="member-term-control">
-                          <Text strong>届别筛选</Text>
-                          <Select
-                            className="bits-select"
-                            value={selectedTerm || undefined}
-                            onChange={handleTermChange}
-                            placeholder="选择学年"
-                            options={terms.map(term => ({ label: term, value: term }))}
-                          />
-                        </div>
-                        <div className="member-dept-tabs" aria-label="校队成员部门筛选">
-                          {groupedMembers.map(group => (
-                            <Button
-                              key={group.department}
-                              type={selectedDept === group.department ? "primary" : "default"}
-                              shape="round"
-                              onClick={() => setSelectedDept(group.department)}
-                            >
-                              {group.department}
-                            </Button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <Row gutter={[20, 20]} justify="center">
-                        {(groupedMembers.find(g => g.department === selectedDept)?.list || []).map(member => {
-                          let tagColor = 'blue';
-                          if (member.position === '理事长' || member.position === '部长') {
-                            tagColor = 'gold';
-                          } else if (member.position === '副理事长' || member.position === '副部长') {
-                            tagColor = 'cyan';
-                          } else if (member.position === '团支书') {
-                            tagColor = 'purple';
-                          } else {
-                            tagColor = 'default';
-                          }
-
-                          return (
-                            <Col xs={24} sm={12} md={8} lg={6} key={member.memberId}>
-                              <Card
-                                hoverable
-                                styles={{ body: { padding: '24px 20px', textAlign: 'center' } }}
-                                style={{ borderRadius: 12, border: 'none', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(8px)', boxShadow: '0 4px 24px rgba(0,0,0,0.02)' }}
-                                onClick={() => { if (member.userId) router.push(`/profile/${member.userId}`); }}
-                              >
-                                <Avatar
-                                  size={80}
-                                  src={member.avatarUrl || '/avatar-default.svg'}
-                                  style={{ border: '3px solid #fff', boxShadow: '0 4px 10px rgba(0,0,0,0.06)', marginBottom: 16 }}
-                                />
-                                <div style={{ fontSize: 18, fontWeight: 700, color: '#262626', marginBottom: 6 }}>
-                                  {member.userId ? (
-                                    <a
-                                      href={`/profile/${member.userId}`}
-                                      style={{ color: '#262626', textDecoration: 'none' }}
-                                      onClick={(e) => { e.stopPropagation(); router.push(`/profile/${member.userId}`); }}
-                                    >
-                                      {member.realName}
-                                    </a>
-                                  ) : (
-                                    member.realName || '未命名成员'
-                                  )}
-                                </div>
-                                <div style={{ marginBottom: 12 }}>
-                                  <Tag color={tagColor} style={{ padding: '2px 10px', borderRadius: 4, fontSize: 11, fontWeight: 600 }}>
-                                    {`${member.department} · ${member.position}`}
-                                  </Tag>
-                                </div>
-                                <p style={{
-                                  color: '#8c8c8c',
-                                  fontSize: 13,
-                                  fontStyle: member.introduction ? 'italic' : 'normal',
-                                  margin: 0,
-                                  height: 38,
-                                  overflow: 'hidden',
-                                  display: '-webkit-box',
-                                  WebkitLineClamp: 2,
-                                  WebkitBoxOrient: 'vertical',
-                                  lineHeight: 1.4
-                                }}>
-                                  {member.introduction || '“这个成员很懒，什么都没留下”'}
-                                </p>
-                              </Card>
-                            </Col>
-                          );
-                        })}
-                      </Row>
-                    </>
+                  <div className="member-control-panel">
+                    <div className="member-term-control">
+                      <Text strong>学年</Text>
+                      <Select className="bits-select" value={selectedTerm || undefined} onChange={handleTermChange}
+                        placeholder="选择学年" options={terms.map(term => ({ label: term, value: term }))} />
+                    </div>
+                    <div className="member-dept-tabs" aria-label="校队成员职务筛选">
+                      {[{ value: 'all', label: '全部职务' }, ...memberRoles].map(role => (
+                        <Button key={role.value} type={selectedDept === role.value ? 'primary' : 'default'}
+                          shape="round" onClick={() => setSelectedDept(role.value)}>{role.label}</Button>
+                      ))}
+                    </div>
+                    <Select aria-label="任职状态" value={tenureFilter} onChange={setTenureFilter} style={{ minWidth: 130 }} options={[
+                      { value: 'all', label: '全部任期' }, ...Object.entries(positionStatusLabels).map(([value, label]) => ({ value, label })),
+                    ]} />
+                  </div>
+                  <Paragraph type="secondary" style={{ textAlign: 'center' }}>任期结束后自动标记为“前”职务；可按学年查看历任成员。</Paragraph>
+                  {visibleMembers.length === 0 ? <Empty description="该筛选下暂无成员数据" /> : (
+                    <Row gutter={[20, 20]} justify="center">
+                      {visibleMembers.map(member => (
+                        <Col xs={24} sm={12} md={8} key={member.memberId}>
+                          <Card hoverable={!!member.userId} styles={{ body: { padding: '24px 20px', textAlign: 'center' } }}
+                            style={{ borderRadius: 12, border: 'none', background: 'rgba(255,255,255,0.7)' }}
+                            onClick={() => { if (member.userId) router.push(`/profile/${member.userId}`); }}>
+                            <Avatar size={80} src={member.avatarUrl || '/avatar-default.svg'} style={{ marginBottom: 16 }} />
+                            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{member.realName || '未命名成员'}</div>
+                            <Tag color={member.positionStatus === 'former' ? 'default' : 'blue'} style={{ whiteSpace: 'normal' }}>
+                              {member.displayPosition || positionLabel(member.department, member.position, member.positionStatus)}
+                            </Tag>
+                            <div style={{ marginTop: 10 }}><Text type="secondary">{positionStatusLabels[member.positionStatus || 'unknown']}</Text></div>
+                            <div style={{ fontSize: 12, margin: '6px 0 12px', color: '#888' }}>{member.startDate} — {member.endDate}</div>
+                            <Paragraph ellipsis={{ rows: 2 }}>{member.introduction || '暂无个人简介'}</Paragraph>
+                          </Card>
+                        </Col>
+                      ))}
+                    </Row>
                   )}
                 </div>
               ) : (

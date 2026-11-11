@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Card, Empty, List, Tag } from "antd";
 import Link from "next/link";
+import { positionStatusLabels } from "@/lib/besti-members";
 import { teamApi, teamError, kindNames } from "@/lib/besti";
 type RecordItem = {
   id: number;
@@ -10,6 +11,8 @@ type RecordItem = {
   result: string;
   start_date?: string;
   end_date?: string;
+  display_title?: string;
+  position_status?: string;
   source_url?: string;
 };
 export default function MemberRecordSummary({
@@ -49,7 +52,8 @@ export default function MemberRecordSummary({
                   <>
                     <Tag color="green">已核验</Tag>
                     <Tag>{kindNames[r.kind]}</Tag>
-                    {r.title}
+                    {r.display_title || r.title}
+                    {r.kind === "position" && <Tag color={r.position_status === "former" ? "default" : "blue"}>{positionStatusLabels[r.position_status || "unknown"]}</Tag>}
                     {r.result && ` · ${r.result}`}
                   </>
                 }

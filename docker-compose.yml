@@ -12,6 +12,7 @@ services:
       - ./SQL/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       - ./SQL/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
       - ./SQL/migration_besti_team_space.sql:/docker-entrypoint-initdb.d/03-besti-team-space.sql:ro
+      - ./SQL/migration_besti_roles_awards.sql:/docker-entrypoint-initdb.d/04-besti-roles-awards.sql:ro
     healthcheck:
       test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 5s

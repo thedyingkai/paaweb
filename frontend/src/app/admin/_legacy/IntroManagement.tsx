@@ -11,8 +11,9 @@ import { userCardHtml, userSearchLabel } from '@/types/user';
 import ImportPreview, { ImportPreviewData } from './components/ImportPreview';
 import { downloadExcelTemplate, readExcelRows, rowsToTsv } from '@/utils/excelImport';
 import { describeRequestError } from '@/utils/errorMessage';
+import { memberRoles, memberRoleKey, currentAcademicTerm, academicTermDates, positionStatusLabels } from '@/lib/besti-members';
 
-const MEMBER_IMPORT_HEADERS = ['部门', '职位', '姓名', '学校', '学号'];
+const MEMBER_IMPORT_HEADERS = ['组织', '职务', '姓名', '学校', '学号', '任职开始', '任职结束'];
 
 const { Text } = Typography;
 
@@ -69,15 +70,14 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
     // States for Association Member Mode
     const isMemberMode = category === 'association_member';
     const [memberTerms, setMemberTerms] = useState<string[]>([]);
-    const [selectedMemberTerm, setSelectedMemberTerm] = useState<string>('2025-2026学年');
+    const [selectedMemberTerm, setSelectedMemberTerm] = useState<string>(currentAcademicTerm());
     const [memberList, setMemberList] = useState<any[]>([]);
-    const [selectedDeptFilter, setSelectedDeptFilter] = useState<string>('理事团');
+    const [selectedDeptFilter, setSelectedDeptFilter] = useState<string>('all');
     const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
     const [editingMember, setEditingMember] = useState<any>(null);
     const [memberForm] = Form.useForm();
     const [isCustomTerm, setIsCustomTerm] = useState(false);
-    const [isCustomDept, setIsCustomDept] = useState(false);
-    const [deptPositions, setDeptPositions] = useState<string[]>(['理事长', '副理事长', '团支书']); 
+    const [tenureFilter, setTenureFilter] = useState('all');
     const [memberAvatarFileId, setMemberAvatarFileId] = useState<number | null>(null);
     const [memberAvatarUrl, setMemberAvatarUrl] = useState<string>('');
     const [isBatchImportModalOpen, setIsBatchImportModalOpen] = useState(false);
@@ -101,8 +101,8 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                     setSelectedMemberTerm(term);
                 }
             } else {
-                setMemberTerms(['2025-2026学年']);
-                term = '2025-2026学年';
+                setMemberTerms([currentAcademicTerm()]);
+                term = currentAcademicTerm();
                 setSelectedMemberTerm(term);
             }
 
@@ -311,29 +311,16 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
         }
     };
 
-    const handleFormDeptChange = (value: string) => {
-        setIsCustomDept(value === 'custom');
-        if (value === '理事团') {
-            setDeptPositions(['理事长', '副理事长', '团支书']);
-            memberForm.setFieldsValue({ position: '理事长' });
-        } else {
-            setDeptPositions(['部长', '副部长', '干事']);
-            memberForm.setFieldsValue({ position: '部长' });
-        }
-    };
-
     const openAddMemberModal = () => {
         setEditingMember(null);
         setIsCustomTerm(false);
-        setIsCustomDept(false);
         setMemberAvatarFileId(null);
         setMemberAvatarUrl('');
-        setDeptPositions(['理事团', '副理事长', '团支书']);
         memberForm.resetFields();
         memberForm.setFieldsValue({
             term: selectedMemberTerm,
-            department: '理事团',
-            position: '理事长',
+            roleKey: 'science-club',
+            ...academicTermDates(selectedMemberTerm),
             sortOrder: 0
         });
         setIsMemberModalOpen(true);
@@ -342,19 +329,9 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
     const openEditMemberModal = (record: any) => {
         setEditingMember(record);
         
-        const standardTerms = ['2025-2026学年', '2024-2025学年', '2023-2024学年'];
+        const standardTerms = Array.from(new Set([currentAcademicTerm(), ...memberTerms]));
         const isCustomT = !standardTerms.includes(record.term);
         setIsCustomTerm(isCustomT);
-
-        const standardDepts = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
-        const isCustomD = !standardDepts.includes(record.department);
-        setIsCustomDept(isCustomD);
-
-        if (record.department === '理事团') {
-            setDeptPositions(['理事长', '副理事长', '团支书']);
-        } else {
-            setDeptPositions(['部长', '副部长', '干事']);
-        }
 
         setMemberAvatarFileId(record.avatarFileId || null);
         setMemberAvatarUrl(record.avatarUrl || '');
@@ -362,9 +339,9 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
         memberForm.setFieldsValue({
             term: isCustomT ? 'custom' : record.term,
             customTerm: isCustomT ? record.term : '',
-            department: isCustomD ? record.department : '',
-            customDepartment: isCustomD ? record.department : '',
-            position: record.position,
+            roleKey: memberRoleKey(record.department, record.position),
+            startDate: record.startDate,
+            endDate: record.endDate,
             userId: record.userId ? String(record.userId) : undefined,
             realName: record.realName || '',
             introduction: record.introduction || '',
@@ -402,15 +379,9 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
             }
         }
     });
-    const defaultDepts = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
-    const getFilterDepartments = () => {
-        const deptsInList = memberList.map(m => m.department);
-        const allDepts = Array.from(new Set([...defaultDepts, ...deptsInList]));
-        return allDepts;
-    };
-    
     const filteredMemberList = memberList
-        .filter(m => m.department === selectedDeptFilter)
+        .filter(m => selectedDeptFilter === 'all' || memberRoleKey(m.department, m.position) === selectedDeptFilter)
+        .filter(m => tenureFilter === 'all' || m.positionStatus === tenureFilter)
         .sort((a, b) => a.sortOrder - b.sortOrder);
 
     const handleSwap = async (id1: number, id2: number) => {
@@ -443,15 +414,15 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                 }
             }
             
-            let department = values.department;
-            if (department === 'custom') {
-                department = values.customDepartment;
-            }
+            const role = memberRoles.find(role => role.value === values.roleKey);
+            if (!role) return;
 
             const data: any = {
                 term,
-                department,
-                position: values.position,
+                department: role.organization,
+                position: role.title,
+                startDate: values.startDate,
+                endDate: values.endDate,
                 userId: values.userId || null,
                 realName: values.realName || '',
                 schoolName: editingMember?.schoolName || null,
@@ -614,20 +585,29 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                         </div>
                         
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <span>部门筛选：</span>
+                            <span>职务筛选：</span>
                             <Radio.Group 
                                 value={selectedDeptFilter} 
                                 onChange={e => setSelectedDeptFilter(e.target.value)}
                                 buttonStyle="solid"
+                                style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}
                             >
-                                {getFilterDepartments().map(d => (
-                                    <Radio.Button key={d} value={d}>{d}</Radio.Button>
+                                {[{ value: 'all', label: '全部职务' }, ...memberRoles].map(role => (
+                                    <Radio.Button key={role.value} value={role.value}>{role.label}</Radio.Button>
                                 ))}
                             </Radio.Group>
                         </div>
                     </div>
                     
-                    <Table 
+                    <Space wrap style={{ marginBottom: 16 }}>
+                        <span>任职状态：</span>
+                        <Select value={tenureFilter} onChange={setTenureFilter} style={{ width: 160 }} options={[
+                            { value: 'all', label: '全部任期' },
+                            ...Object.entries(positionStatusLabels).map(([value, label]) => ({ value, label })),
+                        ]} />
+                        <Text type="secondary">结束日期次日起自动显示“前”职务，历史记录保留。</Text>
+                    </Space>
+                    <Table
                         dataSource={filteredMemberList}
                         rowKey="memberId"
                         loading={loading}
@@ -654,7 +634,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                 )
                             },
                             {
-                                title: '部门',
+                                title: '组织',
                                 dataIndex: 'department',
                                 key: 'department',
                             },
@@ -671,10 +651,14 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                 render: (text) => text || '-'
                             },
                             {
-                                title: '职位',
+                                title: '职务',
                                 dataIndex: 'position',
                                 key: 'position',
-                                render: (text) => <Tag color="geekblue">{text}</Tag>
+                                render: (text, record) => <Tag color={record.positionStatus === 'former' ? 'default' : 'geekblue'}>{record.displayPosition || text}</Tag>
+                            },
+                            {
+                                title: '任期',
+                                render: (_, record) => <><div>{record.startDate} — {record.endDate}</div><Text type="secondary">{positionStatusLabels[record.positionStatus]}</Text></>
                             },
                             {
                                 title: '个人简介 / 个性签名',
@@ -687,8 +671,8 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                 key: 'sort',
                                 width: 100,
                                 render: (_, record, idx) => {
-                                    const isFirst = idx === 0;
-                                    const isLast = idx === filteredMemberList.length - 1;
+                                    const isFirst = idx === 0 || filteredMemberList[idx - 1].department !== record.department;
+                                    const isLast = idx === filteredMemberList.length - 1 || filteredMemberList[idx + 1].department !== record.department;
                                     return (
                                         <Space>
                                             <Button 
@@ -730,7 +714,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
 
                     {/* Member Add/Edit Modal */}
                     <Modal
-                        title={editingMember ? '修改干部成员' : '添加干部成员'}
+                        title={editingMember ? '修改成员职务' : '添加成员职务'}
                         open={isMemberModalOpen}
                         onOk={handleSaveMember}
                         onCancel={() => setIsMemberModalOpen(false)}
@@ -747,9 +731,12 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                     >
                                         <Select 
                                             style={{ width: '40%' }} 
-                                            onChange={(val) => setIsCustomTerm(val === 'custom')}
+                                            onChange={(val) => {
+                                                setIsCustomTerm(val === 'custom');
+                                                if (val !== 'custom') memberForm.setFieldsValue(academicTermDates(val));
+                                            }}
                                         >
-                                            <Select.Option value="2025-2026学年">2025-2026学年</Select.Option>
+                                            {Array.from(new Set([currentAcademicTerm(), ...memberTerms, '2025-2026学年'])).map(term => <Select.Option key={term} value={term}>{term}</Select.Option>)}
                                             <Select.Option value="2024-2025学年">2024-2025学年</Select.Option>
                                             <Select.Option value="2023-2024学年">2023-2024学年</Select.Option>
                                             <Select.Option value="custom">自定义输入</Select.Option>
@@ -761,55 +748,30 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                             noStyle
                                             rules={[{ required: true, message: '请输入自定义学年（如 2025-2026学年）' }]}
                                         >
-                                            <Input style={{ width: '60%' }} placeholder="格式如：2025-2026学年" />
+                                            <Input style={{ width: '60%' }} placeholder="格式如：2025-2026学年" onBlur={event => memberForm.setFieldsValue(academicTermDates(event.target.value))} />
                                         </Form.Item>
                                     )}
                                 </Input.Group>
                             </Form.Item>
 
-                            <Form.Item label="所属部门" required>
-                                <Input.Group compact>
-                                    <Form.Item
-                                        name="department"
-                                        noStyle
-                                        rules={[{ required: true, message: '请选择部门' }]}
-                                    >
-                                        <Select 
-                                            style={{ width: '40%' }} 
-                                            onChange={handleFormDeptChange}
-                                        >
-                                            <Select.Option value="理事团">理事团</Select.Option>
-                                            <Select.Option value="办公室">办公室</Select.Option>
-                                            <Select.Option value="宣传部">宣传部</Select.Option>
-                                            <Select.Option value="组织部">组织部</Select.Option>
-                                            <Select.Option value="技术部">技术部</Select.Option>
-                                            <Select.Option value="监察部">监察部</Select.Option>
-                                            <Select.Option value="custom">自定义新部门</Select.Option>
-                                        </Select>
-                                    </Form.Item>
-                                    {isCustomDept && (
-                                        <Form.Item
-                                            name="customDepartment"
-                                            noStyle
-                                            rules={[{ required: true, message: '请输入部门名称' }]}
-                                        >
-                                            <Input style={{ width: '60%' }} placeholder="输入新部门名称" />
-                                        </Form.Item>
-                                    )}
-                                </Input.Group>
+                            <Form.Item label="职务" name="roleKey" rules={[{ required: true, message: '请选择职务' }]}>
+                                <Select options={memberRoles} placeholder="选择组织及职务" />
                             </Form.Item>
-
-                            <Form.Item 
-                                label="担当职位" 
-                                name="position"
-                                rules={[{ required: true, message: '请选择或输入职位' }]}
-                            >
-                                <Select showSearch placeholder="选择或手动输入职位">
-                                    {deptPositions.map(p => (
-                                        <Select.Option key={p} value={p}>{p}</Select.Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
+                            <Space align="start">
+                                <Form.Item label="任职开始" name="startDate" rules={[{ required: true, message: '请选择开始日期' }]}>
+                                    <Input type="date" />
+                                </Form.Item>
+                                <Form.Item label="任职结束" name="endDate" dependencies={['startDate']} rules={[
+                                    { required: true, message: '请选择结束日期' },
+                                    ({ getFieldValue }) => ({ validator(_, value) {
+                                        return !value || !getFieldValue('startDate') || value >= getFieldValue('startDate')
+                                            ? Promise.resolve() : Promise.reject(new Error('结束日期不能早于开始日期'));
+                                    } }),
+                                ]}>
+                                    <Input type="date" />
+                                </Form.Item>
+                            </Space>
+                            <p style={{ color: '#777' }}>任期结束次日起，职务自动显示为“前××”。</p>
 
                             <Form.Item label="绑定站内已注册用户（可选）" name="userId">
                                 <Select
@@ -906,9 +868,9 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                     )}
                                 </Input.Group>
                             </Form.Item>
-                            <Form.Item label="导入文件" extra="每行 5 列：部门、职位、姓名、学校、学号。学校须填写实名认证中的学校（大学）全称；学校+学号匹配不到账号时会作为无账号成员添加。">
+                            <Form.Item label="导入文件" extra="每行 7 列：组织、职务、姓名、学校、学号、任职开始、任职结束（YYYY-MM-DD）。日期留空时按学年 9 月 1 日至次年 8 月 31 日处理。名单可绑定账号，不改变账号权限。">
                                 <Space wrap>
-                                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '校队成员导入模板.xlsx', headers: MEMBER_IMPORT_HEADERS, examples: [['技术部', '副部长', '示例同学', '示例大学', '20260001']] })}>下载 Excel 模板</Button>
+                                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '校队成员导入模板.xlsx', headers: MEMBER_IMPORT_HEADERS, examples: [['科学之光技术联盟', '社团负责人', '示例同学', '北京电子科技学院', '20260001', '2026-09-01', '2027-08-31'], ['科学之光技术联盟', '主要负责人', '示例同学', '北京电子科技学院', '20260002', '2026-09-01', '2027-08-31'], ['计算机工程师联盟', '负责人', '示例同学', '北京电子科技学院', '20260003', '2026-09-01', '2027-08-31'], ['ACM 校队', '校队队长', '示例同学', '北京电子科技学院', '20260004', '2026-09-01', '2027-08-31'], ['ACM 校队', '队员', '示例同学', '北京电子科技学院', '20260005', '2026-09-01', '2027-08-31']] })}>下载 Excel 模板</Button>
                                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectMemberImportFile(file as File)} onRemove={() => { setBatchImportRows([]); setBatchImportPreview(null); }}>
                                         <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>
                                     </Upload>

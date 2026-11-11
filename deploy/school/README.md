@@ -12,8 +12,8 @@
 cd backend
 mvn.cmd -B -s settings.xml package -DskipTests
 cd ..
-docker build --build-arg JRE_IMAGE=public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine -f backend/Dockerfile.prebuilt -t paaweb-school-backend:20261110-besti-r2 backend
-docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261110-besti-r2 frontend
+docker build --build-arg JRE_IMAGE=public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine -f backend/Dockerfile.prebuilt -t paaweb-school-backend:20261111-besti-r3 backend
+docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261111-besti-r3 frontend
 ```
 
 `Dockerfile.prebuilt` 使用刚刚构建的 JAR。前端构建运行 Next.js 编译和 TypeScript 检查。官方镜像的 ECR 地址用于 Docker Hub 不可达的网络；可通过构建参数切换回 Docker Hub。
@@ -71,3 +71,11 @@ df -h /
 历史荣誉以 `docs/besti/records.json` 为可复核快照，通过管理员 `/api/intro/update` 写入 `honors` 类别，`metadata.json` 写入 `honors_meta`。统计以比赛队次计算，同场同队合并；来源歧义记录在元数据中。不要自动创建或绑定历史选手账号。
 
 普通成员使用已有身份审核机制。SMTP 尚未配置时，邮箱验证码注册与账号激活不可用；部署完成不代表邮件功能已接通。管理员可在系统邮件配置中接入邮箱服务后开放成员注册。
+
+## 职务任期与奖项分类（2026-11-11）
+
+升级前备份数据库，执行 `SQL/migration_besti_roles_awards.sql` 后启动 r3 镜像。该迁移增加任期和奖项分类字段，保留历史数据且可重复执行。
+
+成员职务限定为科学之光技术联盟的社团负责人、主要负责人，计算机工程师联盟的负责人，以及 ACM 校队的校队队长、队员。任期结束当天仍为在任，从次日（Asia/Shanghai）起读接口自动返回“前”职务；保留原始职务名与日期。尚未开始的任期显示待任职。后台新增与自填职务均需明确日期，批量导入未填日期时按所选学年 9 月 1 日至次年 8 月 31 日处理。导入名单不自动授予管理员权限，同一成员可在同一学年兼任不同职务。
+
+个人奖项包含级别（省部级、国家级、校级）与等次（一等奖、二等奖、三等奖、特等奖、优秀奖），前后端共同校验。ICPC、CCPC 区域赛与总决赛自动对应国家级，邀请赛对应省部级；蓝桥杯国赛对应省部级，省赛对应校级。历史竞赛榜单按相同规则换算，金银铜对应一二三等奖，原始奖牌保留在来源说明。正式与打星等效奖项单独统计，并展示排名对应的总队伍数。

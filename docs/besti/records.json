@@ -34,9 +34,15 @@
     },
     "notes": "",
     "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
-    "title": "第十二届中国大学生程序设计竞赛（乐山） · 银牌",
+    "title": "第十二届中国大学生程序设计竞赛（乐山） · 国家级二等奖",
     "imageUrl": "",
-    "sortOrder": 0
+    "sortOrder": 0,
+    "totalTeams": 347,
+    "totalOfficialTeams": 299,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "乐山",
+    "awardLevel": "国家级",
+    "awardGrade": "二等奖"
   },
   {
     "uid": "4adeafb12b36db0188d5",
@@ -78,9 +84,15 @@
     },
     "notes": "",
     "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
-    "title": "第 51 届 ICPC 国际大学生程序设计竞赛区域赛西安站 - 正式赛 · 铜牌",
+    "title": "第 51 届 ICPC 国际大学生程序设计竞赛区域赛西安站 - 正式赛 · 国家级三等奖",
     "imageUrl": "",
-    "sortOrder": 1
+    "sortOrder": 1,
+    "totalTeams": 418,
+    "totalOfficialTeams": 402,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "西安",
+    "awardLevel": "国家级",
+    "awardGrade": "三等奖"
   },
   {
     "uid": "a964f5ab0e948f19a31f",
@@ -117,9 +129,14 @@
     },
     "notes": "",
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
-    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳） · 银牌",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳） · 省部级二等奖",
     "imageUrl": "",
-    "sortOrder": 2
+    "sortOrder": 2,
+    "totalTeams": 286,
+    "totalOfficialTeams": 281,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardLevel": "省部级",
+    "awardGrade": "二等奖"
   },
   {
     "uid": "1b7cf83a0b6b2b3d9a0c",
@@ -156,9 +173,14 @@
     },
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
-    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（南昌）暨江西省赛 · 银牌",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（南昌）暨江西省赛 · 省部级二等奖",
     "imageUrl": "",
-    "sortOrder": 3
+    "sortOrder": 3,
+    "totalTeams": 383,
+    "totalOfficialTeams": 368,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardLevel": "省部级",
+    "awardGrade": "二等奖"
   },
   {
     "uid": "ecaf24ec434f07f59afc",
@@ -195,9 +217,14 @@
     },
     "notes": "",
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
-    "title": "第 51 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 - 正式赛 · 银牌",
+    "title": "第 51 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 - 正式赛 · 省部级二等奖",
     "imageUrl": "",
-    "sortOrder": 4
+    "sortOrder": 4,
+    "totalTeams": 400,
+    "totalOfficialTeams": 354,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardLevel": "省部级",
+    "awardGrade": "二等奖"
   },
   {
     "uid": "39357933f49fe178fa09",
@@ -234,9 +261,14 @@
     },
     "notes": "",
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
-    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（深圳） · 银牌",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（深圳） · 省部级二等奖",
     "imageUrl": "",
-    "sortOrder": 5
+    "sortOrder": 5,
+    "totalTeams": 326,
+    "totalOfficialTeams": 276,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardLevel": "省部级",
+    "awardGrade": "二等奖"
   },
   {
     "uid": "51f81e3d86876f1d566e",
@@ -278,9 +310,15 @@
     },
     "notes": "",
     "awardBasis": "CPCFinder 明确标注奖项（与可用 XCPCIO 奖牌线交叉核对）",
-    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛上海站 · 铜牌",
+    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛上海站 · 国家级三等奖",
     "imageUrl": "",
-    "sortOrder": 6
+    "sortOrder": 6,
+    "totalTeams": 356,
+    "totalOfficialTeams": 331,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "上海",
+    "awardLevel": "国家级",
+    "awardGrade": "三等奖"
   },
   {
     "uid": "4ca8b929f5a30abced9a",
@@ -313,9 +351,14 @@
     },
     "notes": "",
     "awardBasis": "XCPCIO 原始提交重放与明确奖牌线",
-    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 · 铜牌",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 · 省部级三等奖",
     "imageUrl": "",
-    "sortOrder": 7
+    "sortOrder": 7,
+    "totalTeams": 397,
+    "totalOfficialTeams": 382,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardLevel": "省部级",
+    "awardGrade": "三等奖"
   },
   {
     "uid": "3f6bed8335c95b42a82d",
@@ -358,7 +401,17 @@
     "notes": "",
     "title": "「华为杯」第 51 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 8
+    "sortOrder": 8,
+    "totalTeams": 438,
+    "totalOfficialTeams": 369,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "武汉",
+    "equivalentAward": "铜牌",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 157,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "国家级",
+    "equivalentAwardGrade": "三等奖"
   },
   {
     "uid": "f9b0cb121a2de4d0cde3",
@@ -396,7 +449,10 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 9
+    "sortOrder": 9,
+    "totalTeams": 2170,
+    "totalOfficialTeams": 2166,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "780cccefec0aa52fdb24",
@@ -434,7 +490,10 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 10
+    "sortOrder": 10,
+    "totalTeams": 2170,
+    "totalOfficialTeams": 2166,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "285467822e88f491fe2d",
@@ -472,7 +531,10 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 11
+    "sortOrder": 11,
+    "totalTeams": 2170,
+    "totalOfficialTeams": 2166,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "a14e75f33dc8db3d71b0",
@@ -510,7 +572,10 @@
     "notes": "",
     "title": "2026年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 12
+    "sortOrder": 12,
+    "totalTeams": 2170,
+    "totalOfficialTeams": 2166,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "b8beb7cd77697bbbc77b",
@@ -543,7 +608,10 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 13
+    "sortOrder": 13,
+    "totalTeams": 2622,
+    "totalOfficialTeams": 2622,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ea7bd50b020bf78f6e81",
@@ -576,7 +644,10 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 14
+    "sortOrder": 14,
+    "totalTeams": 2535,
+    "totalOfficialTeams": 2535,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "70da14768052f81d46cb",
@@ -609,7 +680,10 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 15
+    "sortOrder": 15,
+    "totalTeams": 2535,
+    "totalOfficialTeams": 2535,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "e4baa1a25965ec0cf782",
@@ -642,7 +716,10 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 16
+    "sortOrder": 16,
+    "totalTeams": 2535,
+    "totalOfficialTeams": 2535,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "8d6f4527df66cb4acaa1",
@@ -675,7 +752,10 @@
     "notes": "",
     "title": "2026 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 17
+    "sortOrder": 17,
+    "totalTeams": 2535,
+    "totalOfficialTeams": 2535,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "e40578c4f6c336cbdc05",
@@ -713,7 +793,10 @@
     "notes": "",
     "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
     "imageUrl": "",
-    "sortOrder": 18
+    "sortOrder": 18,
+    "totalTeams": 286,
+    "totalOfficialTeams": 281,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "513532f6e247ed1f2403",
@@ -751,7 +834,10 @@
     "notes": "",
     "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
     "imageUrl": "",
-    "sortOrder": 19
+    "sortOrder": 19,
+    "totalTeams": 222,
+    "totalOfficialTeams": 211,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "f0f63fc801414e4b44a8",
@@ -789,7 +875,10 @@
     "notes": "",
     "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
     "imageUrl": "",
-    "sortOrder": 20
+    "sortOrder": 20,
+    "totalTeams": 222,
+    "totalOfficialTeams": 211,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ba0a83f0f641d6c32721",
@@ -827,7 +916,10 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 21
+    "sortOrder": 21,
+    "totalTeams": 340,
+    "totalOfficialTeams": 307,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c21b11961587c18c0e35",
@@ -865,7 +957,10 @@
     "notes": "",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 22
+    "sortOrder": 22,
+    "totalTeams": 340,
+    "totalOfficialTeams": 307,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "497963179fc3ebb57016",
@@ -903,7 +998,16 @@
     "notes": "",
     "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
     "imageUrl": "",
-    "sortOrder": 23
+    "sortOrder": 23,
+    "totalTeams": 340,
+    "totalOfficialTeams": 307,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "equivalentAward": "银牌",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 54,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "省部级",
+    "equivalentAwardGrade": "二等奖"
   },
   {
     "uid": "beeedaff7cc12942eb96",
@@ -946,7 +1050,11 @@
     "notes": "",
     "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
     "imageUrl": "",
-    "sortOrder": 24
+    "sortOrder": 24,
+    "totalTeams": 320,
+    "totalOfficialTeams": 260,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "济南"
   },
   {
     "uid": "a46f54bc5328d9f9ad27",
@@ -989,7 +1097,15 @@
     "notes": "",
     "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
     "imageUrl": "",
-    "sortOrder": 25
+    "sortOrder": 25,
+    "totalTeams": 320,
+    "totalOfficialTeams": 260,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "济南",
+    "equivalentAward": "",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 243,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照榜单指定的 CCPC 奖牌比例规则计算；仅为打星等效成绩，不代表实际授奖。"
   },
   {
     "uid": "2db3e2e364b44d33a09a",
@@ -1032,7 +1148,15 @@
     "notes": "",
     "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 26
+    "sortOrder": 26,
+    "totalTeams": 520,
+    "totalOfficialTeams": 446,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "武汉",
+    "equivalentAward": "",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 430,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
   },
   {
     "uid": "179ed60749093041fa19",
@@ -1075,7 +1199,11 @@
     "notes": "",
     "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
     "imageUrl": "",
-    "sortOrder": 27
+    "sortOrder": 27,
+    "totalTeams": 520,
+    "totalOfficialTeams": 446,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "武汉"
   },
   {
     "uid": "4c4863c4ccdc5e73ef3f",
@@ -1108,7 +1236,10 @@
     "notes": "",
     "title": "2025年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 28
+    "sortOrder": 28,
+    "totalTeams": 2085,
+    "totalOfficialTeams": 2075,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "1158df01f0b447c30cf8",
@@ -1141,7 +1272,10 @@
     "notes": "",
     "title": "2025年CCPC网络预选赛",
     "imageUrl": "",
-    "sortOrder": 29
+    "sortOrder": 29,
+    "totalTeams": 2085,
+    "totalOfficialTeams": 2075,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "beeaa0dca8cc24fe8aff",
@@ -1174,7 +1308,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 30
+    "sortOrder": 30,
+    "totalTeams": 2575,
+    "totalOfficialTeams": 2575,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "8f7e4f8161156995c5c0",
@@ -1207,7 +1344,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 31
+    "sortOrder": 31,
+    "totalTeams": 2575,
+    "totalOfficialTeams": 2575,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "a9de1374fc0c10097bb0",
@@ -1240,7 +1380,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 32
+    "sortOrder": 32,
+    "totalTeams": 2575,
+    "totalOfficialTeams": 2575,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "848378f7c79672dd0395",
@@ -1273,7 +1416,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 33
+    "sortOrder": 33,
+    "totalTeams": 2575,
+    "totalOfficialTeams": 2575,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "838100771d503bfe35aa",
@@ -1306,7 +1452,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第二场",
     "imageUrl": "",
-    "sortOrder": 34
+    "sortOrder": 34,
+    "totalTeams": 2575,
+    "totalOfficialTeams": 2575,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "789896b23769f1fcbac3",
@@ -1344,7 +1493,10 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 35
+    "sortOrder": 35,
+    "totalTeams": 270,
+    "totalOfficialTeams": 259,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "24252d41d507423b40f1",
@@ -1382,7 +1534,10 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 36
+    "sortOrder": 36,
+    "totalTeams": 270,
+    "totalOfficialTeams": 259,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "0620acccbe9564c3b259",
@@ -1420,7 +1575,16 @@
     "notes": "",
     "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 37
+    "sortOrder": 37,
+    "totalTeams": 270,
+    "totalOfficialTeams": 259,
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "equivalentAward": "金牌",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 18,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照榜单指定的 CCPC 奖牌比例规则计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "省部级",
+    "equivalentAwardGrade": "一等奖"
   },
   {
     "uid": "54aa425d6716e494561d",
@@ -1453,7 +1617,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 38
+    "sortOrder": 38,
+    "totalTeams": 2279,
+    "totalOfficialTeams": 2279,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "9d0859cc6d803477071e",
@@ -1486,7 +1653,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 39
+    "sortOrder": 39,
+    "totalTeams": 2279,
+    "totalOfficialTeams": 2279,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "d0f2d0c0a46d831e9d9c",
@@ -1519,7 +1689,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 40
+    "sortOrder": 40,
+    "totalTeams": 2279,
+    "totalOfficialTeams": 2279,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "dafe87fb741087a77904",
@@ -1552,7 +1725,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 41
+    "sortOrder": 41,
+    "totalTeams": 2279,
+    "totalOfficialTeams": 2279,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "6cafff24e9ffe73b92fe",
@@ -1585,7 +1761,10 @@
     "notes": "",
     "title": "2025 ICPC Asia EC网络预选赛 - 第一场",
     "imageUrl": "",
-    "sortOrder": 42
+    "sortOrder": 42,
+    "totalTeams": 2279,
+    "totalOfficialTeams": 2279,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "fdc7dfb891a5b4412565",
@@ -1618,7 +1797,10 @@
     "notes": "",
     "title": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛",
     "imageUrl": "",
-    "sortOrder": 43
+    "sortOrder": 43,
+    "totalTeams": 285,
+    "totalOfficialTeams": 284,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ee7f6c9f579522a414f0",
@@ -1652,7 +1834,10 @@
     "notes": "",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 44
+    "sortOrder": 44,
+    "totalTeams": 397,
+    "totalOfficialTeams": 386,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "02ae99bf3b4f216efb1c",
@@ -1686,7 +1871,10 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 45
+    "sortOrder": 45,
+    "totalTeams": 397,
+    "totalOfficialTeams": 386,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "25e0d3071f9588c1be04",
@@ -1720,7 +1908,10 @@
     "notes": "",
     "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
     "imageUrl": "",
-    "sortOrder": 46
+    "sortOrder": 46,
+    "totalTeams": 397,
+    "totalOfficialTeams": 386,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "71acd4b3961cdc74a73e",
@@ -1737,7 +1928,7 @@
     ],
     "award": "",
     "official": false,
-    "rank": 392,
+    "rank": 393,
     "officialRank": null,
     "solved": 3,
     "penalty": 778,
@@ -1760,10 +1951,18 @@
       "xcpcio": "icpc/49th/kunming",
       "cpcfinder": 21609
     },
-    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "notes": " 不同来源的名次有差异，主表采用 CPCFinder 对应榜单的排名与队伍总数；可对照各榜单。",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛昆明站",
     "imageUrl": "",
-    "sortOrder": 47
+    "sortOrder": 47,
+    "totalTeams": 486,
+    "totalOfficialTeams": 449,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "昆明",
+    "equivalentAward": "",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 372,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
   },
   {
     "uid": "423261cf93e0a60875a1",
@@ -1806,7 +2005,11 @@
     "notes": "",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
     "imageUrl": "",
-    "sortOrder": 48
+    "sortOrder": 48,
+    "totalTeams": 352,
+    "totalOfficialTeams": 336,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "上海"
   },
   {
     "uid": "242d3a78f5cc928e5da0",
@@ -1844,7 +2047,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 49
+    "sortOrder": 49,
+    "totalTeams": 2450,
+    "totalOfficialTeams": 2450,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "2665387b245986a1b570",
@@ -1882,7 +2088,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 50
+    "sortOrder": 50,
+    "totalTeams": 2450,
+    "totalOfficialTeams": 2450,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "9784348f522f54760df7",
@@ -1920,7 +2129,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 51
+    "sortOrder": 51,
+    "totalTeams": 2450,
+    "totalOfficialTeams": 2450,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "0b2a5cedd3b36922fceb",
@@ -1958,7 +2170,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 52
+    "sortOrder": 52,
+    "totalTeams": 2323,
+    "totalOfficialTeams": 2323,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c58e595c37e0fe6a317a",
@@ -1996,7 +2211,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 53
+    "sortOrder": 53,
+    "totalTeams": 2323,
+    "totalOfficialTeams": 2323,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "0a123ee82100a4a2f581",
@@ -2034,7 +2252,10 @@
     "notes": "",
     "title": "The 49th ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 54
+    "sortOrder": 54,
+    "totalTeams": 2323,
+    "totalOfficialTeams": 2323,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "332853b38fd518e10154",
@@ -2068,7 +2289,10 @@
     "notes": "",
     "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
     "imageUrl": "",
-    "sortOrder": 55
+    "sortOrder": 55,
+    "totalTeams": 397,
+    "totalOfficialTeams": 382,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "2dbc72081995798ba72d",
@@ -2111,7 +2335,11 @@
     "notes": "",
     "title": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 56
+    "sortOrder": 56,
+    "totalTeams": 483,
+    "totalOfficialTeams": 442,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "杭州"
   },
   {
     "uid": "31c873123fb48ecd6867",
@@ -2149,7 +2377,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 57
+    "sortOrder": 57,
+    "totalTeams": 2726,
+    "totalOfficialTeams": 2726,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "d642aa6284a3b370463f",
@@ -2187,7 +2418,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 58
+    "sortOrder": 58,
+    "totalTeams": 2726,
+    "totalOfficialTeams": 2726,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "311ea000658b64fca10d",
@@ -2225,7 +2459,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 59
+    "sortOrder": 59,
+    "totalTeams": 2726,
+    "totalOfficialTeams": 2726,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "d497951f9f5904d16983",
@@ -2263,7 +2500,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 60
+    "sortOrder": 60,
+    "totalTeams": 2554,
+    "totalOfficialTeams": 2554,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "19ef0ecbe26bffbffab8",
@@ -2301,7 +2541,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 61
+    "sortOrder": 61,
+    "totalTeams": 2554,
+    "totalOfficialTeams": 2554,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "04498ca640e2aa94e56c",
@@ -2339,7 +2582,10 @@
     "notes": "",
     "title": "The 2023 ICPC Asia Regionals Online Contest (I)",
     "imageUrl": "",
-    "sortOrder": 62
+    "sortOrder": 62,
+    "totalTeams": 2554,
+    "totalOfficialTeams": 2554,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "917853b7056ea035808d",
@@ -2368,7 +2614,10 @@
     "notes": " XCPCIO 配置未给出奖牌线，暂仅收录参赛成绩。",
     "title": "第 48 届 ICPC 国际大学生程序设计竞赛西安邀请赛（正式赛）",
     "imageUrl": "",
-    "sortOrder": 63
+    "sortOrder": 63,
+    "totalTeams": 361,
+    "totalOfficialTeams": 354,
+    "teamCountSource": "XCPCIO 原始榜单"
   },
   {
     "uid": "133d1cf46286e51aa4f1",
@@ -2408,10 +2657,14 @@
       "xcpcio": "icpc/47th/hangzhou",
       "cpcfinder": 4849
     },
-    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "notes": " 不同来源的名次有差异，主表采用 CPCFinder 对应榜单的排名与队伍总数；可对照各榜单。",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 64
+    "sortOrder": 64,
+    "totalTeams": 659,
+    "totalOfficialTeams": 556,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "杭州"
   },
   {
     "uid": "322d57c0a6513ffb43e4",
@@ -2454,7 +2707,15 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
     "imageUrl": "",
-    "sortOrder": 65
+    "sortOrder": 65,
+    "totalTeams": 659,
+    "totalOfficialTeams": 556,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "杭州",
+    "equivalentAward": "",
+    "equivalentAwardChecked": true,
+    "equivalentRank": 436,
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
   },
   {
     "uid": "1b610872166659115b21",
@@ -2497,7 +2758,11 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站",
     "imageUrl": "",
-    "sortOrder": 66
+    "sortOrder": 66,
+    "totalTeams": 580,
+    "totalOfficialTeams": 511,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "济南"
   },
   {
     "uid": "93b302b96363b2a9da63",
@@ -2540,7 +2805,11 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
     "imageUrl": "",
-    "sortOrder": 67
+    "sortOrder": 67,
+    "totalTeams": 738,
+    "totalOfficialTeams": 708,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "沈阳"
   },
   {
     "uid": "ad294b6c92e8913fdb71",
@@ -2583,7 +2852,11 @@
     "notes": "",
     "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
     "imageUrl": "",
-    "sortOrder": 68
+    "sortOrder": 68,
+    "totalTeams": 738,
+    "totalOfficialTeams": 708,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "沈阳"
   },
   {
     "uid": "dcdf402e8cbbdb13cae1",
@@ -2621,7 +2894,10 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 69
+    "sortOrder": 69,
+    "totalTeams": 2755,
+    "totalOfficialTeams": 2755,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c15b9964832ac26c6319",
@@ -2659,7 +2935,10 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 70
+    "sortOrder": 70,
+    "totalTeams": 2755,
+    "totalOfficialTeams": 2755,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ebe2a900fb5a59aae489",
@@ -2697,7 +2976,10 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 71
+    "sortOrder": 71,
+    "totalTeams": 2755,
+    "totalOfficialTeams": 2755,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "98762c22d336856939f6",
@@ -2735,7 +3017,10 @@
     "notes": "",
     "title": "The 2022 ICPC Asia Regionals Online Contest (II)",
     "imageUrl": "",
-    "sortOrder": 72
+    "sortOrder": 72,
+    "totalTeams": 2755,
+    "totalOfficialTeams": 2755,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "9dc1a52ebfdc2266fd7e",
@@ -2769,7 +3054,10 @@
     "notes": "",
     "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
     "imageUrl": "",
-    "sortOrder": 73
+    "sortOrder": 73,
+    "totalTeams": 887,
+    "totalOfficialTeams": 753,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "5f7f1657688156a436a9",
@@ -2803,7 +3091,10 @@
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
     "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
     "imageUrl": "",
-    "sortOrder": 74
+    "sortOrder": 74,
+    "totalTeams": 887,
+    "totalOfficialTeams": 753,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c26159b5dde89d00d563",
@@ -2837,7 +3128,10 @@
     "notes": "",
     "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
     "imageUrl": "",
-    "sortOrder": 75
+    "sortOrder": 75,
+    "totalTeams": 511,
+    "totalOfficialTeams": 491,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "f56b088de52d913313e3",
@@ -2871,7 +3165,10 @@
     "notes": "",
     "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
     "imageUrl": "",
-    "sortOrder": 76
+    "sortOrder": 76,
+    "totalTeams": 511,
+    "totalOfficialTeams": 491,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "8e9e3ec816a934302f5c",
@@ -2911,10 +3208,14 @@
       "xcpcio": "icpc/2020/kunming",
       "cpcfinder": 26552
     },
-    "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
+    "notes": " 不同来源的名次有差异，主表采用 CPCFinder 对应榜单的排名与队伍总数；可对照各榜单。",
     "title": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛）",
     "imageUrl": "",
-    "sortOrder": 77
+    "sortOrder": 77,
+    "totalTeams": 813,
+    "totalOfficialTeams": 763,
+    "teamCountSource": "CPCFinder 比赛榜单",
+    "location": "昆明"
   },
   {
     "uid": "f5408b2b5718d6cddfdf",
@@ -2948,7 +3249,10 @@
     "notes": "",
     "title": "The 44th ICPC Asia Yinchuan Regional Programming Contest",
     "imageUrl": "",
-    "sortOrder": 78
+    "sortOrder": 78,
+    "totalTeams": 400,
+    "totalOfficialTeams": 393,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "7d1fff4584fd96e745b2",
@@ -2977,7 +3281,10 @@
     "notes": "",
     "title": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学）",
     "imageUrl": "",
-    "sortOrder": 79
+    "sortOrder": 79,
+    "totalTeams": 333,
+    "totalOfficialTeams": 317,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "03c24f5f0145c5204962",
@@ -3011,7 +3318,10 @@
     "notes": "",
     "title": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学）",
     "imageUrl": "",
-    "sortOrder": 80
+    "sortOrder": 80,
+    "totalTeams": 195,
+    "totalOfficialTeams": 186,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "4cdc0d25e0070508a987",
@@ -3045,7 +3355,10 @@
     "notes": "",
     "title": "ICPC 2016 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 81
+    "sortOrder": 81,
+    "totalTeams": 1607,
+    "totalOfficialTeams": 1607,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ec08d977090bab65c827",
@@ -3079,7 +3392,10 @@
     "notes": "",
     "title": "ICPC 2016 青岛网络赛",
     "imageUrl": "",
-    "sortOrder": 82
+    "sortOrder": 82,
+    "totalTeams": 1751,
+    "totalOfficialTeams": 1751,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "b2055fafed5e1fc6a7c8",
@@ -3113,7 +3429,10 @@
     "notes": "",
     "title": "ICPC 2016 大连赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 83
+    "sortOrder": 83,
+    "totalTeams": 1554,
+    "totalOfficialTeams": 1554,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "d2eb7b52115588e8fd7c",
@@ -3147,7 +3466,10 @@
     "notes": "",
     "title": "2015 北京赛区现场赛 （北京大学）",
     "imageUrl": "",
-    "sortOrder": 84
+    "sortOrder": 84,
+    "totalTeams": 200,
+    "totalOfficialTeams": 200,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "fced42082dec4fbea6cf",
@@ -3181,7 +3503,10 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 85
+    "sortOrder": 85,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "9eb3a0de850a46bf9267",
@@ -3215,7 +3540,10 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 86
+    "sortOrder": 86,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c2158c6aa8330dcb9141",
@@ -3249,7 +3577,10 @@
     "notes": "",
     "title": "ICPC 2015 合肥赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 87
+    "sortOrder": 87,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "20b217e1e44956e659d9",
@@ -3283,7 +3614,10 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 88
+    "sortOrder": 88,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "93e605092855ea4cd932",
@@ -3317,7 +3651,10 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 89
+    "sortOrder": 89,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "70c87613e7c4149e31b0",
@@ -3351,7 +3688,10 @@
     "notes": "",
     "title": "ICPC 2015 上海赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 90
+    "sortOrder": 90,
+    "totalTeams": 1377,
+    "totalOfficialTeams": 1377,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "c69582641da1e3e95c75",
@@ -3385,7 +3725,10 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 91
+    "sortOrder": 91,
+    "totalTeams": 1045,
+    "totalOfficialTeams": 1045,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "00b7b5e2afef5ddc869c",
@@ -3419,7 +3762,10 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 92
+    "sortOrder": 92,
+    "totalTeams": 1045,
+    "totalOfficialTeams": 1045,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "a477c416197fbd626816",
@@ -3453,7 +3799,10 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 93
+    "sortOrder": 93,
+    "totalTeams": 1045,
+    "totalOfficialTeams": 1045,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "0e253ee749e147bcbb3f",
@@ -3487,7 +3836,10 @@
     "notes": "",
     "title": "ICPC 2015 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 94
+    "sortOrder": 94,
+    "totalTeams": 1045,
+    "totalOfficialTeams": 1045,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ae9587f846545eaa7702",
@@ -3521,7 +3873,10 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 95
+    "sortOrder": 95,
+    "totalTeams": 1345,
+    "totalOfficialTeams": 1345,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "03713845693793de2643",
@@ -3555,7 +3910,10 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 96
+    "sortOrder": 96,
+    "totalTeams": 1345,
+    "totalOfficialTeams": 1345,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "1b8844e55be1e5ca0f75",
@@ -3589,7 +3947,10 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 97
+    "sortOrder": 97,
+    "totalTeams": 1345,
+    "totalOfficialTeams": 1345,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "ecc3049778e854f698a8",
@@ -3623,7 +3984,10 @@
     "notes": "",
     "title": "ICPC 2015 沈阳赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 98
+    "sortOrder": 98,
+    "totalTeams": 1345,
+    "totalOfficialTeams": 1345,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "e263becaf47508e577df",
@@ -3657,7 +4021,10 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 99
+    "sortOrder": 99,
+    "totalTeams": 1356,
+    "totalOfficialTeams": 1356,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "48774c275970c66f9e2b",
@@ -3691,7 +4058,10 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 100
+    "sortOrder": 100,
+    "totalTeams": 1356,
+    "totalOfficialTeams": 1356,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "b7c53e7397e6c8872946",
@@ -3725,7 +4095,10 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 101
+    "sortOrder": 101,
+    "totalTeams": 1356,
+    "totalOfficialTeams": 1356,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "5eeaa913b63c6234383c",
@@ -3759,7 +4132,10 @@
     "notes": "",
     "title": "ICPC 2015 长春赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 102
+    "sortOrder": 102,
+    "totalTeams": 1356,
+    "totalOfficialTeams": 1356,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "3023309ac6fa5d16fa61",
@@ -3793,7 +4169,10 @@
     "notes": "",
     "title": "2014 西安赛区现场赛 （西北工业大学）",
     "imageUrl": "",
-    "sortOrder": 103
+    "sortOrder": 103,
+    "totalTeams": 264,
+    "totalOfficialTeams": 258,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "976fff347270f793979e",
@@ -3827,7 +4206,10 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 104
+    "sortOrder": 104,
+    "totalTeams": 1165,
+    "totalOfficialTeams": 1165,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "575296ce38528a807833",
@@ -3861,7 +4243,10 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 105
+    "sortOrder": 105,
+    "totalTeams": 1165,
+    "totalOfficialTeams": 1165,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "1cb88db47c52de1cba11",
@@ -3895,7 +4280,10 @@
     "notes": "",
     "title": "ICPC 2014 北京赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 106
+    "sortOrder": 106,
+    "totalTeams": 1165,
+    "totalOfficialTeams": 1165,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "f98d113018b74c180a1c",
@@ -3929,7 +4317,10 @@
     "notes": "",
     "title": "ICPC 2014 广州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 107
+    "sortOrder": 107,
+    "totalTeams": 798,
+    "totalOfficialTeams": 798,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "e92a047c15f6bc8f43b9",
@@ -3963,7 +4354,10 @@
     "notes": "",
     "title": "ICPC 2014 西安赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 108
+    "sortOrder": 108,
+    "totalTeams": 882,
+    "totalOfficialTeams": 882,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "b6a07326afae808da764",
@@ -3997,7 +4391,10 @@
     "notes": "",
     "title": "ICPC 2014 鞍山赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 109
+    "sortOrder": 109,
+    "totalTeams": 1120,
+    "totalOfficialTeams": 1120,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "5e92719730c597e07e47",
@@ -4031,7 +4428,10 @@
     "notes": "",
     "title": "ICPC 2014 鞍山赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 110
+    "sortOrder": 110,
+    "totalTeams": 1120,
+    "totalOfficialTeams": 1120,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "3aec45aa5d9355dabb78",
@@ -4065,7 +4465,10 @@
     "notes": "",
     "title": "ICPC 2014 牡丹江赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 111
+    "sortOrder": 111,
+    "totalTeams": 904,
+    "totalOfficialTeams": 904,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "e093dcc6cf8cc1cc6804",
@@ -4099,7 +4502,10 @@
     "notes": "",
     "title": "ICPC 2012 成都赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 112
+    "sortOrder": 112,
+    "totalTeams": 850,
+    "totalOfficialTeams": 850,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "dd0052d87dff8b7b34a8",
@@ -4133,7 +4539,10 @@
     "notes": "",
     "title": "2011 北京赛区现场赛 （北京邮电大学）",
     "imageUrl": "",
-    "sortOrder": 113
+    "sortOrder": 113,
+    "totalTeams": 144,
+    "totalOfficialTeams": 129,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "463a051069d6ce5adaf6",
@@ -4167,7 +4576,10 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 114
+    "sortOrder": 114,
+    "totalTeams": 806,
+    "totalOfficialTeams": 806,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "bff01db642a238565859",
@@ -4201,7 +4613,10 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 115
+    "sortOrder": 115,
+    "totalTeams": 806,
+    "totalOfficialTeams": 806,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "fadc98012ff894e70cf0",
@@ -4235,7 +4650,10 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 116
+    "sortOrder": 116,
+    "totalTeams": 806,
+    "totalOfficialTeams": 806,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "af1ecf64b121ea616f72",
@@ -4269,7 +4687,10 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 117
+    "sortOrder": 117,
+    "totalTeams": 806,
+    "totalOfficialTeams": 806,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "6a502f2b616e46f11b22",
@@ -4303,7 +4724,10 @@
     "notes": "",
     "title": "ICPC 2011 福州赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 118
+    "sortOrder": 118,
+    "totalTeams": 806,
+    "totalOfficialTeams": 806,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "0c9779f16727839a6ba3",
@@ -4337,7 +4761,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 119
+    "sortOrder": 119,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "7401ccfbaca59bac134d",
@@ -4371,7 +4798,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 120
+    "sortOrder": 120,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "9d326ae2d7041f925d06",
@@ -4405,7 +4835,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 121
+    "sortOrder": 121,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "a42423b6d29f353f61fc",
@@ -4439,7 +4872,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 122
+    "sortOrder": 122,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "f4da6a678eddd36e162c",
@@ -4473,7 +4909,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 123
+    "sortOrder": 123,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "4373ea9e41cfa955af8f",
@@ -4507,7 +4946,10 @@
     "notes": "",
     "title": "ICPC 2009 武汉赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 124
+    "sortOrder": 124,
+    "totalTeams": 999,
+    "totalOfficialTeams": 999,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "676285d2c80337717fdc",
@@ -4541,7 +4983,10 @@
     "notes": "",
     "title": "ICPC 2009 哈尔滨赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 125
+    "sortOrder": 125,
+    "totalTeams": 662,
+    "totalOfficialTeams": 662,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   },
   {
     "uid": "f65ac10ce8b43349b06a",
@@ -4575,6 +5020,9 @@
     "notes": "",
     "title": "ICPC 2009 哈尔滨赛区网络赛",
     "imageUrl": "",
-    "sortOrder": 126
+    "sortOrder": 126,
+    "totalTeams": 662,
+    "totalOfficialTeams": 662,
+    "teamCountSource": "XCPCRating 完整比赛榜单"
   }
 ]

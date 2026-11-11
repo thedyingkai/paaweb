@@ -11,11 +11,11 @@ services:
         max-size: 10m
         max-file: "3"
   backend:
-    image: paaweb-school-backend:20261110-besti-r2
+    image: paaweb-school-backend:20261111-besti-r3
     mem_limit: 1024m
     logging: *bounded_logs
   frontend:
-    image: paaweb-school-frontend:20261110-besti-r2
+    image: paaweb-school-frontend:20261111-besti-r3
     mem_limit: 768m
     environment:
       NODE_OPTIONS: --max-old-space-size=384

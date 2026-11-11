@@ -23,6 +23,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import SiteHeader from "../components/SiteHeader";
+import { awardLevels, awardGrades } from "@/lib/besti-members";
 type Source = { name: string; url: string };
 type Honor = {
   uid: string;
@@ -35,9 +36,21 @@ type Honor = {
   team?: string;
   members?: string[];
   award?: string;
+  awardLevel?: string;
+  awardGrade?: string;
+  equivalentAwardLevel?: string;
+  equivalentAwardGrade?: string;
   official?: boolean | null;
   rank?: number;
   officialRank?: number;
+  totalTeams?: number;
+  totalOfficialTeams?: number;
+  teamCountSource?: string;
+  location?: string;
+  equivalentAward?: string;
+  equivalentRank?: number;
+  equivalentAwardChecked?: boolean;
+  equivalentAwardBasis?: string;
   solved?: number;
   penalty?: number;
   imageUrl?: string;
@@ -50,7 +63,8 @@ type Meta = {
   recordCount?: number;
   eventCount?: number;
 };
-const medals = ["金牌", "银牌", "铜牌"];
+const awardName = (r: Honor) => r.awardLevel && r.awardGrade ? r.awardLevel + r.awardGrade : r.award || '';
+const equivalentName = (r: Honor) => r.equivalentAwardLevel && r.equivalentAwardGrade ? r.equivalentAwardLevel + r.equivalentAwardGrade : r.equivalentAward || '';
 const tierNames: Record<string, string> = {
   regional: "区域赛",
   invitational: "邀请赛",
@@ -66,7 +80,7 @@ export default function SchoolHonorsClient() {
   const [error, setError] = useState("");
   const [year, setYear] = useState("all");
   const [family, setFamily] = useState("all");
-  const [mode, setMode] = useState("awards");
+  const [mode, setMode] = useState("all");
   const [keyword, setKeyword] = useState("");
   useEffect(() => {
     Promise.all([
@@ -97,7 +111,7 @@ export default function SchoolHonorsClient() {
           (r) =>
             (year === "all" || r.academicYear === year) &&
             (family === "all" || r.family === family) &&
-            (mode === "all" || !!r.award) &&
+            (mode === "all" || (mode === "awards" && !!r.award) || (mode === "equivalent" && !!r.equivalentAward)) &&
             (keyword.trim() === "" ||
               [r.event, r.title, r.team, ...(r.members || [])]
                 .join(" ")
@@ -111,9 +125,6 @@ export default function SchoolHonorsClient() {
         ),
     [records, year, family, mode, keyword],
   );
-  const medalsCount = medals.map(
-    (m) => records.filter((r) => r.award === m).length,
-  );
   const download = () => {
     const fields = [
       "年份",
@@ -122,10 +133,16 @@ export default function SchoolHonorsClient() {
       "类别",
       "队伍",
       "队员",
-      "奖项",
+      "学校认定奖项",
+      "原始榜单奖牌",
+      "打星等效奖项",
       "正式参赛",
       "总排名",
       "正式排名",
+      "总队伍数",
+      "正式队伍数",
+      "打星等效正式名次",
+      "等效奖项计算依据",
       "过题数",
       "来源",
     ];
@@ -136,7 +153,9 @@ export default function SchoolHonorsClient() {
       r.family,
       r.team,
       r.members?.join("、"),
+      awardName(r),
       r.award || "",
+      equivalentName(r),
       r.official === true
         ? "正式"
         : r.official === false
@@ -144,6 +163,10 @@ export default function SchoolHonorsClient() {
           : "未注明",
       r.rank,
       r.officialRank,
+      r.totalTeams,
+      r.totalOfficialTeams,
+      r.equivalentRank,
+      r.equivalentAwardBasis,
       r.solved,
       r.sources?.map((s) => s.url).join(" | "),
     ]);
@@ -181,30 +204,29 @@ export default function SchoolHonorsClient() {
             北京电子科技学院 · 每一场比赛，都有迹可循。
           </Typography.Paragraph>
         </section>
-        <div style={{ maxWidth: 1240, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1500, margin: "0 auto" }}>
           <Row gutter={[16, 16]}>
-            {medals.map((m, i) => (
-              <Col xs={8} md={6} key={m}>
-                <Card>
-                  <Statistic
-                    title={m + "（队次）"}
-                    value={medalsCount[i]}
-                    styles={{
-                      content: { color: ["#a97b19", "#64748b", "#9c653b"][i] },
-                    }}
-                  />
-                </Card>
-              </Col>
-            ))}
-            <Col xs={24} md={6}>
-              <Card>
-                <Statistic
-                  title="收录参赛记录（队次）"
-                  value={records.length}
-                />
-              </Card>
-            </Col>
+            {[
+              { label: '正式获奖（队次）', value: records.filter(r => r.award).length },
+              { label: '打星等效获奖（队次）', value: records.filter(r => r.equivalentAward).length },
+              { label: '收录比赛', value: meta.eventCount || 0 },
+              { label: '参赛记录（队次）', value: records.length },
+            ].map(item => <Col xs={12} md={6} key={item.label}><Card><Statistic title={item.label} value={item.value} /></Card></Col>)}
           </Row>
+          <Card title="学校认定奖项（队次）" style={{ marginTop: 20 }}>
+            <Table rowKey="level" pagination={false} size="small" scroll={{ x: 620 }}
+              dataSource={awardLevels.map(level => ({ level }))}
+              columns={[
+                { title: '级别', dataIndex: 'level', width: 100 },
+                ...awardGrades.map(grade => ({ title: grade, key: grade, render: (_: unknown, row: { level: string }) => {
+                  const official = records.filter(r => r.official !== false && r.awardLevel === row.level && r.awardGrade === grade).length;
+                  const stars = records.filter(r => r.official === false && r.equivalentAwardLevel === row.level && r.equivalentAwardGrade === grade).length;
+                  return <span><strong>{official}</strong><span style={{ color: stars ? '#1677ff' : '#94a3b8' }}>（+{stars}）</span></span>;
+                } })),
+              ]}
+            />
+            <p style={{ margin: '14px 0 0', color: '#64748b' }}>正式奖项（+打星等效奖项）。ICPC / CCPC 区域赛、总决赛按国家级，邀请赛按省部级；金、银、铜牌对应一、二、三等奖。蓝桥杯国赛按省部级，省赛按校级。</p>
+          </Card>
           <Alert
             style={{ margin: "24px 0" }}
             type="info"
@@ -239,7 +261,7 @@ export default function SchoolHonorsClient() {
                 >
                   XCPCRating
                 </a>
-                。同场同队合并，奖牌按队次统计；打星队伍、预选赛和未确认奖项不计入奖牌数。
+                。同场同队合并，奖项按队次统计；括号内单列打星队按榜单奖牌线计算的等效奖项，不计入正式获奖。排名分母为对应榜单的队伍总数；预选赛不计奖牌。
                 {meta.updatedAt && ` 整理日期：${meta.updatedAt}。`}
               </>
             }
@@ -255,7 +277,8 @@ export default function SchoolHonorsClient() {
                 onChange={setMode}
                 style={{ width: 160 }}
                 options={[
-                  { value: "awards", label: "已确认获奖" },
+                  { value: "awards", label: "正式获奖记录" },
+                  { value: "equivalent", label: "打星等效获奖" },
                   { value: "all", label: "全部参赛记录" },
                 ]}
               />
@@ -303,7 +326,7 @@ export default function SchoolHonorsClient() {
                 showSizeChanger: true,
                 showTotal: (n) => `共 ${n} 条记录`,
               }}
-              scroll={{ x: 1050 }}
+              scroll={{ x: 1300 }}
               locale={{ emptyText: <Empty description="当前筛选下暂无记录" /> }}
               expandable={{
                 expandedRowRender: (r) => (
@@ -312,6 +335,9 @@ export default function SchoolHonorsClient() {
                       <p>队员：{r.members.join("、")}</p>
                     )}
                     {r.notes && <p>{r.notes}</p>}
+                    {(r.award || r.equivalentAward) && <p>原始榜单：{r.award || `打星等效${r.equivalentAward}`}。学校认定：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
+                    <p>总队伍数：{r.totalTeams ?? '待核实'}；正式队伍数：{r.totalOfficialTeams ?? '待核实'}。来源：{r.teamCountSource || '待核实'}。</p>
+                    {r.equivalentAwardBasis && <p>打星等效名次：{r.equivalentRank}；{r.equivalentAwardBasis}</p>}
                     <p>
                       榜单原始来源：
                       <Space wrap>
@@ -338,16 +364,16 @@ export default function SchoolHonorsClient() {
                 ),
               }}
               columns={[
-                { title: "年份", dataIndex: "academicYear", width: 80 },
+
                 {
                   title: "比赛",
                   render: (_, r) => (
                     <div style={{ minWidth: 260 }}>
-                      <strong>{r.event || r.title}</strong>
+                      <strong><a href={r.sources?.find(source => source.name === 'CPCFinder')?.url || r.sources?.[0]?.url} target="_blank" rel="noopener noreferrer">{r.event || r.title}</a></strong>
                       <div style={{ marginTop: 6 }}>
                         <Tag>{r.family || "校队荣誉"}</Tag>
                         {r.tier && <Tag>{tierNames[r.tier] || r.tier}</Tag>}
-                        <span style={{ color: "#64748b" }}>{r.date}</span>
+
                       </div>
                     </div>
                   ),
@@ -379,22 +405,30 @@ export default function SchoolHonorsClient() {
                                 : "orange"
                           }
                         >
-                          {r.award}
+                          {awardName(r)}
                         </Tag>
                       ) : (
                         <span style={{ color: "#64748b" }}>参赛记录</span>
                       )}
-                      {r.official === false && <Tag>打星 / 非正式</Tag>}
+                      {r.official === false && <>
+                        <Tag>打星</Tag>
+                        {r.equivalentAward ? <Tag color={r.equivalentAward === '金牌' ? 'gold' : r.equivalentAward === '银牌' ? 'blue' : 'orange'}>（等效{equivalentName(r)}）</Tag>
+                          : <span style={{ fontSize: 12, color: '#64748b' }}>{r.equivalentAwardChecked ? '未达到奖牌线' : '等效奖项待核实'}</span>}
+                      </>}
                     </Space>
                   ),
                 },
+                { title: '时间', dataIndex: 'date', width: 110 },
+                { title: '地点', dataIndex: 'location', width: 75, render: v => v || '—' },
                 {
-                  title: "总 / 正式排名",
-                  render: (_, r) => (
-                    <span>
-                      {r.rank ?? "—"} / {r.officialRank ?? "—"}
-                    </span>
-                  ),
+                  title: '正式排名 / 正式队伍数',
+                  width: 160,
+                  render: (_, r) => r.official === false ? <span title="打星队不占正式名次">*（打星）</span> : `${r.officialRank ?? '—'} / ${r.totalOfficialTeams ?? '待核实'}`,
+                },
+                {
+                  title: '全部排名 / 总队伍数',
+                  width: 150,
+                  render: (_, r) => `${r.rank ?? '—'} / ${r.totalTeams ?? '待核实'}`,
                 },
                 { title: "过题", dataIndex: "solved", render: (v) => v ?? "—" },
                 {

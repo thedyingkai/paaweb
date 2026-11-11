@@ -9,7 +9,7 @@ import com.cwnupaa.backend.mapper.AssociationMemberMapper;
 import com.cwnupaa.backend.mapper.FileSystemMapper;
 import com.cwnupaa.backend.mapper.UniversityMapper;
 import com.cwnupaa.backend.mapper.UserMapper;
-import com.cwnupaa.backend.service.AuthStateChangeService;
+import com.cwnupaa.backend.utils.BestiRecordPolicy;
 import com.cwnupaa.backend.utils.StudentNumberValidator;
 import com.cwnupaa.backend.vo.AssociationMemberVO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,8 +43,17 @@ public class AssociationMemberController {
     @Autowired
     private FileSystemMapper fileSystemMapper;
 
-    @Autowired
-    private AuthStateChangeService authStateChangeService;
+    private String validatePosition(AssociationMember member) {
+        if (!BestiRecordPolicy.validRole(member.getDepartment(), member.getPosition()))
+            return "请选择科学之光技术联盟、计算机工程师联盟或 ACM 校队的指定职务";
+        var dates = BestiRecordPolicy.termDates(member.getTerm());
+        if (member.getStartDate() == null) member.setStartDate(dates[0]);
+        if (member.getEndDate() == null) member.setEndDate(dates[1]);
+        if (member.getStartDate() == null || member.getEndDate() == null)
+            return "请填写任职开始、结束日期，或使用 YYYY-YYYY学年格式";
+        if (member.getEndDate().isBefore(member.getStartDate())) return "结束日期不能早于开始日期";
+        return null;
+    }
 
     @GetMapping("/list")
     public Result<List<AssociationMemberVO>> list(@RequestParam(required = false) String term) {
@@ -65,6 +74,14 @@ public class AssociationMemberController {
             vo.setSchoolName(member.getSchoolName());
             vo.setNumberId(member.getNumberId());
             vo.setPosition(member.getPosition());
+            var dates = BestiRecordPolicy.termDates(member.getTerm());
+            var start = member.getStartDate() == null ? dates[0] : member.getStartDate();
+            var end = member.getEndDate() == null ? dates[1] : member.getEndDate();
+            String status = BestiRecordPolicy.positionStatus(start, end, BestiRecordPolicy.today());
+            vo.setStartDate(start);
+            vo.setEndDate(end);
+            vo.setPositionStatus(status);
+            vo.setDisplayPosition(BestiRecordPolicy.positionLabel(member.getDepartment(), member.getPosition(), status));
             vo.setSortOrder(member.getSortOrder());
 
             String realName = member.getRealName();
@@ -129,11 +146,13 @@ public class AssociationMemberController {
             return Result.error("学年不能为空");
         }
         if (!StringUtils.hasText(member.getDepartment())) {
-            return Result.error("部门不能为空");
+            return Result.error("组织不能为空");
         }
         if (!StringUtils.hasText(member.getPosition())) {
-            return Result.error("职位不能为空");
+            return Result.error("职务不能为空");
         }
+        String positionError = validatePosition(member);
+        if (positionError != null) return Result.error(positionError);
         String fileError = fileAccessPolicy.validatePublicFile(member.getAvatarFileId(), user, true);
         if (fileError == null) fileError = fileAccessPolicy.validatePublicContent(member.getIntroduction(), user);
         if (fileError != null) return Result.error(fileError);
@@ -172,12 +191,12 @@ public class AssociationMemberController {
             String rawLine = lines[i] == null ? "" : lines[i].trim();
             if (!StringUtils.hasText(rawLine)) continue;
 
-            String[] parts = rawLine.split("\\t+");
+            String[] parts = rawLine.split("\\t", -1);
             if (parts.length < 5) {
                 parts = rawLine.split("\\s+");
             }
             if (parts.length < 5) {
-                String reason = "第 " + (i + 1) + " 行格式错误，应为：部门、职位、姓名、学校、学号";
+                String reason = "第 " + (i + 1) + " 行格式错误，应为：组织、职务、姓名、学校、学号，可附任职开始、结束日期";
                 errors.add(reason);
                 failedList.add(Map.of("content", rawLine, "reason", reason));
                 continue;
@@ -197,6 +216,22 @@ public class AssociationMemberController {
                 continue;
             }
 
+            AssociationMember candidate = new AssociationMember();
+            candidate.setTerm(term);
+            candidate.setDepartment(department);
+            candidate.setPosition(position);
+            try {
+                if (parts.length > 5 && !parts[5].isBlank()) candidate.setStartDate(java.time.LocalDate.parse(parts[5].trim()));
+                if (parts.length > 6 && !parts[6].isBlank()) candidate.setEndDate(java.time.LocalDate.parse(parts[6].trim()));
+                String error = validatePosition(candidate);
+                if (error != null) throw new IllegalArgumentException(error);
+            } catch (IllegalArgumentException | java.time.format.DateTimeParseException e) {
+                String reason = "第 " + (i + 1) + " 行职务或任期无效，请检查组织、职务和 YYYY-MM-DD 日期";
+                errors.add(reason);
+                failedList.add(Map.of("content", rawLine, "reason", reason));
+                continue;
+            }
+
             Users matchedUser = StudentNumberValidator.findByUniversityNameAndNumber(
                     userMapper, universityMapper, schoolName, numberId);
             if (matchedUser != null && !realName.equals(matchedUser.getRealName())) {
@@ -207,16 +242,11 @@ public class AssociationMemberController {
             }
             if (matchedUser == null) {
                 noAccount++;
-            } else if (!preview && !"supper_admin".equals(matchedUser.getRole()) && !"super_admin".equals(matchedUser.getRole())) {
-                matchedUser.setRole("stu_admin");
-                userMapper.updateById(matchedUser);
-                // 协会干部名单导入会授予 stu_admin，必须立刻同步该用户的在线会话，
-                // 否则当事人要重新登录才会拿到管理后台入口。
-                authStateChangeService.notifyChanged(matchedUser.getUserId());
+
             }
 
             QueryWrapper<AssociationMember> existingQuery = new QueryWrapper<>();
-            existingQuery.eq("term", term);
+            existingQuery.eq("term", term).eq("department", department).eq("position", position);
             if (matchedUser != null) {
                 existingQuery.eq("user_id", matchedUser.getUserId());
             } else {
@@ -241,6 +271,8 @@ public class AssociationMemberController {
             member.setTerm(term);
             member.setDepartment(department);
             member.setPosition(position);
+            member.setStartDate(candidate.getStartDate());
+            member.setEndDate(candidate.getEndDate());
             member.setUserId(matchedUser == null ? null : matchedUser.getUserId());
             member.setRealName(realName);
             member.setSchoolName(schoolName);
@@ -255,7 +287,7 @@ public class AssociationMemberController {
             }
             successList.add(Map.of(
                     "content", department + " / " + position + " / " + realName + " / " + schoolName + " / " + numberId,
-                    "reason", isNew ? "将新增干部" : "将更新干部"));
+                    "reason", isNew ? "将新增成员职务" : "将更新成员职务"));
         }
 
         Map<String, Object> result = new HashMap<>();
@@ -284,11 +316,13 @@ public class AssociationMemberController {
             return Result.error("学年不能为空");
         }
         if (!StringUtils.hasText(member.getDepartment())) {
-            return Result.error("部门不能为空");
+            return Result.error("组织不能为空");
         }
         if (!StringUtils.hasText(member.getPosition())) {
-            return Result.error("职位不能为空");
+            return Result.error("职务不能为空");
         }
+        String positionError = validatePosition(member);
+        if (positionError != null) return Result.error(positionError);
         String fileError = fileAccessPolicy.validatePublicFile(member.getAvatarFileId(), user, true);
         if (fileError == null) fileError = fileAccessPolicy.validatePublicContent(member.getIntroduction(), user);
         if (fileError != null) return Result.error(fileError);

@@ -1,0 +1,214 @@
+[
+  {
+    "uid": "3f6bed8335c95b42a82d",
+    "event": "icpc/51st/wuhan",
+    "team": "想不出来的话我去厕所问一下 Astra",
+    "allRank": 193,
+    "equivalentRank": 157,
+    "equivalentAward": "铜牌",
+    "medalRule": {
+      "official": {
+        "gold": 37,
+        "silver": 74,
+        "bronze": 111
+      }
+    },
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 37
+      },
+      {
+        "medal": "Silver",
+        "min": 38,
+        "max": 111
+      },
+      {
+        "medal": "Bronze",
+        "min": 112,
+        "max": 222
+      }
+    ]
+  },
+  {
+    "uid": "497963179fc3ebb57016",
+    "event": "ccpc/12th/nanchang-invitational",
+    "team": "零基础猫猫一队",
+    "allRank": 67,
+    "equivalentRank": 54,
+    "equivalentAward": "银牌",
+    "medalRule": {
+      "official": {
+        "gold": 34,
+        "silver": 68,
+        "bronze": 102
+      }
+    },
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 34
+      },
+      {
+        "medal": "Silver",
+        "min": 35,
+        "max": 102
+      },
+      {
+        "medal": "Bronze",
+        "min": 103,
+        "max": 204
+      }
+    ]
+  },
+  {
+    "uid": "a46f54bc5328d9f9ad27",
+    "event": "ccpc/11th/jinan",
+    "team": "三个烧火",
+    "allRank": 285,
+    "equivalentRank": 243,
+    "equivalentAward": "",
+    "medalRule": "ccpc",
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 26
+      },
+      {
+        "medal": "Silver",
+        "min": 27,
+        "max": 78
+      },
+      {
+        "medal": "Bronze",
+        "min": 79,
+        "max": 156
+      }
+    ]
+  },
+  {
+    "uid": "2db3e2e364b44d33a09a",
+    "event": "icpc/50th/wuhan",
+    "team": "从零到一的指针",
+    "allRank": 496,
+    "equivalentRank": 430,
+    "equivalentAward": "",
+    "medalRule": {
+      "official": {
+        "gold": 45,
+        "silver": 90,
+        "bronze": 136
+      }
+    },
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 45
+      },
+      {
+        "medal": "Silver",
+        "min": 46,
+        "max": 135
+      },
+      {
+        "medal": "Bronze",
+        "min": 136,
+        "max": 271
+      }
+    ]
+  },
+  {
+    "uid": "0620acccbe9564c3b259",
+    "event": "ccpc/11th/nanchang-invitational",
+    "team": "饱饱和宝宝和宝饱一起跨校打星",
+    "allRank": 20,
+    "equivalentRank": 18,
+    "equivalentAward": "金牌",
+    "medalRule": "ccpc",
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 26
+      },
+      {
+        "medal": "Silver",
+        "min": 27,
+        "max": 78
+      },
+      {
+        "medal": "Bronze",
+        "min": 79,
+        "max": 155
+      }
+    ]
+  },
+  {
+    "uid": "71acd4b3961cdc74a73e",
+    "event": "icpc/49th/kunming",
+    "team": "丢掉幻想准备斗争队",
+    "allRank": 393,
+    "equivalentRank": 372,
+    "equivalentAward": "",
+    "medalRule": {
+      "official": {
+        "gold": 45,
+        "silver": 90,
+        "bronze": 135
+      }
+    },
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 45
+      },
+      {
+        "medal": "Silver",
+        "min": 46,
+        "max": 135
+      },
+      {
+        "medal": "Bronze",
+        "min": 136,
+        "max": 270
+      }
+    ]
+  },
+  {
+    "uid": "322d57c0a6513ffb43e4",
+    "event": "icpc/47th/hangzhou",
+    "team": "加载出来了",
+    "allRank": 503,
+    "equivalentRank": 436,
+    "equivalentAward": "",
+    "medalRule": {
+      "official": {
+        "gold": 35,
+        "silver": 70,
+        "bronze": 105
+      }
+    },
+    "bounds": [
+      {
+        "medal": "Gold",
+        "min": 1,
+        "max": 35
+      },
+      {
+        "medal": "Silver",
+        "min": 36,
+        "max": 105
+      },
+      {
+        "medal": "Bronze",
+        "min": 106,
+        "max": 210
+      }
+    ]
+  }
+]

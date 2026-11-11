@@ -1,0 +1,10 @@
+{
+  "source": "维护者于 2026-11-11 提供的学校认定口径",
+  "levels": {
+    "ICPC": {"regional": "国家级", "final": "国家级", "invitational": "省部级"},
+    "CCPC": {"regional": "国家级", "final": "国家级", "invitational": "省部级"},
+    "蓝桥杯": {"national": "省部级", "provincial": "校级"}
+  },
+  "grades": {"金牌": "一等奖", "银牌": "二等奖", "铜牌": "三等奖"},
+  "unofficial": "只计等效奖项，单列在括号中，不计正式奖项"
+}

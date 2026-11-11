@@ -15,6 +15,13 @@ public class AssociationMember {
     private String numberId;
     private Long avatarFileId;
     private String position;
+    private java.time.LocalDate startDate;
+    private java.time.LocalDate endDate;
+
+    public java.time.LocalDate getStartDate() { return startDate; }
+    public void setStartDate(java.time.LocalDate value) { startDate = value; }
+    public java.time.LocalDate getEndDate() { return endDate; }
+    public void setEndDate(java.time.LocalDate value) { endDate = value; }
     private String introduction;
     private Integer sortOrder;
 

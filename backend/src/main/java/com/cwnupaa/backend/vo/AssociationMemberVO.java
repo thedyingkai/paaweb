@@ -11,8 +11,21 @@ public class AssociationMemberVO {
     private Long avatarFileId;
     private String avatarUrl;
     private String position;
+    private java.time.LocalDate startDate;
+    private java.time.LocalDate endDate;
+
+    public java.time.LocalDate getStartDate() { return startDate; }
+    public void setStartDate(java.time.LocalDate value) { startDate = value; }
+    public java.time.LocalDate getEndDate() { return endDate; }
+    public void setEndDate(java.time.LocalDate value) { endDate = value; }
     private String introduction;
     private Integer sortOrder;
+    private String displayPosition;
+    private String positionStatus;
+    public String getDisplayPosition() { return displayPosition; }
+    public void setDisplayPosition(String value) { displayPosition = value; }
+    public String getPositionStatus() { return positionStatus; }
+    public void setPositionStatus(String value) { positionStatus = value; }
 
     public Long getMemberId() {
         return memberId;

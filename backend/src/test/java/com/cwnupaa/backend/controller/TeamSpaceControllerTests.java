@@ -21,7 +21,9 @@ class TeamSpaceControllerTests {
         user.setRole(role);user.setAccountStatus(status);user.setPermissions(List.of());request.setAttribute("user",user);return request;
     }
     private TeamSpaceController.MemberRecord record(String kind,String family,String url) {
-        return new TeamSpaceController.MemberRecord(null,null,kind,family,"测试记录","","","",null,null,url,"");
+        return new TeamSpaceController.MemberRecord(null,null,kind,family,
+            "position".equals(kind)?"校队队长":"测试记录", "position".equals(kind)?"ACM 校队":"",
+            "","",LocalDate.of(2026,9,1),LocalDate.of(2027,8,31),url,"","国家级","一等奖","regional");
     }
     @Test void anonymousCannotReadForum() {
         var error=assertThrows(ResponseStatusException.class,()->controller.topics(new MockHttpServletRequest(),1,"",""));
@@ -54,7 +56,7 @@ class TeamSpaceControllerTests {
     }
     @Test void memberCannotOverwriteAnotherOwner() {
         when(db.queryForList("SELECT user_id,version FROM besti_member_record WHERE id=? FOR UPDATE",42L)).thenReturn(List.of(Map.of("user_id",8L,"version",1)));
-        var r=new TeamSpaceController.MemberRecord(42L,1,"award","ICPC","测试","","","",null,null,"","");
+        var r=new TeamSpaceController.MemberRecord(42L,1,"award","ICPC","测试","","","",null,null,"","","省部级","二等奖","invitational");
         var error=assertThrows(ResponseStatusException.class,()->controller.saveRecord(request("student","normal"),r));
         assertEquals(HttpStatus.FORBIDDEN,error.getStatusCode());verify(db,never()).update(anyString(),any(Object[].class));
     }
@@ -65,8 +67,24 @@ class TeamSpaceControllerTests {
         assertDoesNotThrow(()->TeamSpaceController.validate(record("award","ICPC","https://board.xcpcio.com/icpc/51st/xian")));
     }
     @Test void rejectsReversedTenureDates() {
-        var r=new TeamSpaceController.MemberRecord(null,null,"position","","队长","","","",LocalDate.of(2026,11,10),LocalDate.of(2026,1,1),"","");
+        var r=new TeamSpaceController.MemberRecord(null,null,"position","","校队队长","ACM 校队","","",LocalDate.of(2026,11,10),LocalDate.of(2026,1,1),"","",null,null,null);
         assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(r));
+    }
+    @Test void allAwardLevelsAndGradesAreAcceptedButFreeTextIsRejected() {
+        for (String level : List.of("省部级", "国家级", "校级")) {
+            for (String grade : List.of("一等奖", "二等奖", "三等奖", "特等奖", "优秀奖")) {
+                var r = new TeamSpaceController.MemberRecord(null,null,"award","联盟主办","比赛","","","",null,null,"","",level,grade,null);
+                assertDoesNotThrow(() -> TeamSpaceController.validate(r));
+            }
+        }
+        var r = new TeamSpaceController.MemberRecord(null,null,"award","ICPC","比赛","","金牌","",null,null,"","","国际级","金奖","regional");
+        assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(r));
+    }
+    @Test void positionRequiresMatchingOrganizationAndExplicitTenure() {
+        var wrongOrganization = new TeamSpaceController.MemberRecord(null,null,"position","","主要负责人","计算机工程师联盟","","",LocalDate.of(2026,9,1),LocalDate.of(2027,8,31),"","",null,null,null);
+        assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(wrongOrganization));
+        var noEnd = new TeamSpaceController.MemberRecord(null,null,"position","","队员","ACM 校队","","",LocalDate.of(2026,9,1),null,"","",null,null,null);
+        assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(noEnd));
     }
     @Test void ordinaryMemberCannotPublishOfficialAnnouncement() {
         assertThrows(ResponseStatusException.class,()->controller.createTopic(request("student","normal"),new TeamSpaceController.Topic("announcement","标题","内容")));

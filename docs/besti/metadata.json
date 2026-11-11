@@ -86,5 +86,25 @@
       "xcpcioRank": 296,
       "displayRank": 295
     }
-  ]
+  ],
+  "equivalentMedals": {
+    "铜牌": 1,
+    "银牌": 1,
+    "金牌": 1
+  },
+  "teamCountsAvailable": 127,
+  "unofficialRecords": 7,
+  "equivalentAwardUnconfirmed": [],
+  "recognitionSource": "维护者于 2026-11-11 提供的学校认定口径",
+  "recognizedAwards": {
+    "国家级二等奖": 1,
+    "国家级三等奖": 2,
+    "省部级二等奖": 4,
+    "省部级三等奖": 1
+  },
+  "recognizedEquivalents": {
+    "国家级三等奖": 1,
+    "省部级二等奖": 1,
+    "省部级一等奖": 1
+  }
 }

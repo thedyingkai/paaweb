@@ -2,6 +2,7 @@ package com.cwnupaa.backend.controller;
 
 import com.cwnupaa.backend.common.Result;
 import com.cwnupaa.backend.utils.SecurityUtils;
+import com.cwnupaa.backend.utils.BestiRecordPolicy;
 import com.cwnupaa.backend.vo.UserProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class TeamSpaceController {
 
     public record MemberRecord(Long id, Integer version, String kind, String family, String title,
         String organization, String result, String teamName, LocalDate startDate, LocalDate endDate,
-        String sourceUrl, String notes) {}
+        String sourceUrl, String notes, String awardLevel, String awardGrade, String contestStage) {}
     public record Review(int version, boolean approved, String note) {}
     public record Roster(MemberRecord record, List<Long> userIds) {}
     public record Topic(String category, String title, String content) {}
@@ -68,6 +69,22 @@ public class TeamSpaceController {
         text(r.teamName(),200,false); text(r.notes(),4000,false);
         if (r.startDate()!=null && r.endDate()!=null && r.endDate().isBefore(r.startDate()))
             throw error(HttpStatus.BAD_REQUEST,"结束日期不能早于开始日期");
+        if ("position".equals(r.kind())) {
+            if (!BestiRecordPolicy.validRole(r.organization(), r.title()))
+                throw error(HttpStatus.BAD_REQUEST,"请选择指定组织及职务");
+            if (r.startDate() == null || r.endDate() == null)
+                throw error(HttpStatus.BAD_REQUEST,"请填写任职开始和结束日期");
+        }
+        if ("award".equals(r.kind()) && (r.awardLevel() == null || r.awardGrade() == null
+                || !BestiRecordPolicy.AWARD_LEVELS.contains(r.awardLevel()) || !BestiRecordPolicy.AWARD_GRADES.contains(r.awardGrade())))
+            throw error(HttpStatus.BAD_REQUEST,"请选择奖项级别与等次");
+        if ("award".equals(r.kind())) {
+            try {
+                String level = BestiRecordPolicy.recognizedLevel(r.family(), r.contestStage());
+                if (level != null && !level.equals(r.awardLevel()))
+                    throw new IllegalArgumentException("该赛事阶段按学校口径应登记为" + level);
+            } catch (IllegalArgumentException e) { throw error(HttpStatus.BAD_REQUEST, e.getMessage()); }
+        }
         String url=text(r.sourceUrl(),1000,false);
         if (!url.isEmpty()) {
             try {
@@ -90,6 +107,23 @@ public class TeamSpaceController {
     private long number(Map<String,Object> row,String key) { return ((Number)row.get(key)).longValue(); }
     private int page(int page) { return Math.max(1,Math.min(page,100000)); }
 
+    private String result(MemberRecord r) {
+        return "award".equals(r.kind()) ? r.awardLevel() + r.awardGrade() : text(r.result(),100,false);
+    }
+    private String awardLevel(MemberRecord r) { return "award".equals(r.kind()) ? r.awardLevel() : null; }
+    private String awardGrade(MemberRecord r) { return "award".equals(r.kind()) ? r.awardGrade() : null; }
+    private List<Map<String,Object>> displayRecords(List<Map<String,Object>> records) {
+        for (var r : records) {
+            if (!"position".equals(r.get("kind"))) continue;
+            LocalDate start = r.get("start_date") == null ? null : LocalDate.parse(r.get("start_date").toString());
+            LocalDate end = r.get("end_date") == null ? null : LocalDate.parse(r.get("end_date").toString());
+            String status = BestiRecordPolicy.positionStatus(start, end, BestiRecordPolicy.today());
+            r.put("position_status", status);
+            r.put("display_title", BestiRecordPolicy.positionLabel((String)r.get("organization"), (String)r.get("title"), status));
+        }
+        return records;
+    }
+
     @GetMapping("/me")
     public Result<?> me(HttpServletRequest request) {
         var u=member(request);
@@ -102,8 +136,8 @@ public class TeamSpaceController {
         if(userId!=null){where+=" AND r.user_id=?";args.add(userId);}
         var total=db.queryForObject("SELECT count(*) FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where,Long.class,args.toArray());
         args.add((page(page)-1)*50);
-        var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.result,r.team_name,r.start_date,r.end_date,r.source_url FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
-        return Result.success(Map.of("items",items,"total",total));
+        var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.organization,r.result,r.award_level,r.award_grade,r.contest_stage,r.team_name,r.start_date,r.end_date,r.source_url FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
+        return Result.success(Map.of("items",displayRecords(items),"total",total));
     }
     @GetMapping("/records")
     public Result<?> records(HttpServletRequest request,@RequestParam(defaultValue="mine") String scope,
@@ -117,7 +151,7 @@ public class TeamSpaceController {
         var count=db.queryForObject("SELECT count(*) FROM besti_member_record r WHERE "+where,Long.class,args);
         var params=new ArrayList<Object>(Arrays.asList(args));params.add((page(page)-1)*50);
         var items=db.queryForList("SELECT r.*,u.user_name AS owner_name FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.updated_at DESC,r.id DESC LIMIT 50 OFFSET ?",params.toArray());
-        return Result.success(Map.of("items",items,"total",count));
+        return Result.success(Map.of("items",displayRecords(items),"total",count));
     }
     @PostMapping("/records")
     @Transactional
@@ -127,13 +161,13 @@ public class TeamSpaceController {
         var existing=row("SELECT user_id,version FROM besti_member_record WHERE id=? FOR UPDATE",r.id());
         require(number(existing,"user_id")==u.getUserId(),"只能修改自己的记录");
         if (r.version()==null || number(existing,"version")!=r.version()) throw error(HttpStatus.CONFLICT,"记录已更新，请刷新后再保存");
-        db.update("UPDATE besti_member_record SET kind=?,family=?,title=?,organization=?,result=?,team_name=?,start_date=?,end_date=?,source_url=?,notes=?,status='pending',review_note='',reviewed_by=NULL,version=version+1,updated_at=now() WHERE id=?",
-            r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),text(r.result(),100,false),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),r.id());
+        db.update("UPDATE besti_member_record SET kind=?,family=?,title=?,organization=?,result=?,team_name=?,start_date=?,end_date=?,source_url=?,notes=?,status='pending',review_note='',reviewed_by=NULL,version=version+1,updated_at=now(),award_level=?,award_grade=?,contest_stage=? WHERE id=?",
+            r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),result(r),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),awardLevel(r),awardGrade(r),"award".equals(r.kind())?text(r.contestStage(),30,false):null,r.id());
         return Result.success("已保存，等待核验");
     }
     private Long insertRecord(MemberRecord r,long owner,long creator) {
-        return db.queryForObject("INSERT INTO besti_member_record(user_id,kind,family,title,organization,result,team_name,start_date,end_date,source_url,notes,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id",Long.class,
-            owner,r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),text(r.result(),100,false),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),creator);
+        return db.queryForObject("INSERT INTO besti_member_record(user_id,kind,family,title,organization,result,team_name,start_date,end_date,source_url,notes,created_by,award_level,award_grade,contest_stage) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING id",Long.class,
+            owner,r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),result(r),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),creator,awardLevel(r),awardGrade(r),"award".equals(r.kind())?text(r.contestStage(),30,false):null);
     }
     @PostMapping("/roster")
     @Transactional
@@ -176,7 +210,7 @@ public class TeamSpaceController {
         var total=db.queryForObject("SELECT count(*) FROM besti_forum_topic t WHERE "+where,Long.class,params);
         var args=new ArrayList<Object>(Arrays.asList(params));args.add((page(page)-1)*30);
         var items=db.queryForList("SELECT t.id,t.author_id,t.category,t.title,t.pinned,t.locked,t.created_at,t.updated_at,u.user_name AS author_name,(SELECT count(*) FROM besti_forum_reply r WHERE r.topic_id=t.id) AS reply_count FROM besti_forum_topic t JOIN users u ON u.user_id=t.author_id WHERE "+where+" ORDER BY t.pinned DESC,t.updated_at DESC,t.id DESC LIMIT 30 OFFSET ?",args.toArray());
-        return Result.success(Map.of("items",items,"total",total));
+        return Result.success(Map.of("items",displayRecords(items),"total",total));
     }
     @GetMapping("/topics/{id}")
     public Result<?> topic(HttpServletRequest request,@PathVariable long id) {

@@ -16,7 +16,7 @@ export const familyOptions = [...organizedFamilies, ...voluntaryFamilies].map(
 );
 export const kindNames: Record<string, string> = {
   award: "获奖经历",
-  position: "校队职务",
+  position: "职务与任期",
   registration: "参赛登记",
 };
 export const statusNames: Record<string, string> = {

@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import axios from "axios";
 import SiteHeader from "../components/SiteHeader";
+import { memberRoles, memberRoleKey, positionStatusLabels, awardLevels, awardGrades, awardStages, academicTermDates, currentAcademicTerm } from "@/lib/besti-members";
 import {
   familyOptions,
   kindNames,
@@ -47,6 +48,11 @@ type Entry = {
   team_name: string;
   start_date?: string;
   end_date?: string;
+  display_title?: string;
+  position_status?: string;
+  award_level?: string;
+  award_grade?: string;
+  contest_stage?: string;
   source_url: string;
   notes: string;
   status: string;
@@ -66,6 +72,10 @@ type RecordForm = {
   sourceUrl?: string;
   notes?: string;
   userIds?: number[];
+  positionKey?: string;
+  awardLevel?: string;
+  awardGrade?: string;
+  contestStage?: string;
 };
 export default function TeamSpaceClient() {
   const [identity, setIdentity] = useState<TeamIdentity>();
@@ -86,6 +96,11 @@ export default function TeamSpaceClient() {
   const [form] = Form.useForm<RecordForm>();
   const kind = Form.useWatch("kind", form);
   const family = Form.useWatch("family", form);
+  const stage = Form.useWatch("contestStage", form);
+  const fixedLevel = awardStages(family).find(option => option.value === stage)?.level;
+  useEffect(() => {
+    if (kind === 'award' && fixedLevel) form.setFieldsValue({ awardLevel: fixedLevel });
+  }, [kind, fixedLevel, form]);
   useEffect(() => {
     teamApi<TeamIdentity>("/me")
       .then(setIdentity)
@@ -126,6 +141,10 @@ export default function TeamSpaceClient() {
             teamName: entry.team_name,
             startDate: entry.start_date,
             endDate: entry.end_date,
+            positionKey: memberRoleKey(entry.organization, entry.title),
+            awardLevel: entry.award_level,
+            awardGrade: entry.award_grade,
+            contestStage: entry.contest_stage,
             sourceUrl: entry.source_url,
             notes: entry.notes,
           }
@@ -136,8 +155,10 @@ export default function TeamSpaceClient() {
   const submit = async (values: RecordForm) => {
     setSaving(true);
     try {
+      const role = memberRoles.find(role => role.value === values.positionKey);
       const record = {
         ...values,
+        ...(values.kind === 'position' && role ? { title: role.title, organization: role.organization } : {}),
         startDate: values.startDate || null,
         endDate: values.endDate || null,
       };
@@ -288,7 +309,8 @@ export default function TeamSpaceClient() {
                       dataIndex: "title",
                       render: (v, r) => (
                         <>
-                          <strong>{v}</strong>
+                          <strong>{r.display_title || v}</strong>
+                          {r.kind === "position" && <Tag color={r.position_status === "former" ? "default" : "blue"}>{positionStatusLabels[r.position_status || "unknown"]}</Tag>}
                           <div>
                             {r.family && <Tag>{r.family}</Tag>}
                             {r.team_name}
@@ -399,6 +421,10 @@ export default function TeamSpaceClient() {
             >
               <Select
                 disabled={roster}
+                onChange={(value) => {
+                  if (value === 'position') form.setFieldsValue({ ...academicTermDates(currentAcademicTerm()), positionKey: undefined, title: '', organization: '', result: '', awardLevel: undefined, awardGrade: undefined });
+                  else form.setFieldsValue({ startDate: undefined, endDate: undefined, title: '', organization: '', result: '' });
+                }}
                 options={Object.entries(kindNames).map(([value, label]) => ({
                   value,
                   label,
@@ -412,6 +438,7 @@ export default function TeamSpaceClient() {
                 rules={[{ required: true }]}
               >
                 <Select
+                  onChange={() => form.setFieldsValue({ contestStage: undefined, awardLevel: undefined })}
                   options={
                     roster
                       ? familyOptions.filter((x) =>
@@ -462,51 +489,56 @@ export default function TeamSpaceClient() {
                 />
               </Form.Item>
             )}
-            <Form.Item
-              name="title"
-              label={kind === "position" ? "职务名称" : "比赛完整名称"}
-              rules={[{ required: true, whitespace: true, max: 200 }]}
-            >
-              <Input
-                maxLength={200}
-                placeholder={
-                  kind === "position"
-                    ? "如：队长、训练负责人"
-                    : "请包含年份、赛站或组别"
-                }
-              />
-            </Form.Item>
-            <Form.Item
-              name="organization"
-              label={kind === "position" ? "所属组织 / 部门" : "主办方"}
-            >
-              <Input maxLength={200} />
-            </Form.Item>
-            {kind !== "position" && (
+            {kind === 'position' ? (
+              <Form.Item name="positionKey" label="职务" rules={[{ required: true, message: '请选择职务' }]}>
+                <Select options={memberRoles} placeholder="选择组织及职务" />
+              </Form.Item>
+            ) : (
               <>
-                <Form.Item name="teamName" label="队伍名称">
-                  <Input maxLength={200} />
+                <Form.Item name="title" label="比赛完整名称" rules={[{ required: true, whitespace: true, max: 200 }]}>
+                  <Input maxLength={200} placeholder="请包含年份、赛站或组别" />
                 </Form.Item>
-                <Form.Item name="result" label="奖项 / 参赛结果">
-                  <Input
-                    maxLength={100}
-                    placeholder="如：银牌、国家二等奖、待参赛"
-                  />
-                </Form.Item>
+                <Form.Item name="organization" label="主办方"><Input maxLength={200} /></Form.Item>
+                <Form.Item name="teamName" label="队伍名称"><Input maxLength={200} /></Form.Item>
+                {kind === 'award' ? (
+                  <>
+                    {awardStages(family).length > 0 && <Form.Item name="contestStage" label="赛事阶段" rules={[{ required: true, message: '请选择赛事阶段' }]}>
+                      <Select options={awardStages(family)} placeholder="按赛事阶段确定学校认定级别" />
+                    </Form.Item>}
+                    <Form.Item name="awardLevel" label="奖项级别" rules={[{ required: true, message: '请选择奖项级别' }]}>
+                      <Select disabled={awardStages(family).length > 0} placeholder="选择赛事阶段后自动确定" options={awardLevels.map(value => ({ value, label: value }))} />
+                    </Form.Item>
+                    <Form.Item name="awardGrade" label="奖项等次" rules={[{ required: true, message: '请选择奖项等次' }]}>
+                      <Select options={awardGrades.map(value => ({ value, label: value }))} />
+                    </Form.Item>
+                  </>
+                ) : (
+                  <Form.Item name="result" label="参赛结果"><Input maxLength={100} placeholder="如：待参赛、已参赛" /></Form.Item>
+                )}
               </>
             )}
             <Space align="start">
               <Form.Item
                 name="startDate"
                 label={kind === "position" ? "任职开始" : "比赛 / 获奖日期"}
+                rules={[{ required: kind === "position", message: "请选择任职开始日期" }]}
               >
                 <Input type="date" />
               </Form.Item>
               <Form.Item
                 name="endDate"
+                dependencies={['startDate']}
+                rules={[
+                  { required: kind === 'position', message: '请选择任职结束日期' },
+                  ({ getFieldValue }) => ({ validator(_, value) {
+                    return !value || !getFieldValue('startDate') || value >= getFieldValue('startDate')
+                      ? Promise.resolve() : Promise.reject(new Error('结束日期不能早于开始日期'));
+                  } }),
+                ]}
+                extra={kind === 'position' ? '结束日期次日起自动显示为“前”职务。' : undefined}
                 label={
                   kind === "position"
-                    ? "任职结束（在任留空）"
+                    ? "任职结束"
                     : "结束日期（可选）"
                 }
               >
@@ -550,7 +582,8 @@ export default function TeamSpaceClient() {
           }
         >
           <p>
-            {review?.owner_name} · {review?.title} · {review?.result}
+            {review?.owner_name} · {review?.display_title || review?.title} · {review?.result}
+            <br />{[review?.start_date, review?.end_date].filter(Boolean).join(" — ")}
           </p>
           <p style={{ whiteSpace: "pre-wrap" }}>{review?.notes}</p>
           {review?.source_url && (

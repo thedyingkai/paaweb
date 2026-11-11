@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Card, Checkbox, Input, message, Modal, Select, Space, Table, Tag, Typography } from 'antd';
 import { DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { memberOrganizations } from '@/lib/besti-members';
 
 const { Text } = Typography;
 
@@ -36,7 +37,7 @@ const roleLabel: Record<string, string> = {
       department: '部门',
 };
 
-const departmentOrder = ['理事团', '办公室', '宣传部', '组织部', '技术部', '监察部'];
+const departmentOrder = memberOrganizations;
 
 const PermissionManager: React.FC<{ mode?: 'roles' | 'permissions' }> = ({ mode = 'permissions' }) => {
     const [loading, setLoading] = useState(false);
