@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect, @next/next/no-img-element */
 
 import { useEffect, useState } from 'react';
+import { TeamLogo } from './TeamBrand';
 
 interface PageLoaderProps {
   loading: boolean;
@@ -64,15 +65,7 @@ const PageLoader = ({ loading, initialOnly = true }: PageLoaderProps) => {
           }}
         />
         {/* Logo */}
-        <img
-          src="/besti-acm-mark.svg"
-          alt="BESTI ACM"
-          className="loader-logo"
-          style={{ position: 'relative', width: 120, height: 120, borderRadius: 0, objectFit: 'contain', background: '#fff', padding: 4 }}
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-          }}
-        />
+        <TeamLogo size={120} priority className="loader-logo" />
       </div>
       <div className="showcase-font-body" style={{ marginTop: 14, fontSize: 13, color: '#8c8c8c', letterSpacing: 2 }}>
         Loading

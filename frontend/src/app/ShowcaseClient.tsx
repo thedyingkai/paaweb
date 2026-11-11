@@ -20,6 +20,7 @@ import {
 import axios from 'axios';
 import dayjs from 'dayjs';
 import SiteHeader from './components/SiteHeader';
+import { TeamLogo } from './components/TeamBrand';
 import { memberRoles, memberRoleKey, positionLabel } from '@/lib/besti-members';
 import Link from 'next/link';
 
@@ -841,7 +842,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                 }
             `}</style>
 
-            {/* 1. Loading Screen (drawn based on LOGO.png) */}
+            {/* 1. Loading Screen */}
             {loadingVisible && (
                 <div className={`loader-container ${loadingFade ? 'fade-out' : ''}`}>
                     <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 200, height: 200 }}>
@@ -859,15 +860,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                             }}
                         />
                         {/* Logo image in public */}
-                        <img
-                            src="/besti-acm-mark.svg"
-                            alt="BESTI ACM"
-                            className="loader-logo"
-                            style={{ position: 'relative', width: 120, height: 120, borderRadius: 0, objectFit: 'contain', background: '#fff', padding: 4 }}
-                            onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                            }}
-                        />
+                        <TeamLogo size={120} priority className="loader-logo" />
                     </div>
                     <div className="showcase-font-body" style={{ marginTop: 14, fontSize: 13, color: '#8c8c8c', letterSpacing: 2 }}>
                         Loading

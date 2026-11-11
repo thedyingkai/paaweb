@@ -406,7 +406,7 @@ export default function QqBotManager() {
                 return url.hostname === window.location.hostname && (!url.port || url.port === '443');
               }) ? Promise.resolve() : Promise.reject(new Error('图片仅允许当前站点的公开 HTTPS 链接'));
             },
-          }]}><Input.TextArea rows={3} placeholder="https://example.com/besti-acm-wordmark.svg" /></Form.Item>
+          }]}><Input.TextArea rows={3} placeholder="https://bestiacm.thedyingkai.cn/brand/besti-acm-logo-v1.png" /></Form.Item>
           <Row gutter={16}>
             <Col xs={24} sm={12}><Form.Item name="recurrence" label="重复方式" rules={[{ required: true }]}><Select options={recurrenceOptions} /></Form.Item></Col>
             <Col xs={24} sm={12}><Form.Item name="dueAt" label="首次执行时间（北京时间）" rules={[

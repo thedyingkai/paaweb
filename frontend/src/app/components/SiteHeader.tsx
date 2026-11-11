@@ -8,6 +8,7 @@ import type { MenuProps } from 'antd';
 import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { readStoredUser } from '@/utils/auth';
+import TeamBrand from './TeamBrand';
 
 interface SiteHeaderProps {
   transparent?: boolean;
@@ -130,7 +131,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
   return (
     <header className={`site-header auth-page-header ${transparent ? 'transparent-header' : ''}`}>
       <Link href="/" className="site-brand" onClick={handleBrandClick}>
-        <img src="/besti-acm-wordmark.svg" alt="BESTI ACM" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+        <TeamBrand priority />
       </Link>
       <div className="site-header-right">
         <nav className="site-nav-links">
@@ -165,7 +166,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
       </div>
       <Drawer
         className="site-mobile-drawer"
-        title={<img src="/besti-acm-wordmark.svg" alt="BESTI ACM" style={{ display: 'block', width: 180, maxWidth: '100%', height: 'auto' }} />}
+        title={<TeamBrand size={44} />}
         placement="right"
         width="min(86vw, 320px)"
         open={mobileOpen}

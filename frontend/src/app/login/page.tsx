@@ -7,6 +7,7 @@ import { md5 } from 'js-md5';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SiteHeader from '../components/SiteHeader';
+import { TeamLogo } from '../components/TeamBrand';
 import SliderCaptcha from '../components/SliderCaptcha';
 import { persistAuth } from '@/utils/auth';
 
@@ -120,6 +121,7 @@ const LoginPage = () => {
 
       <section className="auth-hero-grid">
         <div className="auth-copy-panel">
+          <TeamLogo size={104} priority className="auth-team-logo" />
           <Tag className="bits-pill" icon={<StarOutlined />}>Algorithm Portal</Tag>
           <Title className="bits-gradient-title">欢迎回来</Title>
           <Paragraph>

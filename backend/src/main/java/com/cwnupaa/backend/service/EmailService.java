@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class EmailService {
-    private static final String LOGO_URL = com.cwnupaa.backend.utils.DeploymentUrls.site() + "/besti-acm-wordmark.svg";
+    private static final String LOGO_URL = com.cwnupaa.backend.utils.DeploymentUrls.site() + "/brand/besti-acm-logo-v1.png";
 
     @Autowired
     private JavaMailSender defaultMailSender;
@@ -509,7 +509,7 @@ public class EmailService {
 
     private String buildLogoHeaderHtml() {
         return "<div style='text-align: center; padding: 4px 0 28px 0; margin-bottom: 28px; border-bottom: 1px solid #d9e2ec;'>" +
-                "<img src='" + LOGO_URL + "' alt='BESTI ACM' style='display: inline-block; width: 260px; max-width: 86%; height: auto; object-fit: contain; border: 0;'>" +
+                "<img src='" + LOGO_URL + "' alt='BESTI ACM' width='104' height='104' style='display: inline-block; width: 104px; height: 104px; object-fit: contain; border: 0; border-radius: 50%;'>" +
                 "</div>";
     }
 

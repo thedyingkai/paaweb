@@ -50,7 +50,7 @@ class EmailServiceTests {
         );
 
         assertThat(html)
-                .contains("https://example.com/besti-acm-wordmark.svg")
+                .contains("https://example.com/brand/besti-acm-logo-v1.png")
                 .contains("此邮件由BESTI ACM系统自动发送")
                 .doesNotContain("PAAWeb", "alt='PAA'")
                 .contains("你好，<strong>张三</strong>：")

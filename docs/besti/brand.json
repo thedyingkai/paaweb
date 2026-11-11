@@ -1,0 +1,16 @@
+{
+  "name": "BESTI ACM 校队 Logo",
+  "selectedAt": "2026-11-11",
+  "design": "北京电子科技学院校徽外圈、中英文校名、ICPC 三色图形与 BESTI ACM 文字",
+  "sourceFile": "BESTI_ACM_校徽外圈_ICPC版_v1.png",
+  "sha256": "781b53bd30e8b816a0a2584918ca885771cf78399a7e5340d73e5f0948ddf9d8",
+  "width": 1254,
+  "height": 1254,
+  "publicUrl": "/brand/besti-acm-logo-v1.png",
+  "copies": [
+    "frontend/public/brand/besti-acm-logo-v1.png",
+    "backend/src/main/resources/images/logo.png",
+    "backend/src/main/resources/qqbot/logo.png"
+  ],
+  "usage": "原始 PNG 原样保存；网页等比例展示并由 Next.js 提供响应式图片。赛事类别、外校标志及第三方工具标志保留各自用途。"
+}

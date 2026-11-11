@@ -35,6 +35,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...['/besti-acm-mark.svg', '/besti-acm-wordmark.svg', '/paa-mark.svg', '/paa-logo.svg', '/icon.svg', '/favicon.ico'].map((source) => ({
+        source,
+        destination: '/brand/besti-acm-logo-v1.png',
+        permanent: true,
+      })),
       {
         source: '/home',
         destination: '/',

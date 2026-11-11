@@ -2,7 +2,7 @@
 
 本目录用于 `https://bestiacm.thedyingkai.cn`，安装目录为 `/opt/paaweb`，Compose 项目名为 `paaweb-school`。公网 Nginx 终止 TLS，应用网关只映射到 `127.0.0.1:3403`。数据库、文件卷和网络独立创建。
 
-平台定位为北京电子科技学院 ACM 校队，使用 BESTI ACM 文字标识；这不是学校官方校徽，也不是登峰杯专属平台。保留上游软件的 LICENSE 和第三方声明。
+平台定位为北京电子科技学院 ACM 校队，使用用户选定的“校徽外圈 + ICPC 图形 + BESTI ACM”队标。队标原图保存为 `frontend/public/brand/besti-acm-logo-v1.png`，页面通过同一个品牌组件展示。保留上游软件的 LICENSE 和第三方声明。
 
 ## 构建
 
@@ -12,8 +12,8 @@
 cd backend
 mvn.cmd -B -s settings.xml package -DskipTests
 cd ..
-docker build --build-arg JRE_IMAGE=public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine -f backend/Dockerfile.prebuilt -t paaweb-school-backend:20261111-besti-r5 backend
-docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261111-besti-r6 frontend
+docker build --build-arg JRE_IMAGE=public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine -f backend/Dockerfile.prebuilt -t paaweb-school-backend:20261111-besti-r8 backend
+docker build --build-arg NODE_IMAGE=public.ecr.aws/docker/library/node:24-bookworm-slim --build-arg PUBLIC_SITE_URL=https://bestiacm.thedyingkai.cn -t paaweb-school-frontend:20261111-besti-r8 frontend
 ```
 
 `Dockerfile.prebuilt` 使用刚刚构建的 JAR。前端构建运行 Next.js 编译和 TypeScript 检查。官方镜像的 ECR 地址用于 Docker Hub 不可达的网络；可通过构建参数切换回 Docker Hub。
@@ -102,3 +102,9 @@ r4 继续执行同一迁移，将奖项等次约束扩展为包含“优胜奖�
 校队资格由有系统管理权限的管理员在“内容 → 校队成员”维护：记录组织必须为 ACM 校队，职务为校队队长或队员，绑定本人 userId，并处于有效任期。未绑定的历史展示资料、联盟负责人、未来或过期任期均不开放内部交流。解绑、删除或修改任期后，下一个请求按实时名单判定；学生身份未认证、受限或封禁账号不能进入。`manage_user` / `manage_sys` 管理员保留交流管理入口，但不因此被标记为校队成员。
 
 交流区的所有列表、详情、发帖、回复、修改、删除及管理接口均检查资格。自助参赛档案与公开比赛报名继续使用学生身份认证，保持普通参赛者可用。注册、个人资料、后台审核和成员管理均说明两种资格；邮件标题、页脚、证书示例、榜单本校名称及旧素材地址均改用 BESTI ACM / 北京电子科技学院。
+
+## 校队 Logo（r8）
+
+前后端升级为 `20261111-besti-r8`，无数据库迁移。页头、移动导航、页脚、加载界面、登录注册页、管理后台、网页图标与分享图片统一使用已选定的圆形队标。原始 PNG 原样入库，页面使用 Next.js 图片优化与等比例显示。历史 SVG 标识地址及 `/favicon.ico` 重定向至新图，避免旧链接继续展示文字占位标识。
+
+邮件抬头改用 PNG，参赛证明和系统卡片也使用同一原图；参赛证明按圆形标识调整显示尺寸。邮件验证只运行模拟发送测试，不向成员发送通知。素材来源与校验值见 `docs/besti/brand.json`。

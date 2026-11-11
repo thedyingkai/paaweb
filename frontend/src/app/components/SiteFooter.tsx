@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TeamBrand from './TeamBrand';
 
 const links = [
   { label: '洛谷', href: 'https://www.luogu.com.cn/' },
@@ -25,7 +26,7 @@ export default function SiteFooter() {
           <div className="site-footer-left">
             <div className="site-footer-intro">
               <Link href="/" className="site-footer-brand" aria-label="北京电子科技学院 ACM 校队首页">
-                <img src="/besti-acm-wordmark.svg" alt="北京电子科技学院 ACM 校队" />
+                <TeamBrand size={64} />
               </Link>
               <span>编程、算法竞赛与工程实践的学习平台</span>
             </div>

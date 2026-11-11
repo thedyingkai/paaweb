@@ -124,11 +124,12 @@ a {
   max-width: 100%;
 }
 
-.site-footer-brand img {
-  display: block;
-  width: min(300px, 100%);
-  height: auto;
-  object-fit: contain;
+.site-footer-brand .team-brand-copy {
+  color: #123c6a;
+}
+
+.site-footer-brand .team-brand-copy strong {
+  font-size: 22px;
 }
 
 .site-footer-links {
@@ -396,11 +397,62 @@ a {
   font-weight: 800;
 }
 
-.site-brand img {
-  width: 220px;
-  height: 36px;
-  border-radius: 0;
-  object-fit: contain;
+.team-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-align: left;
+}
+
+.team-logo {
+  display: block;
+  background: #fff;
+}
+
+.team-brand-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.team-brand-copy strong {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+}
+
+.team-brand-copy small {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  opacity: 0.82;
+}
+
+.auth-team-logo {
+  margin-bottom: 20px;
+}
+
+.admin-team-brand {
+  display: flex;
+  flex-shrink: 0;
+  margin: 16px 12px;
+  color: #fff;
+}
+
+.admin-team-brand:hover {
+  color: #fff;
+}
+
+.admin-team-brand .team-brand-copy strong {
+  font-size: 14px;
+}
+
+.admin-team-brand .team-brand-copy small {
+  font-size: 12px;
 }
 
 .site-nav-links {
@@ -3044,10 +3096,6 @@ a {
     height: 64px;
   }
 
-  .site-brand span {
-    display: none;
-  }
-
   .register-actions {
     grid-template-columns: 1fr;
   }
@@ -3265,6 +3313,7 @@ a {
   border-bottom-color: #13c2c2;
 }
 .loader-logo {
+  position: relative;
   animation: logo-pulse 2s ease-in-out infinite;
 }
 
@@ -3390,20 +3439,6 @@ svg {
   .site-brand {
     min-width: 0;
     gap: 8px;
-  }
-
-  .site-brand img {
-    width: min(46vw, 168px);
-    height: auto;
-    flex: 0 0 auto;
-  }
-
-  .site-brand span {
-    max-width: 48vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 15px;
   }
 
   .auth-user-trigger {
@@ -3645,9 +3680,16 @@ svg {
     background-attachment: scroll;
   }
 
-  .site-brand span {
-    max-width: 42vw;
-    font-size: 14px;
+  .site-brand .team-brand {
+    gap: 8px;
+  }
+
+  .site-brand .team-brand-copy strong {
+    font-size: 16px;
+  }
+
+  .site-brand .team-brand-copy small {
+    font-size: 10px;
   }
 
   .header-icon-button {
@@ -4004,10 +4046,6 @@ svg {
 @media (max-width: 480px) {
   .auth-page-header {
     padding: 0 10px;
-  }
-
-  .site-brand img {
-    width: min(43vw, 150px);
   }
 
   .site-header-right {

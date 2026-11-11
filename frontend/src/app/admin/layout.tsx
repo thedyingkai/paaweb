@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AdminLayoutClient from "./AdminLayoutClient";
+import { TEAM_ICONS } from '@/lib/besti-brand';
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   keywords: [],
   openGraph: null as never,
   twitter: null as never,
-  icons: { icon: "/besti-acm-mark.svg", apple: "/besti-acm-mark.svg" },
+  icons: TEAM_ICONS,
   robots: {
     index: false,
     follow: false,

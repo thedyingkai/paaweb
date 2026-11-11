@@ -23,6 +23,7 @@ import { Navigate, useLocation, useNavigate } from './_legacy/router';
 import Link from 'next/link';
 import { logout, readStoredUser, refreshAuth } from '@/utils/auth';
 import { canManageQqBot } from '@/security/qqBotAccess';
+import TeamBrand, { TeamLogo } from '../components/TeamBrand';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -408,9 +409,9 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
         style={{ height: '100vh', position: 'fixed', top: 0, left: 0, overflow: 'hidden', zIndex: 200 }}
       >
         <style>{`.ant-layout-sider-children::-webkit-scrollbar{display:none;}`}</style>
-        <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', overflow: 'hidden' }}>
-          {collapsed ? 'BESTI ACM' : 'BESTI ACM 管理中心'}
-        </div>
+        <Link href="/admin/dashboard" className="admin-team-brand" aria-label="BESTI ACM 管理中心">
+          <TeamBrand size={40} caption="管理中心" />
+        </Link>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <Menu 
             theme="dark" 
@@ -442,7 +443,10 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
               onClick={() => setCollapsed(!collapsed)}
               style={{ fontSize: '16px', width: 64, height: 64, marginLeft: -24 }}
             />
-            <div className="admin-header-title" style={{ fontSize: 18, fontWeight: 500, marginLeft: 8 }}>管理控制台</div>
+            <div className="admin-header-title" style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 18, fontWeight: 500, marginLeft: 8 }}>
+              <TeamLogo size={36} />
+              <span>管理控制台</span>
+            </div>
           </div>
           <Dropdown menu={{ items: userMenu }} placement="bottomRight" arrow>
             <Space className="admin-user-chip" style={{ cursor: 'pointer' }}>

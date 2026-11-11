@@ -7,6 +7,7 @@ import { md5 } from 'js-md5';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SiteHeader from '../components/SiteHeader';
+import { TeamLogo } from '../components/TeamBrand';
 import { describeValidationFailure } from './validationFeedback';
 import { describeRequestError } from '../../utils/errorMessage';
 import SliderCaptcha from '../components/SliderCaptcha';
@@ -314,6 +315,7 @@ const RegisterPage = () => {
 
       <section className="register-layout">
         <div className="auth-copy-panel register-copy">
+          <TeamLogo size={104} priority className="auth-team-logo" />
           <Tag className="bits-pill" icon={<RocketOutlined />}>BESTI ACM · 账号注册</Tag>
           <Title className="bits-gradient-title">创建你的算法档案</Title>
           <Paragraph>

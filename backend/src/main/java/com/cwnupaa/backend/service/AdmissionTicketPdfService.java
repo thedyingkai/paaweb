@@ -48,7 +48,7 @@ public class AdmissionTicketPdfService {
     private static final int PHOTO_ROW_COUNT = 4;
     private static final float PHOTO_INSET_X = 2.5f;
     private static final float NOTICE_LINE_HEIGHT = 15.5f;
-    private static final float LOGO_WIDTH = 180f;
+    private static final float LOGO_WIDTH = 72f;
     private static final float SEAL_SIZE = 116f;
     private static final float TEAM_SEAT_LEFT_SHIFT = 18f;
     private static final String ADMISSION_TICKET_SUBTITLE = "参赛证明";
