@@ -109,7 +109,7 @@ class TeamSpaceControllerTests {
         assertThrows(ResponseStatusException.class,()->controller.review(req,1L,new TeamSpaceController.Review(1,true,"")));
     }
     @Test void memberCannotOverwriteAnotherOwner() {
-        when(db.queryForList("SELECT user_id,version FROM besti_member_record WHERE id=? FOR UPDATE",42L)).thenReturn(List.of(Map.of("user_id",8L,"version",1)));
+        when(db.queryForList("SELECT user_id,version,history_link_id FROM besti_member_record WHERE id=? FOR UPDATE",42L)).thenReturn(List.of(Map.of("user_id",8L,"version",1)));
         var r=new TeamSpaceController.MemberRecord(42L,1,"award","ICPC","测试","","","",null,null,"","","省部级","二等奖","invitational","银牌");
         var error=assertThrows(ResponseStatusException.class,()->controller.saveRecord(request("student","normal"),r));
         assertEquals(HttpStatus.FORBIDDEN,error.getStatusCode());verify(db,never()).update(anyString(),any(Object[].class));
@@ -119,6 +119,14 @@ class TeamSpaceControllerTests {
         for(String url:List.of("javascript:alert(1)","data:text/html,test","https://user:secret@example.org/"))
             assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(record("award","ICPC",url)));
         assertDoesNotThrow(()->TeamSpaceController.validate(record("award","ICPC","https://board.xcpcio.com/icpc/51st/xian")));
+    }
+    @Test void linkedHistoryCannotBeRewrittenOrDeletedThroughPersonalRecordEndpoints() {
+        when(db.queryForList("SELECT user_id,version,history_link_id FROM besti_member_record WHERE id=? FOR UPDATE",42L)).thenReturn(List.of(Map.of("user_id",7L,"version",1,"history_link_id",99L)));
+        when(db.queryForList("SELECT user_id,history_link_id FROM besti_member_record WHERE id=?",42L)).thenReturn(List.of(Map.of("user_id",7L,"history_link_id",99L)));
+        var r=new TeamSpaceController.MemberRecord(42L,1,"award","ICPC","测试","","","",null,null,"","","国家级","一等奖","regional","金牌");
+        assertEquals(HttpStatus.CONFLICT,assertThrows(ResponseStatusException.class,()->controller.saveRecord(request("student","normal"),r)).getStatusCode());
+        assertEquals(HttpStatus.CONFLICT,assertThrows(ResponseStatusException.class,()->controller.deleteRecord(request("student","normal"),42L)).getStatusCode());
+        verify(db,never()).update(anyString(),any(Object[].class));
     }
     @Test void rejectsReversedTenureDates() {
         var r=new TeamSpaceController.MemberRecord(null,null,"position","","校队队长","ACM 校队","","",LocalDate.of(2026,11,10),LocalDate.of(2026,1,1),"","",null,null,null,null);

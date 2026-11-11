@@ -322,6 +322,7 @@ export default function SchoolHonorsClient() {
               <Button icon={<DownloadOutlined />} onClick={download}>
                 导出当前结果
               </Button>
+              <Link href="/history-awards"><Button type="primary">认领我的历史战绩</Button></Link>
             </Space>
             <Table
               rowKey="uid"
@@ -341,6 +342,7 @@ export default function SchoolHonorsClient() {
                       <p>队员：{r.members.join("、")}</p>
                     )}
                     {r.notes && <p>{r.notes}</p>}
+                    <p><Link href={`/history-awards?uid=${encodeURIComponent(r.uid)}`}>认领这条战绩，关联到我的个人档案</Link></p>
                     {(contestName(r) || equivalentContestName(r)) && <p>赛事奖项：{contestName(r) || `打星等效${equivalentContestName(r)}`}。{r.official !== false && awardName(r) && <>学校认定：{awardName(r)}。</>}</p>}
                     <p>总队伍数：{r.totalTeams ?? '待核实'}；正式队伍数：{r.totalOfficialTeams ?? '待核实'}。来源：{r.teamCountSource || '待核实'}。</p>
                     {r.equivalentAwardBasis && <p>打星等效名次：{r.equivalentRank}；{r.equivalentAwardBasis}</p>}

@@ -16,6 +16,7 @@ services:
       - ./SQL/migration_besti_xcpc_awards.sql:/docker-entrypoint-initdb.d/05-besti-xcpc-awards.sql:ro
       - ./SQL/migration_besti_academic_catalog.sql:/docker-entrypoint-initdb.d/06-besti-academic-catalog.sql:ro
       - ./SQL/migration_besti_certificate_catalog.sql:/docker-entrypoint-initdb.d/07-besti-certificate-catalog.sql:ro
+      - ./SQL/migration_besti_history_claims.sql:/docker-entrypoint-initdb.d/08-besti-history-claims.sql:ro
     healthcheck:
       test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 5s

@@ -4,6 +4,7 @@ import com.cwnupaa.backend.common.Result;
 import com.cwnupaa.backend.utils.SecurityUtils;
 import com.cwnupaa.backend.utils.BestiRecordPolicy;
 import com.cwnupaa.backend.service.TeamMembershipService;
+import com.cwnupaa.backend.service.HistoricalAwardService;
 import com.cwnupaa.backend.vo.UserProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -150,13 +151,14 @@ public class TeamSpaceController {
     }
     @GetMapping("/public-records")
     public Result<?> publicRecords(@RequestParam(required=false) Long userId,@RequestParam(defaultValue="1") int page) {
-        String where="r.status='verified' AND r.kind IN ('award','position') AND u.account_status='normal'";
+        String where="r.status='verified' AND (r.kind IN ('award','position') OR r.history_link_id IS NOT NULL) AND u.account_status='normal' AND "+HistoricalAwardService.visibleRecordSql("r");
         var args=new ArrayList<Object>();
         if(userId!=null){where+=" AND r.user_id=?";args.add(userId);}
         var total=db.queryForObject("SELECT count(*) FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where,Long.class,args.toArray());
+        var counts=db.queryForMap("SELECT count(CASE WHEN r.kind='award' AND r.is_starred=false THEN 1 END) AS awards,count(CASE WHEN r.kind='award' AND r.is_starred=true THEN 1 END) AS starred FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where,args.toArray());
         args.add((page(page)-1)*50);
-        var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.organization,r.result,r.award_level,r.award_grade,r.contest_stage,r.contest_award,r.team_name,r.start_date,r.end_date,r.source_url FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
-        return Result.success(Map.of("items",displayRecords(items),"total",total));
+        var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.organization,r.result,r.award_level,r.award_grade,r.contest_stage,r.contest_award,r.team_name,r.start_date,r.end_date,r.source_url,r.history_link_id,r.is_starred FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
+        return Result.success(Map.of("items",displayRecords(items),"total",total,"awards",counts.get("awards"),"starred",counts.get("starred")));
     }
     @GetMapping("/records")
     public Result<?> records(HttpServletRequest request,@RequestParam(defaultValue="mine") String scope,
@@ -166,7 +168,7 @@ public class TeamSpaceController {
         String where; Object[] args;
         if ("review".equals(scope)) {
             require(moderator(u),"无审核权限"); where="r.status='pending'"; args=new Object[]{};
-        } else { where="r.user_id=?"; args=new Object[]{u.getUserId()}; }
+        } else { where="r.user_id=? AND "+HistoricalAwardService.visibleRecordSql("r"); args=new Object[]{u.getUserId()}; }
         var count=db.queryForObject("SELECT count(*) FROM besti_member_record r WHERE "+where,Long.class,args);
         var params=new ArrayList<Object>(Arrays.asList(args));params.add((page(page)-1)*50);
         var items=db.queryForList("SELECT r.*,u.user_name AS owner_name FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.updated_at DESC,r.id DESC LIMIT 50 OFFSET ?",params.toArray());
@@ -177,8 +179,9 @@ public class TeamSpaceController {
     public Result<?> saveRecord(HttpServletRequest request,@RequestBody MemberRecord r) {
         var u=verifiedUser(request); validate(r);
         if (r.id()==null) return Result.success(Map.of("id",insertRecord(r,u.getUserId(),u.getUserId())));
-        var existing=row("SELECT user_id,version FROM besti_member_record WHERE id=? FOR UPDATE",r.id());
+        var existing=row("SELECT user_id,version,history_link_id FROM besti_member_record WHERE id=? FOR UPDATE",r.id());
         require(number(existing,"user_id")==u.getUserId(),"只能修改自己的记录");
+        if(existing.get("history_link_id")!=null) throw error(HttpStatus.CONFLICT,"历史战绩须由管理员在归属管理中修正，不能改写为自填奖项");
         if (r.version()==null || number(existing,"version")!=r.version()) throw error(HttpStatus.CONFLICT,"记录已更新，请刷新后再保存");
         db.update("UPDATE besti_member_record SET kind=?,family=?,title=?,organization=?,result=?,team_name=?,start_date=?,end_date=?,source_url=?,notes=?,status='pending',review_note='',reviewed_by=NULL,version=version+1,updated_at=now(),award_level=?,award_grade=?,contest_stage=?,contest_award=? WHERE id=?",
             r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),result(r),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),awardLevel(r),awardGrade(r),"award".equals(r.kind())?text(r.contestStage(),30,false):null,contestAward(r),r.id());
@@ -206,7 +209,10 @@ public class TeamSpaceController {
     @DeleteMapping("/records/{id}")
     public Result<?> deleteRecord(HttpServletRequest request,@PathVariable long id) {
         var u=verifiedUser(request);
-        int changed=db.update("DELETE FROM besti_member_record WHERE id=? AND user_id=?",id,u.getUserId());
+        var existing=row("SELECT user_id,history_link_id FROM besti_member_record WHERE id=?",id);
+        require(number(existing,"user_id")==u.getUserId(),"只能删除自己的记录");
+        if(existing.get("history_link_id")!=null) throw error(HttpStatus.CONFLICT,"历史战绩须由管理员核验撤销归属");
+        int changed=db.update("DELETE FROM besti_member_record WHERE id=? AND user_id=? AND history_link_id IS NULL",id,u.getUserId());
         if(changed==0) throw error(HttpStatus.NOT_FOUND,"记录不存在或不属于你");
         return Result.success("已删除");
     }
@@ -214,7 +220,7 @@ public class TeamSpaceController {
     @Transactional
     public Result<?> review(HttpServletRequest request,@PathVariable long id,@RequestBody Review review) {
         var u=verifiedUser(request);require(moderator(u),"无审核权限");
-        int changed=db.update("UPDATE besti_member_record SET status=?,review_note=?,reviewed_by=?,version=version+1,updated_at=now() WHERE id=? AND version=? AND status='pending'",
+        int changed=db.update("UPDATE besti_member_record SET status=?,review_note=?,reviewed_by=?,version=version+1,updated_at=now() WHERE id=? AND version=? AND status='pending' AND history_link_id IS NULL",
             review.approved()?"verified":"rejected",text(review.note(),1000,false),u.getUserId(),id,review.version());
         if(changed==0) throw error(HttpStatus.CONFLICT,"记录已发生变化，请刷新后审核");
         return Result.success("核验结果已保存");

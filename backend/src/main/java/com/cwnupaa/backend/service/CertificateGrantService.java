@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CertificateGrantService {
+    @Autowired private HistoricalAwardService historicalAwardService;
     private final CertificatePdfCache legacyPdfCache = new CertificatePdfCache();
 
     @Autowired
@@ -628,6 +629,7 @@ public class CertificateGrantService {
             member.setUserId(userId);
             issueMemberMapper.updateById(member);
         }
+        historicalAwardService.linkVerifiedUser(userId);
     }
 
     public record IdentityReviewEntry(String recordKey, String userAccount, String realName, String schoolName, Long userId, String context) {}

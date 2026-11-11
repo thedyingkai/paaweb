@@ -45,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringJUnitConfig(CertificateTemplatePersistenceTests.Config.class)
 @MockBean({CertificateExcelImportService.class, CertificateAuthenticityService.class,
         CertificateAccessTokenService.class, CertificateIdentityService.class,
-        SecurityAuditService.class, EmailService.class})
+        SecurityAuditService.class, EmailService.class, com.cwnupaa.backend.service.HistoricalAwardService.class})
 class CertificateTemplatePersistenceTests {
     @Autowired private CertificateGrantController controller;
     @Autowired private JdbcTemplate jdbc;

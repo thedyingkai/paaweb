@@ -58,6 +58,8 @@ type Entry = {
   notes: string;
   status: string;
   review_note: string;
+  history_link_id?: number;
+  is_starred?: boolean;
 };
 type RecordForm = {
   id?: number;
@@ -278,6 +280,8 @@ export default function TeamSpaceClient() {
                   {identity.communityAccess && <Link href="/community">进入校队交流区</Link>}
                   <Link href="/contest/signup">报名公开赛事</Link>
                   <Link href="/competitions">查看赛事范围</Link>
+                  <Link href="/history-awards">认领历史战绩</Link>
+                  {identity.moderator && <Link href="/admin/history-awards">历史战绩归属管理</Link>}
                 </Space>
                 <Table
                   rowKey="id"
@@ -339,7 +343,7 @@ export default function TeamSpaceClient() {
                     {
                       title: "奖项 / 结果",
                       dataIndex: "result",
-                      render: (v, r) => r.contest_award ? <><Tag>{r.contest_award}</Tag><div style={{ color: '#64748b', fontSize: 12 }}>学校认定：{v}</div></> : v || "—",
+                      render: (v, r) => r.is_starred ? <Tag color="orange">打星{r.contest_award ? ` · 等效${r.contest_award}` : '参赛'}</Tag> : r.contest_award ? <><Tag>{r.contest_award}</Tag><div style={{ color: '#64748b', fontSize: 12 }}>学校认定：{v}</div></> : v || "—",
                     },
                     {
                       title: "日期 / 任期",
@@ -369,7 +373,7 @@ export default function TeamSpaceClient() {
                       title: "操作",
                       render: (_, r) => (
                         <Space>
-                          {tab === "review" ? (
+                          {r.history_link_id ? <Link href="/history-awards">查看历史归属</Link> : tab === "review" ? (
                             <Button
                               size="small"
                               onClick={() => {
@@ -419,7 +423,7 @@ export default function TeamSpaceClient() {
           )}
         </div>
         <Modal
-          title={roster ? "队长统一登记" : "维护我的校队记录"}
+          title={roster ? "队长统一登记" : "维护我的参赛记录"}
           open={open}
           onCancel={() => setOpen(false)}
           footer={null}

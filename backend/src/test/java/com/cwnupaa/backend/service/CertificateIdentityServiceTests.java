@@ -29,6 +29,8 @@ class CertificateIdentityServiceTests {
     }
     @Test void approvedBindingUsesDatabaseIdentityAndSkipsLegacyOrWrongRecipients() {
         CertificateGrantService service = new CertificateGrantService();
+        HistoricalAwardService history=mock(HistoricalAwardService.class);
+        ReflectionTestUtils.setField(service,"historicalAwardService",history);
         UserMapper users = mock(UserMapper.class);
         CertificateIdentityService identities = spy(new CertificateIdentityService());
         ReflectionTestUtils.setField(identities,"userMapper",users);
@@ -45,6 +47,7 @@ class CertificateIdentityServiceTests {
         ReflectionTestUtils.setField(service,"grantMapper",grants);
         ReflectionTestUtils.setField(service,"issueMemberMapper",members);
         service.linkCertificatesToUser(7L,"forged","学校B");
+        verify(history).linkVerifiedUser(7L);
         assertThat(valid.getUserId()).isEqualTo(7L);
         assertThat(legacy.getUserId()).isNull(); assertThat(differentName.getUserId()).isNull();
         verify(grants).updateById(valid); verify(grants,never()).updateById(legacy);

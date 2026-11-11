@@ -212,6 +212,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
       userSubItems.push(getItem('用户列表', '/admin/users'));
     }
     if (hasPerm('manage_oj')) userSubItems.push(getItem('OJ账号', '/admin/oj-accounts'));
+    if (hasPerm('manage_user') || hasPerm('manage_sys')) userSubItems.push(getItem('历史战绩归属', '/admin/history-awards'));
     if (hasPerm('manage_permission')) {
       userSubItems.push(getItem('管理员管理', '/admin/roles'));
       userSubItems.push(getItem('权限管理', '/admin/permissions'));
@@ -252,6 +253,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     if (path === '/admin' || path === '/admin/') return true;
     if (path.startsWith('/admin/dashboard') || path.startsWith('/admin/data-panel')) return true;
     if (path.startsWith('/admin/auth-audit')) return hasPerm('manage_user');
+    if (path.startsWith('/admin/history-awards')) return hasPerm('manage_user') || hasPerm('manage_sys');
     if (path.startsWith('/admin/certificate') && !path.startsWith('/admin/certificate-grant') && !path.startsWith('/admin/certificate-stats') && !path.startsWith('/admin/certificate/weights')) return true;
     if (path.startsWith('/admin/certificate-stats')) return true;
     if (path.startsWith('/admin/certificate/weights')) return true;
@@ -339,6 +341,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     '/admin/org': '学院管理',
     '/admin/org/info': '组织信息管理',
     '/admin/term': '学期设置',
+    '/admin/history-awards': '历史战绩归属',
     '/admin/app-key': '接口授权管理',
     '/admin/bulk-email': '批量邮件',
     '/admin/permissions': '权限管理',
