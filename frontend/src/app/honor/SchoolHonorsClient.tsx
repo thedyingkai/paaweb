@@ -450,7 +450,7 @@ export default function SchoolHonorsClient() {
             />
           </Card>
           <p style={{ textAlign: "center", marginTop: 28 }}>
-            个人奖项与职务可在 <Link href="/team-space">我的校队档案</Link>{" "}
+            个人奖项与职务可在 <Link href="/team-space">我的参赛档案</Link>{" "}
             中维护，核验后展示于个人主页。
           </p>
         </div>

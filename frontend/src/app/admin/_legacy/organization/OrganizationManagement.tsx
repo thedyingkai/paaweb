@@ -395,7 +395,7 @@ const OrganizationManagement: React.FC = () => {
         <Space wrap>
           <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({
             fileName: '组织架构导入模板.xlsx', headers: IMPORT_HEADERS,
-            examples: [['示例大学', '计算机学院', '软件工程']],
+            examples: [['北京电子科技学院', '网络空间安全系', '计算机科学与技术']],
           })}>下载 Excel 模板</Button>
           <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectImportFile(file as File)} onRemove={() => { setImportRows([]); setImportPreview(null); }}>
             <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>

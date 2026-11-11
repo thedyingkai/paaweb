@@ -697,8 +697,8 @@ const CertificateGrantManager: React.FC = () => {
                 fileName: selectedTemplate?.isTeam === 1 ? '旧版团队证书发放模板.xlsx' : '旧版个人证书发放模板.xlsx',
                 headers: legacyHeaders,
                 examples: selectedTemplate?.isTeam === 1
-                  ? [["张三", "20240001", "示例大学", "李四", "20240002", "示例理工大学"]]
-                  : [["张三", "20240001", "示例大学"]],
+                  ? [["张三", "20240001", "北京电子科技学院", "李四", "20240002", "北京电子科技学院"]]
+                  : [["张三", "20240001", "北京电子科技学院"]],
               })}>下载 Excel 模板</Button>
               <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectLegacyImportFile(file as File)} onRemove={() => { setLegacyImportRows([]); setLegacyImportPreview(null); }}>
                 <Button icon={<FileExcelOutlined />}>选择填写好的 Excel</Button>

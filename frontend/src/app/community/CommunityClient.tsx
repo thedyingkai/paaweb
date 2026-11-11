@@ -73,7 +73,10 @@ export default function CommunityClient() {
   const [replyEditText, setReplyEditText] = useState("");
   useEffect(() => {
     teamApi<TeamIdentity>("/me")
-      .then(setMe)
+      .then((identity) => {
+        if (identity.communityAccess) setMe(identity);
+        else setAccessError("你已完成学生身份认证，当前为普通参赛者。校队交流区需由管理员确认校队资格后开放。");
+      })
       .catch((e) => setAccessError(teamError(e)))
       .finally(() => setLoading(false));
   }, []);
@@ -183,7 +186,7 @@ export default function CommunityClient() {
             校队交流区
           </Typography.Title>
           <Typography.Paragraph>
-            讨论算法、分享比赛，也记录一起训练的日常。内容仅已审核的校队成员可见。
+            讨论算法、分享比赛，也记录一起训练的日常。内容仅任期内的校队成员与交流区管理员可见。
           </Typography.Paragraph>
         </section>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -195,7 +198,8 @@ export default function CommunityClient() {
               description={
                 <Space>
                   <Link href="/login">登录账号</Link>
-                  <Link href="/register">注册并提交身份审核</Link>
+                  <Link href="/team-space">我的参赛档案</Link>
+                  <Link href="/contest/signup">查看公开赛事</Link>
                 </Space>
               }
             />
@@ -233,7 +237,7 @@ export default function CommunityClient() {
                 <Button type="primary" onClick={() => edit()}>
                   发起讨论
                 </Button>
-                <Link href="/team-space">我的校队档案</Link>
+                <Link href="/team-space">我的参赛档案</Link>
               </Space>
               <List
                 loading={loading}

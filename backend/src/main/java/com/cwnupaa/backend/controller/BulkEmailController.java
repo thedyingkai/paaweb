@@ -85,7 +85,7 @@ public class BulkEmailController {
                 text.setDataFormat(workbook.createDataFormat().getFormat("@"));
                 sheet.setDefaultColumnStyle(1, text);
                 Row sample = sheet.createRow(1);
-                sample.createCell(0).setCellValue("示例大学");
+                sample.createCell(0).setCellValue("北京电子科技学院");
                 sample.createCell(1).setCellValue("00123456");
                 sheet.setColumnWidth(0, 32 * 256);
                 sheet.setColumnWidth(1, 24 * 256);

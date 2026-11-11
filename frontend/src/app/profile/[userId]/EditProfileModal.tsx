@@ -527,7 +527,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
                   </Divider>
 
                   {['restricted', 'register'].includes(userData.accountStatus || '') && (
-                    <Alert type="warning" showIcon message="请完善身份信息并上传学生证首页/第二页或朝阳卡照片，认证通过后身份信息将锁定。" />
+                    <Alert type="warning" showIcon message="请完善身份信息并上传本校学生卡或学生证照片，清晰显示学校、姓名和学号（JPG / PNG，不超过 5 MB）。认证通过后身份信息锁定；校队资格由管理员另行确认。" />
                   )}
                   {userData.accountStatus === 'pending' && (
                     <Alert
@@ -558,14 +558,14 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
                     {isCollegeStudent ? (
                       <>
                         <Col xs={24} md={8}><Form.Item label="学校" name="universityId" rules={[{ required: !isIdentityLocked }]}><Select className="bits-select" disabled={isIdentityLocked} showSearch optionFilterProp="label" onChange={handleUniChange} options={universities.map(item => ({ value: item.universityId, label: item.universityName }))} /></Form.Item></Col>
-                        <Col xs={24} md={8}><Form.Item label="学院" name="schoolId" rules={[{ required: !isIdentityLocked }]}><Select className="bits-select" disabled={isIdentityLocked || !schools.length} showSearch optionFilterProp="label" onChange={handleSchoolChange} options={schools.map(item => ({ value: item.schoolId, label: item.schoolName }))} /></Form.Item></Col>
+                        <Col xs={24} md={8}><Form.Item label="院系 / 培养单位" name="schoolId" rules={[{ required: !isIdentityLocked }]}><Select className="bits-select" disabled={isIdentityLocked || !schools.length} showSearch optionFilterProp="label" onChange={handleSchoolChange} options={schools.map(item => ({ value: item.schoolId, label: item.schoolName }))} /></Form.Item></Col>
                         <Col xs={24} md={8}><Form.Item label="专业" name="majorId" rules={[{ required: !isIdentityLocked }]}><Select className="bits-select" disabled={isIdentityLocked || !majors.length} showSearch optionFilterProp="label" options={majors.map(item => ({ value: item.majorId, label: item.majorName }))} /></Form.Item></Col>
                         <Col xs={24} md={8}><Form.Item label="行政班级" name="className" rules={[{ required: !isIdentityLocked }, { pattern: /^\d+$/, message: '班级必须为纯数字' }]}><Input className="bits-input" disabled={isIdentityLocked} /></Form.Item></Col>
                       </>
                     ) : (
                       <Col xs={24} md={16}><Form.Item label="所属学校/单位" name="universityId" rules={[{ required: !isIdentityLocked }]}><Select className="bits-select" disabled={isIdentityLocked} showSearch optionFilterProp="label" options={universities.map(item => ({ value: item.universityId, label: item.universityName }))} /></Form.Item></Col>
                     )}
-                    <Col xs={24} md={8}><Form.Item label="是否示例大学在校生" name="isEnrolledStu"><Select className="bits-select" disabled={isIdentityLocked} options={[{ value: 1, label: '是（在读）' }, { value: 0, label: '否（毕业/其他学校）' }]} /></Form.Item></Col>
+                    <Col xs={24} md={8}><Form.Item label="是否北京电子科技学院在校生" name="isEnrolledStu"><Select className="bits-select" disabled={isIdentityLocked} options={[{ value: 1, label: '是（在读）' }, { value: 0, label: '否（毕业/其他学校）' }]} /></Form.Item></Col>
                   </Row>
                   {['restricted', 'register'].includes(userData.accountStatus || '') && (
                     <div className="auth-upload-panel">

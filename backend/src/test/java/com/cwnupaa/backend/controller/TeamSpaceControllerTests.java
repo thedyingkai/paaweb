@@ -1,6 +1,7 @@
 package com.cwnupaa.backend.controller;
 
 import com.cwnupaa.backend.vo.UserProfileVO;
+import com.cwnupaa.backend.service.TeamMembershipService;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +15,8 @@ import static org.mockito.Mockito.*;
 
 class TeamSpaceControllerTests {
     private final JdbcTemplate db=mock(JdbcTemplate.class);
-    private final TeamSpaceController controller=new TeamSpaceController(db);
+    private final TeamMembershipService membership=mock(TeamMembershipService.class);
+    private final TeamSpaceController controller=new TeamSpaceController(db,membership);
     private MockHttpServletRequest request(String role,String status) {
         var request=new MockHttpServletRequest();var user=new UserProfileVO();
         user.setUserId(7L);user.setUserAccount("student".equals(role)?"member":"admin");user.setUserName("测试成员");
@@ -28,6 +30,58 @@ class TeamSpaceControllerTests {
     @Test void anonymousCannotReadForum() {
         var error=assertThrows(ResponseStatusException.class,()->controller.topics(new MockHttpServletRequest(),1,"",""));
         assertEquals(HttpStatus.UNAUTHORIZED,error.getStatusCode());verifyNoInteractions(db);
+    }
+    @Test void identityVerificationDoesNotGrantTeamEligibility() {
+        var data=(Map<?,?>)controller.me(request("student","normal")).getData();
+        assertEquals(false,data.get("teamMember"));
+        assertEquals(false,data.get("communityAccess"));
+        assertEquals(false,data.get("moderator"));
+        verifyNoInteractions(db);
+    }
+    @Test void ordinaryParticipantsAreRejectedByEveryPrivateForumEndpoint() {
+        var req=request("student","normal");
+        var topic=new TeamSpaceController.Topic("discussion","测试","内容");
+        var reply=new TeamSpaceController.Reply("内容");
+        List<org.junit.jupiter.api.function.Executable> attempts=List.of(
+            ()->controller.topics(req,1,"",""),
+            ()->controller.topic(req,1),
+            ()->controller.createTopic(req,topic),
+            ()->controller.editTopic(req,1,topic),
+            ()->controller.deleteTopic(req,1),
+            ()->controller.moderate(req,1,new TeamSpaceController.Moderation(true,false)),
+            ()->controller.replies(req,1,1),
+            ()->controller.reply(req,1,reply),
+            ()->controller.editReply(req,1,reply),
+            ()->controller.deleteReply(req,1)
+        );
+        for(var attempt:attempts) {
+            assertEquals(HttpStatus.FORBIDDEN,assertThrows(ResponseStatusException.class,attempt).getStatusCode());
+        }
+        verifyNoInteractions(db);
+    }
+    @Test void currentMembershipGrantsForumAccessWithoutAdministrativePrivileges() {
+        when(membership.isCurrentMember(7L)).thenReturn(true);
+        var req=request("student","normal");
+        var data=(Map<?,?>)controller.me(req).getData();
+        assertEquals(true,data.get("teamMember"));
+        assertEquals(true,data.get("communityAccess"));
+        assertEquals(false,data.get("moderator"));
+        when(db.queryForList(anyString(),eq(1L))).thenReturn(List.of(Map.of("id",1L,"content","内部内容")));
+        assertNotNull(controller.topic(req,1).getData());
+        assertThrows(ResponseStatusException.class,()->controller.moderate(req,1,new TeamSpaceController.Moderation(true,false)));
+    }
+    @Test void ordinaryParticipantsCanStillMaintainTheirOwnAwards() {
+        when(db.queryForObject(anyString(),eq(Long.class),any(Object[].class))).thenReturn(19L);
+        assertNotNull(controller.saveRecord(request("student","normal"),record("award","ICPC","")).getData());
+        verifyNoInteractions(membership);
+    }
+    @Test void rootCanModerateWithoutBeingDisplayedAsATeamMember() {
+        var req=request("super_admin","normal");
+        var data=(Map<?,?>)controller.me(req).getData();
+        assertEquals(false,data.get("teamMember"));
+        assertEquals(true,data.get("communityAccess"));
+        when(db.update(anyString(),eq(true),eq(false),eq(1L))).thenReturn(1);
+        assertDoesNotThrow(()->controller.moderate(req,1,new TeamSpaceController.Moderation(true,false)));
     }
     @Test void pendingOrBannedAccountsCannotEnterTeamSpace() {
         for(String status:List.of("pending","banned","pending_activation")) {

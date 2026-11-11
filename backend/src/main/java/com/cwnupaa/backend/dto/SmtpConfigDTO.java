@@ -10,7 +10,7 @@ public class SmtpConfigDTO {
     private boolean auth = true;
     private boolean sslEnabled;
     private boolean startTlsEnabled = true;
-    private String fromName = "PAAWeb";
+    private String fromName = "BESTI ACM";
     private boolean passwordConfigured;
 
     public boolean isEnabled() { return enabled; }

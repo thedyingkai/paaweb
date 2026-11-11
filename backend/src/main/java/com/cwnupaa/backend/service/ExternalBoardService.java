@@ -762,7 +762,7 @@ public class ExternalBoardService {
 
         enrichOrganizations(rankList, config.getOrganizationDisplay());
         stats.setParticipantCount(rankList.size());
-        long orgCount = rankList.stream().map(RankItemVO::getOrganization).filter(Objects::nonNull).filter(s -> !s.isEmpty() && !"CWNU".equals(s)).distinct().count();
+        long orgCount = rankList.stream().map(RankItemVO::getOrganization).filter(Objects::nonNull).filter(s -> !s.isEmpty() && !"北京电子科技学院".equals(s)).distinct().count();
         stats.setOrganizationCount((int) orgCount);
 
         Map<String, int[]> problemSubStats = new HashMap<>();
@@ -1022,7 +1022,7 @@ public class ExternalBoardService {
                 tVo.setMemberInfos(infos);
             }
 
-            String org = "CWNU";
+            String org = "北京电子科技学院";
             Users leader = ds.isEmpty() ? null : personMap.get(ds.get(0).getUserId());
             if (leader != null) {
                 if (leader.getAvatarFileId() != null) tVo.setAvatar("/api/file/download/" + leader.getAvatarFileId());
@@ -1242,7 +1242,7 @@ public class ExternalBoardService {
                 v.setMemberIds(Collections.singletonList(uid));
                 Users u = userMap.get(uid);
             String name = "Unknown";
-            String org = "CWNU";
+            String org = "北京电子科技学院";
             String avatar = null;
             if (u != null) {
                 name = u.getRealName();
@@ -1559,7 +1559,7 @@ public class ExternalBoardService {
                 RankItemVO v = new RankItemVO();
                 v.setItemId(s.getSignupId());
                 String name = StringUtils.hasText(s.getTeamName()) ? s.getTeamName() : "Unknown Team";
-                String org = "CWNU";
+                String org = "北京电子科技学院";
                 String avatar = null;
 
                 List<String> mNames = new ArrayList<>();
@@ -1609,7 +1609,7 @@ public class ExternalBoardService {
                 v.setMemberIds(Collections.singletonList(s.getUserId()));
                 Users user = userInfo.get(s.getUserId());
                 String name = "Unknown";
-                String org = "CWNU";
+                String org = "北京电子科技学院";
                 String avatar = null;
                 if (user != null) {
                     name = user.getRealName();

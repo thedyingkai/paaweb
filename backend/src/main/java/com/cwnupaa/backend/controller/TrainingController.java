@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/training")
 public class TrainingController {
-    private static final String DEFAULT_PUBLISHER_NAME = "PAAWeb";
+    private static final String DEFAULT_PUBLISHER_NAME = "BESTI ACM";
 
     @Autowired
     private TrainingMapper trainingMapper;

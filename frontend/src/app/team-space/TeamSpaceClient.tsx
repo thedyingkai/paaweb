@@ -207,9 +207,9 @@ export default function TeamSpaceClient() {
       <SiteHeader />
       <main className="content-page-shell">
         <section className="content-hero content-hero-centered">
-          <Tag>BESTI ACM · MEMBER SPACE</Tag>
+          <Tag>BESTI ACM · PARTICIPANT SPACE</Tag>
           <Typography.Title className="content-hero-title">
-            我的校队档案
+            我的参赛档案
           </Typography.Title>
           <Typography.Paragraph>
             维护获奖经历、职务与任期，登记你参加的比赛。
@@ -232,6 +232,13 @@ export default function TeamSpaceClient() {
             <Spin />
           ) : (
             <>
+              <Space wrap style={{ marginBottom: 16 }}>
+                <Tag color="green">学生身份已认证</Tag>
+                <Tag color={identity.teamMember ? "blue" : "default"}>
+                  {identity.teamMember ? "校队成员（任期内）" : "普通参赛者"}
+                </Tag>
+                {identity.moderator && <Tag color="purple">交流区管理员</Tag>}
+              </Space>
               <Alert
                 type="info"
                 showIcon
@@ -240,7 +247,8 @@ export default function TeamSpaceClient() {
                   <>
                     联盟主办比赛及 ICPC、CCPC、天梯赛由队长统一组织。
                     {voluntaryFamilies.join("、")}
-                    由本人自愿申请登记。获奖、职务核验后展示在个人主页，修改后重新核验；参赛登记与补充材料仅本人和审核人员可见。职务记录不改变账号权限。
+                    由本人自愿申请登记。普通参赛者同样可以维护个人奖项、职务和参赛记录。获奖、职务核验后展示在个人主页，修改后重新核验；参赛登记与补充材料仅本人和审核人员可见。
+                    校队资格由管理员在校队名单中另行确认，自填职务不开放内部交流权限。
                   </>
                 }
               />
@@ -267,7 +275,8 @@ export default function TeamSpaceClient() {
                       队长统一登记
                     </Button>
                   )}
-                  <Link href="/community">进入校队交流区</Link>
+                  {identity.communityAccess && <Link href="/community">进入校队交流区</Link>}
+                  <Link href="/contest/signup">报名公开赛事</Link>
                   <Link href="/competitions">查看赛事范围</Link>
                 </Space>
                 <Table
@@ -278,7 +287,7 @@ export default function TeamSpaceClient() {
                   scroll={{ x: 850 }}
                   locale={{
                     emptyText: (
-                      <Empty description="暂无记录，添加第一段校队经历" />
+                      <Empty description="暂无记录，添加你的参赛经历" />
                     ),
                   }}
                   expandable={{
@@ -310,7 +319,7 @@ export default function TeamSpaceClient() {
                       render: (v) => kindNames[v],
                     },
                     ...(tab === "review"
-                      ? [{ title: "成员", dataIndex: "owner_name" }]
+                      ? [{ title: "申请人", dataIndex: "owner_name" }]
                       : []),
                     {
                       title: "比赛 / 职务",

@@ -75,7 +75,7 @@ public class AdminDataPanelServiceImpl implements AdminDataPanelService {
             
             // Create header row
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"姓名", "学号", "学院", "专业", "年级", "学历", "班级", "在校状态", "洛谷", "牛客", "Codeforces", "AtCoder", "CWNU", "总刷题量"};
+            String[] headers = {"姓名", "学号", "学院", "专业", "年级", "学历", "班级", "在校状态", "洛谷", "牛客", "Codeforces", "AtCoder", "学校 OJ", "总刷题量"};
             for (int i = 0; i < headers.length; i++) {
                 headerRow.createCell(i).setCellValue(headers[i]);
             }

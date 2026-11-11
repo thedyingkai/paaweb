@@ -314,18 +314,18 @@ const RegisterPage = () => {
 
       <section className="register-layout">
         <div className="auth-copy-panel register-copy">
-          <Tag className="bits-pill" icon={<RocketOutlined />}>加入BESTI ACM</Tag>
+          <Tag className="bits-pill" icon={<RocketOutlined />}>BESTI ACM · 账号注册</Tag>
           <Title className="bits-gradient-title">创建你的算法档案</Title>
           <Paragraph>
             注册后可报名培训与校内赛事，绑定个人身份信息，沉淀属于你的算法成长记录。
           </Paragraph>
-          <Text className="auth-side-note">表单已按身份类型动态裁剪，减少不必要输入。</Text>
+          <Text className="auth-side-note">学生身份认证通过后可报名校赛、维护个人档案；校队资格由管理员另行确认。</Text>
         </div>
 
         <Card className="register-card bits-card" bordered={false} extra={<Button type="link" onClick={() => router.push('/login')}>已有账号？去登录</Button>}>
           <div className="auth-card-heading">
-            <Title level={2}>注册 ACM 校队</Title>
-            <Text>三步完成账号创建与身份认证</Text>
+            <Title level={2}>注册参赛账号</Title>
+            <Text>面向校赛参赛者与校队成员开放</Text>
           </div>
 
           <Steps
@@ -405,11 +405,12 @@ const RegisterPage = () => {
               </Row>
 
               <div className="register-subcard">
+                {identityType === 'postgraduate' && <Paragraph type="secondary">研究生请选择“研究生部”，再选择本人实际学科或专业领域。</Paragraph>}
                 {['undergraduate', 'postgraduate'].includes(identityType) ? (
                   <Row gutter={16}>
                     <Col xs={24} md={12}><Form.Item name="universityId" label="学校" rules={[{ required: true }]}><Select showSearch optionFilterProp="label" onChange={handleUniChange} options={universities.map((item) => ({ value: item.universityId, label: item.universityName }))} /></Form.Item></Col>
-                    <Col xs={24} md={12}><Form.Item name="schoolId" label="学院" rules={[{ required: true }]}><Select onChange={handleSchoolChange} disabled={!schools.length} options={schools.map((item) => ({ value: item.schoolId, label: item.schoolName }))} /></Form.Item></Col>
-                    <Col xs={24} md={12}><Form.Item name="majorId" label="专业" rules={[{ required: true }]}><Select disabled={!majors.length} options={majors.map((item) => ({ value: item.majorId, label: item.majorName }))} /></Form.Item></Col>
+                    <Col xs={24} md={12}><Form.Item name="schoolId" label="院系 / 培养单位" rules={[{ required: true }]}><Select onChange={handleSchoolChange} disabled={!schools.length} options={schools.map((item) => ({ value: item.schoolId, label: item.schoolName }))} /></Form.Item></Col>
+                    <Col xs={24} md={12}><Form.Item name="majorId" label="专业 / 领域" rules={[{ required: true }]}><Select disabled={!majors.length} options={majors.map((item) => ({ value: item.majorId, label: item.majorName }))} /></Form.Item></Col>
                     <Col xs={24} md={6}><Form.Item name="gradeYear" label="入学年份" rules={[{ required: true }, { pattern: /^\d{4}$/, message: '请输入4位年份' }]}><Input maxLength={4} onPressEnter={handleRegister} /></Form.Item></Col>
                     <Col xs={24} md={6}><Form.Item name="className" label="行政班级" rules={[{ required: true }, { pattern: /^\d+$/, message: '班级必须为纯数字' }, { max: 50, message: '班级最多50个字符' }]}><Input maxLength={50} onPressEnter={handleRegister} /></Form.Item></Col>
                   </Row>
@@ -443,11 +444,11 @@ const RegisterPage = () => {
             </div>
 
             <div className={current === 2 ? 'step-panel is-active' : 'step-panel'}>
-              <Result status="success" title="账号注册成功" subTitle="请上传学生证首页和第二页照片或朝阳卡照片完成认证。" />
+              <Result status="success" title="账号注册成功" subTitle="请上传本校学生卡或学生证照片，清晰显示学校、姓名和学号；支持 JPG / PNG，大小不超过 5 MB。审核用于确认学生身份，校队资格由管理员另行确认。" />
               <div className="upload-zone">
                 {authLoading && <Text type="secondary">正在上传并提交认证，请稍候…</Text>}
                 <Upload {...uploadProps} listType="picture-card" maxCount={1}>
-                  <div><UploadOutlined /><div>上传证件</div></div>
+                  <div><UploadOutlined /><div>上传学生卡</div></div>
                 </Upload>
               </div>
               <Button type="link" onClick={() => router.push('/login')}>暂时跳过</Button>

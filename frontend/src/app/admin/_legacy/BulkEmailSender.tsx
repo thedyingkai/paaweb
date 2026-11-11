@@ -504,7 +504,7 @@ const BulkEmailSender: React.FC = () => {
                     aria-label="学校和学号导入名单"
                     value={schoolNumbers}
                     onChange={event => setSchoolNumbers(event.target.value)}
-                    placeholder={'学校\t学号\n示例大学\t00123456'}
+                    placeholder={'学校\t学号\n北京电子科技学院\t00123456'}
                     autoSize={{ minRows: 4, maxRows: 8 }}
                   />
                   <Button loading={loadingBatchUsers} onClick={loadSchoolNumberUsers} icon={<UserAddOutlined />}>按学校＋学号批量加入</Button>

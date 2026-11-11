@@ -9,6 +9,7 @@ public class AssociationMember {
     private Long memberId;
     private String term;
     private String department;
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private Long userId;
     private String realName;
     private String schoolName;

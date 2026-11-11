@@ -399,7 +399,7 @@ const TrainingSignupManager: React.FC = () => {
                     <p style={{marginBottom: 0}}>学校请填写实名认证中的学校（大学）全称。下载模板填写后再上传。</p>
                 </div>
                 <Space wrap>
-                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '培训报名导入模板.xlsx', headers: IMPORT_HEADERS, examples: [['示例大学', '20230001', '张三']] })}>下载 Excel 模板</Button>
+                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '培训报名导入模板.xlsx', headers: IMPORT_HEADERS, examples: [['北京电子科技学院', '20230001', '张三']] })}>下载 Excel 模板</Button>
                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectImportFile(file as File)} onRemove={() => { setImportRows([]); setImportResult(null); }}>
                         <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>
                     </Upload>

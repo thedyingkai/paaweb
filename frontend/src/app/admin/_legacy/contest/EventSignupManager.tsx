@@ -517,7 +517,7 @@ const EventSignupManager: React.FC = () => {
                     <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({
                         fileName: eventInfo.isTeam === 1 ? '团队赛报名导入模板.xlsx' : '个人赛报名导入模板.xlsx',
                         headers: signupTemplateHeaders,
-                        examples: eventInfo.isTeam === 1 ? [['示例队伍', signupGroups[0], '是', '李老师']] : [['示例大学', '20230001', '张三', signupGroups[0], '是', '王老师']],
+                        examples: eventInfo.isTeam === 1 ? [['示例队伍', signupGroups[0], '是', '李老师']] : [['北京电子科技学院', '20230001', '张三', signupGroups[0], '是', '王老师']],
                     })}>下载 Excel 模板</Button>
                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectExcel(file as File, 'signup')} onRemove={() => { setImportRows([]); setImportPreview(null); }}>
                         <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>
@@ -554,7 +554,7 @@ const EventSignupManager: React.FC = () => {
                     <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({
                         fileName: eventInfo.isTeam === 1 ? '团队赛参赛凭证导入模板.xlsx' : '个人赛参赛凭证导入模板.xlsx',
                         headers: credentialHeaders,
-                        examples: eventInfo.isTeam === 1 ? [['示例队伍', '示例大学', '20230001', 'contest01', 'password', 'A01']] : [['示例大学', '20230001', 'contest01', 'password', 'A01']],
+                        examples: eventInfo.isTeam === 1 ? [['示例队伍', '北京电子科技学院', '20230001', 'contest01', 'password', 'A01']] : [['北京电子科技学院', '20230001', 'contest01', 'password', 'A01']],
                     })}>下载 Excel 模板</Button>
                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectExcel(file as File, 'credential')} onRemove={() => { setCredImportRows([]); setCredImportPreview(null); }}>
                         <Button icon={<UploadOutlined />}>选择填写好的 Excel</Button>

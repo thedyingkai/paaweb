@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class EmailService {
-    private static final String LOGO_URL = com.cwnupaa.backend.utils.DeploymentUrls.site() + "/paa-logo.svg";
+    private static final String LOGO_URL = com.cwnupaa.backend.utils.DeploymentUrls.site() + "/besti-acm-wordmark.svg";
 
     @Autowired
     private JavaMailSender defaultMailSender;
@@ -45,7 +45,7 @@ public class EmailService {
 
     private String activeFromName() {
         SmtpConfigDTO config = systemConfigService.getSmtpConfig();
-        return config.isEnabled() && StringUtils.hasText(config.getFromName()) ? config.getFromName() : "PAAWeb";
+        return config.isEnabled() && StringUtils.hasText(config.getFromName()) ? config.getFromName() : "BESTI ACM";
     }
 
     public void sendAccountBanEmail(String email, String name, java.time.LocalDateTime until, String reason) throws Exception {
@@ -53,7 +53,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
         helper.setFrom(activeFromEmail(), activeFromName());
         helper.setTo(email);
-        helper.setSubject("【PAAWeb】账号封禁通知");
+        helper.setSubject("【BESTI ACM】账号封禁通知");
         helper.setText((StringUtils.hasText(name) ? name : "用户") + "，您好：\n\n您的账号已被封禁。\n封禁原因：" + reason
                 + "\n解封时间（北京时间）：" + until.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
                 + "\n到期后系统将自动解除本次封禁。如有疑问，请联系管理员。", false);
@@ -65,7 +65,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
         helper.setFrom(activeFromEmail(), activeFromName());
         helper.setTo(email);
-        helper.setSubject("【PAAWeb】账号安全信息变更通知");
+        helper.setSubject("【BESTI ACM】账号安全信息变更通知");
         helper.setText("您的账号安全信息已发生变更，其他登录会话已失效。如非本人操作，请立即联系管理员。通知不会包含新邮箱、密码或验证码。", false);
         activeMailSender().send(message);
     }
@@ -85,7 +85,7 @@ public class EmailService {
         else if ("change-email-current".equals(type)) subjectType = "邮箱变更原邮箱确认";
         else if ("change-email-new".equals(type)) subjectType = "邮箱变更新邮箱确认";
 
-        helper.setSubject("【PAAWeb】" + subjectType + "安全验证");
+        helper.setSubject("【BESTI ACM】" + subjectType + "安全验证");
         setHtmlText(helper, buildHtmlEmail(resolveRecipientName(toEmail, null), code, subjectType));
 
         activeMailSender().send(message);
@@ -97,7 +97,7 @@ public class EmailService {
         helper.setFrom(activeFromEmail(), activeFromName());
         helper.setTo(toEmail);
 
-        String title = "【PAAWeb】账号安全风险提醒";
+        String title = "【BESTI ACM】账号安全风险提醒";
         helper.setSubject(title);
         setHtmlText(helper, buildCodeRiskHtmlEmail(resolveRecipientName(toEmail, null)));
 
@@ -111,7 +111,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】队伍邀请通知";
+            String title = "【BESTI ACM】队伍邀请通知";
             helper.setSubject(title);
             setHtmlText(helper, buildInviteHtmlEmail(resolveRecipientName(toEmail, null), inviterName, teamName));
             activeMailSender().send(message);
@@ -129,7 +129,7 @@ public class EmailService {
             helper.setTo(toEmail);
 
             String action = accepted ? "接受" : "拒绝";
-            String title = "【PAAWeb】队伍邀请" + action + "通知";
+            String title = "【BESTI ACM】队伍邀请" + action + "通知";
             helper.setSubject(title);
 
             setHtmlText(helper, buildInviteResponseHtmlEmail(resolveRecipientName(toEmail, null), inviteeName, teamName, accepted));
@@ -147,7 +147,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】队伍变动通知";
+            String title = "【BESTI ACM】队伍变动通知";
             helper.setSubject(title);
 
             setHtmlText(helper, buildRemovalHtmlEmail(memberName, teamName, leaderName));
@@ -165,7 +165,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】队伍解散通知";
+            String title = "【BESTI ACM】队伍解散通知";
             helper.setSubject(title);
 
             setHtmlText(helper, buildDisbandHtmlEmail(memberName, teamName, leaderName));
@@ -183,7 +183,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】队员退队通知";
+            String title = "【BESTI ACM】队员退队通知";
             helper.setSubject(title);
 
             setHtmlText(helper, buildMemberLeaveHtmlEmail(resolveRecipientName(toEmail, null), memberName, teamName));
@@ -202,8 +202,8 @@ public class EmailService {
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
 
-            String subject = "【PAAWeb】" + ("update".equals(type) ? "培训安排变更通知" : "新培训讲师任命通知");
-            if ("remove".equals(type)) subject = "【PAAWeb】培训讲师解任通知";
+            String subject = "【BESTI ACM】" + ("update".equals(type) ? "培训安排变更通知" : "新培训讲师任命通知");
+            if ("remove".equals(type)) subject = "【BESTI ACM】培训讲师解任通知";
 
             helper.setSubject(subject);
 
@@ -225,7 +225,7 @@ public class EmailService {
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
 
-            String subject = "【PAAWeb】培训报名状态通知";
+            String subject = "【BESTI ACM】培训报名状态通知";
             String statusText = "";
             String color = "#1890ff";
             String reasonText = "";
@@ -269,7 +269,7 @@ public class EmailService {
             helper.setTo(toEmail);
 
             String resultText = isPassed ? "认证通过" : "认证未通过";
-            String title = "【PAAWeb】身份认证审核结果通知 - " + resultText;
+            String title = "【BESTI ACM】身份认证审核结果通知 - " + resultText;
             helper.setSubject(title);
 
             setHtmlText(helper, buildAuthAuditHtml(userName, isPassed, reason));
@@ -294,7 +294,7 @@ public class EmailService {
     // The durable notification worker needs failures to propagate so it can retry.
     public void sendEventSignupStatusToRecipient(String toEmail, String userName, String eventName,
                                                   String teamName, String status, String reason) throws Exception {
-        String subject = "【PAAWeb】赛事报名状态通知";
+        String subject = "【BESTI ACM】赛事报名状态通知";
         String statusText = switch (status) {
             case "approved" -> "报名成功";
             case "pending" -> "待审核";
@@ -329,7 +329,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】新证书颁发通知";
+            String title = "【BESTI ACM】新证书颁发通知";
             helper.setSubject(title);
             setHtmlText(helper, buildCertificateGrantHtml(userName, certificateName));
 
@@ -349,7 +349,7 @@ public class EmailService {
             helper.setTo(toEmail);
 
             String resultText = isPassed ? "认证通过" : "认证未通过";
-            String title = "【PAAWeb】证书认证审核结果通知 - " + resultText;
+            String title = "【BESTI ACM】证书认证审核结果通知 - " + resultText;
             helper.setSubject(title);
 
             setHtmlText(helper, buildCertificateAuditHtml(userName, eventName, isPassed, reason));
@@ -367,7 +367,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(activeFromEmail(), activeFromName());
             helper.setTo(toEmail);
-            String title = "【PAAWeb】证书撤回通知";
+            String title = "【BESTI ACM】证书撤回通知";
             helper.setSubject(title);
             setHtmlText(helper, buildCertificateRevokeHtml(userName, certificateName));
 
@@ -389,7 +389,7 @@ public class EmailService {
                 MimeMessageHelper helper = new MimeMessageHelper(message, true);
                 helper.setFrom(activeFromEmail(), activeFromName());
                 helper.setTo(toEmail);
-                String title = "【PAAWeb】赛事安排变更通知 - " + eventName;
+                String title = "【BESTI ACM】赛事安排变更通知 - " + eventName;
                 helper.setSubject(title);
 
                 setHtmlText(helper, buildEventTimeChangeHtml(userName, eventName, changeDetail));
@@ -411,7 +411,7 @@ public class EmailService {
                 MimeMessageHelper helper = new MimeMessageHelper(message, true);
                 helper.setFrom(activeFromEmail(), activeFromName());
                 helper.setTo(toEmail);
-                String title = "【PAAWeb】培训安排变更通知 - " + trainingName;
+                String title = "【BESTI ACM】培训安排变更通知 - " + trainingName;
                 helper.setSubject(title);
 
                 setHtmlText(helper, buildTrainingTimeChangeHtml(userName, trainingName, changeDetail));
@@ -433,7 +433,7 @@ public class EmailService {
                 MimeMessageHelper helper = new MimeMessageHelper(message, true);
                 helper.setFrom(activeFromEmail(), activeFromName());
                 helper.setTo(toEmail);
-                String title = "【PAAWeb】赛事提醒 - " + eventName;
+                String title = "【BESTI ACM】赛事提醒 - " + eventName;
                 helper.setSubject(title);
 
                 setHtmlText(helper, buildEventReminderHtml(userName, eventName, eventTime, description));
@@ -450,7 +450,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(activeFromEmail(), activeFromName());
         helper.setTo(toEmail);
-        String finalSubject = subject.startsWith("【PAAWeb】") ? subject : "【PAAWeb】" + subject;
+        String finalSubject = subject.startsWith("【BESTI ACM】") ? subject : "【BESTI ACM】" + subject;
         helper.setSubject(finalSubject);
         setHtmlText(helper, buildBulkHtmlEmail(htmlContent));
         activeMailSender().send(message);
@@ -509,7 +509,7 @@ public class EmailService {
 
     private String buildLogoHeaderHtml() {
         return "<div style='text-align: center; padding: 4px 0 28px 0; margin-bottom: 28px; border-bottom: 1px solid #d9e2ec;'>" +
-                "<img src='" + LOGO_URL + "' alt='PAA' style='display: inline-block; width: 260px; max-width: 86%; height: auto; object-fit: contain; border: 0;'>" +
+                "<img src='" + LOGO_URL + "' alt='BESTI ACM' style='display: inline-block; width: 260px; max-width: 86%; height: auto; object-fit: contain; border: 0;'>" +
                 "</div>";
     }
 
@@ -527,7 +527,7 @@ public class EmailService {
                 formalParagraph(escapeHtml(subjectName) + "关于赛事 <strong style='color: #333;'>" + escapeHtml(eventName) + "</strong> 的报名状态已更新，具体结果如下。") +
                 "<div style='margin: 30px 0; padding: 15px; background-color: #f9f9f9; border-radius: 6px;'>" +
                 "<h3 style='color: " + color + "; margin: 0; font-size: 22px;'>" + statusText + "</h3>" + reasonHtml + "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送，请勿直接回复。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送，请勿直接回复。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -550,7 +550,7 @@ public class EmailService {
                 "<div style='background-color: #fff1f0; border: 1px solid #ffa39e; border-radius: 6px; padding: 18px; margin: 24px 0; text-align: left;'>" +
                 "<p style='font-size: 14px; color: #555555; line-height: 1.8; margin: 0;'>为保护账号安全，本次验证码已自动失效。若非本人操作，说明您的账号可能存在被盗风险，请尽快修改密码，并检查邮箱、手机号等账号安全信息。</p>" +
                 "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送，请勿直接回复。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送，请勿直接回复。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -564,7 +564,7 @@ public class EmailService {
                 "<div style='height: 1px; background: #eee; margin: 15px 0;'></div>" +
                 "<p style='margin: 8px 0; font-size: 15px; color: #555;'>邀请您加入队伍：<strong style='color: #1890ff; font-size: 18px;'>" + teamName + "</strong></p></div>" +
                 formalParagraph("请登录系统，进入“个人主页 - 我的队伍”处理该邀请。") +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -582,7 +582,7 @@ public class EmailService {
                 "<p style='margin: 5px 0; font-size: 15px;'>用户 <strong>" + inviteeName + "</strong></p>" +
                 "<p style='margin: 5px 0; font-size: 15px;'>针对队伍 <strong>" + teamName + "</strong></p>" +
                 "<p style='font-size: 20px; font-weight: bold; color: " + color + "; margin-top: 15px;'>已" + actionText + "邀请</p></div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -594,7 +594,7 @@ public class EmailService {
                 "<div style='background-color: #fff1f0; border: 1px solid #ffa39e; padding: 25px; border-radius: 6px; margin: 25px 0;'>" +
                 "<p style='font-size: 16px; color: #333; margin: 0;'>您已被队长 <strong>" + leaderName + "</strong> 移出</p>" +
                 "<p style='font-size: 20px; font-weight: bold; color: #cf1322; margin: 12px 0;'>「 " + teamName + " 」</p><p style='margin:0; color: #666;'>队伍</p></div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -606,7 +606,7 @@ public class EmailService {
                 "<div style='background-color: #fffbe6; border: 1px solid #ffe58f; padding: 25px; border-radius: 6px; margin: 25px 0;'>" +
                 "<p style='font-size: 16px; color: #333; margin: 0;'>队长 <strong>" + leaderName + "</strong> 已解散</p>" +
                 "<p style='font-size: 20px; font-weight: bold; color: #d48806; margin: 12px 0;'>「 " + teamName + " 」</p><p style='margin:0; color: #666;'>队伍</p></div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -619,7 +619,7 @@ public class EmailService {
                 "<p style='font-size: 16px; color: #333; margin: 0;'>用户 <strong>" + memberName + "</strong></p>" +
                 "<p style='font-size: 16px; color: #666; margin: 10px 0;'>已退出</p>" +
                 "<p style='font-size: 20px; font-weight: bold; color: #cf1322; margin: 0;'>「 " + teamName + " 」</p></div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -649,7 +649,7 @@ public class EmailService {
                 ("remove".equals(type) ? "" : "<p style='margin: 8px 0; color: #555;'>授课时间：<strong style='color: #333;'>" + timeRange + "</strong></p>") +
                 "</div>" +
                 formalParagraph("请登录系统查看详细安排，并按要求做好相关准备。") +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -667,7 +667,7 @@ public class EmailService {
                 formalParagraph("您关于课程 <strong>" + escapeHtml(trainingName) + "</strong> 的报名状态已更新，具体结果如下。") +
                 "<div style='margin: 30px 0; padding: 15px; background-color: #f9f9f9; border-radius: 6px;'>" +
                 "<h3 style='color: " + color + "; margin: 0; font-size: 22px;'>" + statusText + "</h3>" + reasonHtml + "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -681,7 +681,7 @@ public class EmailService {
                 "<div style='padding: 40px 30px; text-align: center;'>" + buildLogoHeaderHtml() + formalGreeting(userName) +
                 formalParagraph("您提交的身份认证申请已完成审核，具体结果如下。") +
                 "<div style='background-color: #f8f9fa; padding: 25px; border-radius: 6px; margin: 25px 0; border: 1px solid #eee;'>" + content + "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -695,7 +695,7 @@ public class EmailService {
                 "<div style='padding: 40px 30px; text-align: center;'>" + buildLogoHeaderHtml() + formalGreeting(userName) +
                 formalParagraph("您提交的证书认证申请已完成审核，具体结果如下。") +
                 "<div style='background-color: #f8f9fa; padding: 25px; border-radius: 6px; margin: 25px 0; border: 1px solid #eee;'>" + content + "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -710,7 +710,7 @@ public class EmailService {
                 "<p style='font-size: 22px; font-weight: bold; color: #d48806; margin: 10px 0; letter-spacing: 1px;'>" + certificateName + "</p></div>" +
                 "</div>" +
                 "<p style='font-size: 14px; color: #666666;'>请登录协会系统，进入【个人中心 - 证书中心】查看并下载电子证书。</p>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -724,7 +724,7 @@ public class EmailService {
                 "<p style='font-size: 20px; font-weight: bold; color: #cf1322; margin: 12px 0; text-decoration: line-through;'>" + certificateName + "</p>" +
                 "<p style='font-size: 14px; color: #666;'>如有疑问，请联系协会管理员。</p>" +
                 "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -736,7 +736,7 @@ public class EmailService {
                 "<div style='background-color: #f9f0ff; border: 1px solid #d3adf7; padding: 25px; border-radius: 6px; margin: 25px 0; text-align: left;'>" +
                 "<p style='font-size: 15px; color: #333; margin: 0; line-height: 1.8; white-space: pre-wrap;'>" + detail + "</p>" +
                 "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -748,7 +748,7 @@ public class EmailService {
                 "<div style='background-color: #e6fffb; border: 1px solid #87e8de; padding: 25px; border-radius: 6px; margin: 25px 0; text-align: left;'>" +
                 "<p style='font-size: 15px; color: #333; margin: 0; line-height: 1.8; white-space: pre-wrap;'>" + detail + "</p>" +
                 "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -762,7 +762,7 @@ public class EmailService {
                 "<p style='margin: 8px 0; color: #d48806; font-size: 14px;'>" + description + "</p>" +
                 "</div>" +
                 formalParagraph("请提前做好参赛准备，预祝您取得优异成绩。") +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 
@@ -771,7 +771,7 @@ public class EmailService {
                 "<div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);'>" +
                 "<div style='padding: 40px 30px; text-align: left;'>" + buildLogoHeaderHtml() +
                 "<div style='font-size: 15px; color: #333333; line-height: 1.9; text-align: justify; text-indent: 2em;'>" + htmlContent + "</div>" +
-                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px; text-align: center;'>此邮件由PAAWeb系统自动发送。</p>" +
+                "<p style='font-size: 13px; color: #999999; margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px; text-align: center;'>此邮件由BESTI ACM系统自动发送。</p>" +
                 "</div></div></body></html>";
     }
 }

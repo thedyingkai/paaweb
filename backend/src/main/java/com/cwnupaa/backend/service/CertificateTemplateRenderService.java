@@ -111,7 +111,7 @@ public class CertificateTemplateRenderService {
     public byte[] renderPreview(Long fileId, String schemaJson, boolean team, LocalDate issueDate) throws Exception {
         String normalizedSchema = normalizeAndValidateSchema(schemaJson);
         CertificateIssue sample = new CertificateIssue();
-        sample.setCertificateNo("PAA-2026-0001");
+        sample.setCertificateNo("BESTI-2026-0001");
         sample.setAwardName("一等奖（金奖）");
         sample.setTeamName(team ? "星辰算法队" : null);
         sample.setCertificateKind(team ? 1 : 0);

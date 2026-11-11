@@ -37,7 +37,7 @@ export default function MemberRecordSummary({
   }, [userId]);
   return (
     <Card
-      title="校队奖项与职务"
+      title="个人奖项与职务"
       extra={<Link href="/team-space">维护我的档案</Link>}
       style={{ marginTop: 24 }}
     >
@@ -47,7 +47,7 @@ export default function MemberRecordSummary({
         <List
           loading={loading}
           dataSource={items}
-          locale={{ emptyText: <Empty description="暂无已核验的校队记录" /> }}
+          locale={{ emptyText: <Empty description="暂无已核验的个人记录" /> }}
           renderItem={(r) => (
             <List.Item>
               <List.Item.Meta

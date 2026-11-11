@@ -102,7 +102,7 @@ public class BotCardRenderer {
         center(g, "CP Tracker", 393, 29, Font.BOLD);
         center(g, "Total Solved", 453, 27, Font.PLAIN);
         center(g, String.valueOf(counts.values().stream().mapToLong(Long::longValue).sum()), 537, 75, Font.BOLD);
-        List<String> names = List.of("CodeForces", "AtCoder", "NowCoder", "Luogu", "CWNU OJ");
+        List<String> names = List.of("CodeForces", "AtCoder", "NowCoder", "Luogu", "学校 OJ");
         List<Color> colors = List.of(new Color(37, 99, 235), new Color(38, 49, 71), new Color(14, 146, 118),
                 new Color(233, 128, 32), new Color(125, 69, 204));
         for (int i = 0; i < 5; i++) {
@@ -139,7 +139,7 @@ public class BotCardRenderer {
             double scale = Math.min(235.0 / logo.getWidth(), 65.0 / logo.getHeight());
             int h = (int) Math.round(logo.getHeight() * scale), w = (int) Math.round(logo.getWidth() * scale);
             g.drawImage(logo, WIDTH - w - 27, 21, w, h, null);
-        } else text(g, "CWNU PAA", 627, 54, 27, Font.BOLD, ink);
+        } else text(g, "BESTI ACM", 627, 54, 27, Font.BOLD, ink);
     }
 
     private void avatar(Graphics2D g, Users user, Color background, Color ink) {
@@ -210,7 +210,7 @@ public class BotCardRenderer {
                 35, height - 24, 21, Font.PLAIN, ink);
     }
     private static String username(Users user) {
-        return user.getUserAccount() == null || user.getUserAccount().isBlank() ? "CWNU User" : user.getUserAccount();
+        return user.getUserAccount() == null || user.getUserAccount().isBlank() ? "BESTI 用户" : user.getUserAccount();
     }
     private static String englishDifficulty(String value) {
         if (value == null || value.isBlank() || value.equals("待评级") || value.equals("未分级") || value.equals("未评级")) return "Unrated";

@@ -65,18 +65,18 @@ const teamPlaceholders = [
 const sampleValues: Record<string, string> = {
   '<name>': '张三',
   '<studentid>': '20260001',
-  '<school>': '示例大学',
+  '<school>': '北京电子科技学院',
   '<teamname>': '星辰算法队',
   '<members>': '张三、李四、王五、赵六',
   '<studentids>': '20260001、20260002、20260003、20260004',
-  '<schools>': '示例大学、示例大学、示例大学、示例大学',
+  '<schools>': '北京电子科技学院、北京电子科技学院、北京电子科技学院、北京电子科技学院',
   '<award>': '一等奖（金奖）',
-  '<number>': 'PAA-2026-0001',
+  '<number>': 'BESTI-2026-0001',
   '<date>': '2026年7月16日',
   ...Object.fromEntries(Array.from({ length: 10 }, (_, index) => index + 1).flatMap(index => [
     [`<member${index}name>`, ['张三', '李四', '王五', '赵六', '孙七', '周八', '吴九', '郑十', '陈一', '刘二'][index - 1]],
     [`<member${index}id>`, `202600${String(index).padStart(2, '0')}`],
-    [`<member${index}school>`, '示例大学'],
+    [`<member${index}school>`, '北京电子科技学院'],
   ])),
 };
 
@@ -104,14 +104,14 @@ type PlaceholderHelp = {
 
 const commonFieldHelp: PlaceholderHelp[] = [
   { label: '奖项', token: '<award>', source: 'Excel 的“奖项”列', example: '一等奖（金奖）' },
-  { label: '证书编号', token: '<number>', source: 'Excel 的“编号”列', example: 'PAA-2026-0001' },
+  { label: '证书编号', token: '<number>', source: 'Excel 的“编号”列', example: 'BESTI-2026-0001' },
   { label: '落款日期', token: '<date>', source: '模板中设置的落款日期', example: '2026年7月16日' },
 ];
 
 const personalFieldHelp: PlaceholderHelp[] = [
   { label: '姓名', token: '<name>', source: 'Excel 的“姓名”列', example: '张三' },
   { label: '学号', token: '<studentid>', source: 'Excel 的“学号”列', example: '20260001' },
-  { label: '学校', token: '<school>', source: 'Excel 的“学校”列', example: '示例大学' },
+  { label: '学校', token: '<school>', source: 'Excel 的“学校”列', example: '北京电子科技学院' },
   ...commonFieldHelp,
 ];
 
@@ -119,7 +119,7 @@ const teamFieldHelp: PlaceholderHelp[] = [
   { label: '队伍名称', token: '<teamname>', source: 'Excel 的“队伍名称”列', example: '星辰算法队' },
   { label: '全部队员姓名', token: '<members>', source: '本行已填写的所有“队员N姓名”', example: '张三、李四、王五、赵六' },
   { label: '全部队员学号', token: '<studentids>', source: '本行已填写的所有“队员N学号”', example: '20260001、20260002' },
-  { label: '全部队员学校', token: '<schools>', source: '本行已填写的所有“队员N学校”', example: '示例大学、示例大学' },
+  { label: '全部队员学校', token: '<schools>', source: '本行已填写的所有“队员N学校”', example: '北京电子科技学院、北京电子科技学院' },
   ...Array.from({ length: 10 }, (_, index) => index + 1).flatMap(index => [
     { label: `队员${index}姓名`, token: `<member${index}name>`, source: `Excel 的“队员${index}姓名”列`, example: sampleValues[`<member${index}name>`] },
     { label: `队员${index}学号`, token: `<member${index}id>`, source: `Excel 的“队员${index}学号”列`, example: sampleValues[`<member${index}id>`] },

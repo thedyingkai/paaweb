@@ -1,0 +1,138 @@
+{
+  "university": "北京电子科技学院",
+  "verifiedAt": "2026-11-11",
+  "sources": [
+    {
+      "title": "学院简介",
+      "url": "https://www.besti.edu.cn/201/69.html"
+    },
+    {
+      "title": "密码科学与技术系专业设置",
+      "url": "https://www.besti.edu.cn/398/314.html"
+    },
+    {
+      "title": "网络空间安全系简介",
+      "url": "https://www.besti.edu.cn/wlkjaqx.html"
+    },
+    {
+      "title": "电子与通信工程系专业设置",
+      "url": "https://www.besti.edu.cn/390/index.html"
+    },
+    {
+      "title": "管理系（MPA教育中心）简介",
+      "url": "https://www.besti.edu.cn/665.news.detail.dhtml?news_id=1978"
+    },
+    {
+      "title": "2026年硕士研究生招生专业目录",
+      "url": "https://www.besti.edu.cn/files/2025/09/20250929100756256.pdf"
+    },
+    {
+      "title": "2026年硕士研究生招生简章（学校发布于研招网）",
+      "url": "https://yz.chsi.com.cn/sch/viewZszc--infoId-3421226887%2CcategoryId-302960743%2CschId-302960684%2Cmindex-12.dhtml"
+    },
+    {
+      "title": "博士研究生招生简章",
+      "url": "https://www.besti.edu.cn/files/2024/10/20241031072159157.pdf"
+    }
+  ],
+  "notes": [
+    "本科按官网学院简介中的8个现有本科专业及各系介绍归属收录。未将停招的历史专业混入当前本科选项。",
+    "研究生按招生目录单列在研究生部这一注册分组下；分组不代表对各系实际培养归属的认定。联合培养专业来自学院简介。",
+    "学制采用硕士3年、博士常规4年的基本学制；延长学制及其他培养方式由管理员按本人学籍核实。"
+  ],
+  "units": [
+    {
+      "name": "密码科学与技术系",
+      "majors": [
+        {
+          "name": "信息安全",
+          "years": 4
+        },
+        {
+          "name": "密码科学与技术",
+          "years": 4
+        }
+      ]
+    },
+    {
+      "name": "网络空间安全系",
+      "majors": [
+        {
+          "name": "计算机科学与技术",
+          "years": 4
+        },
+        {
+          "name": "网络空间安全",
+          "years": 4
+        }
+      ]
+    },
+    {
+      "name": "电子与通信工程系",
+      "majors": [
+        {
+          "name": "电子信息工程",
+          "years": 4
+        },
+        {
+          "name": "通信工程",
+          "years": 4
+        }
+      ]
+    },
+    {
+      "name": "管理系",
+      "majors": [
+        {
+          "name": "行政管理",
+          "years": 4
+        },
+        {
+          "name": "保密管理",
+          "years": 4
+        }
+      ]
+    },
+    {
+      "name": "研究生部",
+      "majors": [
+        {
+          "name": "网络空间安全（硕士）",
+          "years": 3
+        },
+        {
+          "name": "新一代电子信息技术（硕士）",
+          "years": 3
+        },
+        {
+          "name": "通信工程（硕士）",
+          "years": 3
+        },
+        {
+          "name": "计算机技术（硕士）",
+          "years": 3
+        },
+        {
+          "name": "密码（硕士）",
+          "years": 3
+        },
+        {
+          "name": "公共管理（MPA）",
+          "years": 3
+        },
+        {
+          "name": "信息与通信工程（联合培养硕士）",
+          "years": 3
+        },
+        {
+          "name": "计算机科学与技术（联合培养硕士）",
+          "years": 3
+        },
+        {
+          "name": "网络空间安全（博士）",
+          "years": 4
+        }
+      ]
+    }
+  ]
+}

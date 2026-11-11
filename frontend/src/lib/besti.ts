@@ -29,6 +29,8 @@ export type TeamIdentity = {
   name: string;
   moderator: boolean;
   coordinator: boolean;
+  teamMember: boolean;
+  communityAccess: boolean;
 };
 export async function teamApi<T = unknown>(
   path: string,

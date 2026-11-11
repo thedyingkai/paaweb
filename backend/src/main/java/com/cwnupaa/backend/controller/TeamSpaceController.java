@@ -3,6 +3,7 @@ package com.cwnupaa.backend.controller;
 import com.cwnupaa.backend.common.Result;
 import com.cwnupaa.backend.utils.SecurityUtils;
 import com.cwnupaa.backend.utils.BestiRecordPolicy;
+import com.cwnupaa.backend.service.TeamMembershipService;
 import com.cwnupaa.backend.vo.UserProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,11 @@ public class TeamSpaceController {
     static final Set<String> KINDS = Set.of("award", "position", "registration");
     static final Set<String> CATEGORIES = Set.of("discussion", "training", "experience", "announcement");
     private final JdbcTemplate db;
-    public TeamSpaceController(JdbcTemplate db) { this.db = db; }
+    private final TeamMembershipService membership;
+    public TeamSpaceController(JdbcTemplate db, TeamMembershipService membership) {
+        this.db = db;
+        this.membership = membership;
+    }
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Result<String>> handleStatus(ResponseStatusException exception) {
         return ResponseEntity.status(exception.getStatusCode()).body(Result.error(exception.getStatusCode().value(),exception.getReason()));
@@ -40,10 +45,16 @@ public class TeamSpaceController {
     public record Reply(String content) {}
     public record Moderation(boolean pinned, boolean locked) {}
 
-    private UserProfileVO member(HttpServletRequest request) {
+    private UserProfileVO verifiedUser(HttpServletRequest request) {
         var u = SecurityUtils.currentUser(request);
         if (u == null) throw error(HttpStatus.UNAUTHORIZED, "请先登录");
-        if (!"normal".equals(u.getAccountStatus())) throw error(HttpStatus.FORBIDDEN, "请先完成校队成员身份审核");
+        if (!"normal".equals(u.getAccountStatus())) throw error(HttpStatus.FORBIDDEN, "请先完成学生身份认证");
+        return u;
+    }
+    private UserProfileVO forumMember(HttpServletRequest request) {
+        var u = verifiedUser(request);
+        require(moderator(u) || membership.isCurrentMember(u.getUserId()),
+            "校队交流区仅限任期内的校队成员；学生身份认证通过后仍需管理员确认校队资格");
         return u;
     }
     private boolean moderator(UserProfileVO u) {
@@ -132,8 +143,10 @@ public class TeamSpaceController {
 
     @GetMapping("/me")
     public Result<?> me(HttpServletRequest request) {
-        var u=member(request);
-        return Result.success(Map.of("userId",u.getUserId(),"name",u.getUserName(),"moderator",moderator(u),"coordinator",coordinator(u)));
+        var u=verifiedUser(request);
+        boolean teamMember = membership.isCurrentMember(u.getUserId());
+        return Result.success(Map.of("userId",u.getUserId(),"name",u.getUserName(),"moderator",moderator(u),
+            "coordinator",coordinator(u),"teamMember",teamMember,"communityAccess",teamMember || moderator(u)));
     }
     @GetMapping("/public-records")
     public Result<?> publicRecords(@RequestParam(required=false) Long userId,@RequestParam(defaultValue="1") int page) {
@@ -148,7 +161,7 @@ public class TeamSpaceController {
     @GetMapping("/records")
     public Result<?> records(HttpServletRequest request,@RequestParam(defaultValue="mine") String scope,
             @RequestParam(required=false) Long userId,@RequestParam(defaultValue="1") int page) {
-        var u=member(request);
+        var u=verifiedUser(request);
         if ("member".equals(scope)) return publicRecords(userId==null?u.getUserId():userId,page);
         String where; Object[] args;
         if ("review".equals(scope)) {
@@ -162,7 +175,7 @@ public class TeamSpaceController {
     @PostMapping("/records")
     @Transactional
     public Result<?> saveRecord(HttpServletRequest request,@RequestBody MemberRecord r) {
-        var u=member(request); validate(r);
+        var u=verifiedUser(request); validate(r);
         if (r.id()==null) return Result.success(Map.of("id",insertRecord(r,u.getUserId(),u.getUserId())));
         var existing=row("SELECT user_id,version FROM besti_member_record WHERE id=? FOR UPDATE",r.id());
         require(number(existing,"user_id")==u.getUserId(),"只能修改自己的记录");
@@ -178,21 +191,21 @@ public class TeamSpaceController {
     @PostMapping("/roster")
     @Transactional
     public Result<?> roster(HttpServletRequest request,@RequestBody Roster body) {
-        var u=member(request);require(coordinator(u),"仅有赛事管理权限的队长或管理员可统一登记");
+        var u=verifiedUser(request);require(coordinator(u),"仅有赛事管理权限的队长或管理员可统一登记");
         validateRosterFamily(body.record());
         if(body.userIds()==null || body.userIds().isEmpty() || body.userIds().size()>100 || body.userIds().contains(null))
-            throw error(HttpStatus.BAD_REQUEST,"请选择 1 至 100 位已审核成员");
+            throw error(HttpStatus.BAD_REQUEST,"请选择 1 至 100 位已认证参赛者");
         var ids=new LinkedHashSet<>(body.userIds());
         for(long id:ids) {
             if(!Boolean.TRUE.equals(db.queryForObject("SELECT EXISTS(SELECT 1 FROM users WHERE user_id=? AND account_status='normal')",Boolean.class,id)))
-                throw error(HttpStatus.BAD_REQUEST,"名单中包含不存在或未审核的成员");
+                throw error(HttpStatus.BAD_REQUEST,"名单中包含不存在或未完成身份认证的账号");
             insertRecord(body.record(),id,u.getUserId());
         }
         return Result.success(Map.of("count",ids.size()));
     }
     @DeleteMapping("/records/{id}")
     public Result<?> deleteRecord(HttpServletRequest request,@PathVariable long id) {
-        var u=member(request);
+        var u=verifiedUser(request);
         int changed=db.update("DELETE FROM besti_member_record WHERE id=? AND user_id=?",id,u.getUserId());
         if(changed==0) throw error(HttpStatus.NOT_FOUND,"记录不存在或不属于你");
         return Result.success("已删除");
@@ -200,7 +213,7 @@ public class TeamSpaceController {
     @PostMapping("/records/{id}/review")
     @Transactional
     public Result<?> review(HttpServletRequest request,@PathVariable long id,@RequestBody Review review) {
-        var u=member(request);require(moderator(u),"无审核权限");
+        var u=verifiedUser(request);require(moderator(u),"无审核权限");
         int changed=db.update("UPDATE besti_member_record SET status=?,review_note=?,reviewed_by=?,version=version+1,updated_at=now() WHERE id=? AND version=? AND status='pending'",
             review.approved()?"verified":"rejected",text(review.note(),1000,false),u.getUserId(),id,review.version());
         if(changed==0) throw error(HttpStatus.CONFLICT,"记录已发生变化，请刷新后审核");
@@ -209,7 +222,7 @@ public class TeamSpaceController {
     @GetMapping("/topics")
     public Result<?> topics(HttpServletRequest request,@RequestParam(defaultValue="1") int page,
             @RequestParam(defaultValue="") String category,@RequestParam(defaultValue="") String keyword) {
-        member(request);
+        forumMember(request);
         String where="(?='' OR t.category=?) AND (?='' OR t.title ILIKE ?)";
         String query=text(keyword,100,false);String cat=text(category,30,false);
         Object[] params={cat,cat,query,"%"+query+"%"};
@@ -220,12 +233,12 @@ public class TeamSpaceController {
     }
     @GetMapping("/topics/{id}")
     public Result<?> topic(HttpServletRequest request,@PathVariable long id) {
-        member(request);
+        forumMember(request);
         return Result.success(row("SELECT t.*,u.user_name AS author_name FROM besti_forum_topic t JOIN users u ON u.user_id=t.author_id WHERE t.id=?",id));
     }
     @PostMapping("/topics")
     public Result<?> createTopic(HttpServletRequest request,@RequestBody Topic topic) {
-        var u=member(request);validateTopic(u,topic);
+        var u=forumMember(request);validateTopic(u,topic);
         Long id=db.queryForObject("INSERT INTO besti_forum_topic(author_id,category,title,content) VALUES(?,?,?,?) RETURNING id",Long.class,u.getUserId(),topic.category(),text(topic.title(),200,true),text(topic.content(),20000,true));
         return Result.success(Map.of("id",id));
     }
@@ -237,7 +250,7 @@ public class TeamSpaceController {
     @PutMapping("/topics/{id}")
     @Transactional
     public Result<?> editTopic(HttpServletRequest request,@PathVariable long id,@RequestBody Topic topic) {
-        var u=member(request);validateTopic(u,topic);
+        var u=forumMember(request);validateTopic(u,topic);
         var existing=row("SELECT author_id,locked FROM besti_forum_topic WHERE id=? FOR UPDATE",id);
         require(number(existing,"author_id")==u.getUserId(),"只能编辑自己的帖子");
         require(!Boolean.TRUE.equals(existing.get("locked")) || moderator(u),"此讨论已锁定");
@@ -247,27 +260,27 @@ public class TeamSpaceController {
     @DeleteMapping("/topics/{id}")
     @Transactional
     public Result<?> deleteTopic(HttpServletRequest request,@PathVariable long id) {
-        var u=member(request);var existing=row("SELECT author_id FROM besti_forum_topic WHERE id=? FOR UPDATE",id);
+        var u=forumMember(request);var existing=row("SELECT author_id FROM besti_forum_topic WHERE id=? FOR UPDATE",id);
         require(number(existing,"author_id")==u.getUserId() || moderator(u),"无权删除此帖子");
         db.update("DELETE FROM besti_forum_topic WHERE id=?",id);return Result.success("已删除");
     }
     @PostMapping("/topics/{id}/moderate")
     public Result<?> moderate(HttpServletRequest request,@PathVariable long id,@RequestBody Moderation flags) {
-        var u=member(request);require(moderator(u),"无管理权限");
+        var u=forumMember(request);require(moderator(u),"无管理权限");
         if(db.update("UPDATE besti_forum_topic SET pinned=?,locked=? WHERE id=?",flags.pinned(),flags.locked(),id)==0)
             throw error(HttpStatus.NOT_FOUND,"帖子不存在");
         return Result.success("已更新");
     }
     @GetMapping("/topics/{id}/replies")
     public Result<?> replies(HttpServletRequest request,@PathVariable long id,@RequestParam(defaultValue="1") int page) {
-        member(request);row("SELECT id FROM besti_forum_topic WHERE id=?",id);
+        forumMember(request);row("SELECT id FROM besti_forum_topic WHERE id=?",id);
         var total=db.queryForObject("SELECT count(*) FROM besti_forum_reply WHERE topic_id=?",Long.class,id);
         return Result.success(Map.of("items",db.queryForList("SELECT r.*,u.user_name AS author_name FROM besti_forum_reply r JOIN users u ON u.user_id=r.author_id WHERE topic_id=? ORDER BY r.id LIMIT 50 OFFSET ?",id,(page(page)-1)*50),"total",total));
     }
     @PostMapping("/topics/{id}/replies")
     @Transactional
     public Result<?> reply(HttpServletRequest request,@PathVariable long id,@RequestBody Reply reply) {
-        var u=member(request);var topic=row("SELECT locked FROM besti_forum_topic WHERE id=? FOR UPDATE",id);
+        var u=forumMember(request);var topic=row("SELECT locked FROM besti_forum_topic WHERE id=? FOR UPDATE",id);
         require(!Boolean.TRUE.equals(topic.get("locked")),"此讨论已锁定");
         String content=text(reply.content(),10000,true);
         Long replyId=db.queryForObject("INSERT INTO besti_forum_reply(topic_id,author_id,content) VALUES(?,?,?) RETURNING id",Long.class,id,u.getUserId(),content);
@@ -277,7 +290,7 @@ public class TeamSpaceController {
     @PutMapping("/replies/{id}")
     @Transactional
     public Result<?> editReply(HttpServletRequest request,@PathVariable long id,@RequestBody Reply reply) {
-        var u=member(request);var r=row("SELECT r.author_id,t.locked FROM besti_forum_reply r JOIN besti_forum_topic t ON t.id=r.topic_id WHERE r.id=? FOR UPDATE OF t",id);
+        var u=forumMember(request);var r=row("SELECT r.author_id,t.locked FROM besti_forum_reply r JOIN besti_forum_topic t ON t.id=r.topic_id WHERE r.id=? FOR UPDATE OF t",id);
         require(number(r,"author_id")==u.getUserId(),"只能编辑自己的回复");
         require(!Boolean.TRUE.equals(r.get("locked")) || moderator(u),"此讨论已锁定");
         db.update("UPDATE besti_forum_reply SET content=?,updated_at=now() WHERE id=?",text(reply.content(),10000,true),id);
@@ -285,7 +298,7 @@ public class TeamSpaceController {
     }
     @DeleteMapping("/replies/{id}")
     public Result<?> deleteReply(HttpServletRequest request,@PathVariable long id) {
-        var u=member(request);var r=row("SELECT author_id FROM besti_forum_reply WHERE id=?",id);
+        var u=forumMember(request);var r=row("SELECT author_id FROM besti_forum_reply WHERE id=?",id);
         require(number(r,"author_id")==u.getUserId() || moderator(u),"无权删除此回复");
         db.update("DELETE FROM besti_forum_reply WHERE id=?",id);return Result.success("已删除");
     }

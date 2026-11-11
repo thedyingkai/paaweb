@@ -83,7 +83,7 @@ export function CertificateVerifyPanel({ embedded = false }: CertificateVerifyPa
           onSearch={verify}
           enterButton={<><SearchOutlined /> 查询</>}
           loading={loading}
-          placeholder="例如：PAA-2026-0001"
+          placeholder="例如：BESTI-2026-0001"
           maxLength={100}
         />
         <Alert

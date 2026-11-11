@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Card, Radio, Button, message, Modal, Select, Spin, Avatar, Input, Upload, List, Typography, Tooltip, Switch, Form, Table, Tag, Popconfirm, InputNumber, Space } from 'antd';
+import { Card, Radio, Button, message, Modal, Select, Spin, Avatar, Input, Upload, List, Typography, Tooltip, Switch, Form, Table, Tag, Popconfirm, InputNumber, Space, Alert } from 'antd';
 import type { UploadProps } from 'antd'; 
 
 import { MdEditor, type ExposeParam } from '@/app/components/content/SecureMarkdownEditor';
@@ -573,6 +573,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
 
             {isMemberMode ? (
                 <div>
+                    <Alert style={{ marginBottom: 20 }} type="info" showIcon title="学生身份认证与校队资格分开管理" description="普通参赛者可以注册和报名校赛。确认校队资格时，请选择 ACM 校队的队长或队员职务、设置任期并绑定本人站内账号；仅学生身份已认证且在任期内的绑定账号可以进入内部交流区。联盟负责人、自填职务和未绑定账号的展示资料不会自动授予校队资格。解绑、移出名单或任期结束后，内部交流权限随即收回。" />
                     <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <span>当前查看学年：</span>
@@ -773,7 +774,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                             </Space>
                             <p style={{ color: '#777' }}>任期结束次日起，职务自动显示为“前××”。</p>
 
-                            <Form.Item label="绑定站内已注册用户（可选）" name="userId">
+                            <Form.Item label="绑定站内账号" name="userId" extra="校队交流资格必须绑定本人账号；留空仅展示履历。可清空绑定以收回该任期的交流资格。">
                                 <Select
                                     showSearch
                                     placeholder="输入昵称动态检索并绑定站内账号..."
@@ -868,7 +869,7 @@ const IntroManagement: React.FC<{ initialCategory?: IntroCategory }> = ({ initia
                                     )}
                                 </Input.Group>
                             </Form.Item>
-                            <Form.Item label="导入文件" extra="每行 7 列：组织、职务、姓名、学校、学号、任职开始、任职结束（YYYY-MM-DD）。日期留空时按学年 9 月 1 日至次年 8 月 31 日处理。名单可绑定账号，不改变账号权限。">
+                            <Form.Item label="导入文件" extra="每行 7 列：组织、职务、姓名、学校、学号、任职开始、任职结束（YYYY-MM-DD）。日期留空时按学年 9 月 1 日至次年 8 月 31 日处理。校队队长、队员绑定已认证账号后，在任期内开放内部交流；其他职务不授予校队资格，也不授予管理权限。">
                                 <Space wrap>
                                     <Button icon={<DownloadOutlined />} onClick={() => downloadExcelTemplate({ fileName: '校队成员导入模板.xlsx', headers: MEMBER_IMPORT_HEADERS, examples: [['科学之光技术联盟', '社团负责人', '示例同学', '北京电子科技学院', '20260001', '2026-09-01', '2027-08-31'], ['科学之光技术联盟', '主要负责人', '示例同学', '北京电子科技学院', '20260002', '2026-09-01', '2027-08-31'], ['计算机工程师联盟', '负责人', '示例同学', '北京电子科技学院', '20260003', '2026-09-01', '2027-08-31'], ['ACM 校队', '校队队长', '示例同学', '北京电子科技学院', '20260004', '2026-09-01', '2027-08-31'], ['ACM 校队', '队员', '示例同学', '北京电子科技学院', '20260005', '2026-09-01', '2027-08-31']] })}>下载 Excel 模板</Button>
                                     <Upload accept=".xlsx,.xls" maxCount={1} beforeUpload={(file) => selectMemberImportFile(file as File)} onRemove={() => { setBatchImportRows([]); setBatchImportPreview(null); }}>
