@@ -665,6 +665,10 @@ public class AdminUserController {
         if (dto.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }
+        if (StringUtils.hasText(dto.getNewcoderId()) && !dto.getNewcoderId().matches("\\d+"))
+            return Result.error("牛客账号请填写竞赛个人主页 /profile/ 后的数字 UID，不是昵称或学号");
+        if (StringUtils.hasText(dto.getLuoguId()) && !dto.getLuoguId().matches("\\d+"))
+            return Result.error("洛谷账号请填写个人主页 /user/ 后的数字 UID，不是昵称");
 
         Users target = userMapper.selectOne(new QueryWrapper<Users>().eq("user_id", dto.getUserId()).last("FOR UPDATE"));
         UserProfileVO operator = SecurityUtils.currentUser(request);

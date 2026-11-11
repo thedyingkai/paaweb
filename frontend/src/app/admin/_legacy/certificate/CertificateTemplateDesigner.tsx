@@ -70,7 +70,7 @@ const sampleValues: Record<string, string> = {
   '<members>': '张三、李四、王五、赵六',
   '<studentids>': '20260001、20260002、20260003、20260004',
   '<schools>': '北京电子科技学院、北京电子科技学院、北京电子科技学院、北京电子科技学院',
-  '<award>': '一等奖（金奖）',
+  '<award>': '一等奖',
   '<number>': 'BESTI-2026-0001',
   '<date>': '2026年7月16日',
   ...Object.fromEntries(Array.from({ length: 10 }, (_, index) => index + 1).flatMap(index => [
@@ -103,7 +103,7 @@ type PlaceholderHelp = {
 };
 
 const commonFieldHelp: PlaceholderHelp[] = [
-  { label: '奖项', token: '<award>', source: 'Excel 的“奖项”列', example: '一等奖（金奖）' },
+  { label: '奖项', token: '<award>', source: 'Excel 的“奖项”列', example: '一等奖' },
   { label: '证书编号', token: '<number>', source: 'Excel 的“编号”列', example: 'BESTI-2026-0001' },
   { label: '落款日期', token: '<date>', source: '模板中设置的落款日期', example: '2026年7月16日' },
 ];

@@ -269,9 +269,10 @@ public class CertificateController {
             return true;
         }
         return containsAny(award, rank, "特等", "一等", "二等", "三等", "优秀", "其他")
-                || (award.contains("金") && rank.contains("金"))
-                || (award.contains("银") && rank.contains("银"))
-                || (award.contains("铜") && rank.contains("铜"));
+                || (award.contains("金") && (rank.contains("金") || rank.contains("一等")))
+                || (award.contains("银") && (rank.contains("银") || rank.contains("二等")))
+                || (award.contains("铜") && (rank.contains("铜") || rank.contains("三等")))
+                || (award.contains("优胜") && rank.contains("优秀"));
     }
 
     private boolean containsAny(String award, String rank, String... tokens) {

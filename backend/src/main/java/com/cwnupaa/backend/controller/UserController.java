@@ -1113,6 +1113,10 @@ public class UserController {
                 || StringUtils.hasText(userDto.getLuoguClientId());
 
         if (isBindingUpdate) {
+            if (StringUtils.hasText(userDto.getNewcoderId()) && !userDto.getNewcoderId().matches("\\d+"))
+                return Result.error("牛客账号请填写竞赛个人主页 /profile/ 后的数字 UID，不是昵称或学号");
+            if (StringUtils.hasText(userDto.getLuoguId()) && !userDto.getLuoguId().matches("\\d+"))
+                return Result.error("洛谷账号请填写个人主页 /user/ 后的数字 UID，不是昵称");
             if (!verifyEmailCode(currentEmail, userDto.getVerifyCode(), "binding", currentUserId)) return Result.error("绑定账号需要验证当前邮箱");
 
             OjUserAccount oj = ojUserAccountMapper.selectById(userDto.getUserId());

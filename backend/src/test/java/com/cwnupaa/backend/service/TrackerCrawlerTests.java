@@ -42,6 +42,46 @@ class TrackerCrawlerTests {
     }
 
     @Test
+    void codeforcesRecoversFromOneUpstreamServerFailure() throws Exception {
+        String url = "https://codeforces.com/api/user.status?handle=test&from=1&count=10000";
+        server.expect(requestTo(url)).andRespond(withStatus(org.springframework.http.HttpStatus.BAD_GATEWAY));
+        reply(url, Map.of("status", "OK", "result", List.of()));
+        assertThat(crawler.crawlCodeforces("test")).isEmpty();
+        server.verify();
+    }
+
+    @Test
+    void requestTimeoutRetriesOnceAndDoesNotExposeSensitiveExceptionText() {
+        server.expect(org.springframework.test.web.client.ExpectedCount.twice(),
+                requestTo("https://codeforces.com/api/user.status?handle=test&from=1&count=10000"))
+                .andRespond(request -> { throw new java.net.SocketTimeoutException("private-cookie-marker"); });
+        assertThatThrownBy(() -> crawler.crawlCodeforces("test"))
+                .hasMessageContaining("超时").hasMessageContaining("自动重试")
+                .hasMessageNotContaining("private-cookie-marker");
+        server.verify();
+    }
+
+    @Test
+    void forbiddenPublicApiDoesNotAskForLoginCredentialsOrLeakResponse() {
+        server.expect(requestTo("https://codeforces.com/api/user.status?handle=test&from=1&count=10000"))
+                .andRespond(withStatus(org.springframework.http.HttpStatus.FORBIDDEN).body("private-response-marker"));
+        assertThatThrownBy(() -> crawler.crawlCodeforces("test"))
+                .hasMessageContaining("403").hasMessageNotContaining("登录凭据")
+                .hasMessageNotContaining("private-response-marker");
+        server.verify();
+    }
+
+    @Test
+    void dnsFailureIdentifiesThePlatformAndDoesNotRetry() {
+        server.expect(requestTo("https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=test&from_second=0"))
+                .andRespond(request -> { throw new java.net.UnknownHostException("private-host-marker"); });
+        assertThatThrownBy(() -> crawler.crawlAtcoder("test"))
+                .hasMessageContaining("AtCoder").hasMessageContaining("域名")
+                .hasMessageNotContaining("private-host-marker");
+        server.verify();
+    }
+
+    @Test
     void atcoderLoadsBeyond500UsesAllVerdictsForCursorAndKeepsFirstAc() throws Exception {
         List<Map<String, Object>> first = new ArrayList<>();
         for (int i = 1; i <= 500; i++) first.add(at(i, i, "abc_a", i == 2 ? "AC" : "WA"));
@@ -78,8 +118,12 @@ class TrackerCrawlerTests {
         var first = new ArrayList<Map<String, Object>>();
         for (int i = 1; i <= 500; i++) first.add(at(i, i, "abc_a", "AC"));
         reply("https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=test&from_second=0", first);
-        server.expect(anything()).andRespond(withServerError());
-        assertThatThrownBy(() -> crawler.crawlAtcoder("test")).isInstanceOf(IllegalStateException.class);
+        server.expect(org.springframework.test.web.client.ExpectedCount.twice(),
+                requestTo("https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=test&from_second=500"))
+                .andRespond(withServerError());
+        assertThatThrownBy(() -> crawler.crawlAtcoder("test"))
+                .isInstanceOf(IllegalStateException.class).hasMessageContaining("HTTP 500");
+        server.verify();
     }
 
     @Test

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -22,8 +24,17 @@ public class WebConfig implements WebMvcConfigurer {
     private String uploadPath;
 
     @Bean
+    @Primary
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public RestTemplate trackerRestTemplate() {
+        SimpleClientHttpRequestFactory requests = new SimpleClientHttpRequestFactory();
+        requests.setConnectTimeout(15000);
+        requests.setReadTimeout(30000);
+        return new RestTemplate(requests);
     }
 
     private String[] corsOrigins() {

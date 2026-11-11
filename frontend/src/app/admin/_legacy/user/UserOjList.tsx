@@ -209,11 +209,11 @@ const UserOjList: React.FC = () => {
             <Form.Item name="atcoderId" label="AtCoder 账号 (昵称)">
                 <Input placeholder="输入AtCoder Handle" />
             </Form.Item>
-            <Form.Item name="luoguId" label="洛谷 账号 (昵称)">
-                <Input placeholder="输入洛谷 ID" />
+            <Form.Item name="luoguId" label="洛谷数字 UID" rules={[{ pattern: /^\d+$/, message: '请填写洛谷个人主页地址中的数字 UID' }]}>
+                <Input placeholder="例如 123456（个人主页 /user/ 后的数字）" />
             </Form.Item>
-            <Form.Item name="newcoderId" label="牛客 账号 (竞赛首页学号)">
-                <Input placeholder="输入牛客 ID" />
+            <Form.Item name="newcoderId" label="牛客竞赛数字 UID" rules={[{ pattern: /^\d+$/, message: '请填写牛客竞赛个人主页地址中的数字 UID' }]}>
+                <Input placeholder="例如 123456（竞赛主页 /profile/ 后的数字）" />
             </Form.Item>
             <Form.Item name="cwnuojId" label="学校OJ 账号 (账号ID)">
                 <Input placeholder="输入学校OJ账号" />

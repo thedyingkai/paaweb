@@ -586,8 +586,8 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
               children: (
                 <div className="edit-narrow-panel">
                   {isAllBound ? <Alert type="success" showIcon message="所有账号已完成绑定，信息仅供展示，不可修改。" /> : <Alert type="warning" showIcon message="账号绑定后不可修改，请确认账号属于本人。" />}
-                  <Form.Item label="牛客竞赛" name="newcoderId"><Input className="bits-input" disabled={Boolean(userData.newcoderId)} prefix={<GlobalOutlined />} /></Form.Item>
-                  <Form.Item label="洛谷" name="luoguId"><Input className="bits-input" disabled={Boolean(userData.luoguId)} prefix={<GlobalOutlined />} /></Form.Item>
+                  <Form.Item label="牛客竞赛数字 UID" name="newcoderId" extra="填写竞赛个人主页地址 /profile/ 后的数字。" rules={[{ pattern: /^\d+$/, message: '请输入数字 UID，不是昵称或学号' }]}><Input className="bits-input" disabled={Boolean(userData.newcoderId)} placeholder="例如 123456" prefix={<GlobalOutlined />} /></Form.Item>
+                  <Form.Item label="洛谷数字 UID" name="luoguId" extra="填写洛谷个人主页地址 /user/ 后的数字。" rules={[{ pattern: /^\d+$/, message: '请输入数字 UID，不是昵称' }]}><Input className="bits-input" disabled={Boolean(userData.luoguId)} placeholder="例如 123456" prefix={<GlobalOutlined />} /></Form.Item>
                   <Form.Item label="Codeforces" name="codeforcesId"><Input className="bits-input" disabled={Boolean(userData.codeforcesId)} prefix={<GlobalOutlined />} /></Form.Item>
                   <Form.Item label="AtCoder" name="atcoderId"><Input className="bits-input" disabled={Boolean(userData.atcoderId)} prefix={<GlobalOutlined />} /></Form.Item>
                   <Form.Item label="学校 OJ" name="cwnuojId"><Input className="bits-input" disabled={Boolean(userData.cwnuojId)} prefix={<GlobalOutlined />} /></Form.Item>

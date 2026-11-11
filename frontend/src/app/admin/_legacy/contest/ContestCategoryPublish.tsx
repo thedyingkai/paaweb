@@ -148,7 +148,7 @@ const ContestCategoryPublish: React.FC = () => {
                                     <Form.Item name="level" label="赛事级别" rules={[{ required: true }]}>
                                         <Select size="large">
                                             <Select.Option value="national">国家级</Select.Option>
-                                            <Select.Option value="provincial">省级</Select.Option>
+                                            <Select.Option value="provincial">省部级</Select.Option>
                                             <Select.Option value="city">市级</Select.Option>
                                             <Select.Option value="school">校级</Select.Option>
                                             <Select.Option value="department">院级</Select.Option>

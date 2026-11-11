@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Card, Table, Button, Modal, Form, Input, DatePicker, message, Tag, Result } from 'antd';
+import { Card, Table, Button, Modal, Form, Input, DatePicker, message, Tag } from 'antd';
 import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { useNavigate } from '@/app/admin/_legacy/router';
 
 const TermManagement: React.FC = () => {
     const [list, setList] = useState([]);
@@ -14,23 +13,9 @@ const TermManagement: React.FC = () => {
     const [editingTerm, setEditingTerm] = useState<any>(null);
     const [form] = Form.useForm();
 
-    const navigate = useNavigate();
-    const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
-
     useEffect(() => {
-        const checkAuth = () => {
-            const userStr = localStorage.getItem('user_info');
-            const user = userStr ? JSON.parse(userStr) : null;
-
-            if (!user || user.role !== 'supper_admin') {
-                message.error('无权访问：仅限超级管理员操作');
-                setIsAuthorized(false);
-            } else {
-                setIsAuthorized(true);
-                fetchTerms(); 
-            }
-        };
-        checkAuth();
+        // AdminLayoutClient gates this route with manage_term; the save API enforces it again.
+        fetchTerms();
     }, []);
 
     const fetchTerms = async () => {
@@ -101,21 +86,6 @@ const TermManagement: React.FC = () => {
             )
         }
     ];
-
-    if (isAuthorized === false) {
-        return (
-            <Result
-                status="403"
-                title="403 Forbidden"
-                subTitle="抱歉，您没有权限访问此页面 (需要超级管理员权限)。"
-                extra={<Button type="primary" onClick={() => navigate('/admin/dashboard')}>返回后台首页</Button>}
-            />
-        );
-    }
-    
-    if (isAuthorized === null) {
-        return null;
-    }
 
     return (
         <Card 

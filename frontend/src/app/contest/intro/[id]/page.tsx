@@ -19,7 +19,7 @@ interface ContestCategoryDetail {
 
 const levelConfig: Record<string, { text: string; color: string }> = {
   national: { text: '国家级', color: '#f5222d' },
-  provincial: { text: '省级', color: '#fa541c' },
+  provincial: { text: '省部级', color: '#fa541c' },
   city: { text: '市级', color: '#fa8c16' },
   school: { text: '校级', color: '#1677ff' },
   department: { text: '院级', color: '#52c41a' }

@@ -69,7 +69,7 @@ const AdminDashboard: React.FC = () => {
     return () => window.clearInterval(timer);
   }, []);
 
-  const isSuperAdmin = user?.role === 'supper_admin';
+  const isSuperAdmin = user?.role === 'supper_admin' || user?.role === 'super_admin';
   
   return (
     <div>

@@ -51,7 +51,7 @@ const ContestCategoryManager: React.FC = () => {
 
   const levelMap: any = {
     national: { text: '国家级', color: 'red' },
-    provincial: { text: '省级', color: 'volcano' },
+    provincial: { text: '省部级', color: 'volcano' },
     city: { text: '市级', color: 'orange' },
     school: { text: '校级', color: 'blue' },
     department: { text: '院级', color: 'green' },

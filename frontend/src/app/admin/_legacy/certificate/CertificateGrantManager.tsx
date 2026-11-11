@@ -82,8 +82,8 @@ type IdentityConfirmation = {
 
 const displayLevelScope = (levelScope?: string) => {
   if (!levelScope) return '-';
-  if (levelScope.includes('校') && !levelScope.includes('市')) return '校（市）级';
-  if (levelScope.includes('院')) return '院级';
+  if (levelScope.includes('校')) return '校级';
+  if (levelScope.includes('省')) return '省部级';
   return levelScope;
 };
 
@@ -561,7 +561,7 @@ const CertificateGrantManager: React.FC = () => {
         <Form form={form} layout="vertical" onFinish={saveTemplate}>
           <Row gutter={16}>
             <Col span={8}><Form.Item name="typeName" label="证书名称" rules={[{ required: true, message: '请输入证书名称' }]}><Input /></Form.Item></Col>
-            <Col span={6}><Form.Item name="level" label="等级大类" rules={[{ required: true, message: '请选择等级大类' }]}><Select options={levelOptions.map(item => ({ label: item.label, value: item.value }))} placeholder="选择国家级/省级/校（市）级/院级" /></Form.Item></Col>
+            <Col span={6}><Form.Item name="level" label="等级大类" rules={[{ required: true, message: '请选择等级大类' }]}><Select options={levelOptions.map(item => ({ label: item.label, value: item.value }))} placeholder="选择国家级／省部级／校级" /></Form.Item></Col>
             <Col span={5}><Form.Item name="term" label="所属学期" rules={[{ required: true, message: '请选择学期' }]}><Select options={terms.map(item => ({ label: item.termName, value: item.termId }))} /></Form.Item></Col>
             <Col span={5}><Form.Item name="time" label="落款日期" rules={[{ required: true, message: '请选择日期' }]}><DatePicker style={{ width: '100%' }} /></Form.Item></Col>
           </Row>

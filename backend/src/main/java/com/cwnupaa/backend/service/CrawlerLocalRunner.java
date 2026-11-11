@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -19,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CrawlerLocalRunner {
 
     @Autowired
+    @Qualifier("trackerRestTemplate")
     private RestTemplate restTemplate;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -500,6 +502,32 @@ public class CrawlerLocalRunner {
 
     private String getPage(String url, Map<String, String> extraHeaders, long interval) {
         String host = java.net.URI.create(url).getHost();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "Mozilla/5.0");
+        if (extraHeaders != null) extraHeaders.forEach(headers::set);
+        for (int attempt = 1; ; attempt++) {
+            waitForRequestSlot(host, interval);
+            try {
+                String body = restTemplate.exchange(java.net.URI.create(url), HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
+                require(body != null && !body.isBlank(), "平台返回空响应");
+                return body;
+            } catch (RestClientException e) {
+                // Record diagnostic categories only: exception text can contain URLs, credentials or response HTML.
+                Throwable root = e;
+                while (root.getCause() != null && root.getCause() != root) root = root.getCause();
+                Integer status = e instanceof HttpStatusCodeException http ? http.getStatusCode().value() : null;
+                log.warn("OJ request failed host={} status={} cause={} attempt={}", host, status, root.getClass().getSimpleName(), attempt);
+                boolean transientFailure = status != null ? status >= 500 && status <= 599
+                        : e instanceof org.springframework.web.client.ResourceAccessException
+                        && !(root instanceof javax.net.ssl.SSLException)
+                        && !(root instanceof java.net.UnknownHostException);
+                if (attempt < 2 && transientFailure) continue;
+                throw new TrackerSyncException(requestFailureMessage(host, status, root));
+            }
+        }
+    }
+
+    private void waitForRequestSlot(String host, long interval) {
         synchronized (lastRequest) {
             long wait = lastRequest.getOrDefault(host, 0L) + interval - System.currentTimeMillis();
             if (paceRequests && wait > 0) {
@@ -511,26 +539,33 @@ public class CrawlerLocalRunner {
             }
             lastRequest.put(host, System.currentTimeMillis());
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("User-Agent", "Mozilla/5.0");
-        if (extraHeaders != null) extraHeaders.forEach(headers::set);
-        try {
-            String body = restTemplate.exchange(java.net.URI.create(url), HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
-            require(body != null && !body.isBlank(), "平台返回空响应");
-            return body;
-        } catch (RestClientException e) {
-            // Do not include request headers, Cookie values, or full HTML in notifications.
-            if ("www.luogu.com.cn".equals(host) && e instanceof HttpStatusCodeException httpError) {
-                int status = httpError.getStatusCode().value();
-                throw new TrackerSyncException(switch (status) {
-                    case 401 -> "洛谷未接受登录凭据（HTTP 401），请登录洛谷后重新填写同一会话的 __client_id 和 _uid";
-                    case 403 -> "请求被洛谷拒绝（HTTP 403），请确认登录状态和评测记录访问权限";
-                    case 429 -> "洛谷请求过于频繁（HTTP 429），请稍后重试";
-                    default -> "洛谷请求失败（HTTP " + status + "），请稍后重试";
-                });
-            }
-            throw new TrackerSyncException("平台请求失败，请稍后重试或检查登录凭据");
+    }
+
+    private String requestFailureMessage(String host, Integer status, Throwable cause) {
+        String platform = switch (host) {
+            case "codeforces.com" -> "Codeforces";
+            case "kenkoooo.com" -> "AtCoder";
+            case "ac.nowcoder.com" -> "牛客";
+            case "www.luogu.com.cn" -> "洛谷";
+            default -> "OJ";
+        };
+        if (status != null) {
+            if ("www.luogu.com.cn".equals(host) && status == 401)
+                return "洛谷未接受登录凭据（HTTP 401），请登录洛谷后重新填写同一会话的 __client_id 和 _uid";
+            return switch (status) {
+                case 401 -> platform + "接口拒绝访问（HTTP 401），请检查账号信息";
+                case 403 -> platform + "拒绝了同步请求（HTTP 403），请稍后重试或检查记录访问权限";
+                case 404 -> platform + "未找到账号或接口（HTTP 404），请检查绑定账号";
+                case 429 -> platform + "请求过于频繁（HTTP 429），请稍后重试";
+                default -> platform + "请求失败（HTTP " + status + "），请稍后重试";
+            };
         }
+        if (cause instanceof java.net.SocketTimeoutException) return platform + "连接或读取超时，自动重试后仍未成功，请稍后重试";
+        if (cause instanceof java.net.UnknownHostException) return "服务器无法解析 " + platform + " 的域名，请联系管理员";
+        if (cause instanceof javax.net.ssl.SSLException || cause instanceof java.security.cert.CertificateException)
+            return "服务器与 " + platform + " 的安全连接失败，请联系管理员";
+        if (cause instanceof java.net.ConnectException) return "服务器无法连接 " + platform + "，请稍后重试";
+        return platform + "网络请求失败，请稍后重试或联系管理员";
     }
 
     private Map<String, Object> readObject(String json) {

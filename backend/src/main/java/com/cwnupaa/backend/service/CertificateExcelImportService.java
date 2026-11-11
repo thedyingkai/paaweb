@@ -259,7 +259,7 @@ public class CertificateExcelImportService {
             throw new IllegalArgumentException("证书模板必须设置落款日期");
         }
         if (!StringUtils.hasText(resolveLevelScope(type))) {
-            throw new IllegalArgumentException("证书模板必须设置国家级、省级、校（市）级或院级等大类等级");
+            throw new IllegalArgumentException("证书模板必须设置国家级、省部级或校级");
         }
         String schema = type.getTemplateSchema();
         if (!StringUtils.hasText(schema)) {

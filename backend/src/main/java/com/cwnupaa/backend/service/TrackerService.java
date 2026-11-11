@@ -323,7 +323,8 @@ public class TrackerService {
                 notificationService.send(userId, 5, "CP Tracker数据同步完成", "平台 [" + platformName + "] 数据同步完成，新增 " + added + " 题。");
             }
         } catch (Exception e) {
-            log.error("同步 {} 失败: {}", platformName, e.getClass().getSimpleName());
+            log.error("用户 {} 同步 {} 失败: {}", userId, platformName,
+                    e instanceof TrackerSyncException ? e.getMessage() : e.getClass().getSimpleName());
             if (notifyUser) {
                 String detail = e instanceof TrackerSyncException ? e.getMessage() : "请稍后重试或联系管理员";
                 notificationService.send(userId, 5, "CP Tracker数据同步失败", "平台 [" + platformName + "] 数据同步遇到问题: " + detail);
