@@ -8,7 +8,7 @@ export const memberRoles = [
 
 export const memberOrganizations = ['科学之光技术联盟', '计算机工程师联盟', 'ACM 校队'];
 export const awardLevels = ['省部级', '国家级', '校级'];
-export const awardGrades = ['一等奖', '二等奖', '三等奖', '特等奖', '优秀奖'];
+export const awardGrades = ['一等奖', '二等奖', '三等奖', '特等奖', '优胜奖', '优秀奖'];
 
 export function awardStages(family?: string) {
   if (family === 'ICPC' || family === 'CCPC') return [

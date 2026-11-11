@@ -1,0 +1,35 @@
+{
+  "release": "20261111-besti-r4",
+  "passed": 16,
+  "checks": [
+    "published-records-match-reviewed-snapshot",
+    "published-metadata-match-reviewed-snapshot",
+    "formal-recognized-awards-39",
+    "separate-unofficial-equivalents-7",
+    "national-honorable-19-plus-4",
+    "provincial-honorable-12",
+    "preliminary-results-remain-participation",
+    "unknown-xian-award-remains-unclassified",
+    "raw-medals-preserved",
+    "all-127-team-counts-preserved",
+    "silk-road-events-still-excluded",
+    "persisted-distinct-grade:国家级优胜奖",
+    "persisted-distinct-grade:省部级优胜奖",
+    "persisted-distinct-grade:校级优胜奖",
+    "persisted-distinct-grade:校级优秀奖",
+    "verification-records-cleaned"
+  ],
+  "backendFocusedTestsPassed": 16,
+  "frontendProductionBuild": "passed (including TypeScript)",
+  "browserVerification": {
+    "browser": "Edge",
+    "url": "https://bestiacm.thedyingkai.cn/honor",
+    "checked": [
+      "removed school-recognition card title",
+      "distinct honorable and excellent columns",
+      "39 formal awards and 7 unofficial equivalents",
+      "national honorable 19 (+4), provincial honorable 12 (+0)",
+      "official and total rank denominators visible"
+    ]
+  }
+}

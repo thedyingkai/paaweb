@@ -791,12 +791,15 @@
       "xcpcio": "icpc/51st/shenyang-invitational"
     },
     "notes": "",
-    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳）",
+    "title": "2026 年 ICPC 国际大学生程序设计竞赛全国邀请赛（沈阳） · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 18,
     "totalTeams": 286,
     "totalOfficialTeams": 281,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "513532f6e247ed1f2403",
@@ -832,12 +835,15 @@
       "xcpcio": "ccpc/12th/guizhou-invitational"
     },
     "notes": "",
-    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 19,
     "totalTeams": 222,
     "totalOfficialTeams": 211,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "f0f63fc801414e4b44a8",
@@ -873,12 +879,15 @@
       "xcpcio": "ccpc/12th/guizhou-invitational"
     },
     "notes": "",
-    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛",
+    "title": "2026 CCPC 中国大学生程序设计竞赛全国邀请赛（贵州）暨贵州省赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 20,
     "totalTeams": 222,
     "totalOfficialTeams": 211,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "ba0a83f0f641d6c32721",
@@ -914,12 +923,15 @@
       "xcpcio": "ccpc/12th/nanchang-invitational"
     },
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
-    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学） · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 21,
     "totalTeams": 340,
     "totalOfficialTeams": 307,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "c21b11961587c18c0e35",
@@ -955,12 +967,15 @@
       "xcpcio": "ccpc/12th/nanchang-invitational"
     },
     "notes": "",
-    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学）",
+    "title": "2026年中国大学生程序设计竞赛-全国邀请赛（南昌）（南昌大学） · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 22,
     "totalTeams": 340,
     "totalOfficialTeams": 307,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "497963179fc3ebb57016",
@@ -1048,13 +1063,16 @@
       "cpcfinder": 32550
     },
     "notes": "",
-    "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站",
+    "title": "第 11 届 CCPC 中国大学生程序设计竞赛济南站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 24,
     "totalTeams": 320,
     "totalOfficialTeams": 260,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "济南"
+    "location": "济南",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "a46f54bc5328d9f9ad27",
@@ -1105,7 +1123,9 @@
     "equivalentAward": "",
     "equivalentAwardChecked": true,
     "equivalentRank": 243,
-    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照榜单指定的 CCPC 奖牌比例规则计算；仅为打星等效成绩，不代表实际授奖。"
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照榜单指定的 CCPC 奖牌比例规则计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "国家级",
+    "equivalentAwardGrade": "优胜奖"
   },
   {
     "uid": "2db3e2e364b44d33a09a",
@@ -1156,7 +1176,9 @@
     "equivalentAward": "",
     "equivalentAwardChecked": true,
     "equivalentRank": 430,
-    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "国家级",
+    "equivalentAwardGrade": "优胜奖"
   },
   {
     "uid": "179ed60749093041fa19",
@@ -1197,13 +1219,16 @@
       "cpcfinder": 32961
     },
     "notes": "",
-    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站",
+    "title": "「华为杯」第 50 届 ICPC 国际大学生程序设计竞赛区域赛武汉站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 27,
     "totalTeams": 520,
     "totalOfficialTeams": 446,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "武汉"
+    "location": "武汉",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "4c4863c4ccdc5e73ef3f",
@@ -1491,12 +1516,15 @@
       "xcpcio": "ccpc/11th/nanchang-invitational"
     },
     "notes": "",
-    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 35,
     "totalTeams": 270,
     "totalOfficialTeams": 259,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "24252d41d507423b40f1",
@@ -1532,12 +1560,15 @@
       "xcpcio": "ccpc/11th/nanchang-invitational"
     },
     "notes": "",
-    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛",
+    "title": "2025 CCPC 全国邀请赛（南昌）暨第二届江西省赛 - 正式赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 36,
     "totalTeams": 270,
     "totalOfficialTeams": 259,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "0620acccbe9564c3b259",
@@ -1795,12 +1826,15 @@
       "rating": "ccpc__ccpc2025__ccpc2025invitational-fujian"
     },
     "notes": "",
-    "title": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛",
+    "title": "第十二届福建省大学生程序设计竞赛暨2025年CCPC福建邀请赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 43,
     "totalTeams": 285,
     "totalOfficialTeams": 284,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "ee7f6c9f579522a414f0",
@@ -1832,12 +1866,15 @@
       "xcpcio": "ccpc/11th/northeastern"
     },
     "notes": "",
-    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 44,
     "totalTeams": 397,
     "totalOfficialTeams": 386,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "02ae99bf3b4f216efb1c",
@@ -1869,12 +1906,15 @@
       "xcpcio": "ccpc/11th/northeastern"
     },
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
-    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 45,
     "totalTeams": 397,
     "totalOfficialTeams": 386,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "25e0d3071f9588c1be04",
@@ -1906,12 +1946,15 @@
       "xcpcio": "ccpc/11th/northeastern"
     },
     "notes": "",
-    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛",
+    "title": "2025 年 CCPC 全国邀请赛（东北）暨第十九届 CCPC 东北地区大学生程序设计竞赛 - 正式赛 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 46,
     "totalTeams": 397,
     "totalOfficialTeams": 386,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "71acd4b3961cdc74a73e",
@@ -1962,7 +2005,9 @@
     "equivalentAward": "",
     "equivalentAwardChecked": true,
     "equivalentRank": 372,
-    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "国家级",
+    "equivalentAwardGrade": "优胜奖"
   },
   {
     "uid": "423261cf93e0a60875a1",
@@ -2003,13 +2048,16 @@
       "cpcfinder": 35454
     },
     "notes": "",
-    "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛区域赛上海站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 48,
     "totalTeams": 352,
     "totalOfficialTeams": 336,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "上海"
+    "location": "上海",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "242d3a78f5cc928e5da0",
@@ -2287,12 +2335,15 @@
       "xcpcio": "icpc/49th/xian-invitational"
     },
     "notes": "",
-    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站",
+    "title": "第 49 届 ICPC 国际大学生程序设计竞赛邀请赛西安站 · 省部级优胜奖",
     "imageUrl": "",
     "sortOrder": 55,
     "totalTeams": 397,
     "totalOfficialTeams": 382,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "省部级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "2dbc72081995798ba72d",
@@ -2333,13 +2384,16 @@
       "cpcfinder": 811
     },
     "notes": "",
-    "title": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "title": "第 48 届国际大学生程序设计竞赛亚洲区域赛杭州站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 56,
     "totalTeams": 483,
     "totalOfficialTeams": 442,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "杭州"
+    "location": "杭州",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "31c873123fb48ecd6867",
@@ -2658,13 +2712,16 @@
       "cpcfinder": 4849
     },
     "notes": " 不同来源的名次有差异，主表采用 CPCFinder 对应榜单的排名与队伍总数；可对照各榜单。",
-    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛杭州站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 64,
     "totalTeams": 659,
     "totalOfficialTeams": 556,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "杭州"
+    "location": "杭州",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "322d57c0a6513ffb43e4",
@@ -2715,7 +2772,9 @@
     "equivalentAward": "",
     "equivalentAwardChecked": true,
     "equivalentRank": 436,
-    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。"
+    "equivalentAwardBasis": "按 XCPCIO 原始榜单重放，在正式队伍中比较名次，再对照公布的奖牌数量计算；仅为打星等效成绩，不代表实际授奖。",
+    "equivalentAwardLevel": "国家级",
+    "equivalentAwardGrade": "优胜奖"
   },
   {
     "uid": "1b610872166659115b21",
@@ -2756,13 +2815,16 @@
       "cpcfinder": 5404
     },
     "notes": "",
-    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛济南站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 66,
     "totalTeams": 580,
     "totalOfficialTeams": 511,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "济南"
+    "location": "济南",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "93b302b96363b2a9da63",
@@ -2803,13 +2865,16 @@
       "cpcfinder": 7786
     },
     "notes": "",
-    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 67,
     "totalTeams": 738,
     "totalOfficialTeams": 708,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "沈阳"
+    "location": "沈阳",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "ad294b6c92e8913fdb71",
@@ -2850,13 +2915,16 @@
       "cpcfinder": 7773
     },
     "notes": "",
-    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站",
+    "title": "第 47 届国际大学生程序设计竞赛亚洲区域赛沈阳站 · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 68,
     "totalTeams": 738,
     "totalOfficialTeams": 708,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "沈阳"
+    "location": "沈阳",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "dcdf402e8cbbdb13cae1",
@@ -3052,12 +3120,15 @@
       "xcpcio": "icpc/46th/kunming"
     },
     "notes": "",
-    "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "title": "第 46 届 ICPC 亚洲区域赛（昆明） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 73,
     "totalTeams": 887,
     "totalOfficialTeams": 753,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "5f7f1657688156a436a9",
@@ -3089,12 +3160,15 @@
       "xcpcio": "icpc/46th/kunming"
     },
     "notes": " 不同来源的名次有差异，主表优先展示 XCPCRating 整理值；可对照各榜单。",
-    "title": "第 46 届 ICPC 亚洲区域赛（昆明）",
+    "title": "第 46 届 ICPC 亚洲区域赛（昆明） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 74,
     "totalTeams": 887,
     "totalOfficialTeams": 753,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "c26159b5dde89d00d563",
@@ -3126,12 +3200,15 @@
       "xcpcio": "icpc/2020/yinchuan"
     },
     "notes": "",
-    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021) · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 75,
     "totalTeams": 511,
     "totalOfficialTeams": 491,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "f56b088de52d913313e3",
@@ -3163,12 +3240,15 @@
       "xcpcio": "icpc/2020/yinchuan"
     },
     "notes": "",
-    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021)",
+    "title": "The 45th ICPC Asia Yinchuan Regional Programming Contest (Hosted by Ningxia Institute of Science and Technology, also known as IUPC 2021) · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 76,
     "totalTeams": 511,
     "totalOfficialTeams": 491,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "8e9e3ec816a934302f5c",
@@ -3209,13 +3289,16 @@
       "cpcfinder": 26552
     },
     "notes": " 不同来源的名次有差异，主表采用 CPCFinder 对应榜单的排名与队伍总数；可对照各榜单。",
-    "title": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛）",
+    "title": "第 45 届国际大学生程序设计竞赛（ICPC）亚洲区域赛（昆明） （线上赛） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 77,
     "totalTeams": 813,
     "totalOfficialTeams": 763,
     "teamCountSource": "CPCFinder 比赛榜单",
-    "location": "昆明"
+    "location": "昆明",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "f5408b2b5718d6cddfdf",
@@ -3247,12 +3330,15 @@
       "xcpcio": "icpc/2019/yinchuan"
     },
     "notes": "",
-    "title": "The 44th ICPC Asia Yinchuan Regional Programming Contest",
+    "title": "The 44th ICPC Asia Yinchuan Regional Programming Contest · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 78,
     "totalTeams": 400,
     "totalOfficialTeams": 393,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "7d1fff4584fd96e745b2",
@@ -3279,12 +3365,15 @@
       "rating": "icpc__icpc2018__icpc2018nanjing"
     },
     "notes": "",
-    "title": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学）",
+    "title": "第43届ACM-ICPC国际大学生程序设计竞赛亚洲区域赛（南京） （南京航空航天大学） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 79,
     "totalTeams": 333,
     "totalOfficialTeams": 317,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "03c24f5f0145c5204962",
@@ -3316,12 +3405,15 @@
       "xcpcio": "icpc/2017/pku_onsite"
     },
     "notes": "",
-    "title": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学）",
+    "title": "The 2017 ACM-ICPC Asia Beijing Regional Contest （北京大学） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 80,
     "totalTeams": 195,
     "totalOfficialTeams": 186,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "4cdc0d25e0070508a987",
@@ -3464,12 +3556,15 @@
       "xcpcio": "icpc/2015/pku_onsite"
     },
     "notes": "",
-    "title": "2015 北京赛区现场赛 （北京大学）",
+    "title": "2015 北京赛区现场赛 （北京大学） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 84,
     "totalTeams": 200,
     "totalOfficialTeams": 200,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "fced42082dec4fbea6cf",
@@ -4167,12 +4262,15 @@
       "xcpcio": "icpc/2014/nwpu_onsite"
     },
     "notes": "",
-    "title": "2014 西安赛区现场赛 （西北工业大学）",
+    "title": "2014 西安赛区现场赛 （西北工业大学） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 103,
     "totalTeams": 264,
     "totalOfficialTeams": 258,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "976fff347270f793979e",
@@ -4537,12 +4635,15 @@
       "xcpcio": "icpc/2011/bupt_onsite"
     },
     "notes": "",
-    "title": "2011 北京赛区现场赛 （北京邮电大学）",
+    "title": "2011 北京赛区现场赛 （北京邮电大学） · 国家级优胜奖",
     "imageUrl": "",
     "sortOrder": 113,
     "totalTeams": 144,
     "totalOfficialTeams": 129,
-    "teamCountSource": "XCPCRating 完整比赛榜单"
+    "teamCountSource": "XCPCRating 完整比赛榜单",
+    "awardRecognitionBasis": "维护者明确 XCPC 打铁归为优胜奖；适用于线下正式赛，打星单列等效优胜奖。奖牌情况待核实的记录暂不归类。",
+    "awardLevel": "国家级",
+    "awardGrade": "优胜奖"
   },
   {
     "uid": "463a051069d6ce5adaf6",

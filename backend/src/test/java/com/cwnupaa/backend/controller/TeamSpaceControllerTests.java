@@ -72,7 +72,7 @@ class TeamSpaceControllerTests {
     }
     @Test void allAwardLevelsAndGradesAreAcceptedButFreeTextIsRejected() {
         for (String level : List.of("省部级", "国家级", "校级")) {
-            for (String grade : List.of("一等奖", "二等奖", "三等奖", "特等奖", "优秀奖")) {
+            for (String grade : List.of("一等奖", "二等奖", "三等奖", "特等奖", "优胜奖", "优秀奖")) {
                 var r = new TeamSpaceController.MemberRecord(null,null,"award","联盟主办","比赛","","","",null,null,"","",level,grade,null);
                 assertDoesNotThrow(() -> TeamSpaceController.validate(r));
             }

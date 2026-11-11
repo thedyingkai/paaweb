@@ -14,9 +14,8 @@ DO $$ BEGIN
   ALTER TABLE besti_member_record ADD CONSTRAINT besti_award_level_values
    CHECK(award_level IS NULL OR award_level IN ('省部级','国家级','校级'));
  END IF;
- IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname='besti_award_grade_values') THEN
-  ALTER TABLE besti_member_record ADD CONSTRAINT besti_award_grade_values
-   CHECK(award_grade IS NULL OR award_grade IN ('一等奖','二等奖','三等奖','特等奖','优秀奖'));
- END IF;
+ ALTER TABLE besti_member_record DROP CONSTRAINT IF EXISTS besti_award_grade_values;
+ ALTER TABLE besti_member_record ADD CONSTRAINT besti_award_grade_values
+  CHECK(award_grade IS NULL OR award_grade IN ('一等奖','二等奖','三等奖','特等奖','优胜奖','优秀奖'));
 END $$;
 COMMIT;

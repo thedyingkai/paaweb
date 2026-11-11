@@ -111,7 +111,7 @@ export default function SchoolHonorsClient() {
           (r) =>
             (year === "all" || r.academicYear === year) &&
             (family === "all" || r.family === family) &&
-            (mode === "all" || (mode === "awards" && !!r.award) || (mode === "equivalent" && !!r.equivalentAward)) &&
+            (mode === "all" || (mode === "awards" && !!awardName(r)) || (mode === "equivalent" && !!equivalentName(r))) &&
             (keyword.trim() === "" ||
               [r.event, r.title, r.team, ...(r.members || [])]
                 .join(" ")
@@ -207,13 +207,13 @@ export default function SchoolHonorsClient() {
         <div style={{ maxWidth: 1500, margin: "0 auto" }}>
           <Row gutter={[16, 16]}>
             {[
-              { label: '正式获奖（队次）', value: records.filter(r => r.award).length },
-              { label: '打星等效获奖（队次）', value: records.filter(r => r.equivalentAward).length },
+              { label: '正式获奖（队次）', value: records.filter(r => awardName(r)).length },
+              { label: '打星等效获奖（队次）', value: records.filter(r => equivalentName(r)).length },
               { label: '收录比赛', value: meta.eventCount || 0 },
               { label: '参赛记录（队次）', value: records.length },
             ].map(item => <Col xs={12} md={6} key={item.label}><Card><Statistic title={item.label} value={item.value} /></Card></Col>)}
           </Row>
-          <Card title="学校认定奖项（队次）" style={{ marginTop: 20 }}>
+          <Card style={{ marginTop: 20 }}>
             <Table rowKey="level" pagination={false} size="small" scroll={{ x: 620 }}
               dataSource={awardLevels.map(level => ({ level }))}
               columns={[
@@ -225,7 +225,7 @@ export default function SchoolHonorsClient() {
                 } })),
               ]}
             />
-            <p style={{ margin: '14px 0 0', color: '#64748b' }}>正式奖项（+打星等效奖项）。ICPC / CCPC 区域赛、总决赛按国家级，邀请赛按省部级；金、银、铜牌对应一、二、三等奖。蓝桥杯国赛按省部级，省赛按校级。</p>
+            <p style={{ margin: '14px 0 0', color: '#64748b' }}>正式奖项（+打星等效奖项）。ICPC / CCPC 区域赛、总决赛按国家级，邀请赛按省部级；金、银、铜牌对应一、二、三等奖，打铁为优胜奖。蓝桥杯国赛按省部级，省赛按校级。</p>
           </Card>
           <Alert
             style={{ margin: "24px 0" }}
@@ -335,7 +335,7 @@ export default function SchoolHonorsClient() {
                       <p>队员：{r.members.join("、")}</p>
                     )}
                     {r.notes && <p>{r.notes}</p>}
-                    {(r.award || r.equivalentAward) && <p>原始榜单：{r.award || `打星等效${r.equivalentAward}`}。学校认定：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
+                    {(awardName(r) || equivalentName(r)) && <p>原始榜单：{r.award || (r.equivalentAward ? `打星等效${r.equivalentAward}` : r.official === false ? '打星（未获金银铜牌）' : '未列金银铜牌')}。认定结果：{awardName(r) || `打星等效${equivalentName(r)}`}。</p>}
                     <p>总队伍数：{r.totalTeams ?? '待核实'}；正式队伍数：{r.totalOfficialTeams ?? '待核实'}。来源：{r.teamCountSource || '待核实'}。</p>
                     {r.equivalentAwardBasis && <p>打星等效名次：{r.equivalentRank}；{r.equivalentAwardBasis}</p>}
                     <p>
@@ -395,10 +395,10 @@ export default function SchoolHonorsClient() {
                   title: "奖项 / 身份",
                   render: (_, r) => (
                     <Space orientation="vertical" size={3}>
-                      {r.award ? (
+                      {awardName(r) ? (
                         <Tag
                           color={
-                            r.award === "金牌"
+                            r.awardGrade === "优胜奖" ? "default" : r.award === "金牌"
                               ? "gold"
                               : r.award === "银牌"
                                 ? "blue"
@@ -412,7 +412,7 @@ export default function SchoolHonorsClient() {
                       )}
                       {r.official === false && <>
                         <Tag>打星</Tag>
-                        {r.equivalentAward ? <Tag color={r.equivalentAward === '金牌' ? 'gold' : r.equivalentAward === '银牌' ? 'blue' : 'orange'}>（等效{equivalentName(r)}）</Tag>
+                        {equivalentName(r) ? <Tag color={r.equivalentAward === '金牌' ? 'gold' : r.equivalentAward === '银牌' ? 'blue' : r.equivalentAward === '铜牌' ? 'orange' : 'default'}>（等效{equivalentName(r)}）</Tag>
                           : <span style={{ fontSize: 12, color: '#64748b' }}>{r.equivalentAwardChecked ? '未达到奖牌线' : '等效奖项待核实'}</span>}
                       </>}
                     </Space>

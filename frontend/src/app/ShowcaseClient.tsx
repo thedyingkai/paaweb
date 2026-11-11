@@ -1114,7 +1114,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                             </div>
                         ) : (
                             <Row gutter={[24, 24]} className="reveal-item reveal-delay-1" justify="center">
-                                {honorsList.filter(item => item.award || item.imageUrl).slice(0, 3).map((item, idx) => (
+                                {honorsList.filter(item => item.awardGrade || item.award || item.imageUrl).slice(0, 3).map((item, idx) => (
                                     <Col xs={24} md={8} key={idx}>
                                         <Card
                                             hoverable
