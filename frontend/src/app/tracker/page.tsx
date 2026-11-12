@@ -530,7 +530,7 @@ export default function TrackerPage() {
       <div className="tracker-sidebar-block">
         <Title level={5}>校队赛事与登记</Title>
         <p>联盟主办比赛、ICPC、CCPC、天梯赛由校队统一组织。</p>
-        <p>蓝桥杯、马蹄杯、百度之星、CCSP、CNCC 由成员自愿登记。</p>
+        <p>其他比赛由成员自愿登记。</p>
         <Button type="link" onClick={() => router.push('/competitions')}>查看登记方式</Button>
       </div>
     </Card>

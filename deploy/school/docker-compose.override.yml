@@ -15,7 +15,7 @@ services:
     mem_limit: 1024m
     logging: *bounded_logs
   frontend:
-    image: paaweb-school-frontend:20261112-besti-r12
+    image: paaweb-school-frontend:20261112-besti-r13
     mem_limit: 768m
     environment:
       NODE_OPTIONS: --max-old-space-size=384

@@ -1239,7 +1239,7 @@ const ShowcaseHome: React.FC<ShowcaseProps> = ({
                                         </div>
                                         <Link href="/team-space"><Button type="link" size="small" style={{ paddingInline: 0 }}>全部</Button></Link>
                                     </div>
-                                    <p style={{lineHeight:1.9}}>蓝桥杯、马蹄杯、百度之星、CCSP、CNCC。由成员本人自愿申请登记。</p><Link href="/competitions">查看赛事范围与登记方式 →</Link>
+                                    <p style={{lineHeight:1.9}}>其他比赛由成员自愿登记。</p><Link href="/competitions">查看赛事范围与登记方式 →</Link>
                                 </Card>
                             </div>
                         </div>
