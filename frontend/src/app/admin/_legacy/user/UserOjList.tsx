@@ -7,6 +7,7 @@ import {
 } from 'antd';
 import { SearchOutlined, EditOutlined, ReloadOutlined, GlobalOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { ojBindingFields } from '@/lib/ojBinding';
 
 const UserOjList: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -203,21 +204,16 @@ const UserOjList: React.FC = () => {
         destroyOnClose
       >
         <Form form={form} layout="vertical">
-            <Form.Item name="codeforcesId" label="Codeforces 账号 (昵称)">
-                <Input placeholder="输入Codeforces Handle" />
-            </Form.Item>
-            <Form.Item name="atcoderId" label="AtCoder 账号 (昵称)">
-                <Input placeholder="输入AtCoder Handle" />
-            </Form.Item>
-            <Form.Item name="luoguId" label="洛谷数字 UID" rules={[{ pattern: /^\d+$/, message: '请填写洛谷个人主页地址中的数字 UID' }]}>
-                <Input placeholder="例如 123456（个人主页 /user/ 后的数字）" />
-            </Form.Item>
-            <Form.Item name="newcoderId" label="牛客竞赛数字 UID" rules={[{ pattern: /^\d+$/, message: '请填写牛客竞赛个人主页地址中的数字 UID' }]}>
-                <Input placeholder="例如 123456（竞赛主页 /profile/ 后的数字）" />
-            </Form.Item>
-            <Form.Item name="cwnuojId" label="学校OJ 账号 (账号ID)">
-                <Input placeholder="输入学校OJ账号" />
-            </Form.Item>
+            <p style={{ color: '#666' }}>每项只填写下方说明中的 UID 或用户名，不填写密码、邮箱、昵称或完整网址。未使用的平台可留空。</p>
+            {ojBindingFields.map(field => <Form.Item
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                extra={<span style={{ overflowWrap: 'anywhere' }}>{field.help}</span>}
+                rules={field.digitsOnly ? [{ pattern: /^\d+$/, message: '请填写个人主页地址中的数字 UID' }] : []}
+            >
+                <Input placeholder={field.placeholder} />
+            </Form.Item>)}
             <div style={{color: '#999', fontSize: 12, marginTop: 10}}>
                 注：修改后可能需要等待下一次爬虫运行才能更新最新的刷题数据。
             </div>

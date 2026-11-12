@@ -38,6 +38,7 @@ import { md5 } from 'js-md5';
 import { useEffect, useState } from 'react';
 import { refreshAuth } from '@/utils/auth';
 import { describeRequestError } from '@/utils/errorMessage';
+import { ojBindingFields } from '@/lib/ojBinding';
 
 interface UserData {
   userId: string | number;
@@ -585,12 +586,15 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
               label: <span><GlobalOutlined /> 账号绑定</span>,
               children: (
                 <div className="edit-narrow-panel">
-                  {isAllBound ? <Alert type="success" showIcon message="所有账号已完成绑定，信息仅供展示，不可修改。" /> : <Alert type="warning" showIcon message="账号绑定后不可修改，请确认账号属于本人。" />}
-                  <Form.Item label="牛客竞赛数字 UID" name="newcoderId" extra="填写竞赛个人主页地址 /profile/ 后的数字。" rules={[{ pattern: /^\d+$/, message: '请输入数字 UID，不是昵称或学号' }]}><Input className="bits-input" disabled={Boolean(userData.newcoderId)} placeholder="例如 123456" prefix={<GlobalOutlined />} /></Form.Item>
-                  <Form.Item label="洛谷数字 UID" name="luoguId" extra="填写洛谷个人主页地址 /user/ 后的数字。" rules={[{ pattern: /^\d+$/, message: '请输入数字 UID，不是昵称' }]}><Input className="bits-input" disabled={Boolean(userData.luoguId)} placeholder="例如 123456" prefix={<GlobalOutlined />} /></Form.Item>
-                  <Form.Item label="Codeforces" name="codeforcesId"><Input className="bits-input" disabled={Boolean(userData.codeforcesId)} prefix={<GlobalOutlined />} /></Form.Item>
-                  <Form.Item label="AtCoder" name="atcoderId"><Input className="bits-input" disabled={Boolean(userData.atcoderId)} prefix={<GlobalOutlined />} /></Form.Item>
-                  <Form.Item label="学校 OJ" name="cwnuojId"><Input className="bits-input" disabled={Boolean(userData.cwnuojId)} prefix={<GlobalOutlined />} /></Form.Item>
+                  {isAllBound ? <Alert type="success" showIcon message="账号已完成绑定；如需更正，请联系管理员。" /> : <Alert type="warning" showIcon message="请绑定你本人的账号；绑定后如需更正，请联系管理员。" />}
+                  <p style={{ color: '#666', margin: '16px 0' }}>每项只填写下方说明中的 UID 或用户名，不填写密码、邮箱、昵称或完整网址。未使用的平台可留空。</p>
+                  {ojBindingFields.map(field => <Form.Item
+                    key={field.name}
+                    label={field.label}
+                    name={field.name}
+                    extra={<span style={{ overflowWrap: 'anywhere' }}>{field.help}</span>}
+                    rules={field.digitsOnly ? [{ pattern: /^\d+$/, message: '请填写个人主页地址中的数字 UID' }] : []}
+                  ><Input className="bits-input" disabled={Boolean(userData[field.name])} placeholder={field.placeholder} prefix={<GlobalOutlined />} /></Form.Item>)}
                   {!isAllBound && <Form.Item label="邮箱验证码" name="verifyCode" rules={[{ required: true }]}>{renderCodeInput(`验证码将发送至 ${userData.email || ''}`, 'current')}</Form.Item>}
                 </div>
               )
