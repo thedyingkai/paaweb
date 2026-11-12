@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 /** Parses QOJ's authenticated submission table; UCup accounts use the same IDs. */
 final class QojSubmissionParser {
+    static final String BROWSER_CHALLENGE_MESSAGE = "QOJ / UCup 的 Cloudflare 浏览器验证拦截了服务器请求，自动同步暂不可用；原题量已保留。这不代表绑定账号有误，重复提交 Cookie 不能保证恢复。";
     record Submission(long id, String problemId, String title, long time, boolean accepted) {}
     record Page(List<Submission> submissions, boolean hasNext) {}
     private static final Pattern PROBLEM = Pattern.compile("(?:/contest/\\d+)?/problem/(\\d+)/?");
@@ -22,8 +23,7 @@ final class QojSubmissionParser {
     static Page parse(String html, String handle, int page) {
         var doc = Jsoup.parse(html, "https://qoj.ac");
         check(doc.select("#form-login, input[type=password]").isEmpty(), "QOJ 登录已失效，请在同步窗口更新 QOJ Cookie");
-        check(!doc.title().contains("Just a moment") && !html.contains("cf-chl-")
-                && !html.contains("cf-turnstile"), "QOJ 要求浏览器验证，请正常登录后再同步");
+        check(!isBrowserChallenge(html), BROWSER_CHALLENGE_MESSAGE);
         List<Submission> rows = new ArrayList<>();
         for (Element row : doc.select("table tr")) {
             var cells = row.children().select("td");
@@ -87,6 +87,12 @@ final class QojSubmissionParser {
             more = next;
         }
         return new Page(rows, Boolean.TRUE.equals(more));
+    }
+
+    static boolean isBrowserChallenge(String body) {
+        return body != null && (body.contains("cf-chl-") || body.contains("cf-turnstile")
+                || body.contains("/cdn-cgi/challenge-platform/")
+                || Jsoup.parse(body).title().contains("Just a moment"));
     }
 
     private static boolean accepted(Element cell) {

@@ -67,6 +67,10 @@ public class SseNotificationManager implements DisposableBean {
             } catch (IOException e) {
                 emitters.remove(userId, emitter);
                 emitter.completeWithError(e);
+            } catch (IllegalStateException e) {
+                // A response can complete before its removal callback runs. A stale
+                // notification connection must not fail the caller's HTTP request.
+                emitters.remove(userId, emitter);
             }
         }
     }
@@ -82,6 +86,8 @@ public class SseNotificationManager implements DisposableBean {
             } catch (IOException e) {
                 emitters.remove(userId, emitter);
                 emitter.completeWithError(e);
+            } catch (IllegalStateException e) {
+                emitters.remove(userId, emitter);
             }
         });
     }

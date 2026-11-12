@@ -88,7 +88,7 @@ export default function MemberRecordSummary({
       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
         <Space wrap>
           {variant === 'honors' ? <>
-            {!loading && !error && <Tag title="括号内为打星等效奖项，不计入正式获奖。">获奖 {counts.awards}{counts.starred > 0 ? `（+${counts.starred}）` : ''}</Tag>}
+            {!loading && !error && <Tag title="括号内为打星等效奖项，单独统计，按等效奖项计入积分。">获奖 {counts.awards}{counts.starred > 0 ? `（+${counts.starred}）` : ''}</Tag>}
             {certificates.length > 0 && <Tag>证书荣誉 {certificates.length}</Tag>}
           </> : <Typography.Text strong>职务与参赛经历</Typography.Text>}
         </Space>

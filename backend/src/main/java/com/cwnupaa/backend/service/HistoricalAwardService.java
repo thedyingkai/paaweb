@@ -247,8 +247,8 @@ public class HistoricalAwardService {
         String award=star?h.field("equivalentContestAward"):h.field("contestAward");
         boolean hasAward=BestiRecordPolicy.XCPC_AWARD_GRADES.containsKey(award) && (star || Boolean.TRUE.equals(h.raw.get("official")));
         String kind=hasAward?"award":"registration";
-        String grade=hasAward&&!star?BestiRecordPolicy.XCPC_AWARD_GRADES.get(award):null;
-        String level=hasAward&&!star?h.field("awardLevel"):null;
+        String grade=hasAward?BestiRecordPolicy.XCPC_AWARD_GRADES.get(award):null;
+        String level=hasAward?(star?BestiRecordPolicy.recognizedLevel(h.field("family"),h.field("tier")):h.field("awardLevel")):null;
         String result=hasAward?(star?"打星 · 等效"+award:str(level)+str(grade)):(star?"打星参赛":"参赛记录");
         String source="";
         if(h.raw.get("sources") instanceof List<?> sources && !sources.isEmpty() && sources.getFirst() instanceof Map<?,?> first) source=str(first.get("url"));

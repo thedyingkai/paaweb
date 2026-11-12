@@ -524,6 +524,11 @@ public class CrawlerLocalRunner {
                 while (root.getCause() != null && root.getCause() != root) root = root.getCause();
                 Integer status = e instanceof HttpStatusCodeException http ? http.getStatusCode().value() : null;
                 log.warn("OJ request failed host={} status={} cause={} attempt={}", host, status, root.getClass().getSimpleName(), attempt);
+                if ("qoj.ac".equals(host) && e instanceof HttpStatusCodeException http
+                        && ((http.getResponseHeaders() != null && "challenge".equalsIgnoreCase(http.getResponseHeaders().getFirst("cf-mitigated")))
+                        || QojSubmissionParser.isBrowserChallenge(http.getResponseBodyAsString()))) {
+                    throw new TrackerSyncException(QojSubmissionParser.BROWSER_CHALLENGE_MESSAGE);
+                }
                 boolean transientFailure = status != null ? status >= 500 && status <= 599
                         : e instanceof org.springframework.web.client.ResourceAccessException
                         && !(root instanceof javax.net.ssl.SSLException)
@@ -558,6 +563,8 @@ public class CrawlerLocalRunner {
             default -> "OJ";
         };
         if (status != null) {
+            if ("qoj.ac".equals(host) && status == 401)
+                return "QOJ 登录凭据已失效（HTTP 401），请在同步窗口更新 QOJ Cookie；原题量已保留";
             if ("www.luogu.com.cn".equals(host) && status == 401)
                 return "洛谷未接受登录凭据（HTTP 401），请登录洛谷后重新填写同一会话的 __client_id 和 _uid";
             return switch (status) {

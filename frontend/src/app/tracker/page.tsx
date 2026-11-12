@@ -683,7 +683,7 @@ export default function TrackerPage() {
         <Form form={syncForm} layout="vertical" preserve={false} onFinish={submitSync}>
           {(syncPlatforms.includes('QOJ') || syncPlatforms.includes('UCup')) && (
             <>
-              <p style={{ fontSize: 12, color: '#666' }}>QOJ 和 UCup 队伍账号共用 QOJ 的提交记录。首次同步请填写登录凭据；留空使用已保存的凭据。</p>
+              <p style={{ fontSize: 12, color: '#666' }}>QOJ 和 UCup 队伍账号共用 QOJ 的提交记录。首次同步请填写登录凭据；留空使用已保存的凭据。网站会检查能否读取完整记录；若遇到平台的浏览器验证，服务器无法自动完成验证，原题量会保留，重复粘贴 Cookie 不保证恢复。</p>
               <Form.Item label="QOJ Cookie" name="qojCookie" rules={[{ max: 16000, message: 'Cookie 过长' }, { pattern: /^[^\r\n]*$/, message: '请粘贴一整行 Cookie' }]}>
                 <Input.Password placeholder="粘贴已登录 qoj.ac 的完整 Cookie 请求头" autoComplete="off" />
               </Form.Item>

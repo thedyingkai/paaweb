@@ -19,7 +19,7 @@ public class MemberAwardRatingService {
             FROM besti_member_record r
             JOIN users u ON u.user_id=r.user_id
             JOIN certificate_level l ON l.level_type=r.award_level AND l.rank_type=r.award_grade
-            WHERE r.kind='award' AND r.status='verified' AND r.is_starred=false
+            WHERE r.kind='award' AND r.status='verified'
               AND u.account_status='normal'
             AND """ + HistoricalAwardService.visibleRecordSql("r"), (rs,index) -> {
                 long user=rs.getLong("user_id");LocalDate date=rs.getObject("award_date",LocalDate.class);

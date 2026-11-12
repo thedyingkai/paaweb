@@ -90,4 +90,32 @@ class QojTrackerTests {
         var account = new OjUserAccount(); account.setQojId("tester"); account.setQojCookie("private-marker");
         assertThat(new ObjectMapper().writeValueAsString(account)).contains("tester").doesNotContain("private-marker", "qojCookie");
     }
+    @Test void cloudflareChallengeIsReportedWithoutBlamingTheAccountOrRetrying() {
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+                .andRespond(withStatus(org.springframework.http.HttpStatus.FORBIDDEN)
+                        .header("cf-mitigated","challenge").body("private-marker"));
+        assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
+                .hasMessageContaining("Cloudflare 浏览器验证").hasMessageContaining("原题量已保留")
+                .hasMessageNotContaining("稍后重试").hasMessageNotContaining("private-marker");
+        http.verify();
+    }
+    @Test void challengeHtmlWithSuccessStatusCannotBecomeAnEmptySnapshot() {
+        reply(1,"<title>Just a moment...</title><script src='/cdn-cgi/challenge-platform/test'></script>");
+        assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
+                .hasMessageContaining("Cloudflare 浏览器验证");
+        http.verify();
+    }
+    @Test void expiredLoginAndOtherForbiddenResponsesAreNotMisidentifiedAsChallenges() {
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+                .andRespond(withStatus(org.springframework.http.HttpStatus.UNAUTHORIZED));
+        assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
+                .hasMessageContaining("登录凭据已失效").hasMessageNotContaining("Cloudflare");
+        http.verify();
+        http.reset();
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+                .andRespond(withStatus(org.springframework.http.HttpStatus.FORBIDDEN).body("Forbidden"));
+        assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
+                .hasMessageContaining("HTTP 403").hasMessageNotContaining("Cloudflare");
+        http.verify();
+    }
 }

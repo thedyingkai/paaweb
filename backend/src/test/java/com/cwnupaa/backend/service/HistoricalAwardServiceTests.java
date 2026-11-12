@@ -44,7 +44,7 @@ class HistoricalAwardServiceTests {
         db.execute("CREATE TABLE sys_intro(category VARCHAR(50) PRIMARY KEY,content TEXT)");
         db.execute("CREATE TABLE association_member(member_id BIGINT PRIMARY KEY,user_id BIGINT,term VARCHAR(50),department VARCHAR(50),position VARCHAR(50),start_date DATE,end_date DATE)");
         db.execute("CREATE TABLE certificate_level(level_id BIGINT PRIMARY KEY,level_type VARCHAR(30),rank_type VARCHAR(30),base_rating INTEGER)");
-        db.update("INSERT INTO certificate_level VALUES(1,'国家级','二等奖',700),(2,'国家级','优秀奖',400)");
+        db.update("INSERT INTO certificate_level VALUES(1,'国家级','二等奖',700),(2,'国家级','优秀奖',400),(3,'国家级','三等奖',550),(4,'省部级','三等奖',300)");
         db.update("INSERT INTO university VALUES (1,?),(2,'其他学校')",school);
         db.update("INSERT INTO school VALUES(1,1),(2,2)");db.update("INSERT INTO major VALUES(1,1),(2,2)");
         db.update("INSERT INTO users VALUES(1,'管理员','000',1,'normal','管理员'),(2,'张三','20260001',1,'normal','甲'),(3,'张三','20260002',1,'normal','乙'),(4,'张三','20260001',2,'normal','外校'),(9,'李四','20260009',1,'pending','未认证')");
@@ -78,20 +78,19 @@ class HistoricalAwardServiceTests {
         assertThat(record(2,"formal")).containsEntry("kind","award").containsEntry("contest_award","银牌").containsEntry("award_level","国家级").containsEntry("award_grade","二等奖").containsEntry("status","verified");
         assertThat(count("besti_honor_audit")).isEqualTo(3);
     }
-    @Test void onlyVerifiedFormalAwardsWithMatchingIdentityContributeRating() {
+    @Test void verifiedFormalAndStarredAwardsWithMatchingIdentityContributeRating() {
         var ratings=new MemberAwardRatingService(db);
         long claim=submit(2,"formal",1);
         assertThat(ratings.approvedAwards()).isEmpty();
         service.review(actor(1),claim,new HistoricalAwardService.Decision(1,true,"核验通过"));
         importRows(List.of(row("star",1,"20260001","张三"),row("prelim",1,"20260001","张三")));
-        assertThat(ratings.approvedAwards()).hasSize(1);
-        assertThat(ratings.approvedAwards().getFirst().points()).isEqualTo(700);
+        assertThat(ratings.approvedAwards()).extracting(MemberAwardRatingService.Award::points).containsExactlyInAnyOrder(700,550);
         db.update("UPDATE users SET real_name='修改后姓名' WHERE user_id=2");
         assertThat(ratings.approvedAwards()).isEmpty();
         db.update("UPDATE users SET real_name='张三' WHERE user_id=2");
         var link=db.queryForMap("SELECT * FROM besti_honor_link WHERE honor_uid='formal'");
         service.revoke(actor(1),((Number)link.get("id")).longValue(),new HistoricalAwardService.Revoke(((Number)link.get("version")).intValue(),"归属修正"));
-        assertThat(ratings.approvedAwards()).isEmpty();
+        assertThat(ratings.approvedAwards()).extracting(MemberAwardRatingService.Award::points).containsExactly(550);
     }
     @Test void officialRolesAppearAlongsidePersonalRecordsWithExpiryAndVisibility() {
         db.update("INSERT INTO association_member VALUES(1,2,'2024-2025学年','ACM 校队','校队队长','2024-09-01','2025-08-31')");
@@ -155,11 +154,29 @@ class HistoricalAwardServiceTests {
     }
     @Test void starredMedalsAndPreliminaryAppearWithoutBecomingOfficialAwards() {
         importRows(List.of(row("formal",1,"20260001","张三"),row("star",1,"20260001","张三"),row("prelim",1,"20260001","张三")));
-        assertThat(record(2,"star")).containsEntry("is_starred",true).containsEntry("award_level",null).containsEntry("award_grade",null).containsEntry("contest_award","铜牌");
+        assertThat(record(2,"star")).containsEntry("is_starred",true).containsEntry("award_level","国家级").containsEntry("award_grade","三等奖").containsEntry("contest_award","铜牌");
         assertThat(record(2,"prelim")).containsEntry("kind","registration");
         var controller=new TeamSpaceController(db,mock(TeamMembershipService.class));
         var result=(Map<?,?>)controller.publicRecords(2L,1).getData();
         assertThat(result.get("awards")).isEqualTo(1L);assertThat(result.get("starred")).isEqualTo(1L);assertThat(result.get("total")).isEqualTo(3L);
+    }
+    @Test void starredInvitationalUsesProvincialPointsAndMigrationRepairsOldRowsIdempotently() throws Exception {
+        source.add(honor("star-invite",false,"invitational","","铜牌",List.of("张三")));
+        source.add(honor("star-final",false,"final","","优胜奖",List.of("张三")));
+        db.update("UPDATE sys_intro SET content=? WHERE category='honors'",json.writeValueAsString(source));
+        importRows(List.of(row("star",1,"20260001","张三"),row("star-invite",1,"20260001","张三"),row("star-final",1,"20260001","张三"),row("prelim",1,"20260001","张三")));
+        assertThat(record(2,"star-invite")).containsEntry("award_level","省部级").containsEntry("award_grade","三等奖");
+        db.update("UPDATE besti_member_record SET award_level=NULL,award_grade=NULL WHERE is_starred=true");
+        var migration=new ResourceDatabasePopulator(new FileSystemResource("../SQL/migration_besti_starred_rating.sql"));
+        migration.execute(context.getBean(DataSource.class));
+        var rows=db.queryForList("SELECT * FROM besti_member_record ORDER BY id");
+        migration.execute(context.getBean(DataSource.class));
+        assertThat(db.queryForList("SELECT * FROM besti_member_record ORDER BY id")).isEqualTo(rows);
+        assertThat(new MemberAwardRatingService(db).approvedAwards()).extracting(MemberAwardRatingService.Award::points).containsExactlyInAnyOrder(550,300,400);
+        assertThat(record(2,"prelim")).containsEntry("award_level",null).containsEntry("kind","registration");
+        assertThat(record(2,"star-invite")).containsEntry("result","打星 · 等效铜牌").containsEntry("is_starred",true);
+        db.update("UPDATE besti_member_record SET status='pending' WHERE is_starred=true");
+        assertThat(new MemberAwardRatingService(db).approvedAwards()).isEmpty();
     }
     @Test void stalePreviewIsRejectedAndDifferentNumberNeverMatchesByNameAlone() {
         var rows=List.of(row("formal",1,"20269999","张三"));var preview=service.preview(actor(1),rows);
