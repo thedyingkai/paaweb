@@ -183,7 +183,7 @@ const RankPageClient = () => {
       )
     },
     {
-      title: <Tooltip title="总分 = 比赛分 + 证书分 + 刷题分">总排位分</Tooltip>,
+      title: <Tooltip title="总分 = 比赛分 + 奖项分 + 刷题分">总排位分</Tooltip>,
       dataIndex: 'ratingAll',
       align: 'center',
       sorter: (a, b) => a.ratingAll - b.ratingAll,
@@ -197,7 +197,7 @@ const RankPageClient = () => {
       render: (value: number) => value || '-'
     },
     {
-      title: '认证',
+      title: '奖项',
       dataIndex: 'ratingCertificate',
       align: 'center',
       render: (value: number) => value || '-'
@@ -224,7 +224,7 @@ const RankPageClient = () => {
         <section className="content-hero">
           <Tag className="bits-pill">RATING BOARD</Tag>
           <Title className="content-hero-title">全站积分排行榜</Title>
-          <Paragraph>汇聚校内算法竞赛成长记录，见证每一次比赛、认证与刷题积累。</Paragraph>
+          <Paragraph>汇聚校内算法竞赛成长记录，见证每一次比赛、获奖与刷题积累。</Paragraph>
         </section>
 
         <div className="rank-toolbar" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px', padding: '0 10px' }}>
@@ -253,7 +253,7 @@ const RankPageClient = () => {
             style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }}
           />
         ) : !termsLoading && terms.length === 0 && (
-          <Alert type="info" showIcon title="尚未设置学期，可先查看当前积分。" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }} />
+          <Alert type="info" showIcon title="尚未设置学期，当前积分按全部历史记录累计。" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }} />
         )}
 
         {myRankInfo && (
@@ -270,7 +270,7 @@ const RankPageClient = () => {
               </Col>
               <Col xs={12} md={4}><Statistic title="总积分" value={myRankInfo.ratingAll} prefix={<RiseOutlined />} /></Col>
               <Col xs={12} md={4}><Statistic title="比赛" value={myRankInfo.ratingContest} /></Col>
-              <Col xs={12} md={4}><Statistic title="认证" value={myRankInfo.ratingCertificate} /></Col>
+              <Col xs={12} md={4}><Statistic title="奖项" value={myRankInfo.ratingCertificate} /></Col>
               <Col xs={12} md={4}><Statistic title="刷题" value={myRankInfo.ratingPractice} /></Col>
             </Row>
           </Card>

@@ -8,10 +8,12 @@ import { teamError, kindNames } from '@/lib/besti';
 import request from '@/utils/request';
 
 type RecordItem = {
-  id: number;
+  id: number | string;
   kind: string;
   title: string;
   result: string;
+  organization?: string;
+  source_type?: string;
   family?: string;
   contest_stage?: string;
   contest_award?: string;
@@ -52,19 +54,21 @@ export default function MemberRecordSummary({
   certificates?: CertificateHonor[];
 }) {
   const [items, setItems] = useState<RecordItem[]>([]);
+  const [positions, setPositions] = useState<RecordItem[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [retry, setRetry] = useState(0);
   const [counts, setCounts] = useState({ awards: 0, starred: 0 });
   useEffect(() => {
     const controller = new AbortController();
-    setLoading(true);setError('');setItems([]);
-    request.get<{ code: number; data: { items: RecordItem[]; awards: number; starred: number } }>('/team-space/public-records', {
+    setLoading(true);setError('');setItems([]);setPositions([]);
+    request.get<{ code: number; data: { items: RecordItem[]; positions?: RecordItem[]; awards: number; starred: number } }>('/team-space/public-records', {
       params: { userId }, signal: controller.signal, timeout: 15000,
     }).then(({data}) => {
       if (data.code !== 200 || !Array.isArray(data.data?.items)) throw new Error('个人记录加载失败，请重试');
       if (!controller.signal.aborted) {
         setItems(data.data.items);
+        setPositions(data.data.positions || []);
         setCounts({ awards: data.data.awards || 0, starred: data.data.starred || 0 });
       }
     }).catch(e => {
@@ -76,7 +80,9 @@ export default function MemberRecordSummary({
   }, [userId, retry]);
 
   const awards = items.filter(r => r.kind === 'award');
-  const experiences = items.filter(r => r.kind !== 'award');
+  const positionKey = (r: RecordItem) => [r.organization,r.title,r.start_date,r.end_date].join('|');
+  const officialPositions = new Set(positions.map(positionKey));
+  const experiences = [...positions,...items.filter(r => r.kind !== 'position' || !officialPositions.has(positionKey(r)))];
   return (
     <div className="profile-records" data-record-section={variant}>
       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
@@ -133,8 +139,8 @@ export default function MemberRecordSummary({
           dataSource={experiences}
           locale={{ emptyText: error ? <span /> : <Empty description="暂无已核验的职务或参赛经历" /> }}
           renderItem={r => <List.Item><List.Item.Meta
-            title={<><Tag>{kindNames[r.kind]}</Tag>{r.display_title || r.title}{r.kind === 'position' && <Tag color={r.position_status === 'former' ? 'default' : 'blue'}>{positionStatusLabels[r.position_status || 'unknown']}</Tag>}</>}
-            description={<Space wrap>{r.result && <span>{r.result}</span>}<span>{[r.start_date, r.end_date].filter(Boolean).join(' — ')}</span>{source(r)}</Space>}
+            title={<><Tag>{r.kind === 'award' ? '参赛经历' : kindNames[r.kind]}</Tag>{r.source_type === 'official_roster' && <Tag color="blue">正式任职</Tag>}{r.display_title || r.title}{r.kind === 'position' && <Tag color={r.position_status === 'former' ? 'default' : 'blue'}>{positionStatusLabels[r.position_status || 'unknown']}</Tag>}</>}
+            description={<Space wrap>{r.team_name && <span>{r.team_name}</span>}{r.is_starred ? <Tag color="orange">打星{r.contest_award ? `（等效${r.contest_award}）` : '参赛'}</Tag> : r.contest_award ? <Tag>{contestStageLabels[r.contest_stage || ''] || ''} · {r.contest_award}</Tag> : r.result && <span>{r.result}</span>}<span>{[r.start_date, r.end_date].filter(Boolean).join(' — ')}</span>{source(r)}</Space>}
           /></List.Item>}
         />}
       </Skeleton>

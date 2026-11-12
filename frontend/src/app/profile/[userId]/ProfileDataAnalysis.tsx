@@ -41,7 +41,7 @@ interface ProfileDataAnalysisProps {
 const ratingNameMap: Record<string, string> = {
   ratingAll: '总分',
   ratingContest: '比赛',
-  ratingCertificate: '证书',
+  ratingCertificate: '奖项',
   ratingPractice: '刷题'
 };
 
@@ -160,7 +160,7 @@ const ProfileDataAnalysis = ({ loading, dashboard, ratingHistory }: ProfileDataA
               options={[
                 { label: '总分', value: 'ratingAll' },
                 { label: '比赛', value: 'ratingContest' },
-                { label: '证书', value: 'ratingCertificate' },
+                { label: '奖项', value: 'ratingCertificate' },
                 { label: '刷题', value: 'ratingPractice' }
               ]}
             />

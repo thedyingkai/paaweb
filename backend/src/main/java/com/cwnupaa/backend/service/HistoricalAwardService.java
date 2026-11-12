@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +25,7 @@ import java.util.*;
 public class HistoricalAwardService {
     public static final String SCHOOL = "北京电子科技学院";
     private final JdbcTemplate db;
+    @Autowired private ApplicationEventPublisher ratingEvents;
     private final ObjectMapper json = new ObjectMapper();
     public HistoricalAwardService(JdbcTemplate db) { this.db = db; }
 
@@ -226,6 +229,7 @@ public class HistoricalAwardService {
         }
         db.update("UPDATE besti_honor_claim SET status=?,review_note=?,reviewed_by=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=?",decision.approved?"approved":"rejected",note,actor.getUserId(),id);
         audit(num(c,"link_id"),id,actor.getUserId(),decision.approved?"approve":"reject",note.isBlank()?"核验身份与参赛证明后通过":note);
+        if (decision.approved) RatingRefreshRequested.publish(ratingEvents);
     }
 
     private void ensureUnique(String uid,int index,String school,String number) {
@@ -295,6 +299,7 @@ public class HistoricalAwardService {
             var assigned=link(h,index,false);
             db.update("UPDATE besti_honor_claim SET status=CASE WHEN claimant_id=? AND claimant_school=? AND claimant_number=? AND claimant_name=? THEN 'approved' ELSE 'rejected' END,review_note='管理员已按完整名单核验归属',reviewed_by=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE link_id=? AND status='pending'",item.get("userId"),item.get("school"),item.get("studentNumber"),item.get("realName"),actor.getUserId(),assigned.get("id"));
         }
+        RatingRefreshRequested.publish(ratingEvents);
         return Map.of("matched",preview.get("matched"),"waiting",preview.get("waiting"),"count",items.size());
     }
     /** Called inside the existing verified-identity workflow. Only administrator-approved identity tuples auto-link. */
@@ -318,6 +323,7 @@ public class HistoricalAwardService {
                 assign(h,(int)num(l,"member_index"),user.school,user.number,user.name,userId,num(l,"assigned_by"),"identity_verified");
             }
         }
+        RatingRefreshRequested.publish(ratingEvents);
     }
     public List<Map<String,Object>> links(UserProfileVO actor) {
         requireManager(actor);
@@ -339,6 +345,7 @@ public class HistoricalAwardService {
         db.update("UPDATE besti_honor_link SET user_id=NULL,status='revoked',school_name='',student_number='',real_name='',version=version+1,updated_at=CURRENT_TIMESTAMP WHERE id=?",linkId);
         db.update("UPDATE besti_honor_claim SET status='rejected',review_note=?,reviewed_by=?,version=version+1,updated_at=CURRENT_TIMESTAMP WHERE link_id=? AND status='approved'","历史归属撤销："+note,actor.getUserId(),linkId);
         audit(linkId,null,actor.getUserId(),"revoke",note+"；原身份："+l.get("school_name")+" / "+l.get("student_number")+" / "+l.get("real_name"));
+        RatingRefreshRequested.publish(ratingEvents);
     }
 
     /** Do not expose a linked record after its owner's verified identity has changed. */

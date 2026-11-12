@@ -26,8 +26,8 @@ public interface OjPracticeRecordMapper extends BaseMapper<OjPracticeRecord> {
     @Select("SELECT user_id, COUNT(DISTINCT problem_id) as solved_count " + "FROM oj_practice_record " + "WHERE ac_time >= #{start} AND ac_time <= #{end} " + "GROUP BY user_id")
     List<Map<String, Object>> selectDailySolvedStats(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Select("SELECT user_id, TO_CHAR(ac_time, 'YYYY-MM-DD') as date_str, COUNT(DISTINCT problem_id) as solved_count " + "FROM oj_practice_record " + "WHERE ac_time > #{minTime} " + "GROUP BY user_id, TO_CHAR(ac_time, 'YYYY-MM-DD')")
-    List<Map<String, Object>> selectAllUserDailyStatsAfter(@Param("minTime") LocalDateTime minTime);
+    @Select("SELECT user_id, TO_CHAR(ac_time, 'YYYY-MM-DD') as date_str, COUNT(DISTINCT (source_id,problem_id)) as solved_count " + "FROM oj_practice_record " + "WHERE ac_time > #{minTime} AND ac_time <= #{maxTime} " + "GROUP BY user_id, TO_CHAR(ac_time, 'YYYY-MM-DD')")
+    List<Map<String, Object>> selectAllUserDailyStatsAfter(@Param("minTime") LocalDateTime minTime,@Param("maxTime") LocalDateTime maxTime);
 
     @Select("SELECT count(1) FROM oj_practice_record opr LEFT JOIN users u ON opr.user_id = u.user_id WHERE u.is_enrolled_stu = 1")
     Long countSolvedByEnrolledUsers();

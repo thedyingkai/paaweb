@@ -58,10 +58,12 @@ public class RatingService {
     @Autowired
     private UniversityMapper universityMapper;
     @Autowired private CertificateIdentityService certificateIdentityService;
+    @Autowired private MemberAwardRatingService memberAwardRatingService;
 
     @Transactional(rollbackFor = Exception.class)
-    public void refreshAllRatings() {
+    public synchronized void refreshAllRatings() {
         List<Term> allTerms = termMapper.selectList(new QueryWrapper<Term>()
+                .le("start_time", LocalDate.now())
                 .orderByDesc("start_time")
                 .last("LIMIT 10"));
         Collections.reverse(allTerms);
@@ -115,14 +117,16 @@ public class RatingService {
             if (!CertificateIdentityService.matches(owner, userSchoolNames.get(grant.getUserId()),
                     grant.getSchoolName(), grant.getUserAccount(), grant.getRealName())) continue;
             CertificateType type = certTypeMap.get(grant.getCertificateTypeId());
-            if (type != null && type.getTerm() != null) {
-                grantsByTerm.computeIfAbsent(type.getTerm(), k -> new ArrayList<>()).add(grant);
+            Long scope = allTerms.isEmpty() ? 0L : type == null ? null : type.getTerm();
+            if (type != null && scope != null) {
+                grantsByTerm.computeIfAbsent(scope, k -> new ArrayList<>()).add(grant);
             }
         }
 
         Map<Long, List<CertificateVerify>> verifiesByTerm = certificateVerifyMapper.selectList(
                 new QueryWrapper<CertificateVerify>().eq("status", "approved")
-        ).stream().filter(v -> v.getTerm() != null).collect(Collectors.groupingBy(CertificateVerify::getTerm));
+        ).stream().filter(v -> allTerms.isEmpty() || v.getTerm() != null)
+                .collect(Collectors.groupingBy(v -> allTerms.isEmpty() ? 0L : v.getTerm()));
 
         Map<Long, RatingComposition> runningRatings = new HashMap<>();
         for (Long uid : allUserIds) {
@@ -136,9 +140,21 @@ public class RatingService {
         }
 
         LocalDateTime prevTermEndTime = LocalDateTime.of(1970, 1, 1, 0, 0);
+        LocalDateTime now = LocalDateTime.now();
+        var memberAwards = memberAwardRatingService.approvedAwards();
+
+        if (allTerms.isEmpty()) {
+            var credited = new HashSet<String>();
+            calculateContestScoreInScope(prevTermEndTime, now, runningRatings, categoryMap);
+            calculateCertificateScoreInTerm(0L, runningRatings, grantsByTerm, verifiesByTerm,
+                    levelScoreMap, levelMap, certificateLevels, certTypeMap, issueMap, credited);
+            calculateMemberAwardScore(prevTermEndTime, now, runningRatings, memberAwards, credited);
+            calculatePracticeScoreInScope(prevTermEndTime, now, runningRatings);
+        }
 
         for (Term term : allTerms) {
             LocalDateTime currentTermEndTime = (term.getEndTime() == null) ? LocalDateTime.MAX : term.getEndTime().atTime(23, 59, 59);
+            if (currentTermEndTime.isAfter(now)) currentTermEndTime = now;
 
             for (RatingComposition rc : runningRatings.values()) {
                 rc.setRatingContest((int) (rc.getRatingContest() * 0.20));
@@ -147,8 +163,10 @@ public class RatingService {
             }
 
             calculateContestScoreInScope(prevTermEndTime, currentTermEndTime, runningRatings, categoryMap);
+            var credited = new HashSet<String>();
             calculateCertificateScoreInTerm(term.getTermId(), runningRatings, grantsByTerm, verifiesByTerm,
-                    levelScoreMap, levelMap, certificateLevels, certTypeMap, issueMap);
+                    levelScoreMap, levelMap, certificateLevels, certTypeMap, issueMap, credited);
+            calculateMemberAwardScore(prevTermEndTime, currentTermEndTime, runningRatings, memberAwards, credited);
             calculatePracticeScoreInScope(prevTermEndTime, currentTermEndTime, runningRatings);
 
             saveTermRecord(term.getTermId(), runningRatings);
@@ -157,6 +175,18 @@ public class RatingService {
         }
 
         saveComposition(runningRatings);
+    }
+
+    private void calculateMemberAwardScore(LocalDateTime start,LocalDateTime end,Map<Long,RatingComposition> ratings,
+                                           List<MemberAwardRatingService.Award> awards,Set<String> credited) {
+        for (var award : awards) {
+            var rating=ratings.get(award.userId());
+            if (rating==null || award.date()==null) continue;
+            var date=award.date().atStartOfDay();
+            if (!date.isAfter(start) || date.isAfter(end)) continue;
+            if (award.key()!=null && !credited.add(award.key())) continue;
+            rating.setRatingCertificate(rating.getRatingCertificate()+award.points());
+        }
     }
 
     private void calculateContestScoreInScope(LocalDateTime start, LocalDateTime end, Map<Long, RatingComposition> ratings, Map<Long, ContestCategory> categoryMap) {
@@ -265,10 +295,18 @@ public class RatingService {
                                                  List<CertificateLevel> certificateLevels,
                                                  Map<Long, CertificateType> certTypeMap,
                                                  Map<Long, CertificateIssue> issueMap) {
+        calculateCertificateScoreInTerm(termId,ratings,grantsByTerm,verifiesByTerm,levelScoreMap,levelMap,certificateLevels,certTypeMap,issueMap,new HashSet<>());
+    }
+
+    private void calculateCertificateScoreInTerm(Long termId,Map<Long,RatingComposition> ratings,
+            Map<Long,List<CertificateGrant>> grantsByTerm,Map<Long,List<CertificateVerify>> verifiesByTerm,
+            Map<Long,Integer> levelScoreMap,Map<Long,CertificateLevel> levelMap,List<CertificateLevel> certificateLevels,
+            Map<Long,CertificateType> certTypeMap,Map<Long,CertificateIssue> issueMap,Set<String> credited) {
 
         List<CertificateGrant> grants = grantsByTerm.getOrDefault(termId, Collections.emptyList());
         for (CertificateGrant grant : grants) {
             CertificateType type = certTypeMap.get(grant.getCertificateTypeId());
+            if (type!=null && type.getTime()!=null && type.getTime().isAfter(LocalDate.now())) continue;
             if (type != null && !Boolean.FALSE.equals(type.getRatingEnabled())) {
                 // For official grants, the user might be registered or unregistered (stored in userAccount)
                 // But RatingService only calculates for registered users in 'ratings' map.
@@ -278,8 +316,10 @@ public class RatingService {
                     RatingComposition rc = ratings.get(grant.getUserId());
                     if (rc != null) {
                         CertificateIssue issue = grant.getIssueId() == null ? null : issueMap.get(grant.getIssueId());
-                        rc.setRatingCertificate(rc.getRatingCertificate()
-                                + resolveOfficialCertificateScore(type, issue, levelScoreMap, levelMap, certificateLevels));
+                        int points=resolveOfficialCertificateScore(type, issue, levelScoreMap, levelMap, certificateLevels);
+                        CertificateLevel level=resolveOfficialCertificateLevel(type,issue,levelMap,certificateLevels);
+                        String key=level==null?null:MemberAwardRatingService.key(grant.getUserId(),type.getTypeName(),type.getTime(),level.getLevelType(),level.getRankType());
+                        if (points>0 && (key==null || credited.add(key))) rc.setRatingCertificate(rc.getRatingCertificate()+points);
                     }
                 }
             }
@@ -298,6 +338,7 @@ public class RatingService {
         }
 
         for (CertificateVerify verify : verifies) {
+            if (verify.getTime()!=null && verify.getTime().isAfter(LocalDate.now())) continue;
             int score = levelScoreMap.getOrDefault(verify.getLevelId(), 0);
             Set<Long> scoredUserIds = new HashSet<>();
             // The applicant is tied to the original authenticated submission, independent of team snapshots.
@@ -309,7 +350,9 @@ public class RatingService {
             }
             for (Long userId : scoredUserIds) {
                 RatingComposition composition = ratings.get(userId);
-                if (composition != null) composition.setRatingCertificate(composition.getRatingCertificate() + score);
+                CertificateLevel level=levelMap.get(verify.getLevelId());
+                String key=level==null?null:MemberAwardRatingService.key(userId,verify.getEventName(),verify.getTime(),level.getLevelType(),level.getRankType());
+                if (composition != null && (key==null || credited.add(key))) composition.setRatingCertificate(composition.getRatingCertificate() + score);
             }
         }
     }
@@ -320,6 +363,12 @@ public class RatingService {
                                                 Map<Long, CertificateLevel> levelMap,
                                                 List<CertificateLevel> certificateLevels) {
         if (issue != null && "revoked".equals(issue.getStatus())) return 0;
+        CertificateLevel level=resolveOfficialCertificateLevel(type,issue,levelMap,certificateLevels);
+        return level==null?levelScoreMap.getOrDefault(type.getTypeId(),0):level.getBaseRating()==null?0:level.getBaseRating();
+    }
+
+    private CertificateLevel resolveOfficialCertificateLevel(CertificateType type,CertificateIssue issue,
+                Map<Long,CertificateLevel> levelMap,List<CertificateLevel> certificateLevels) {
         String levelScope = null;
         if (StringUtils.hasText(type.getLevelScope())) levelScope = type.getLevelScope();
         if (!StringUtils.hasText(levelScope) && issue != null && StringUtils.hasText(issue.getLevelScope())) levelScope = issue.getLevelScope();
@@ -330,11 +379,11 @@ public class RatingService {
         if (StringUtils.hasText(levelScope) && StringUtils.hasText(awardName)) {
             for (CertificateLevel level : certificateLevels) {
                 if (levelScope.equals(level.getLevelType()) && awardMatches(level, awardName)) {
-                    return level.getBaseRating() == null ? 0 : level.getBaseRating();
+                    return level;
                 }
             }
         }
-        return levelScoreMap.getOrDefault(type.getTypeId(), 0);
+        return levelMap.get(type.getTypeId());
     }
 
     private boolean awardMatches(CertificateLevel level, String awardName) {
@@ -365,7 +414,7 @@ public class RatingService {
     }
 
     private void calculatePracticeScoreInScope(LocalDateTime start, LocalDateTime end, Map<Long, RatingComposition> ratings) {
-        List<Map<String, Object>> dailyStats = ojPracticeRecordMapper.selectAllUserDailyStatsAfter(start);
+        List<Map<String, Object>> dailyStats = ojPracticeRecordMapper.selectAllUserDailyStatsAfter(start,end);
 
         for (Map<String, Object> stat : dailyStats) {
             Long uid = ((Number) stat.get("user_id")).longValue();

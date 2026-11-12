@@ -13,6 +13,7 @@ import com.cwnupaa.backend.vo.TrackerDashboardVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrackerService {
+    @Autowired private ApplicationEventPublisher ratingEvents;
 
     private static final Logger log = LoggerFactory.getLogger(TrackerService.class);
 
@@ -287,6 +289,7 @@ public class TrackerService {
         }
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        RatingRefreshRequested.publish(ratingEvents);
     }
 
     private String resolveAndCacheLuoguCookie(OjUserAccount account, String luoguClientId) {

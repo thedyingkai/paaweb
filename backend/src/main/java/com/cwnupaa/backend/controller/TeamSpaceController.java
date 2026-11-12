@@ -5,6 +5,9 @@ import com.cwnupaa.backend.utils.SecurityUtils;
 import com.cwnupaa.backend.utils.BestiRecordPolicy;
 import com.cwnupaa.backend.service.TeamMembershipService;
 import com.cwnupaa.backend.service.HistoricalAwardService;
+import com.cwnupaa.backend.service.RatingRefreshRequested;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import com.cwnupaa.backend.vo.UserProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/team-space")
 public class TeamSpaceController {
+    @Autowired private ApplicationEventPublisher ratingEvents;
     static final Set<String> ORGANIZED = Set.of("联盟主办", "ICPC", "CCPC", "天梯赛");
     static final Set<String> VOLUNTARY = Set.of("蓝桥杯", "马蹄杯", "百度之星", "CCSP", "CNCC");
     static final Set<String> KINDS = Set.of("award", "position", "registration");
@@ -158,7 +162,19 @@ public class TeamSpaceController {
         var counts=db.queryForMap("SELECT count(CASE WHEN r.kind='award' AND r.is_starred=false THEN 1 END) AS awards,count(CASE WHEN r.kind='award' AND r.is_starred=true THEN 1 END) AS starred FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where,args.toArray());
         args.add((page(page)-1)*50);
         var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.organization,r.result,r.award_level,r.award_grade,r.contest_stage,r.contest_award,r.team_name,r.start_date,r.end_date,r.source_url,r.history_link_id,r.is_starred FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
-        return Result.success(Map.of("items",displayRecords(items),"total",total,"awards",counts.get("awards"),"starred",counts.get("starred")));
+        return Result.success(Map.of("items",displayRecords(items),"positions",officialPositions(userId),"total",total,"awards",counts.get("awards"),"starred",counts.get("starred")));
+    }
+    private List<Map<String,Object>> officialPositions(Long userId) {
+        if(userId==null) return List.of();
+        var positions=db.queryForList("SELECT m.member_id AS id,m.term,m.department AS organization,m.position AS title,m.start_date,m.end_date FROM association_member m JOIN users u ON u.user_id=m.user_id WHERE m.user_id=? AND u.account_status='normal' ORDER BY m.start_date DESC NULLS LAST,m.member_id DESC",userId);
+        for(var p:positions) {
+            var dates=BestiRecordPolicy.termDates((String)p.get("term"));
+            if(p.get("start_date")==null) p.put("start_date",dates[0]);
+            if(p.get("end_date")==null) p.put("end_date",dates[1]);
+            p.put("id","position-"+p.get("id"));p.put("kind","position");p.put("result",p.get("organization"));
+            p.put("status","verified");p.put("source_type","official_roster");
+        }
+        return displayRecords(positions);
     }
     @GetMapping("/records")
     public Result<?> records(HttpServletRequest request,@RequestParam(defaultValue="mine") String scope,
@@ -185,6 +201,7 @@ public class TeamSpaceController {
         if (r.version()==null || number(existing,"version")!=r.version()) throw error(HttpStatus.CONFLICT,"记录已更新，请刷新后再保存");
         db.update("UPDATE besti_member_record SET kind=?,family=?,title=?,organization=?,result=?,team_name=?,start_date=?,end_date=?,source_url=?,notes=?,status='pending',review_note='',reviewed_by=NULL,version=version+1,updated_at=now(),award_level=?,award_grade=?,contest_stage=?,contest_award=? WHERE id=?",
             r.kind(),"position".equals(r.kind())?"":r.family(),text(r.title(),200,true),text(r.organization(),200,false),result(r),text(r.teamName(),200,false),r.startDate(),r.endDate(),text(r.sourceUrl(),1000,false),text(r.notes(),4000,false),awardLevel(r),awardGrade(r),"award".equals(r.kind())?text(r.contestStage(),30,false):null,contestAward(r),r.id());
+        RatingRefreshRequested.publish(ratingEvents);
         return Result.success("已保存，等待核验");
     }
     private Long insertRecord(MemberRecord r,long owner,long creator) {
@@ -214,6 +231,7 @@ public class TeamSpaceController {
         if(existing.get("history_link_id")!=null) throw error(HttpStatus.CONFLICT,"历史战绩须由管理员核验撤销归属");
         int changed=db.update("DELETE FROM besti_member_record WHERE id=? AND user_id=? AND history_link_id IS NULL",id,u.getUserId());
         if(changed==0) throw error(HttpStatus.NOT_FOUND,"记录不存在或不属于你");
+        RatingRefreshRequested.publish(ratingEvents);
         return Result.success("已删除");
     }
     @PostMapping("/records/{id}/review")
@@ -223,6 +241,7 @@ public class TeamSpaceController {
         int changed=db.update("UPDATE besti_member_record SET status=?,review_note=?,reviewed_by=?,version=version+1,updated_at=now() WHERE id=? AND version=? AND status='pending' AND history_link_id IS NULL",
             review.approved()?"verified":"rejected",text(review.note(),1000,false),u.getUserId(),id,review.version());
         if(changed==0) throw error(HttpStatus.CONFLICT,"记录已发生变化，请刷新后审核");
+        RatingRefreshRequested.publish(ratingEvents);
         return Result.success("核验结果已保存");
     }
     @GetMapping("/topics")
