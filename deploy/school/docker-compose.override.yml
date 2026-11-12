@@ -11,7 +11,7 @@ services:
         max-size: 10m
         max-file: "3"
   backend:
-    image: paaweb-school-backend:20261112-besti-r12
+    image: paaweb-school-backend:20261112-besti-r14
     mem_limit: 1024m
     logging: *bounded_logs
   frontend:

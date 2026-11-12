@@ -12,6 +12,7 @@ import com.cwnupaa.backend.service.AccountSecurityService;
 import com.cwnupaa.backend.service.SecurityAuditService;
 import com.cwnupaa.backend.service.FileAccessPolicy;
 import com.cwnupaa.backend.service.CertificateGrantService;
+import com.cwnupaa.backend.service.AdminRolePermissionService;
 import com.cwnupaa.backend.vo.AuditLogVO;
 import com.cwnupaa.backend.vo.AuthAuditListVO;
 import com.cwnupaa.backend.vo.UserProfileVO;
@@ -64,6 +65,7 @@ public class AdminUserController {
     @Autowired private SecurityAuditService securityAuditService;
     @Autowired private FileAccessPolicy fileAccessPolicy;
     @Autowired private CertificateGrantService certificateGrantService;
+    @Autowired private AdminRolePermissionService adminRolePermissionService;
     @Autowired
     private AuditRecordsMapper auditRecordsMapper;
 
@@ -426,6 +428,7 @@ public class AdminUserController {
             existUser.setIdPhotoUpdatedAt(LocalDateTime.now());
         }
         userMapper.updateById(existUser);
+        if (roleChanged) adminRolePermissionService.initializeForPromotion(existUser, previousRole);
         if (!java.util.Objects.equals(previousAccountStatus, existUser.getAccountStatus())) {
             userMapper.update(null, new com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper<Users>()
                     .eq("user_id", existUser.getUserId()).set("ban_until", null)
@@ -435,6 +438,7 @@ public class AdminUserController {
         List<String> fields = new ArrayList<>();
         if (emailChanged) fields.add("email");
         if (roleChanged) fields.add("role");
+        if (roleChanged) fields.add("permissions");
         if (statusChanged) fields.add("accountStatus");
         if (!fields.isEmpty()) {
             accountSecurityService.revokeSessions(existUser, request, false);

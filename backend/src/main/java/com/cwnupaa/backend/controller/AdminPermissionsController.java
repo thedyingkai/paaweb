@@ -9,6 +9,7 @@ import com.cwnupaa.backend.mapper.UserMapper;
 import com.cwnupaa.backend.service.AuthStateChangeService;
 import com.cwnupaa.backend.service.AccountSecurityService;
 import com.cwnupaa.backend.service.SecurityAuditService;
+import com.cwnupaa.backend.service.AdminRolePermissionService;
 import com.cwnupaa.backend.utils.SecurityUtils;
 import org.springframework.transaction.annotation.Transactional;
 import com.cwnupaa.backend.vo.UserProfileVO;
@@ -27,11 +28,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin/permission")
 public class AdminPermissionsController {
-    private static final List<String> ALLOWED_PERMISSIONS = List.of(
-            "manage_notice", "manage_training", "manage_category", "manage_contest",
-            "manage_user", "manage_user_email", "manage_user_role", "manage_user_status", "manage_oj", "manage_sys", "manage_api", "manage_cert_grant",
-            "manage_org", "manage_term", "manage_permission"
-    );
+    private static final List<String> ALLOWED_PERMISSIONS = AdminRolePermissionService.ALLOWED_PERMISSIONS;
 
     @Autowired
     private AdminPermissionsMapper adminPermissionsMapper;
@@ -43,6 +40,7 @@ public class AdminPermissionsController {
     private AuthStateChangeService authStateChangeService;
     @Autowired private AccountSecurityService accountSecurityService;
     @Autowired private SecurityAuditService securityAuditService;
+    @Autowired private AdminRolePermissionService adminRolePermissionService;
 
     private boolean checkIsAdminUser(HttpServletRequest request) {
         return SecurityUtils.isRoot(SecurityUtils.currentUser(request))
@@ -134,6 +132,7 @@ public class AdminPermissionsController {
 
         Long userId = Long.valueOf(params.get("userId").toString());
         String role = String.valueOf(params.get("role"));
+        if ("super_admin".equals(role)) role = "supper_admin";
         if (!List.of("supper_admin", "stu_admin").contains(role)) {
             return Result.error("管理员级别不合法");
         }
@@ -145,8 +144,10 @@ public class AdminPermissionsController {
             return Result.error("admin 账号必须保留超级管理员");
         }
 
+        String previousRole = targetUser.getRole();
         targetUser.setRole(role);
         userMapper.updateById(targetUser);
+        adminRolePermissionService.initializeForPromotion(targetUser, previousRole);
 
         if (!"supper_admin".equals(role)) {
             AdminPermissions perm = adminPermissionsMapper.selectOne(new QueryWrapper<AdminPermissions>().eq("user_id", userId));
