@@ -851,13 +851,16 @@ public class CrawlerLocalRunner {
         require(handle != null && !handle.isBlank() && com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(handle),
                 "QOJ / UCup 请填写登录用户名，不要填写队名或网址");
         require(cookie != null && !cookie.isBlank(), "QOJ / UCup 需要登录凭据，请在同步窗口填写 QOJ Cookie");
-        require(cookie.length() <= 16000 && !cookie.contains("\r") && !cookie.contains("\n"), "QOJ Cookie 格式不正确");
+        try { cookie = com.cwnupaa.backend.utils.QojCookie.normalize(cookie); }
+        catch (IllegalArgumentException e) { throw new TrackerSyncException(e.getMessage()); }
         Map<String, Map<String, Object>> solved = new LinkedHashMap<>();
         Set<Long> seen = new HashSet<>();
         long previousMinimum = Long.MAX_VALUE;
         for (int page = 1; page <= 2000; page++) {
-            String html = getPage("https://qoj.ac/submissions?submitter=" + encode(handle) + "&page=" + page,
-                    Map.of("Cookie", cookie.trim(), "Accept-Language", "en", "Referer", "https://qoj.ac/"), 2200);
+            String html = getPage("https://qoj.ac/submissions?submitter=" + encode(handle) + "&min_score=100&max_score=100&page=" + page,
+                    Map.of("Cookie", cookie, "Accept-Language", "en", "Referer", "https://qoj.ac/",
+                            "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/151 Safari/537.36 OJ-Insight/0.5",
+                            "Accept", "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8"), 2200);
             var parsed = QojSubmissionParser.parse(html, handle.trim(), page);
             long minimum = Long.MAX_VALUE;
             int added = 0;

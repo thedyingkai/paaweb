@@ -35,9 +35,11 @@ class QojTrackerTests {
         return b.append("</ul>").toString();
     }
     private void reply(int page, String body) {
-        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page="+page))
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&min_score=100&max_score=100&page="+page))
                 .andExpect(header("Cookie", "session=private-marker"))
-                .andRespond(withSuccess(body, MediaType.TEXT_HTML));
+                .andExpect(header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/151 Safari/537.36 OJ-Insight/0.5"))
+                .andExpect(header("Accept", "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8"))
+                .andRespond(withSuccess(body, new MediaType("text", "html", java.nio.charset.StandardCharsets.UTF_8)));
     }
     @Test void loadsEveryPageAndKeepsEarliestGlobalProblemAcrossContests() {
         reply(1, "<table>"+row(200,"/contest/12/problem/42","Accepted","2026-11-12 15:00:00")
@@ -57,13 +59,19 @@ class QojTrackerTests {
         reply(1, "<table>"+row(200,"/problem/42","AC","2026-11-12 15:00:00").replace("tester", "someone_else")+"</table>");
         assertThatThrownBy(() -> crawler.crawlQoj("tester", "session=private-marker")).hasMessageContaining("账号不匹配");
     }
+    @Test void displayNamesDoNotReplaceTheStableUsernameInProfileLinks() {
+        reply(1, "<table>"+row(200,"/problem/42","AC","2026-11-12 15:00:00")
+                .replace("<span class='uoj-username'>tester</span>", "<a class='uoj-username' href='/user/profile/tester'>队伍显示名称</a>")+"</table>");
+        assertThat(crawler.crawlQoj("tester","Cookie: session = private-marker;")).hasSize(1);
+        http.verify();
+    }
     @Test void aLoginPageIsNotAnEmptyHistory() {
         reply(1, "<form id='form-login'><input type='password'></form>");
         assertThatThrownBy(() -> crawler.crawlQoj("tester", "session=private-marker"))
                 .hasMessageContaining("登录已失效").hasMessageNotContaining("private-marker");
     }
     @Test void loginRedirectDoesNotForwardCredentials() {
-        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&min_score=100&max_score=100&page=1"))
                 .andRespond(withStatus(org.springframework.http.HttpStatus.FOUND).header("Location", "https://other.example/login"));
         assertThatThrownBy(() -> crawler.crawlQoj("tester", "session=private-marker")).hasMessageContaining("登录已失效");
         http.verify();
@@ -91,7 +99,7 @@ class QojTrackerTests {
         assertThat(new ObjectMapper().writeValueAsString(account)).contains("tester").doesNotContain("private-marker", "qojCookie");
     }
     @Test void cloudflareChallengeIsReportedWithoutBlamingTheAccountOrRetrying() {
-        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&min_score=100&max_score=100&page=1"))
                 .andRespond(withStatus(org.springframework.http.HttpStatus.FORBIDDEN)
                         .header("cf-mitigated","challenge").body("private-marker"));
         assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
@@ -105,14 +113,28 @@ class QojTrackerTests {
                 .hasMessageContaining("Cloudflare 浏览器验证");
         http.verify();
     }
+    @Test void cloudflareBackgroundScriptOnARealSubmissionPageIsNotAChallenge() {
+        reply(1,"<title>提交记录 - QOJ.ac</title><table>"
+                +row(200,"/problem/42","AC ✓","2026-11-12 15:00:00")+"</table>"
+                +"<script>window.__CF$cv$params={};</script>"
+                +"<script src='/cdn-cgi/challenge-platform/scripts/jsd/main.js'></script>");
+        assertThat(crawler.crawlQoj("tester","session=private-marker")).hasSize(1);
+        http.verify();
+    }
+    @Test void aConfirmedEmptyHistoryWithCloudflareBackgroundScriptIsValid() {
+        reply(1,"<title>提交记录 - QOJ.ac</title><p>No submissions</p>"
+                +"<script src='/cdn-cgi/challenge-platform/scripts/jsd/main.js'></script>");
+        assertThat(crawler.crawlQoj("tester","session=private-marker")).isEmpty();
+        http.verify();
+    }
     @Test void expiredLoginAndOtherForbiddenResponsesAreNotMisidentifiedAsChallenges() {
-        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&min_score=100&max_score=100&page=1"))
                 .andRespond(withStatus(org.springframework.http.HttpStatus.UNAUTHORIZED));
         assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
                 .hasMessageContaining("登录凭据已失效").hasMessageNotContaining("Cloudflare");
         http.verify();
         http.reset();
-        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&page=1"))
+        http.expect(requestTo("https://qoj.ac/submissions?submitter=tester&min_score=100&max_score=100&page=1"))
                 .andRespond(withStatus(org.springframework.http.HttpStatus.FORBIDDEN).body("Forbidden"));
         assertThatThrownBy(() -> crawler.crawlQoj("tester","session=private-marker"))
                 .hasMessageContaining("HTTP 403").hasMessageNotContaining("Cloudflare");

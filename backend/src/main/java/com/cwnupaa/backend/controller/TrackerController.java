@@ -57,6 +57,22 @@ public class TrackerController {
         }
     }
 
+    @PostMapping("/admin/user/{targetUserId}/refresh")
+    public Result<String> refreshMemberStats(
+            @RequestAttribute(value = "user", required = false) com.cwnupaa.backend.vo.UserProfileVO requester,
+            @PathVariable Long targetUserId,
+            @RequestParam(required = false) List<String> platforms
+    ) {
+        if (!com.cwnupaa.backend.utils.SecurityUtils.hasPermission(requester, "manage_user"))
+            return Result.error(403, "无权同步其他成员的训练记录");
+        String error = trackerService.checkSyncRequest(targetUserId, platforms, null);
+        if (error != null) return Result.error(error);
+        trackerService.refreshMemberTrackerQuietly(targetUserId, platforms);
+        org.slf4j.LoggerFactory.getLogger(TrackerController.class).info(
+                "管理员 {} 提交成员 {} 的训练记录同步，平台 {}", requester.getUserId(), targetUserId, platforms);
+        return Result.success("同步请求已接收，后台将使用成员已保存的绑定信息执行同步。");
+    }
+
     @GetMapping("/upcoming-contests")
     public Result<List<OjRecentContest>> getUpcomingContests() {
         return Result.success(trackerService.getUpcomingContests());

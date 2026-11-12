@@ -32,12 +32,10 @@ final class QojSubmissionParser {
                     .filter(a -> path(a).matches("/submission/\\d+/?")).findFirst().orElse(null);
             if (submission == null) continue;
             check(cells.size() >= 9, "QOJ 提交表结构变化，原统计已保留");
-            String owner = cells.get(2).select(".uoj-username").text().trim();
-            if (owner.isEmpty()) {
-                var link = cells.get(2).select("a[href]").stream()
-                        .filter(a -> path(a).startsWith("/user/profile/")).findFirst().orElse(null);
-                owner = link == null ? cells.get(2).text().trim() : path(link).substring("/user/profile/".length());
-            }
+            var ownerLink = cells.get(2).select("a[href]").stream()
+                    .filter(a -> path(a).startsWith("/user/profile/")).findFirst().orElse(null);
+            String owner = ownerLink == null ? cells.get(2).select(".uoj-username").text().trim()
+                    : path(ownerLink).substring("/user/profile/".length());
             check(owner.equals(handle), "QOJ 返回的提交账号不匹配，原统计已保留");
             Element problem = cells.get(1).select("a[href]").stream()
                     .filter(a -> PROBLEM.matcher(path(a)).matches()).findFirst().orElse(null);
@@ -91,7 +89,9 @@ final class QojSubmissionParser {
 
     static boolean isBrowserChallenge(String body) {
         return body != null && (body.contains("cf-chl-") || body.contains("cf-turnstile")
-                || body.contains("/cdn-cgi/challenge-platform/")
+                // Cloudflare also injects /challenge-platform/scripts/jsd/ into valid
+                // HTTP 200 pages. Only the interactive challenge markers are failures.
+                || body.contains("_cf_chl_opt") || body.contains("/orchestrate/chl_page/")
                 || Jsoup.parse(body).title().contains("Just a moment"));
     }
 

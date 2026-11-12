@@ -242,8 +242,10 @@ public class TrackerService {
     public String checkSyncRequest(Long userId, List<String> platforms, String qojCookie) {
         if (platforms != null && platforms.stream().anyMatch(p -> !EXTERNAL_PLATFORMS.contains(p) && !"CWNU".equals(p)))
             return "请选择支持的 OJ 平台";
-        if (qojCookie != null && (qojCookie.length() > 16000 || qojCookie.contains("\r") || qojCookie.contains("\n")))
-            return "QOJ Cookie 格式不正确，请粘贴一整行 Cookie 请求头的值";
+        if (qojCookie != null && !qojCookie.isBlank()) {
+            try { com.cwnupaa.backend.utils.QojCookie.normalize(qojCookie); }
+            catch (IllegalArgumentException e) { return e.getMessage(); }
+        }
         OjUserAccount account = ojUserAccountMapper.selectById(userId);
         if (account == null) return "请先在个人资料中绑定 OJ 账号";
         boolean all = platforms == null || platforms.isEmpty();
@@ -257,8 +259,9 @@ public class TrackerService {
     @Async
     public void refreshUserTracker(Long userId, String luoguClientId, List<String> targetPlatforms, String qojCookie) {
         if (qojCookie != null && !qojCookie.isBlank()) {
-            if (qojCookie.length() > 16000 || qojCookie.contains("\r") || qojCookie.contains("\n")) {
-                notificationService.send(userId, 5, "同步失败", "QOJ Cookie 格式不正确，请填写单行 Cookie 请求头");
+            try { qojCookie = com.cwnupaa.backend.utils.QojCookie.normalize(qojCookie); }
+            catch (IllegalArgumentException e) {
+                notificationService.send(userId, 5, "同步失败", e.getMessage());
                 return;
             }
             OjUserAccount account = ojUserAccountMapper.selectById(userId);
@@ -276,6 +279,11 @@ public class TrackerService {
 
     public void refreshUserTrackerQuietly(Long userId, List<String> targetPlatforms) {
         refreshUserTracker(userId, null, targetPlatforms, false);
+    }
+
+    @Async
+    public void refreshMemberTrackerQuietly(Long userId, List<String> targetPlatforms) {
+        refreshUserTrackerQuietly(userId, targetPlatforms);
     }
 
     private void refreshUserTracker(Long userId, String luoguClientId, List<String> targetPlatforms, boolean notifyUser) {
