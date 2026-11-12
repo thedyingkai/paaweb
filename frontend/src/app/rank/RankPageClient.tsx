@@ -1,9 +1,12 @@
 "use client";
 
 import {
+  Alert,
   Avatar,
+  Button,
   Card,
   Col,
+  Empty,
   Row,
   Select,
   Skeleton,
@@ -23,11 +26,11 @@ import {
   TrophyOutlined,
   UserOutlined
 } from '@ant-design/icons';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { readStoredUser } from '@/utils/auth';
+import request from '@/utils/request';
 import SiteHeader from '../components/SiteHeader';
 import PageLoader from '../components/PageLoader';
 
@@ -69,8 +72,13 @@ const RankPageClient = () => {
   const [data, setData] = useState<LeaderboardItem[]>([]);
   const [terms, setTerms] = useState<Term[]>([]);
   const [activeTermId, setActiveTermId] = useState<number | null>(null);
-  const [selectedTerm, setSelectedTerm] = useState<number | null>(null);
+  const [selectedTerm, setSelectedTerm] = useState<number | 'current'>('current');
   const [loading, setLoading] = useState(true);
+  const [termsLoading, setTermsLoading] = useState(true);
+  const [termsError, setTermsError] = useState(false);
+  const [boardError, setBoardError] = useState(false);
+  const [termsRetry, setTermsRetry] = useState(0);
+  const [boardRetry, setBoardRetry] = useState(0);
 
   const currentUserId = readStoredUser()?.userId;
   const myRankInfo = useMemo(
@@ -79,43 +87,64 @@ const RankPageClient = () => {
   );
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchTerms = async () => {
-      const res = await axios.get<{ code: number; data: Term[] }>('/api/rating/terms');
-      const termList = [...(res.data.data || [])].sort(
-        (a, b) => dayjs(b.startTime).valueOf() - dayjs(a.startTime).valueOf()
-      );
-      setTerms(termList);
-
-      const now = dayjs();
-      const current = termList.find(term => {
-        const start = dayjs(term.startTime);
-        const end = term.endTime ? dayjs(term.endTime) : null;
-        return !start.isAfter(now) && (!end || end.isAfter(now));
-      });
-      const activeId = current?.termId || (termList[0]?.termId) || null;
-      setActiveTermId(activeId);
-      setSelectedTerm(activeId);
-    };
-
-    fetchTerms().catch(() => setTerms([]));
-  }, []);
-
-  useEffect(() => {
-    const fetchLeaderboard = async () => {
-      if (selectedTerm === null) return;
-      setLoading(true);
+      setTermsLoading(true);
+      setTermsError(false);
       try {
-        const res = await axios.get<{ code: number; data: LeaderboardItem[] }>('/api/rating/leaderboard', {
-          params: { termId: selectedTerm }
+        const res = await request.get<{ code: number; data: Term[] }>('/rating/terms', {
+          signal: controller.signal,
+          timeout: 15000
         });
-        setData(res.data.data || []);
+        if (res.data.code !== 200 || !Array.isArray(res.data.data)) throw new Error('Invalid terms response');
+        if (controller.signal.aborted) return;
+        const termList = [...res.data.data].sort(
+          (a, b) => dayjs(b.startTime).valueOf() - dayjs(a.startTime).valueOf()
+        );
+        setTerms(termList);
+
+        const now = dayjs();
+        const current = termList.find(term => {
+          const start = dayjs(term.startTime);
+          const end = term.endTime ? dayjs(term.endTime).endOf('day') : null;
+          return !start.isAfter(now) && (!end || !end.isBefore(now));
+        });
+        setActiveTermId(current?.termId ?? null);
+      } catch {
+        if (!controller.signal.aborted) setTermsError(true);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) setTermsLoading(false);
       }
     };
 
-    fetchLeaderboard().catch(() => setLoading(false));
-  }, [selectedTerm]);
+    void fetchTerms();
+    return () => controller.abort();
+  }, [termsRetry]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const fetchLeaderboard = async () => {
+      setLoading(true);
+      setBoardError(false);
+      setData([]);
+      try {
+        const res = await request.get<{ code: number; data: LeaderboardItem[] }>('/rating/leaderboard', {
+          params: selectedTerm === 'current' ? {} : { termId: selectedTerm },
+          signal: controller.signal,
+          timeout: 15000
+        });
+        if (res.data.code !== 200 || !Array.isArray(res.data.data)) throw new Error('Invalid leaderboard response');
+        if (!controller.signal.aborted) setData(res.data.data);
+      } catch {
+        if (!controller.signal.aborted) setBoardError(true);
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    };
+
+    void fetchLeaderboard();
+    return () => controller.abort();
+  }, [selectedTerm, boardRetry]);
 
   const renderRole = (role?: string) => {
     if (!role || !roleMap[role]) return null;
@@ -202,17 +231,30 @@ const RankPageClient = () => {
           <Space>
             <FieldTimeOutlined />
             <Select
-              value={selectedTerm || undefined}
+              aria-label="积分统计范围"
+              value={selectedTerm}
               onChange={value => setSelectedTerm(value)}
-              placeholder="选择学期"
-              options={terms.map(term => ({
+              loading={termsLoading}
+              options={[{ value: 'current', label: '当前积分' }, ...terms.map(term => ({
                 value: term.termId,
                 label: `${term.termName}${term.termId === activeTermId ? ' · 进行中' : ''}`
-              }))}
+              }))]}
               style={{ width: 250 }}
             />
           </Space>
         </div>
+
+        {termsError ? (
+          <Alert
+            type="warning"
+            showIcon
+            title="学期列表加载失败，仍可查看当前积分。"
+            action={<Button size="small" onClick={() => setTermsRetry(value => value + 1)}>重试学期列表</Button>}
+            style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }}
+          />
+        ) : !termsLoading && terms.length === 0 && (
+          <Alert type="info" showIcon title="尚未设置学期，可先查看当前积分。" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }} />
+        )}
 
         {myRankInfo && (
           <Card className="bits-card my-rank-card" variant="borderless" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }}>
@@ -235,16 +277,19 @@ const RankPageClient = () => {
         )}
 
         <Card className="bits-card rank-table-card" variant="borderless" style={{ width: 'min(1120px, 100%)', margin: '0 auto' }}>
-          <Skeleton loading={loading} active paragraph={{ rows: 8 }}>
+          {boardError ? (
+            <Alert type="error" showIcon title="积分排行榜加载失败，请重试。" action={<Button onClick={() => setBoardRetry(value => value + 1)}>重新加载排行榜</Button>} />
+          ) : <Skeleton loading={loading} active paragraph={{ rows: 8 }}>
             <Table
               columns={columns}
               dataSource={data}
               rowKey="userId"
               pagination={{ pageSize: 50, showSizeChanger: false }}
               scroll={{ x: 900 }}
+              locale={{ emptyText: <Empty description={selectedTerm === 'current' ? '暂无积分排名记录' : '该学期暂无积分排名记录'} /> }}
               rowClassName={record => Number(record.userId) === Number(currentUserId) ? 'is-my-rank' : ''}
             />
-          </Skeleton>
+          </Skeleton>}
         </Card>
       </main>
     </>

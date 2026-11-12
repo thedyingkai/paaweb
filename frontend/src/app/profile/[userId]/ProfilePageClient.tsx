@@ -18,12 +18,11 @@ import {
 import type { UploadProps } from 'antd';
 import {
   BarChartOutlined,
-  CalendarOutlined,
   CameraOutlined,
-  CrownFilled,
   EditOutlined,
   ExclamationCircleFilled,
   GlobalOutlined,
+  HistoryOutlined,
   TeamOutlined,
   TrophyOutlined,
   UserOutlined
@@ -126,23 +125,6 @@ const eduMap: Record<string, string> = {
   postgraduate: '研究生',
   department: '部门',
   'off-campus': '校外'
-};
-
-const levelColor = (level?: string) => {
-  if (!level) return '#1677ff';
-  if (level.includes('国') || level.includes('National')) return '#f5222d';
-  if (level.includes('省') || level.includes('Provincial')) return '#fa8c16';
-  if (level.includes('校') || level.includes('市')) return '#13c2c2';
-  if (level.includes('院')) return '#52c41a';
-  return '#1677ff';
-};
-
-const rankColor = (rank?: string) => {
-  if (!rank) return '#1677ff';
-  if (rank.includes('金') || rank.includes('一等')) return '#fadb14';
-  if (rank.includes('银') || rank.includes('二等')) return '#9aa7b2';
-  if (rank.includes('铜') || rank.includes('三等')) return '#b8741a';
-  return '#1677ff';
 };
 
 const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
@@ -309,26 +291,12 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
                     {
                       key: 'honors',
                       label: <span><TrophyOutlined /> 荣誉墙</span>,
-                      children: honors.length ? (
-                        <div className="honor-grid">
-                          {honors.map(item => (
-                            <Card className="honor-card" variant="borderless" key={item.id}>
-                              <div className="honor-icon" style={{ color: levelColor(item.levelType), background: `${levelColor(item.levelType)}18` }}>
-                                <TrophyOutlined />
-                              </div>
-                              <div>
-                                <Tag color={levelColor(item.levelType)}>{item.levelType || '荣誉'}</Tag>
-                                <h3>{item.name}</h3>
-                                <p>{item.levelName || '未填写赛事级别'}</p>
-                                <Space split={<span className="meta-dot" />} wrap>
-                                  <Text strong style={{ color: rankColor(item.rankType) }}><CrownFilled /> {item.rankType || '获奖'}</Text>
-                                  <Text><CalendarOutlined /> {item.awardDate || '日期未知'}</Text>
-                                </Space>
-                              </div>
-                            </Card>
-                          ))}
-                        </div>
-                      ) : <Empty description="暂无荣誉记录" />
+                      children: <MemberRecordSummary userId={userId} isOwnProfile={isOwnProfile} certificates={honors} />
+                    },
+                    {
+                      key: 'experience',
+                      label: <span><HistoryOutlined /> 经历</span>,
+                      children: <MemberRecordSummary userId={userId} isOwnProfile={isOwnProfile} variant="experience" />
                     },
                     {
                       key: 'team',
@@ -340,7 +308,6 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
                   ]}
                 />
               </section>
-              <MemberRecordSummary userId={userId} />
               {isOwnProfile && (
                 <EditProfileModal
                   open={editOpen}
