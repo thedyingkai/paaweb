@@ -175,4 +175,20 @@ class TeamSpaceControllerTests {
         assertThrows(ResponseStatusException.class,()->controller.reply(request("student","normal"),42L,new TeamSpaceController.Reply("回复")));
         verify(db,never()).update(anyString(),any(Object[].class));
     }
+    @Test void organizingExperienceRequiresOrganizerRoleAndDateButNoAward() {
+        var record=new TeamSpaceController.MemberRecord(null,null,"organizing","联盟主办","校赛","计算机工程师联盟","命题与技术保障","",LocalDate.now(),null,"","",null,null,null,null);
+        assertDoesNotThrow(()->TeamSpaceController.validate(record));
+        assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(record("organizing","联盟主办","")));
+        var missingDate=new TeamSpaceController.MemberRecord(null,null,"organizing","联盟主办","校赛","联盟","命题","",null,null,"","",null,null,null,null);
+        assertThrows(ResponseStatusException.class,()->TeamSpaceController.validate(missingDate));
+        when(db.queryForObject(anyString(),eq(Long.class),any(Object[].class))).thenReturn(19L);
+        assertDoesNotThrow(()->controller.saveRecord(request("student","normal"),record));
+        verifyNoInteractions(membership);
+    }
+    @Test void experienceFilteringHappensBeforePaginationAndKeepsVerificationRestriction() {
+        when(db.queryForObject(anyString(),eq(Long.class),any(Object[].class))).thenReturn(0L);
+        when(db.queryForMap(anyString(),any(Object[].class))).thenReturn(Map.of("awards",0L,"starred",0L));
+        controller.publicRecords(7L,1,"experience");
+        verify(db).queryForList(argThat((String sql)->sql.contains("r.status='verified'") && sql.contains("r.kind IN ('position','organizing')") && sql.contains("LIMIT 50 OFFSET ?")),eq(7L),eq(0));
+    }
 }

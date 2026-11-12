@@ -456,7 +456,7 @@ export default function TrackerPage() {
       left: 'center',
       bottom: 0,
       pieces: [
-        { min: 3000, label: '3000+', color: '#aa0000' },
+        { gte: 3000, label: '3000+', color: '#aa0000' },
         { min: 2600, max: 2999, label: 'GM', color: '#ff3333' },
         { min: 2400, max: 2599, label: 'Red', color: '#ff7777' },
         { min: 2100, max: 2399, label: 'Master', color: '#ffcc88' },
@@ -476,7 +476,7 @@ export default function TrackerPage() {
       left: 'center',
       bottom: 0,
       pieces: [
-        { min: 5, label: 'More', color: '#216e39' },
+        { gte: 5, label: 'More', color: '#216e39' },
         { min: 3, max: 4, label: '3-4', color: '#30a14e' },
         { min: 1, max: 2, label: '1-2', color: '#9be9a8' },
         { value: 0, label: 'Less', color: '#ebedf0' }

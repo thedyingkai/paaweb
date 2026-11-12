@@ -430,7 +430,7 @@ const AuthAudit: React.FC = () => {
 
     return (
         <Card title="学生身份认证审核">
-            <Alert style={{ marginBottom: 20 }} type="info" showIcon title="通过审核只确认学生身份" description="请核对学生卡上的学校、姓名和学号。审核通过后，普通参赛者可以报名校赛、维护个人档案；校队资格需另到“校队成员”名单中绑定账号并设置任期。" />
+            <Alert style={{ marginBottom: 20 }} type="info" showIcon title="通过审核只确认学生身份" description="请核对学生卡上的学校、姓名和学号。认证通过后，普通参赛者可以报名校赛、维护个人档案，并在开放期间提交入队申请。校队资格通过“入队申请”单独审核，也可在“校队成员”中维护任期。" />
             <Tabs 
                 activeKey={activeTab} 
                 onChange={(key) => setActiveTab(key)}

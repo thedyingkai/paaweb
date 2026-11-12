@@ -158,6 +158,7 @@ const IntroPageClient = ({ category }: IntroPageClientProps) => {
             {titleMap[category]}
           </Title>
           <Paragraph>{subtitleMap[category]}</Paragraph>
+          {category === 'association_member' && <Button type="primary" href="/join-team">申请加入校队</Button>}
         </section>
 
         <Card 

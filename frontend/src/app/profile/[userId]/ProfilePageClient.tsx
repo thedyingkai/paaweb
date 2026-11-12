@@ -76,15 +76,6 @@ interface UserProfile {
   isEnrolledStu?: number;
 }
 
-interface HonorItem {
-  id: string | number;
-  name: string;
-  levelName?: string;
-  levelType?: string;
-  rankType?: string;
-  awardDate?: string;
-}
-
 interface DashboardData {
   totalSolved?: number;
   last7DaysSolved?: number;
@@ -132,7 +123,6 @@ const eduMap: Record<string, string> = {
 const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
   const router = useRouter();
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [honors, setHonors] = useState<HonorItem[]>([]);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [history, setHistory] = useState<RatingHistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -159,15 +149,13 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
     const fetchProfile = async () => {
       setLoading(true);
       try {
-        const [profileRes, honorRes, dashboardRes, historyRes] = await Promise.allSettled([
+        const [profileRes, dashboardRes, historyRes] = await Promise.allSettled([
           axios.get<{ code: number; data?: UserProfile }>(`/api/user/profile/${userId}`),
-          axios.get<{ code: number; data?: HonorItem[] }>('/api/certificate/honor-wall', { params: { userId } }),
           axios.get<{ code: number; data?: DashboardData }>('/api/tracker/dashboard', { params: { userId } }),
           axios.get<{ code: number; data?: RatingHistoryItem[] }>('/api/rating/history', { params: { userId } })
         ]);
 
         if (profileRes.status === 'fulfilled') setUser(profileRes.value.data.data || null);
-        if (honorRes.status === 'fulfilled') setHonors(honorRes.value.data.data || []);
         if (dashboardRes.status === 'fulfilled') setDashboard(dashboardRes.value.data.data || null);
         if (historyRes.status === 'fulfilled') setHistory(historyRes.value.data.data || []);
       } finally {
@@ -295,7 +283,7 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
                     {
                       key: 'honors',
                       label: <span><TrophyOutlined /> 荣誉墙</span>,
-                      children: <MemberRecordSummary userId={userId} isOwnProfile={isOwnProfile} certificates={honors} />
+                      children: <MemberRecordSummary userId={userId} isOwnProfile={isOwnProfile} />
                     },
                     {
                       key: 'experience',

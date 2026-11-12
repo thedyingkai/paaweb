@@ -10,6 +10,8 @@ import com.cwnupaa.backend.mapper.*;
 import com.cwnupaa.backend.service.EmailService;
 import com.cwnupaa.backend.service.FileAccessPolicy;
 import com.cwnupaa.backend.service.CertificateIdentityService;
+import com.cwnupaa.backend.service.HonorShowcaseService;
+import com.cwnupaa.backend.service.HistoricalAwardService;
 import com.cwnupaa.backend.utils.SecurityUtils;
 import com.cwnupaa.backend.utils.StudentNumberValidator;
 import com.cwnupaa.backend.vo.CertificateVerifyVO;
@@ -18,6 +20,7 @@ import com.cwnupaa.backend.vo.UserProfileVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +30,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -70,6 +74,48 @@ public class CertificateController {
     @Autowired private CertificateIdentityService certificateIdentityService;
     @Autowired private TeamMapper teamMapper;
     @Autowired private TeamMemberMapper teamMemberMapper;
+    @Autowired private JdbcTemplate db;
+    @Autowired private HonorShowcaseService honorShowcase;
+
+    public record ShowcaseRequest(List<String> selectedKeys) {}
+    public record Showcase(List<Map<String,Object>> records, List<HonorWallVO> certificates,
+            HonorShowcaseService.Preferences preferences) {}
+
+    private List<Map<String,Object>> showcaseRecords(Long userId) {
+        return db.queryForList("SELECT r.id,r.title,r.result,r.family,r.contest_stage,r.contest_award,r.team_name,r.start_date,r.source_url,r.is_starred "
+                + "FROM besti_member_record r JOIN users u ON u.user_id=r.user_id "
+                + "WHERE r.user_id=? AND r.kind='award' AND r.status='verified' AND u.account_status='normal' AND "
+                + HistoricalAwardService.visibleRecordSql("r")
+                + " ORDER BY r.start_date DESC NULLS LAST,r.id DESC", userId);
+    }
+
+    @GetMapping("/honor-wall/showcase")
+    public Result<Showcase> getShowcase(@RequestParam Long userId) {
+        return Result.success(new Showcase(showcaseRecords(userId), getHonorWall(userId).getData(), honorShowcase.read(userId)));
+    }
+
+    @PutMapping("/honor-wall/showcase")
+    public Result<?> saveShowcase(@RequestBody ShowcaseRequest body, HttpServletRequest request) {
+        var user = SecurityUtils.currentUser(request);
+        if (user == null) return Result.error(401,"请先登录");
+        if (!"normal".equals(user.getAccountStatus())) return Result.error(403,"请先完成身份认证");
+        var available = new HashSet<String>();
+        showcaseRecords(user.getUserId()).forEach(r -> available.add("record-" + r.get("id")));
+        getHonorWall(user.getUserId()).getData().forEach(c -> available.add("certificate-" + c.getId()));
+        try {
+            return Result.success(honorShowcase.save(user.getUserId(), body == null ? null : body.selectedKeys(), available));
+        } catch (IllegalArgumentException e) {
+            return Result.error(400,e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/honor-wall/showcase")
+    public Result<?> resetShowcase(HttpServletRequest request) {
+        var user = SecurityUtils.currentUser(request);
+        if (user == null) return Result.error(401,"请先登录");
+        if (!"normal".equals(user.getAccountStatus())) return Result.error(403,"请先完成身份认证");
+        return Result.success(honorShowcase.reset(user.getUserId()));
+    }
 
     @PostMapping("/submit")
     @Transactional(rollbackFor = Exception.class)

@@ -28,7 +28,7 @@ public class TeamSpaceController {
     @Autowired private ApplicationEventPublisher ratingEvents;
     static final Set<String> ORGANIZED = Set.of("联盟主办", "ICPC", "CCPC", "天梯赛");
     static final Set<String> VOLUNTARY = Set.of("蓝桥杯", "马蹄杯", "百度之星", "CCSP", "CNCC");
-    static final Set<String> KINDS = Set.of("award", "position", "registration");
+    static final Set<String> KINDS = Set.of("award", "position", "registration", "organizing");
     static final Set<String> CATEGORIES = Set.of("discussion", "training", "experience", "announcement");
     private final JdbcTemplate db;
     private final TeamMembershipService membership;
@@ -83,6 +83,10 @@ public class TeamSpaceController {
             throw error(HttpStatus.BAD_REQUEST,"赛事不在校队平台登记范围内");
         text(r.title(),200,true); text(r.organization(),200,false); text(r.result(),100,false);
         text(r.teamName(),200,false); text(r.notes(),4000,false);
+        if ("organizing".equals(r.kind())) {
+            text(r.organization(),200,true); text(r.result(),100,true);
+            if (r.startDate()==null) throw error(HttpStatus.BAD_REQUEST,"请填写办赛日期");
+        }
         if (r.startDate()!=null && r.endDate()!=null && r.endDate().isBefore(r.startDate()))
             throw error(HttpStatus.BAD_REQUEST,"结束日期不能早于开始日期");
         if ("position".equals(r.kind())) {
@@ -154,8 +158,11 @@ public class TeamSpaceController {
             "coordinator",coordinator(u),"teamMember",teamMember,"communityAccess",teamMember || moderator(u)));
     }
     @GetMapping("/public-records")
-    public Result<?> publicRecords(@RequestParam(required=false) Long userId,@RequestParam(defaultValue="1") int page) {
-        String where="r.status='verified' AND (r.kind IN ('award','position') OR r.history_link_id IS NOT NULL) AND u.account_status='normal' AND "+HistoricalAwardService.visibleRecordSql("r");
+    public Result<?> publicRecords(@RequestParam(required=false) Long userId,@RequestParam(defaultValue="1") int page,
+                                   @RequestParam(defaultValue="all") String section) {
+        if (!Set.of("all","experience").contains(section)) throw error(HttpStatus.BAD_REQUEST,"无效的展示分类");
+        String where="r.status='verified' AND (r.kind IN ('award','position','organizing') OR r.history_link_id IS NOT NULL) AND u.account_status='normal' AND "+HistoricalAwardService.visibleRecordSql("r");
+        if ("experience".equals(section)) where+=" AND r.kind IN ('position','organizing')";
         var args=new ArrayList<Object>();
         if(userId!=null){where+=" AND r.user_id=?";args.add(userId);}
         var total=db.queryForObject("SELECT count(*) FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where,Long.class,args.toArray());
@@ -164,6 +171,7 @@ public class TeamSpaceController {
         var items=db.queryForList("SELECT r.id,r.user_id,u.user_name AS owner_name,r.kind,r.family,r.title,r.organization,r.result,r.award_level,r.award_grade,r.contest_stage,r.contest_award,r.team_name,r.start_date,r.end_date,r.source_url,r.history_link_id,r.is_starred FROM besti_member_record r JOIN users u ON u.user_id=r.user_id WHERE "+where+" ORDER BY r.start_date DESC NULLS LAST,r.id DESC LIMIT 50 OFFSET ?",args.toArray());
         return Result.success(Map.of("items",displayRecords(items),"positions",officialPositions(userId),"total",total,"awards",counts.get("awards"),"starred",counts.get("starred")));
     }
+    public Result<?> publicRecords(Long userId,int page) { return publicRecords(userId,page,"all"); }
     private List<Map<String,Object>> officialPositions(Long userId) {
         if(userId==null) return List.of();
         var positions=db.queryForList("SELECT m.member_id AS id,m.term,m.department AS organization,m.position AS title,m.start_date,m.end_date FROM association_member m JOIN users u ON u.user_id=m.user_id WHERE m.user_id=? AND u.account_status='normal' ORDER BY m.start_date DESC NULLS LAST,m.member_id DESC",userId);

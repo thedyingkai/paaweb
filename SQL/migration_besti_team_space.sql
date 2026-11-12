@@ -3,7 +3,7 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS besti_member_record (
  id bigserial PRIMARY KEY,
  user_id bigint NOT NULL REFERENCES users(user_id),
- kind varchar(20) NOT NULL CHECK (kind IN ('award','position','registration')),
+ kind varchar(20) NOT NULL CHECK (kind IN ('award','position','registration','organizing')),
  family varchar(40) NOT NULL DEFAULT '',
  title varchar(200) NOT NULL,
  organization varchar(200) NOT NULL DEFAULT '',

@@ -107,7 +107,7 @@ const ProfileDataAnalysis = ({ loading, dashboard, ratingHistory }: ProfileDataA
       left: 'center',
       bottom: 0,
       pieces: [
-        { min: 3000, label: '3000+', color: '#aa0000' },
+        { gte: 3000, label: '3000+', color: '#aa0000' },
         { min: 2400, max: 2999, label: 'Red+', color: '#ff3333' },
         { min: 1900, max: 2399, label: 'Master', color: '#ff88ff' },
         { min: 1600, max: 1899, label: 'Expert', color: '#aaaaff' },
@@ -122,7 +122,7 @@ const ProfileDataAnalysis = ({ loading, dashboard, ratingHistory }: ProfileDataA
       left: 'center',
       bottom: 0,
       pieces: [
-        { min: 5, label: 'More', color: '#216e39' },
+        { gte: 5, label: 'More', color: '#216e39' },
         { min: 3, max: 4, label: '3-4', color: '#30a14e' },
         { min: 1, max: 2, label: '1-2', color: '#9be9a8' },
         { value: 0, label: 'Less', color: '#e8eef3' }

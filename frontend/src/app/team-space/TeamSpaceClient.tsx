@@ -240,6 +240,7 @@ export default function TeamSpaceClient() {
                   {identity.teamMember ? "校队成员（任期内）" : "普通参赛者"}
                 </Tag>
                 {identity.moderator && <Tag color="purple">交流区管理员</Tag>}
+                {!identity.teamMember && <Link href="/join-team">申请加入校队</Link>}
               </Space>
               <Alert
                 type="info"
@@ -248,8 +249,8 @@ export default function TeamSpaceClient() {
                 description={
                   <>
                     联盟主办比赛及 ICPC、CCPC、天梯赛由队长统一组织。
-                    其他比赛由成员自愿登记。普通参赛者同样可以维护个人奖项、职务和参赛记录。获奖、职务核验后展示在个人主页，修改后重新核验；参赛登记与补充材料仅本人和审核人员可见。
-                    校队资格由管理员在校队名单中另行确认，自填职务不开放内部交流权限。
+                    其他比赛由成员自愿登记。普通参赛者同样可以维护个人奖项、职务、办赛经历和参赛记录。奖项核验后展示在荣誉墙，职务与办赛经历展示在“经历”页，修改后重新核验；参赛登记与补充材料仅本人和审核人员可见。
+                    可在开放时间内提交入队申请，审核通过后成为校队成员；自填职务不开放内部交流权限。
                   </>
                 }
               />
@@ -519,8 +520,8 @@ export default function TeamSpaceClient() {
                 <Form.Item name="title" label="比赛完整名称" rules={[{ required: true, whitespace: true, max: 200 }]}>
                   <Input maxLength={200} placeholder="请包含年份、赛站或组别" />
                 </Form.Item>
-                <Form.Item name="organization" label="主办方"><Input maxLength={200} /></Form.Item>
-                <Form.Item name="teamName" label="队伍名称"><Input maxLength={200} /></Form.Item>
+                <Form.Item name="organization" label={kind === 'organizing' ? '举办单位' : '主办方'} rules={[{required:kind === 'organizing',whitespace:true,message:'请填写举办单位'}]}><Input maxLength={200} /></Form.Item>
+                {kind !== 'organizing' && <Form.Item name="teamName" label="队伍名称"><Input maxLength={200} /></Form.Item>}
                 {kind === 'award' ? (
                   <>
                     {awardStages(family).length > 0 && <Form.Item name="contestStage" label="赛事阶段" rules={[{ required: true, message: '请选择赛事阶段' }]}>
@@ -537,15 +538,15 @@ export default function TeamSpaceClient() {
                     </Form.Item>
                   </>
                 ) : (
-                  <Form.Item name="result" label="参赛结果"><Input maxLength={100} placeholder="如：待参赛、已参赛" /></Form.Item>
+                  <Form.Item name="result" label={kind === 'organizing' ? '承担的工作 / 职责' : '参赛结果'} rules={[{required:kind === 'organizing',whitespace:true,message:'请填写承担的工作或职责'}]}><Input maxLength={100} placeholder={kind === 'organizing' ? '如：赛事组织、命题、验题、技术保障、现场志愿服务' : '如：待参赛、已参赛'} /></Form.Item>
                 )}
               </>
             )}
             <Space align="start">
               <Form.Item
                 name="startDate"
-                label={kind === "position" ? "任职开始" : "比赛 / 获奖日期"}
-                rules={[{ required: kind === "position", message: "请选择任职开始日期" }]}
+                label={kind === "position" ? "任职开始" : kind === 'organizing' ? '办赛开始日期' : "比赛 / 获奖日期"}
+                rules={[{ required: kind === "position" || kind === 'organizing', message: "请选择开始日期" }]}
               >
                 <Input type="date" />
               </Form.Item>
@@ -578,7 +579,7 @@ export default function TeamSpaceClient() {
             >
               <Input maxLength={1000} placeholder="https://..." />
             </Form.Item>
-            <Form.Item name="notes" label="补充说明 / 队友 / 核验材料说明">
+            <Form.Item name="notes" label={kind === 'organizing' ? '办赛工作说明 / 核验材料' : '补充说明 / 队友 / 核验材料说明'}>
               <Input.TextArea rows={4} maxLength={4000} showCount />
             </Form.Item>
             <Button type="primary" htmlType="submit" loading={saving}>

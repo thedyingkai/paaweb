@@ -136,6 +136,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         if ("GET".equalsIgnoreCase(method) && "/user/me".equals(uri)) return true;
         if ("GET".equalsIgnoreCase(method) && "/team-space/public-records".equals(uri)) return true;
+        if ("GET".equalsIgnoreCase(method) && "/team-recruitment/windows".equals(uri)) return true;
 
         if ("GET".equalsIgnoreCase(method)) {
             if (!isAdminPath && (uri.contains("/notice") ||
@@ -256,6 +257,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
 
             // Route matching
+            if (isPathOrChild(uri, "/team-recruitment/admin") && SecurityUtils.hasPermission(user, "manage_sys")) return true;
             if ((uri.contains("/admin/notice") || uri.contains("/notice/admin")) && perms.contains("manage_notice")) return true;
             if ((uri.contains("/admin/training") || uri.contains("/training/admin")) && perms.contains("manage_training")) return true;
             if (uri.contains("/admin/category") || uri.contains("/admin/contest/category")) {

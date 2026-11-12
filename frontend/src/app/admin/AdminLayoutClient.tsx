@@ -181,6 +181,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
         getItem('校队简介', '/admin/content/association'),
         getItem('基本规则', '/admin/content/rules'),
         getItem('校队成员', '/admin/content/members'),
+        getItem('入队申请', '/admin/team-recruitment'),
       ]));
     }
 
@@ -254,6 +255,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     if (path.startsWith('/admin/dashboard') || path.startsWith('/admin/data-panel')) return true;
     if (path.startsWith('/admin/auth-audit')) return hasPerm('manage_user');
     if (path.startsWith('/admin/history-awards')) return hasPerm('manage_user') || hasPerm('manage_sys');
+    if (path.startsWith('/admin/team-recruitment')) return hasPerm('manage_sys');
     if (path.startsWith('/admin/certificate') && !path.startsWith('/admin/certificate-grant') && !path.startsWith('/admin/certificate-stats') && !path.startsWith('/admin/certificate/weights')) return true;
     if (path.startsWith('/admin/certificate-stats')) return true;
     if (path.startsWith('/admin/certificate/weights')) return true;
@@ -322,6 +324,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
     '/admin/content/association': '校队简介',
     '/admin/content/rules': '基本规则',
     '/admin/content/members': '校队成员',
+    '/admin/team-recruitment': '入队申请',
     '/admin/system': '系统配置',
     '/admin/system/register': '是否开放注册',
     '/admin/system/email': '邮箱发送设置',
