@@ -28,6 +28,20 @@ export const ojBindingFields = [
     digitsOnly: false,
   },
   {
+    name: 'qojId',
+    label: 'QOJ · 登录用户名',
+    placeholder: '例如 acmer_2026',
+    help: '填写 qoj.ac 登录时使用的用户名，即个人主页 /user/profile/ 后的内容。同步时需在训练记录页面填写已登录 QOJ 的 Cookie。',
+    digitsOnly: false,
+  },
+  {
+    name: 'ucupId',
+    label: 'UCup · 队伍账号用户名',
+    placeholder: '例如 ucup-team1234，按实际账号填写',
+    help: '填写 Universal Cup 发放、可登录 QOJ 的队伍账号用户名（如 ucup-team1234），不是排行榜上的队伍名称。队内一人绑定即可合并到已确认的队友。',
+    digitsOnly: false,
+  },
+  {
     name: 'cwnuojId',
     label: '学校 OJ · 用户 ID（UID，可选）',
     placeholder: '填写学校 OJ 的用户 ID；没有可留空',

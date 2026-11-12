@@ -60,6 +60,8 @@ interface UserProfile {
   codeforcesId?: string;
   atcoderId?: string;
   cwnuojId?: string;
+  qojId?: string;
+  ucupId?: string;
   rank?: number;
   rating?: number;
   email?: string;
@@ -147,6 +149,8 @@ const ProfilePageClient = ({ userId }: ProfilePageClientProps) => {
       user.luoguId && '洛谷',
       user.codeforcesId && 'CodeForces',
       user.atcoderId && 'AtCoder',
+      user.qojId && 'QOJ',
+      user.ucupId && 'UCup',
       user.cwnuojId && '学校 OJ'
     ].filter(Boolean) as string[];
   }, [user]);

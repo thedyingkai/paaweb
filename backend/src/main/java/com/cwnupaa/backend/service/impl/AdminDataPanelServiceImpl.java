@@ -75,7 +75,7 @@ public class AdminDataPanelServiceImpl implements AdminDataPanelService {
             
             // Create header row
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"姓名", "学号", "学院", "专业", "年级", "学历", "班级", "在校状态", "洛谷", "牛客", "Codeforces", "AtCoder", "学校 OJ", "总刷题量"};
+            String[] headers = {"姓名", "学号", "学院", "专业", "年级", "学历", "班级", "在校状态", "洛谷", "牛客", "Codeforces", "AtCoder", "学校 OJ", "QOJ / UCup", "总刷题量"};
             for (int i = 0; i < headers.length; i++) {
                 headerRow.createCell(i).setCellValue(headers[i]);
             }
@@ -107,7 +107,8 @@ public class AdminDataPanelServiceImpl implements AdminDataPanelService {
                 row.createCell(10).setCellValue(dto.getCodeforcesSolved() != null ? dto.getCodeforcesSolved() : 0);
                 row.createCell(11).setCellValue(dto.getAtcoderSolved() != null ? dto.getAtcoderSolved() : 0);
                 row.createCell(12).setCellValue(dto.getCwnuSolved() != null ? dto.getCwnuSolved() : 0);
-                row.createCell(13).setCellValue(dto.getTotalSolved() != null ? dto.getTotalSolved() : 0);
+                row.createCell(13).setCellValue(dto.getQojSolved() != null ? dto.getQojSolved() : 0);
+                row.createCell(14).setCellValue(dto.getTotalSolved() != null ? dto.getTotalSolved() : 0);
             }
             
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

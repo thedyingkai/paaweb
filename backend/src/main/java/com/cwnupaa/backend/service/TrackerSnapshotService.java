@@ -32,6 +32,8 @@ public class TrackerSnapshotService {
             case "AtCoder" -> account.getAtcoderId();
             case "NowCoder" -> account.getNewcoderId();
             case "Luogu" -> account.getLuoguId();
+            case "QOJ" -> account.getQojId();
+            case "UCup" -> account.getUcupId();
             default -> throw new IllegalArgumentException("不支持的平台");
         };
         if (current == null || !current.trim().equals(handle.trim())) {

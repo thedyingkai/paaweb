@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/team")
 public class TeamController {
+    @Autowired private org.springframework.context.ApplicationEventPublisher ratingEvents;
 
     @Autowired
     private TeamMapper teamMapper;
@@ -279,6 +280,7 @@ public class TeamController {
             if (leader != null && invitee != null) {
                 emailService.sendInviteResponseEmail(leader.getEmail(), invitee.getRealName(), team.getTeamName(), true);
             }
+            com.cwnupaa.backend.service.RatingRefreshRequested.publish(ratingEvents);
             return Result.success("已加入队伍");
         } else {
             teamMemberMapper.deleteById(tm.getTeamMemberId());
@@ -322,6 +324,7 @@ public class TeamController {
             }
         }
 
+        com.cwnupaa.backend.service.RatingRefreshRequested.publish(ratingEvents);
         return Result.success("操作成功");
     }
 
@@ -348,6 +351,7 @@ public class TeamController {
             fileAccessPolicy.deleteIfUnreferenced(team.getTeamImageId(), SecurityUtils.currentUser(request));
         }
 
+        com.cwnupaa.backend.service.RatingRefreshRequested.publish(ratingEvents);
         return Result.success("队伍已解散");
     }
 

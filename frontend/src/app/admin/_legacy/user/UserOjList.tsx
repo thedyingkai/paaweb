@@ -70,6 +70,8 @@ const UserOjList: React.FC = () => {
       atcoderId: record.atcoderId,
       luoguId: record.luoguId,
       newcoderId: record.newcoderId,
+      qojId: record.qojId,
+      ucupId: record.ucupId,
       cwnuojId: record.cwnuojId
     });
     setIsModalOpen(true);
@@ -130,6 +132,8 @@ const UserOjList: React.FC = () => {
       dataIndex: 'newcoderId', 
       render: (text: string) => text || <span style={{color: '#ccc'}}>-</span> 
     },
+    { title: 'QOJ', dataIndex: 'qojId', render: (text: string) => text || '—' },
+    { title: 'UCup', dataIndex: 'ucupId', render: (text: string) => text || '—' },
     { 
       title: '学校OJ', 
       dataIndex: 'cwnuojId', 

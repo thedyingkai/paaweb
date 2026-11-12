@@ -27,10 +27,13 @@ public class TrackerController {
     public Result<String> refreshMyStats(
             @RequestAttribute("userId") Long userId,
             @RequestParam(required = false) String luoguClientId,
-            @RequestParam(required = false) List<String> platforms
+            @RequestParam(required = false) List<String> platforms,
+            @RequestParam(required = false) String qojCookie
     ) {
         try {
-            trackerService.refreshUserTracker(userId, luoguClientId, platforms);
+            String error = trackerService.checkSyncRequest(userId, platforms, qojCookie);
+            if (error != null) return Result.error(error);
+            trackerService.refreshUserTracker(userId, luoguClientId, platforms, qojCookie);
             return Result.success("同步请求已接收，后台正在执行中。请稍后留意站内通知，在此期间您可以自由浏览其他页面。");
         } catch (Exception e) {
             return Result.error("刷新请求提交失败: " + e.getMessage());
@@ -62,9 +65,13 @@ public class TrackerController {
     @PostMapping("/submissions")
     public Result<IPage<OjPracticeRecord>> searchSubmissions(
             @RequestAttribute("userId") Long userId,
+            @RequestAttribute(value = "user", required = false) com.cwnupaa.backend.vo.UserProfileVO requester,
             @RequestBody SubmissionQueryDTO queryDTO
     ) {
-        queryDTO.setUserId(userId);
+        Long targetId = queryDTO.getUserId() == null ? userId : queryDTO.getUserId();
+        if (!userId.equals(targetId) && !com.cwnupaa.backend.utils.SecurityUtils.hasPermission(requester, "manage_user"))
+            return Result.error(403, "无权查看其他成员的做题明细");
+        queryDTO.setUserId(targetId);
         return Result.success(trackerService.searchSubmissions(queryDTO));
     }
 }

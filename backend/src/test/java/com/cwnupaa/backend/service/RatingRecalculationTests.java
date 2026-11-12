@@ -95,6 +95,7 @@ class RatingRecalculationTests {
         var db=new JdbcTemplate(new DriverManagerDataSource("jdbc:h2:mem:rating_practice;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1","sa",""));
         db.execute("CREATE TABLE oj_practice_record(user_id BIGINT,source_id BIGINT,problem_id VARCHAR(100),ac_time TIMESTAMP)");
         db.update("INSERT INTO oj_practice_record VALUES(2,1,'A','2025-06-01 12:00:00'),(2,2,'A','2025-06-01 12:01:00'),(2,1,'A','2025-06-01 12:02:00'),(2,1,'FUTURE','2025-06-02 12:00:00')");
+        db.execute("CREATE VIEW oj_effective_practice_record AS SELECT user_id,source_id,problem_id,MIN(ac_time) AS ac_time FROM oj_practice_record GROUP BY user_id,source_id,problem_id");
         String sql=OjPracticeRecordMapper.class.getMethod("selectAllUserDailyStatsAfter",LocalDateTime.class,LocalDateTime.class).getAnnotation(Select.class).value()[0].replace("#{minTime}","?").replace("#{maxTime}","?");
         var rows=db.queryForList(sql,LocalDateTime.of(2025,6,1,0,0),LocalDateTime.of(2025,6,1,23,59,59));
         assertThat(rows).hasSize(1);assertThat(((Number)rows.getFirst().get("solved_count")).intValue()).isEqualTo(2);

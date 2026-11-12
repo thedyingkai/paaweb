@@ -16,6 +16,7 @@ public class UserPracticeStatsDTO {
     private Integer codeforcesSolved;
     private Integer atcoderSolved;
     private Integer cwnuSolved;
+    private Integer qojSolved;
     private Integer totalSolved;
     private Integer isEnrolledStu;
     private String gradeYear;

@@ -67,6 +67,8 @@ interface UserData {
   codeforcesId?: string;
   atcoderId?: string;
   cwnuojId?: string;
+  qojId?: string;
+  ucupId?: string;
   role?: string;
 }
 
@@ -166,7 +168,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
 
   const isIdentityLocked = ['normal', 'pending', 'banned'].includes(userData.accountStatus || '');
   const isCollegeStudent = ['undergraduate', 'postgraduate'].includes(eduBg);
-  const isAllBound = Boolean(userData.newcoderId && userData.luoguId && userData.codeforcesId && userData.atcoderId && userData.cwnuojId);
+  const isAllBound = Boolean(userData.newcoderId && userData.luoguId && userData.codeforcesId && userData.atcoderId && userData.qojId && userData.ucupId && userData.cwnuojId);
 
   const handleUniChange = async (value: number) => {
     setSchools([]);
@@ -364,7 +366,7 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
     const fields = activeTab === 'security'
       ? securityMode === 'email' ? ['newEmail', 'newEmailVerifyCode', emailIdentityMethod === 'password' ? 'oldPassword' : 'oldVerifyCode']
         : securityMode === 'password' ? ['password', 'confirmPassword', 'verifyCode'] : ['userAccount', 'verifyCode']
-      : activeTab === 'binding' ? ['newcoderId', 'luoguId', 'codeforcesId', 'atcoderId', 'cwnuojId', 'verifyCode']
+      : activeTab === 'binding' ? ['newcoderId', 'luoguId', 'codeforcesId', 'atcoderId', 'cwnuojId', 'qojId', 'ucupId', 'verifyCode']
       : ['userName', 'introduce', 'realName', 'numberId', 'gender', 'phone', 'gradeYear', 'className', 'isEnrolledStu', 'eduBg', 'majorId', 'universityId', 'schoolId'];
     const values = await form.validateFields(fields);
     const payload: Record<string, unknown> = { userId: userData.userId };
@@ -399,6 +401,8 @@ const EditProfileModal = ({ open, onCancel, onSuccess, userData }: EditProfileMo
         codeforcesId: values.codeforcesId,
         atcoderId: values.atcoderId,
         cwnuojId: values.cwnuojId,
+        qojId: values.qojId,
+        ucupId: values.ucupId,
         verifyCode: values.verifyCode
       });
     }

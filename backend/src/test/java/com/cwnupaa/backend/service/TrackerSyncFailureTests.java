@@ -74,4 +74,30 @@ class TrackerSyncFailureTests {
         verifyNoInteractions(crawler, snapshots, records);
         verify(notifications).send(eq(1L), eq(5), eq("CP Tracker数据同步失败"), contains("缺少 Cookie"));
     }
+
+    @Test
+    void websiteChecksQojCredentialsAndRejectsMalformedRequestsBeforeStarting() {
+        var account = accounts.selectById(1L);
+        account.setQojId("test");
+        org.assertj.core.api.Assertions.assertThat(tracker.checkSyncRequest(1L, List.of("QOJ"), null)).contains("QOJ Cookie");
+        account.setQojCookie("session=cached");
+        org.assertj.core.api.Assertions.assertThat(tracker.checkSyncRequest(1L, List.of("QOJ"), null)).isNull();
+        org.assertj.core.api.Assertions.assertThat(tracker.checkSyncRequest(1L, List.of("QOJ"), "bad\r\nheader")).contains("格式不正确");
+        org.assertj.core.api.Assertions.assertThat(tracker.checkSyncRequest(1L, List.of("unknown"), null)).contains("支持的 OJ");
+        verifyNoInteractions(crawler, snapshots, notifications);
+    }
+
+    @Test
+    void manualSyncAlsoRefreshesDirectPeersQuietlyWithoutRecursing() {
+        var peer = new OjUserAccount(); peer.setUserId(2L); peer.setAtcoderId("peer");
+        when(accounts.selectById(2L)).thenReturn(peer);
+        when(records.selectTrackerPeers(1L)).thenReturn(List.of(2L));
+        when(crawler.crawlSubmissions(eq("AtCoder"), anyString(), eq(0L), isNull()))
+                .thenReturn(Map.of("submissions", List.of(), "complete", true));
+        tracker.refreshUserTracker(1L, null, List.of("AtCoder"), (String)null);
+        verify(snapshots).reconcile(1L, 2L, "AtCoder", "test", List.of());
+        verify(snapshots).reconcile(2L, 2L, "AtCoder", "peer", List.of());
+        verify(records, never()).selectTrackerPeers(2L);
+        verify(notifications, never()).send(eq(2L), anyInt(), anyString(), anyString());
+    }
 }

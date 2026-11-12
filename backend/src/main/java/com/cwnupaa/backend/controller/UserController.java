@@ -1016,6 +1016,8 @@ public class UserController {
             vo.setCodeforcesId(oj.getCodeforcesId());
             vo.setAtcoderId(oj.getAtcoderId());
             vo.setCwnuojId(oj.getCwnuojId());
+            vo.setQojId(oj.getQojId());
+            vo.setUcupId(oj.getUcupId());
         }
 
         RatingComposition rating = ratingMapper.selectById(user.getUserId());
@@ -1109,10 +1111,15 @@ public class UserController {
                 || userDto.getLuoguId() != null
                 || userDto.getCodeforcesId() != null
                 || userDto.getAtcoderId() != null
+                || userDto.getQojId() != null
+                || userDto.getUcupId() != null
                 || userDto.getCwnuojId() != null
                 || StringUtils.hasText(userDto.getLuoguClientId());
 
         if (isBindingUpdate) {
+            if (!com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(userDto.getQojId())
+                    || !com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(userDto.getUcupId()))
+                return Result.error("QOJ / UCup 请填写登录用户名，只能包含字母、数字、下划线和连字符，不要填队名或完整网址");
             if (StringUtils.hasText(userDto.getNewcoderId()) && !userDto.getNewcoderId().matches("\\d+"))
                 return Result.error("牛客账号请填写竞赛个人主页 /profile/ 后的数字 UID，不是昵称或学号");
             if (StringUtils.hasText(userDto.getLuoguId()) && !userDto.getLuoguId().matches("\\d+"))
@@ -1156,6 +1163,16 @@ public class UserController {
                 oj.setLuoguClientId(userDto.getLuoguClientId().trim());
             }
 
+            if (userDto.getQojId() != null) {
+                String value = userDto.getQojId().trim();
+                if (StringUtils.hasText(oj.getQojId()) && !oj.getQojId().equals(value)) return Result.error("QOJ 账号已绑定，更正请联系管理员");
+                oj.setQojId(value);
+            }
+            if (userDto.getUcupId() != null) {
+                String value = userDto.getUcupId().trim();
+                if (StringUtils.hasText(oj.getUcupId()) && !oj.getUcupId().equals(value)) return Result.error("UCup 账号已绑定，更正请联系管理员");
+                oj.setUcupId(value);
+            }
             pendingOjUpdate = oj;
         }
 

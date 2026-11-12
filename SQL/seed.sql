@@ -6,6 +6,9 @@ INSERT INTO oj_platform (oj_name, oj_url) VALUES
     ('AtCoder', 'https://atcoder.jp/'),
     ('NowCoder', 'https://ac.nowcoder.com/'),
     ('Luogu', 'https://www.luogu.com.cn/');
+INSERT INTO oj_platform (oj_id, oj_name, oj_url) VALUES
+    (6, 'QOJ', 'https://qoj.ac/'), (7, 'UCup', 'https://contest.ucup.ac/');
+SELECT setval('oj_platform_oj_id_seq', 7);
 
 insert into certificate_level(name, level_type, rank_type, base_rating)
 values

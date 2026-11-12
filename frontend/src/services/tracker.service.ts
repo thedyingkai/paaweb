@@ -51,6 +51,8 @@ export interface OjAccounts {
   newcoderId?: string;
   luoguId?: string;
   cwnuojId?: string;
+  qojId?: string;
+  ucupId?: string;
 }
 
 export const TrackerService = {
@@ -63,9 +65,10 @@ export const TrackerService = {
     return axios.get(`${API_PREFIX}/user/profile/${userId}`);
   },
 
-  refreshTracker: async (platforms: string[], luoguClientId?: string) => {
+  refreshTracker: async (platforms: string[], luoguClientId?: string, qojCookie?: string) => {
     const body = new URLSearchParams({ platforms: platforms.join(',') });
     if (luoguClientId?.trim()) body.set('luoguClientId', luoguClientId.trim());
+    if (qojCookie?.trim()) body.set('qojCookie', qojCookie.trim());
     return axios.post(`${API_PREFIX}/tracker/refresh`, body);
   },
 

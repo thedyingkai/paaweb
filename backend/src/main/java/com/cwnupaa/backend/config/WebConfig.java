@@ -37,6 +37,20 @@ public class WebConfig implements WebMvcConfigurer {
         return new RestTemplate(requests);
     }
 
+    @Bean
+    public RestTemplate qojRestTemplate() {
+        SimpleClientHttpRequestFactory requests = new SimpleClientHttpRequestFactory() {
+            @Override
+            protected void prepareConnection(java.net.HttpURLConnection connection, String method) throws java.io.IOException {
+                super.prepareConnection(connection, method);
+                connection.setInstanceFollowRedirects(false);
+            }
+        };
+        requests.setConnectTimeout(15000);
+        requests.setReadTimeout(30000);
+        return new RestTemplate(requests);
+    }
+
     private String[] corsOrigins() {
         String configured = System.getenv("CORS_ALLOWED_ORIGINS");
         if (configured == null || configured.isBlank()) return new String[]{com.cwnupaa.backend.utils.DeploymentUrls.site()};

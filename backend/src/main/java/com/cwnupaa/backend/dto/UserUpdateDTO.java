@@ -23,6 +23,8 @@ public class UserUpdateDTO extends Users {
     private String codeforcesId;
     private String atcoderId;
     private String cwnuojId;
+    private String qojId;
+    private String ucupId;
     private String luoguClientId;
 
     @Override
@@ -134,4 +136,8 @@ public class UserUpdateDTO extends Users {
     public void setLuoguClientId(String luoguClientId) {
         this.luoguClientId = luoguClientId;
     }
+    public String getQojId() { return qojId; }
+    public void setQojId(String value) { qojId = value; }
+    public String getUcupId() { return ucupId; }
+    public void setUcupId(String value) { ucupId = value; }
 }

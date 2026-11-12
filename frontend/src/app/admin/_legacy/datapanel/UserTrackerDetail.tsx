@@ -47,7 +47,7 @@ const getDifficultyColor = (diffStr: string) => {
 };
 
 const getPlatformColor = (name: string) => {
-    const map: any = { 'CodeForces': '#FFD700', 'AtCoder': '#000000', 'Luogu': '#E74C3C', 'NowCoder': '#2ECC71', 'CWNU': '#3498DB', '学校 OJ': '#3498DB' };
+    const map: any = { 'CodeForces': '#FFD700', 'AtCoder': '#000000', 'Luogu': '#E74C3C', 'NowCoder': '#2ECC71', 'QOJ / UCup': '#722ed1', 'CWNU': '#3498DB', '学校 OJ': '#3498DB' };
     return map[name] || '#888';
 };
 
@@ -190,6 +190,10 @@ const UserTrackerDetail: React.FC = () => {
                 break;
             case 4:
                 url = `https://www.luogu.com.cn/problem/${pid}`;
+                break;
+            case 6:
+            case 7:
+                url = `https://qoj.ac/problem/${pid.replace(/^QOJ/, '')}`;
                 break;
             case 5:
                 url = schoolOjProblemUrl(pid);
@@ -459,7 +463,7 @@ const UserTrackerDetail: React.FC = () => {
 
                     <Card title="做题记录明细" size="small" style={{ borderRadius: 8 }}>
                         <Form form={queryForm} layout="inline" onFinish={() => setQuery({ ...query, page: 1 })} style={{ marginBottom: 16, rowGap: 8 }}>
-                            <Form.Item name="sourceId"><Select placeholder="平台" style={{ width: 110 }} allowClear>{dashboard.platformStats && dashboard.platformStats.map(p => { const map: any = {'CodeForces': 1, 'AtCoder': 2, 'NowCoder': 3, 'Luogu': 4, 'CWNU': 5}; return <Option key={p.name} value={map[p.name]}>{p.name === 'CWNU' ? '学校 OJ' : p.name}</Option>; })}</Select></Form.Item>
+                            <Form.Item name="sourceId"><Select placeholder="平台" style={{ width: 110 }} allowClear>{dashboard.platformStats && dashboard.platformStats.map(p => { const map: any = {'CodeForces': 1, 'AtCoder': 2, 'NowCoder': 3, 'Luogu': 4, 'CWNU': 5, 'QOJ / UCup': 6}; return <Option key={p.name} value={map[p.name]}>{p.name === 'CWNU' ? '学校 OJ' : p.name}</Option>; })}</Select></Form.Item>
                             <Form.Item name="difficultyRange"><Select placeholder="难度" style={{ width: 110 }} allowClear>{DIFF_RANGES.map((r, i) => <Option key={r} value={i.toString()}>{r}</Option>)}</Select></Form.Item>
                             <Form.Item name="problemId"><Input placeholder="题目ID" style={{ width: 120 }} /></Form.Item>
                             <Form.Item name="keyword"><Input placeholder="题目名称" style={{ width: 140 }} /></Form.Item>
@@ -470,7 +474,7 @@ const UserTrackerDetail: React.FC = () => {
                             dataSource={tableData} rowKey="practiceProblemId" loading={tableLoading} size="small"
                             pagination={{ current: query.page, pageSize: query.size, total: tableTotal, showSizeChanger: true, onChange: (p, s) => setQuery({ page: p, size: s }) }}
                             columns={[
-                                { title: '平台', dataIndex: 'sourceId', width: 100, render: (val: any) => { const map: any = {1:'CodeForces', 2:'AtCoder', 3:'NowCoder', 4:'Luogu', 5:'CWNU'}; const name = val === 5 ? '学校 OJ' : (map[val] || 'Unknown'); return <Tag color={getPlatformColor(name)}>{name}</Tag>; } },
+                                { title: '平台', dataIndex: 'sourceId', width: 100, render: (val: any) => { const map: any = {1:'CodeForces', 2:'AtCoder', 3:'NowCoder', 4:'Luogu', 5:'CWNU', 6:'QOJ / UCup', 7:'QOJ / UCup'}; const name = val === 5 ? '学校 OJ' : (map[val] || 'Unknown'); return <Tag color={getPlatformColor(name)}>{name}</Tag>; } },
                                 { title: '题目ID', dataIndex: 'problemId', width: 120, render: (text: any, record: any) => <Button type="link" size="small" icon={<ExportOutlined />} onClick={() => jumpToProblem(record.sourceId, text)} style={{ padding: 0, fontFamily: 'monospace' }}>{text}</Button> },
                                 { title: '题目名称', dataIndex: 'problemName', ellipsis: true },
                                 { 

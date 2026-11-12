@@ -205,6 +205,7 @@ const DataPanel: React.FC = () => {
     { title: '洛谷刷题量', dataIndex: 'luoguSolved', key: 'luoguSolved', sorter: (a: any, b: any) => a.luoguSolved - b.luoguSolved },
     { title: '牛客刷题量', dataIndex: 'nowcoderSolved', key: 'nowcoderSolved', sorter: (a: any, b: any) => a.nowcoderSolved - b.nowcoderSolved },
     { title: 'Codeforces刷题量', dataIndex: 'codeforcesSolved', key: 'codeforcesSolved', sorter: (a: any, b: any) => a.codeforcesSolved - b.codeforcesSolved },
+    { title: 'QOJ / UCup题量', dataIndex: 'qojSolved', key: 'qojSolved', sorter: (a: any, b: any) => a.qojSolved - b.qojSolved },
     { title: 'AtCoder刷题量', dataIndex: 'atcoderSolved', key: 'atcoderSolved', sorter: (a: any, b: any) => a.atcoderSolved - b.atcoderSolved },
     { title: '学校 OJ 刷题量', dataIndex: 'cwnuSolved', key: 'cwnuSolved', sorter: (a: any, b: any) => a.cwnuSolved - b.cwnuSolved },
     { title: '总刷题量', dataIndex: 'totalSolved', key: 'totalSolved', sorter: (a: any, b: any) => a.totalSolved - b.totalSolved },

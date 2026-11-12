@@ -62,7 +62,7 @@ public class TrackerService {
     private final Object[] externalSyncLocks = java.util.stream.IntStream.range(0, 256)
             .mapToObj(i -> new Object()).toArray();
 
-    private static final Set<String> EXTERNAL_PLATFORMS = Set.of("CodeForces", "AtCoder", "NowCoder", "Luogu");
+    private static final Set<String> EXTERNAL_PLATFORMS = Set.of("CodeForces", "AtCoder", "NowCoder", "Luogu", "QOJ", "UCup");
 
     @Autowired
     private NotificationService notificationService;
@@ -83,7 +83,7 @@ public class TrackerService {
 
     public TrackerDashboardVO getDashboardStats(Long userId) {
         initPlatformMap();
-        List<OjPracticeRecord> allRecords = practiceRecordMapper.selectList(new QueryWrapper<OjPracticeRecord>().eq("user_id", userId));
+        List<OjPracticeRecord> allRecords = practiceRecordMapper.selectEffectiveRecords(userId);
 
         TrackerDashboardVO vo = new TrackerDashboardVO();
         LocalDateTime now = LocalDateTime.now();
@@ -112,10 +112,10 @@ public class TrackerService {
     }
 
     public IPage<OjPracticeRecord> searchSubmissions(SubmissionQueryDTO queryDTO) {
-        Page<OjPracticeRecord> page = new Page<>(queryDTO.getPage(), queryDTO.getSize());
+        Page<OjPracticeRecord> page = new Page<>(Math.max(1, queryDTO.getPage()), Math.min(100, Math.max(1, queryDTO.getSize())));
         QueryWrapper<OjPracticeRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("user_id", queryDTO.getUserId());
-        if (queryDTO.getSourceId() != null) wrapper.eq("source_id", queryDTO.getSourceId());
+        if (queryDTO.getSourceId() != null) wrapper.eq("source_id", queryDTO.getSourceId() == 7L ? 6L : queryDTO.getSourceId());
         if (queryDTO.getProblemId() != null && !queryDTO.getProblemId().isEmpty())
             wrapper.eq("problem_id", queryDTO.getProblemId());
         if (queryDTO.getKeyword() != null && !queryDTO.getKeyword().isEmpty())
@@ -123,7 +123,7 @@ public class TrackerService {
         if (queryDTO.getStartTime() != null) wrapper.ge("ac_time", queryDTO.getStartTime().atStartOfDay());
         if (queryDTO.getEndTime() != null) wrapper.le("ac_time", queryDTO.getEndTime().atTime(23, 59, 59));
         wrapper.orderByDesc("ac_time");
-        return practiceRecordMapper.selectPage(page, wrapper);
+        return practiceRecordMapper.selectEffectivePage(page, wrapper);
     }
 
     private long countAfter(List<OjPracticeRecord> records, LocalDateTime time) {
@@ -135,8 +135,9 @@ public class TrackerService {
         Map<Long, Long> counts = records.stream().collect(Collectors.groupingBy(OjPracticeRecord::getSourceId, Collectors.counting()));
         List<PlatformStatVO> stats = new ArrayList<>();
         platformIdMap.forEach((name, id) -> {
+            if ("UCup".equals(name)) return;
             PlatformStatVO stat = new PlatformStatVO();
-            stat.setName(name);
+            stat.setName("QOJ".equals(name) ? "QOJ / UCup" : name);
             stat.setCount(counts.getOrDefault(id, 0L).intValue());
             stat.setColor(getPlatformColor(name));
             stats.add(stat);
@@ -238,6 +239,41 @@ public class TrackerService {
         refreshUserTracker(userId, luoguClientId, targetPlatforms, true);
     }
 
+    public String checkSyncRequest(Long userId, List<String> platforms, String qojCookie) {
+        if (platforms != null && platforms.stream().anyMatch(p -> !EXTERNAL_PLATFORMS.contains(p) && !"CWNU".equals(p)))
+            return "请选择支持的 OJ 平台";
+        if (qojCookie != null && (qojCookie.length() > 16000 || qojCookie.contains("\r") || qojCookie.contains("\n")))
+            return "QOJ Cookie 格式不正确，请粘贴一整行 Cookie 请求头的值";
+        OjUserAccount account = ojUserAccountMapper.selectById(userId);
+        if (account == null) return "请先在个人资料中绑定 OJ 账号";
+        boolean all = platforms == null || platforms.isEmpty();
+        boolean qoj = (all || platforms.contains("QOJ")) && StringUtils.hasText(account.getQojId());
+        boolean ucup = (all || platforms.contains("UCup")) && StringUtils.hasText(account.getUcupId());
+        if ((qoj || ucup) && !StringUtils.hasText(qojCookie) && !StringUtils.hasText(account.getQojCookie()))
+            return "QOJ 限制未登录访问提交记录。请在此窗口填写 QOJ Cookie，网站会检查登录状态并保存有效同步结果";
+        return null;
+    }
+
+    @Async
+    public void refreshUserTracker(Long userId, String luoguClientId, List<String> targetPlatforms, String qojCookie) {
+        if (qojCookie != null && !qojCookie.isBlank()) {
+            if (qojCookie.length() > 16000 || qojCookie.contains("\r") || qojCookie.contains("\n")) {
+                notificationService.send(userId, 5, "同步失败", "QOJ Cookie 格式不正确，请填写单行 Cookie 请求头");
+                return;
+            }
+            OjUserAccount account = ojUserAccountMapper.selectById(userId);
+            if (account != null) ojUserAccountMapper.update(null,
+                    new com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper<OjUserAccount>()
+                            .eq("user_id", userId).set("qoj_cookie", qojCookie.trim()));
+        }
+        refreshUserTracker(userId, luoguClientId, targetPlatforms, true);
+        // Refresh only direct teammates with their own saved credentials. Quietly:
+        // another member's click must not send notifications to every teammate.
+        for (Long peer : practiceRecordMapper.selectTrackerPeers(userId)) {
+            refreshUserTracker(peer, null, targetPlatforms, false);
+        }
+    }
+
     public void refreshUserTrackerQuietly(Long userId, List<String> targetPlatforms) {
         refreshUserTracker(userId, null, targetPlatforms, false);
     }
@@ -282,6 +318,14 @@ public class TrackerService {
                     notificationService.send(userId, 5, "CP Tracker数据同步失败", "平台 [Luogu] 缺少 Cookie，请填写有效 Cookie 后重试，原统计已保留。");
                 }
             }
+        }
+        if (syncAll || targetPlatforms.contains("QOJ")) {
+            futures.add(CompletableFuture.runAsync(() ->
+                    processPlatformSync(userId, account.getQojId(), "QOJ", account.getQojCookie(), notifyUser), crawlerExecutor));
+        }
+        if (syncAll || targetPlatforms.contains("UCup")) {
+            futures.add(CompletableFuture.runAsync(() ->
+                    processPlatformSync(userId, account.getUcupId(), "UCup", account.getQojCookie(), notifyUser), crawlerExecutor));
         }
         if (syncAll || targetPlatforms.contains("CWNU")) {
             futures.add(CompletableFuture.runAsync(() ->
@@ -516,6 +560,9 @@ public class TrackerService {
                 return "#E74C3C";
             case "NowCoder":
                 return "#2ECC71";
+            case "QOJ":
+            case "UCup":
+                return "#722ed1";
             case "CWNU":
                 return "#3498DB";
             default:

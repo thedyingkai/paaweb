@@ -691,6 +691,11 @@ public class AdminUserController {
         account.setLuoguId(dto.getLuoguId());
         account.setNewcoderId(dto.getNewcoderId());
         account.setCwnuojId(dto.getCwnuojId());
+        if (!com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(dto.getQojId())
+                || !com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(dto.getUcupId()))
+            return Result.error("QOJ / UCup 请填写登录用户名，不要填队名或完整网址");
+        if (dto.getQojId() != null) account.setQojId(dto.getQojId().trim());
+        if (dto.getUcupId() != null) account.setUcupId(dto.getUcupId().trim());
 
         if (isNew) {
             ojUserAccountMapper.insert(account);

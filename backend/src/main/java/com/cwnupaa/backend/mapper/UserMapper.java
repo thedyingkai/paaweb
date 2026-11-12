@@ -51,11 +51,12 @@ public interface UserMapper extends BaseMapper<Users> {
             "COUNT(DISTINCT CASE WHEN opr.source_id = 3 THEN opr.problem_id END) as nowcoder_solved, " +
             "COUNT(DISTINCT CASE WHEN opr.source_id = 4 THEN opr.problem_id END) as luogu_solved, " +
             "COUNT(DISTINCT CASE WHEN opr.source_id = 5 THEN opr.problem_id END) as cwnu_solved, " +
-            "COUNT(DISTINCT opr.problem_id) as total_solved " +
+            "COUNT(DISTINCT CASE WHEN opr.source_id = 6 THEN opr.problem_id END) as qoj_solved, " +
+            "COUNT(opr.practice_problem_id) as total_solved " +
             "FROM users u " +
             "LEFT JOIN major m ON u.major_id = m.major_id " +
             "LEFT JOIN school s ON m.school_id = s.school_id " +
-            "LEFT JOIN oj_practice_record opr ON u.user_id = opr.user_id " +
+            "LEFT JOIN oj_effective_practice_record opr ON u.user_id = opr.user_id " +
             "WHERE 1=1 " +
             "<if test='keyword != null and keyword != \"\"'> " +
             "AND (u.user_name LIKE CONCAT('%', #{keyword}, '%') OR u.real_name LIKE CONCAT('%', #{keyword}, '%') OR u.number_id LIKE CONCAT('%', #{keyword}, '%')) " +
@@ -92,11 +93,12 @@ public interface UserMapper extends BaseMapper<Users> {
             "COUNT(DISTINCT CASE WHEN opr.source_id = 3 THEN opr.problem_id END) as nowcoder_solved, " +
             "COUNT(DISTINCT CASE WHEN opr.source_id = 4 THEN opr.problem_id END) as luogu_solved, " +
             "COUNT(DISTINCT CASE WHEN opr.source_id = 5 THEN opr.problem_id END) as cwnu_solved, " +
-            "COUNT(DISTINCT opr.problem_id) as total_solved " +
+            "COUNT(DISTINCT CASE WHEN opr.source_id = 6 THEN opr.problem_id END) as qoj_solved, " +
+            "COUNT(opr.practice_problem_id) as total_solved " +
             "FROM users u " +
             "LEFT JOIN major m ON u.major_id = m.major_id " +
             "LEFT JOIN school s ON m.school_id = s.school_id " +
-            "LEFT JOIN oj_practice_record opr ON u.user_id = opr.user_id " +
+            "LEFT JOIN oj_effective_practice_record opr ON u.user_id = opr.user_id " +
             "WHERE 1=1 " +
             "<if test='keyword != null and keyword != \"\"'> " +
             "AND (u.user_name LIKE CONCAT('%', #{keyword}, '%') OR u.real_name LIKE CONCAT('%', #{keyword}, '%') OR u.number_id LIKE CONCAT('%', #{keyword}, '%')) " +
@@ -127,13 +129,13 @@ public interface UserMapper extends BaseMapper<Users> {
     @Select("<script>" +
             "SELECT " +
             "COUNT(DISTINCT u.user_id) as user_count, " +
-            "COUNT(DISTINCT CASE WHEN opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.problem_id) END) as total_solved, " +
-            "COUNT(DISTINCT CASE WHEN opr.ac_time >= (NOW() - INTERVAL '30 day') AND opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.problem_id) END) as last_30_days_solved, " +
-            "COUNT(DISTINCT CASE WHEN opr.ac_time >= (NOW() - INTERVAL '7 day') AND opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.problem_id) END) as last_7_days_solved " +
+            "COUNT(DISTINCT CASE WHEN opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.source_id, '-', opr.problem_id) END) as total_solved, " +
+            "COUNT(DISTINCT CASE WHEN opr.ac_time >= (NOW() - INTERVAL '30 day') AND opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.source_id, '-', opr.problem_id) END) as last_30_days_solved, " +
+            "COUNT(DISTINCT CASE WHEN opr.ac_time >= (NOW() - INTERVAL '7 day') AND opr.problem_id IS NOT NULL THEN CONCAT(u.user_id, '-', opr.source_id, '-', opr.problem_id) END) as last_7_days_solved " +
             "FROM users u " +
             "LEFT JOIN major m ON u.major_id = m.major_id " +
             "LEFT JOIN school s ON m.school_id = s.school_id " +
-            "LEFT JOIN oj_practice_record opr ON u.user_id = opr.user_id " +
+            "LEFT JOIN oj_effective_practice_record opr ON u.user_id = opr.user_id " +
             "WHERE 1=1 " +
             "<if test='keyword != null and keyword != \"\"'> " +
             "AND (u.user_name LIKE CONCAT('%', #{keyword}, '%') OR u.real_name LIKE CONCAT('%', #{keyword}, '%') OR u.number_id LIKE CONCAT('%', #{keyword}, '%')) " +

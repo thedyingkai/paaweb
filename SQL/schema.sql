@@ -559,7 +559,10 @@ CREATE TABLE public.oj_user_account (
     luogu_client_id text,
     codeforces_id character varying(100),
     atcoder_id character varying(100),
-    cwnuoj_id character varying(100)
+    cwnuoj_id character varying(100),
+    qoj_id character varying(100),
+    ucup_id character varying(100),
+    qoj_cookie text
 );
 
 CREATE TABLE public.qq_bot_config (
@@ -1746,3 +1749,32 @@ ALTER TABLE public.external_board ADD COLUMN IF NOT EXISTS resolver_speed DOUBLE
 -- migration_resolver_settings.sql
 -- Awards and display preferences for the official resolver, isolated per external board.
 ALTER TABLE public.external_board ADD COLUMN IF NOT EXISTS resolver_settings TEXT;
+
+CREATE INDEX IF NOT EXISTS idx_team_member_accepted ON team_member(member_id, team_id) WHERE status='1';
+
+-- Only direct, accepted teammates share records. This is a live view, so leaving
+-- a team cannot leave copied awards/records behind or spread records transitively.
+CREATE OR REPLACE VIEW oj_tracker_peers AS
+SELECT user_id AS user_id, user_id AS owner_id FROM users
+UNION
+SELECT mine.member_id, peer.member_id
+FROM team_member mine
+JOIN team t ON t.team_id=mine.team_id
+JOIN team_member peer ON peer.team_id=mine.team_id
+JOIN users viewer ON viewer.user_id=mine.member_id AND viewer.account_status='normal'
+JOIN users contributor ON contributor.user_id=peer.member_id AND contributor.account_status='normal'
+WHERE mine.status='1' AND peer.status='1';
+
+CREATE OR REPLACE VIEW oj_effective_practice_record AS
+SELECT practice_problem_id, user_id, source_id, problem_id, problem_name,
+       problem_difficulty, problem_tag, ac_time
+FROM (
+    SELECT r.practice_problem_id, p.user_id,
+           CASE WHEN r.source_id=7 THEN 6 ELSE r.source_id END AS source_id,
+           r.problem_id, r.problem_name, r.problem_difficulty, r.problem_tag, r.ac_time,
+           ROW_NUMBER() OVER (
+               PARTITION BY p.user_id, CASE WHEN r.source_id=7 THEN 6 ELSE r.source_id END, r.problem_id
+               ORDER BY r.ac_time, r.practice_problem_id
+           ) AS occurrence
+    FROM oj_tracker_peers p JOIN oj_practice_record r ON r.user_id=p.owner_id
+) merged WHERE occurrence=1;

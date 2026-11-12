@@ -23,6 +23,10 @@ public class CrawlerLocalRunner {
     @Qualifier("trackerRestTemplate")
     private RestTemplate restTemplate;
 
+    @Autowired
+    @Qualifier("qojRestTemplate")
+    private RestTemplate qojRestTemplate;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private double clipDifficulty(double difficulty) {
@@ -508,7 +512,10 @@ public class CrawlerLocalRunner {
         for (int attempt = 1; ; attempt++) {
             waitForRequestSlot(host, interval);
             try {
-                String body = restTemplate.exchange(java.net.URI.create(url), HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
+                RestTemplate client = "qoj.ac".equals(host) && qojRestTemplate != null ? qojRestTemplate : restTemplate;
+                var response = client.exchange(java.net.URI.create(url), HttpMethod.GET, new HttpEntity<>(headers), String.class);
+                require(!response.getStatusCode().is3xxRedirection(), "QOJ 登录已失效，请在同步窗口更新 QOJ Cookie");
+                String body = response.getBody();
                 require(body != null && !body.isBlank(), "平台返回空响应");
                 return body;
             } catch (RestClientException e) {
@@ -547,6 +554,7 @@ public class CrawlerLocalRunner {
             case "kenkoooo.com" -> "AtCoder";
             case "ac.nowcoder.com" -> "牛客";
             case "www.luogu.com.cn" -> "洛谷";
+            case "qoj.ac" -> "QOJ / UCup";
             default -> "OJ";
         };
         if (status != null) {
@@ -832,6 +840,35 @@ public class CrawlerLocalRunner {
     }
 
     // Unified call dispatcher
+    public List<Map<String, Object>> crawlQoj(String handle, String cookie) {
+        require(handle != null && !handle.isBlank() && com.cwnupaa.backend.utils.OjBindingPolicy.validQojHandle(handle),
+                "QOJ / UCup 请填写登录用户名，不要填写队名或网址");
+        require(cookie != null && !cookie.isBlank(), "QOJ / UCup 需要登录凭据，请在同步窗口填写 QOJ Cookie");
+        require(cookie.length() <= 16000 && !cookie.contains("\r") && !cookie.contains("\n"), "QOJ Cookie 格式不正确");
+        Map<String, Map<String, Object>> solved = new LinkedHashMap<>();
+        Set<Long> seen = new HashSet<>();
+        long previousMinimum = Long.MAX_VALUE;
+        for (int page = 1; page <= 2000; page++) {
+            String html = getPage("https://qoj.ac/submissions?submitter=" + encode(handle) + "&page=" + page,
+                    Map.of("Cookie", cookie.trim(), "Accept-Language", "en", "Referer", "https://qoj.ac/"), 2200);
+            var parsed = QojSubmissionParser.parse(html, handle.trim(), page);
+            long minimum = Long.MAX_VALUE;
+            int added = 0;
+            for (var submission : parsed.submissions()) {
+                if (!seen.add(submission.id())) continue;
+                added++;
+                minimum = Math.min(minimum, submission.id());
+                if (submission.accepted()) keepEarliest(solved,
+                        record("QOJ", submission.problemId(), submission.title(), submission.time()));
+            }
+            require(page == 1 || (added > 0 && minimum < previousMinimum), "QOJ 分页未前进，原统计已保留");
+            if (!parsed.hasNext()) return new ArrayList<>(solved.values());
+            require(added > 0, "QOJ 分页返回空记录，原统计已保留");
+            previousMinimum = minimum;
+        }
+        throw new TrackerSyncException("QOJ 历史记录超过单次同步上限，原统计已保留");
+    }
+
     public Map<String, Object> crawlSubmissions(String platform, String handle, long lastTime, String clientId) {
         List<Map<String, Object>> list;
         if ("codeforces".equalsIgnoreCase(platform)) {
@@ -844,6 +881,8 @@ public class CrawlerLocalRunner {
             list = crawlLuogu(handle, lastTime, clientId);
         } else if ("nowcoder".equalsIgnoreCase(platform)) {
             list = crawlNowcoder(handle, lastTime);
+        } else if ("qoj".equalsIgnoreCase(platform) || "ucup".equalsIgnoreCase(platform)) {
+            list = crawlQoj(handle, clientId);
         } else {
             log.error("Unknown crawler platform: {}", platform);
             list = Collections.emptyList();

@@ -87,6 +87,8 @@ public class TrackerTask {
                 || StringUtils.hasText(account.getAtcoderId())
                 || StringUtils.hasText(account.getNewcoderId())
                 || StringUtils.hasText(account.getLuoguId())
+                || StringUtils.hasText(account.getQojId())
+                || StringUtils.hasText(account.getUcupId())
                 || StringUtils.hasText(account.getCwnuojId());
     }
 }

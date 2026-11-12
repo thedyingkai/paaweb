@@ -105,6 +105,8 @@ interface OjAccounts {
   newcoderId?: string;
   luoguId?: string;
   cwnuojId?: string;
+  qojId?: string;
+  ucupId?: string;
 }
 
 interface SubmissionRecord {
@@ -133,6 +135,7 @@ const getPlatformColor = (name: string) => {
   const map: Record<string, string> = {
     CodeForces: '#FFD700',
     AtCoder: '#000000',
+    'QOJ / UCup': '#722ed1',
     Luogu: '#E74C3C',
     NowCoder: '#2ECC71',
     CWNU: '#3498DB', '学校 OJ': '#3498DB'
@@ -140,8 +143,8 @@ const getPlatformColor = (name: string) => {
   return map[name] || '#888';
 };
 
-const platformIdMap: Record<string, number> = { CodeForces: 1, AtCoder: 2, NowCoder: 3, Luogu: 4, CWNU: 5 };
-const platformNameMap: Record<number, string> = { 1: 'CodeForces', 2: 'AtCoder', 3: 'NowCoder', 4: 'Luogu', 5: '学校 OJ' };
+const platformIdMap: Record<string, number> = { CodeForces: 1, AtCoder: 2, NowCoder: 3, Luogu: 4, CWNU: 5, 'QOJ / UCup': 6 };
+const platformNameMap: Record<number, string> = { 1: 'CodeForces', 2: 'AtCoder', 3: 'NowCoder', 4: 'Luogu', 5: '学校 OJ', 6: 'QOJ / UCup', 7: 'QOJ / UCup' };
 
 export default function TrackerPage() {
   const router = useRouter();
@@ -152,7 +155,7 @@ export default function TrackerPage() {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [syncPlatforms, setSyncPlatforms] = useState<string[]>([]);
   const [syncing, setSyncing] = useState(false);
-  const [syncForm] = Form.useForm<{ clientId?: string; uid?: string }>();
+  const [syncForm] = Form.useForm<{ clientId?: string; uid?: string; qojCookie?: string }>();
   const [chartScope, setChartScope] = useState<'7d' | '30d' | '1y'>('30d');
   const [selectedYear, setSelectedYear] = useState<number>(dayjs().year());
   const [tableData, setTableData] = useState<SubmissionRecord[]>([]);
@@ -218,6 +221,8 @@ export default function TrackerPage() {
     if (accounts.newcoderId) bound.push('NowCoder');
     if (accounts.luoguId) bound.push('Luogu');
     if (accounts.cwnuojId) bound.push('CWNU');
+    if (accounts.qojId) bound.push('QOJ');
+    if (accounts.ucupId) bound.push('UCup');
     setSelectedPlatforms(bound);
   }, [accounts]);
 
@@ -314,7 +319,7 @@ export default function TrackerPage() {
   const yearOptions = Array.from({ length: 6 }, (_, index) => dayjs().year() - index);
 
   const handleSync = () => {
-    const hasAccount = accounts.codeforcesId || accounts.atcoderId || accounts.newcoderId || accounts.luoguId || accounts.cwnuojId;
+    const hasAccount = accounts.codeforcesId || accounts.atcoderId || accounts.newcoderId || accounts.luoguId || accounts.cwnuojId || accounts.qojId || accounts.ucupId;
     if (!hasAccount) {
       message.warning('请先绑定至少一个OJ账号');
       return;
@@ -327,11 +332,16 @@ export default function TrackerPage() {
     setSyncPlatforms(selectedPlatforms);
   };
 
-  const submitSync = async ({ clientId, uid }: { clientId?: string; uid?: string }) => {
+  const submitSync = async ({ clientId, uid, qojCookie }: { clientId?: string; uid?: string; qojCookie?: string }) => {
     const cookie = uid?.trim() ? `__client_id=${clientId?.trim()}; _uid=${uid.trim()}` : clientId?.trim();
     setSyncing(true);
     try {
-      await TrackerService.refreshTracker(syncPlatforms, cookie);
+      const response = await TrackerService.refreshTracker(syncPlatforms, cookie, qojCookie);
+      if (response.data?.code !== 200) {
+        message.error(response.data?.msg || '同步检查未通过');
+        return;
+      }
+      syncForm.resetFields();
       setSyncPlatforms([]);
       message.success('同步请求已发送，请稍后刷新页面查看最新数据');
     } catch (error) {
@@ -364,6 +374,10 @@ export default function TrackerPage() {
         break;
       case 4:
         url = `https://www.luogu.com.cn/problem/${problem}`;
+        break;
+      case 6:
+      case 7:
+        url = `https://qoj.ac/problem/${problem.replace(/^QOJ/, '')}`;
         break;
       case 5:
         url = schoolOjProblemUrl(problem);
@@ -494,6 +508,7 @@ export default function TrackerPage() {
     <Card variant="borderless" style={{ height: '100%', boxShadow: 'none', background: 'transparent' }} styles={{ body: { padding: 0 } }}>
       <div className="tracker-sidebar-block">
         <Title level={5} style={{ marginBottom: 12 }}>已绑定账号</Title>
+        <p style={{ fontSize: 12, color: '#666' }}>自动合并本人及已确认队友的通过题目，重复题目只计一次。在个人主页「团队」中组队。</p>
         <div style={{ marginBottom: 10, fontSize: 12, color: '#999' }}>请勾选需要同步的平台：</div>
         <List size="small" split={false}>
           {[
@@ -501,6 +516,8 @@ export default function TrackerPage() {
             { name: 'AtCoder', id: accounts.atcoderId },
             { name: 'NowCoder', id: accounts.newcoderId },
             { name: 'Luogu', id: accounts.luoguId },
+            { name: 'QOJ', id: accounts.qojId },
+            { name: 'UCup', id: accounts.ucupId },
             { name: 'CWNU', id: accounts.cwnuojId }
           ].map(item => (
             <List.Item key={item.name} style={{ padding: '6px 0', border: 'none' }}>
@@ -664,6 +681,18 @@ export default function TrackerPage() {
         <p>数据同步将在后台进行，您可继续浏览其他页面。</p>
         <p>选中的平台：<b>{syncPlatforms.join(', ')}</b></p>
         <Form form={syncForm} layout="vertical" preserve={false} onFinish={submitSync}>
+          {(syncPlatforms.includes('QOJ') || syncPlatforms.includes('UCup')) && (
+            <>
+              <p style={{ fontSize: 12, color: '#666' }}>QOJ 和 UCup 队伍账号共用 QOJ 的提交记录。首次同步请填写登录凭据；留空使用已保存的凭据。</p>
+              <Form.Item label="QOJ Cookie" name="qojCookie" rules={[{ max: 16000, message: 'Cookie 过长' }, { pattern: /^[^\r\n]*$/, message: '请粘贴一整行 Cookie' }]}>
+                <Input.Password placeholder="粘贴已登录 qoj.ac 的完整 Cookie 请求头" autoComplete="off" />
+              </Form.Item>
+              <details style={{ marginBottom: 16, fontSize: 12, color: '#666' }}>
+                <summary>如何取得 Cookie</summary>
+                <p>在浏览器登录 qoj.ac，按 F12 打开开发者工具，切换到「网络 / Network」并刷新页面。点击 qoj.ac 的请求，在「请求标头 / Request Headers」中找到 Cookie，复制它的完整值。不要复制 Set-Cookie，也不用填写账号密码。</p>
+              </details>
+            </>
+          )}
           {syncPlatforms.includes('Luogu') && (
             <>
               <p style={{ fontSize: 12, color: '#666' }}>

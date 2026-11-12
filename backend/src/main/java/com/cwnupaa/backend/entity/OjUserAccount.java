@@ -13,6 +13,10 @@ public class OjUserAccount {
     private String codeforcesId;
     private String atcoderId;
     private String cwnuojId;
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private String qojCookie;
+    private String qojId;
+    private String ucupId;
 
     public Long getUserId() {
         return userId;
@@ -69,4 +73,12 @@ public class OjUserAccount {
     public void setCwnuojId(String cwnuojId) {
         this.cwnuojId = cwnuojId;
     }
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public String getQojCookie() { return qojCookie; }
+    public void setQojCookie(String value) { qojCookie = value; }
+
+    public String getQojId() { return qojId; }
+    public void setQojId(String value) { qojId = value; }
+    public String getUcupId() { return ucupId; }
+    public void setUcupId(String value) { ucupId = value; }
 }

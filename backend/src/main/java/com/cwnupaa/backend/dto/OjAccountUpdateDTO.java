@@ -7,6 +7,8 @@ public class OjAccountUpdateDTO {
     private String luoguId;
     private String newcoderId;
     private String cwnuojId;
+    private String qojId;
+    private String ucupId;
 
     public Long getUserId() {
         return userId;
@@ -55,4 +57,8 @@ public class OjAccountUpdateDTO {
     public void setCwnuojId(String cwnuojId) {
         this.cwnuojId = cwnuojId;
     }
+    public String getQojId() { return qojId; }
+    public void setQojId(String value) { qojId = value; }
+    public String getUcupId() { return ucupId; }
+    public void setUcupId(String value) { ucupId = value; }
 }
