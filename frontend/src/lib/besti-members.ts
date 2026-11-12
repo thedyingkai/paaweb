@@ -8,7 +8,7 @@ export const memberRoles = [
 
 export const memberOrganizations = ['科学之光技术联盟', '计算机工程师联盟', 'ACM 校队'];
 export const awardLevels = ['省部级', '国家级', '校级'];
-export const awardGrades = ['一等奖', '二等奖', '三等奖', '特等奖', '优秀奖'];
+export const awardGrades = ['特等奖', '一等奖', '二等奖', '三等奖', '优秀奖'];
 export const xcpcAwardGrades: Record<string, string> = { '金牌': '一等奖', '银牌': '二等奖', '铜牌': '三等奖', '优胜奖': '优秀奖' };
 export const xcpcAwards = Object.keys(xcpcAwardGrades);
 export const contestStageLabels: Record<string, string> = { regional: '区域赛', final: '总决赛', invitational: '邀请赛', national: '国赛', provincial: '省赛' };

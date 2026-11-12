@@ -62,7 +62,7 @@ const DIFF_RANGES = [
 ];
 
 const DIFF_COLORS = [
-  '#bfbfbf', '#cccccc', '#77ff77', '#77ddff', '#aaaaff',
+  '#000000', '#cccccc', '#77ff77', '#77ddff', '#aaaaff',
   '#ff88ff', '#ffcc88', '#ff7777', '#ff3333', '#aa0000'
 ];
 
@@ -119,7 +119,7 @@ interface SubmissionRecord {
 }
 
 const getDifficultyColor = (diffStr: string) => {
-  if (!diffStr || diffStr === 'N/A') return '#bfbfbf';
+  if (!diffStr || diffStr === 'N/A') return '#000000';
   const value = parseInt(diffStr.replace(/[^0-9]/g, ''), 10);
   if (Number.isNaN(value)) return '#bfbfbf';
   if (value < 1200) return '#999999';
@@ -464,7 +464,8 @@ export default function TrackerPage() {
         { min: 1600, max: 1899, label: 'Expert', color: '#aaaaff' },
         { min: 1400, max: 1599, label: 'Spec', color: '#77ddff' },
         { min: 1200, max: 1399, label: 'Pupil', color: '#77ff77' },
-        { max: 1199, label: 'Newbie', color: '#cccccc' }
+        { min: 1, max: 1199, label: 'Newbie', color: '#cccccc' },
+        { value: 0, label: 'N/A', color: '#000000' }
       ],
       textStyle: { fontSize: 9 },
       itemWidth: 10,
@@ -486,7 +487,7 @@ export default function TrackerPage() {
     };
 
     return {
-      tooltip: { position: 'top', formatter: (params: { data: [string, number] }) => `${params.data[0]}: ${params.data[1]}` },
+      tooltip: { position: 'top', formatter: (params: { data: [string, number] }) => `${params.data[0]}: ${isMaxDiff && params.data[1] === 0 ? 'N/A（当日通过题目均无难度数据）' : params.data[1]}` },
       visualMap,
       calendar: {
         top: 25,

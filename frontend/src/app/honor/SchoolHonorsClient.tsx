@@ -329,11 +329,11 @@ export default function SchoolHonorsClient() {
               loading={loading}
               dataSource={filtered}
               pagination={{
-                pageSize: 20,
+                defaultPageSize: 20,
                 showSizeChanger: true,
                 showTotal: (n) => `共 ${n} 条记录`,
               }}
-              scroll={{ x: 1450 }}
+              scroll={{ x: 1100 }}
               locale={{ emptyText: <Empty description="当前筛选下暂无记录" /> }}
               expandable={{
                 expandedRowRender: (r) => (
@@ -413,13 +413,7 @@ export default function SchoolHonorsClient() {
                     </Space>
                   ),
                 },
-                {
-                  title: '学校认定',
-                  width: 180,
-                  render: (_, r) => r.official === false ? '—' : awardName(r) || '—',
-                },
                 { title: '时间', dataIndex: 'date', width: 110 },
-                { title: '地点', dataIndex: 'location', width: 75, render: v => v || '—' },
                 {
                   title: '正式排名 / 正式队伍数',
                   width: 160,
@@ -429,24 +423,6 @@ export default function SchoolHonorsClient() {
                   title: '全部排名 / 总队伍数',
                   width: 150,
                   render: (_, r) => `${r.rank ?? '—'} / ${r.totalTeams ?? '待核实'}`,
-                },
-                { title: "过题", dataIndex: "solved", render: (v) => v ?? "—" },
-                {
-                  title: "来源",
-                  render: (_, r) => (
-                    <Space orientation="vertical" size={2}>
-                      {r.sources?.map((s) => (
-                        <a
-                          key={s.name + s.url}
-                          href={s.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {s.name} ↗
-                        </a>
-                      ))}
-                    </Space>
-                  ),
                 },
               ]}
             />

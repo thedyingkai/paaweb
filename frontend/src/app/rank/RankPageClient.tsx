@@ -253,7 +253,9 @@ const RankPageClient = () => {
             style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }}
           />
         ) : !termsLoading && terms.length === 0 && (
-          <Alert type="info" showIcon title="尚未设置学期，当前积分按全部历史记录累计。" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px' }} />
+          <Paragraph type="secondary" style={{ width: 'min(1120px, 100%)', margin: '0 auto 24px', padding: '0 10px' }}>
+            当前榜单按比赛、奖项与刷题积分综合排名。
+          </Paragraph>
         )}
 
         {myRankInfo && (

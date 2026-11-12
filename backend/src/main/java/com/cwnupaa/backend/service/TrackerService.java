@@ -184,6 +184,9 @@ public class TrackerService {
             String date = r.getAcTime().format(fmt);
             if (isMaxDiff) {
                 int diff = parseDifficulty(r.getProblemDifficulty());
+                // Zero marks an active day with no rated problems. Days without
+                // submissions stay absent, so the UI can distinguish N/A from rest.
+                map.putIfAbsent(date, 0);
                 if (diff > 0) {
                     int currentMax = map.getOrDefault(date, 0);
                     if (diff > currentMax) map.put(date, diff);

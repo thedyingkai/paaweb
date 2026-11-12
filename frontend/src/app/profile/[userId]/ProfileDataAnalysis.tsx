@@ -98,7 +98,7 @@ const ProfileDataAnalysis = ({ loading, dashboard, ratingHistory }: ProfileDataA
     tooltip: {
       position: 'top',
       formatter: (params: { data: [string, number] }) => (
-        isDifficulty ? `${params.data[0]} 最大难度：${params.data[1]}` : `${params.data[0]}：${params.data[1]} 题`
+        isDifficulty ? `${params.data[0]} 最大难度：${params.data[1] === 0 ? 'N/A（当日通过题目均无难度数据）' : params.data[1]}` : `${params.data[0]}：${params.data[1]} 题`
       )
     },
     visualMap: isDifficulty ? {
@@ -112,7 +112,8 @@ const ProfileDataAnalysis = ({ loading, dashboard, ratingHistory }: ProfileDataA
         { min: 1900, max: 2399, label: 'Master', color: '#ff88ff' },
         { min: 1600, max: 1899, label: 'Expert', color: '#aaaaff' },
         { min: 1200, max: 1599, label: 'Pupil', color: '#77d977' },
-        { max: 1199, label: 'Newbie', color: '#d2dae2' }
+        { min: 1, max: 1199, label: 'Newbie', color: '#d2dae2' },
+        { value: 0, label: 'N/A', color: '#000000' }
       ],
       textStyle: { color: '#6d8495', fontSize: 10 }
     } : {
