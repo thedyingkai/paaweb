@@ -252,7 +252,7 @@ export default function SignupDetailPage() {
   return (
     <ActivityLayout>
       <section className="activity-content">
-        <Button className="bits-ghost-button" icon={<ArrowLeftOutlined />} onClick={() => router.push('/contest/signup')} style={{ marginBottom: 16 }}>返回赛事报名</Button>
+        <Button className="bits-ghost-button" icon={<ArrowLeftOutlined />} onClick={() => router.push('/competitions')} style={{ marginBottom: 16 }}>返回赛事列表</Button>
         <Skeleton loading={loading} active paragraph={{ rows: 8 }}>
           {data && (
             <Card className="content-main-card intro-content-card" variant="borderless" style={{ width: 'min(980px, 100%)', margin: '0 auto' }}>

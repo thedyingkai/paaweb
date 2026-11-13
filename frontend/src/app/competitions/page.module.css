@@ -1,0 +1,36 @@
+.page { max-width: 1160px; margin: 0 auto; padding: 8px 0 36px; color: #172b42; }
+.heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 24px; }
+.heading h1 { margin: 0; font-size: 34px; line-height: 1.3; }
+.heading p { margin: 8px 0 0; color: #52677a; }
+.links { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.links a { color: #1764bf; font-weight: 500; }
+.recruitment { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 24px; margin-bottom: 24px; border: 1px solid #bed8fb; border-left: 4px solid #2479df; border-radius: 14px; background: #f1f7ff; }
+.noticeMain { min-width: 0; }
+.noticeTitle { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.noticeTitle h2 { margin: 0; font-size: 18px; line-height: 1.5; }
+.noticeMain p { margin: 8px 0 0; color: #415975; line-height: 1.8; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.toolbar h2 { margin: 0; font-size: 21px; }
+.toolbar > :last-child { width: 300px; }
+.events { display: grid; gap: 16px; }
+.event { background: rgba(255,255,255,.96); border: 1px solid #dce5ee; border-radius: 16px; padding: 24px; box-shadow: 0 4px 14px rgba(31,69,105,.04); }
+.eventHeading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
+.eventHeading h2 { margin: 0; font-size: 21px; line-height: 1.5; }
+.eventHeading h2 a { color: #173d6c; }
+.eventHeading h2 a:hover { color: #1677ff; }
+.count { color: #4e657b; font-size: 14px; }
+.schedule { margin: 16px 0 12px; line-height: 1.7; }
+.eventBottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 20px; }
+.eventBottom p { margin: 0; color: #52677a; line-height: 1.7; }
+.footnote { color: #607489; margin: 22px 0 0; line-height: 1.8; }
+.footnote a { color: #1764bf; }
+@media (max-width: 700px) {
+  .heading { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .heading h1 { font-size: 28px; }
+  .recruitment { align-items: flex-start; flex-direction: column; padding: 16px; gap: 12px; }
+  .toolbar { align-items: stretch; flex-direction: column; gap: 12px; }
+  .toolbar > :last-child { width: 100%; }
+  .event { padding: 18px; }
+  .eventHeading { flex-wrap: wrap; gap: 8px; }
+  .eventHeading h2 { font-size: 19px; }
+}

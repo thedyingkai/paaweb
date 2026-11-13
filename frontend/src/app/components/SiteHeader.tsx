@@ -117,7 +117,7 @@ const SiteHeader = ({ transparent = false, onBrandClick }: SiteHeaderProps) => {
     { href: '/notice', label: '通知' },
     { href: '/news', label: '新闻' },
     { href: '/publicity', label: '公示' },
-    { href: '/competitions', label: '赛事与登记' },
+    { href: '/competitions', label: '赛事' },
     { href: '/team-space', label: '我的参赛档案' },
     { href: '/join-team', label: '申请加入校队' },
     { href: '/community', label: '校队交流区' },
