@@ -15,6 +15,7 @@ import com.cwnupaa.backend.service.AdmissionTicketPdfService;
 import com.cwnupaa.backend.service.EmailService;
 import com.cwnupaa.backend.service.EventSignupNotificationService;
 import com.cwnupaa.backend.service.EventSignupPolicy;
+import com.cwnupaa.backend.service.EventRosterService;
 import com.cwnupaa.backend.service.SignupTeamIdentityService;
 import com.cwnupaa.backend.service.SignupCredentialService;
 import com.cwnupaa.backend.service.FileAccessPolicy;
@@ -67,6 +68,7 @@ public class EventController {
     private EmailService emailService;
     @Autowired private EventSignupNotificationService signupNotifications;
     @Autowired private EventSignupPolicy signupPolicy;
+    @Autowired private EventRosterService eventRoster;
     @Autowired private ExternalBoardService externalBoards;
     @Autowired private SignupTeamIdentityService signupTeamIdentity;
     @Autowired private SignupCredentialService signupCredentials;
@@ -117,13 +119,15 @@ public class EventController {
         } else {
             count = signupPersonalMapper.countApproved(e.getEventId());
         }
-        vo.setSignupCount(count);
+        vo.setSignupCount(EventRosterService.isRoster(e) ? eventRoster.count(e.getEventId()) : count);
 
         // 计算业务状态
         LocalDateTime now = LocalDateTime.now();
-        if (now.isBefore(e.getSignupStart())) {
+        if (EventRosterService.isRoster(e)) {
+            vo.setState(now.isBefore(e.getEventStart()) ? "waiting" : now.isBefore(e.getEventEnd()) ? "ongoing" : "ended");
+        } else if (now.isBefore(e.getSignupStart())) {
             vo.setState("pending"); // 报名未开始
-        } else if (now.isBefore(e.getSignupEnd())) {
+        } else if (e.getSignupEnd() == null || now.isBefore(e.getSignupEnd())) {
             vo.setState("registering"); // 报名进行中
         } else if (now.isBefore(e.getEventStart())) {
             vo.setState("waiting"); // 等待开赛
@@ -156,6 +160,7 @@ public class EventController {
 
         Event event = new Event();
         BeanUtils.copyProperties(dto, event);
+        if (event.getSignupMode() == null) event.setSignupMode("open");
         if (event.getAdmissionTicketOpen() == null) event.setAdmissionTicketOpen(false);
         eventMapper.insert(event);
 
@@ -188,13 +193,14 @@ public class EventController {
 
         Event event = eventMapper.selectForSignupUpdate(dto.getEventId());
         if (event == null) return Result.error("赛事不存在");
-        if (dto.getMaxSignup() != null && dto.getMaxSignup() < signupPolicy.approvedCount(event)) {
+        if (dto.getMaxSignup() != null && dto.getMaxSignup() < (EventRosterService.isRoster(event) ? eventRoster.count(event.getEventId()) : signupPolicy.approvedCount(event))) {
             return Result.error("报名上限不能小于已审核通过数量");
         }
         Event oldEventState = new Event();
         BeanUtils.copyProperties(event, oldEventState);
 
         BeanUtils.copyProperties(dto, event);
+        if (event.getSignupMode() == null) event.setSignupMode(oldEventState.getSignupMode());
         if (event.getAdmissionTicketOpen() == null) event.setAdmissionTicketOpen(oldEventState.getAdmissionTicketOpen());
         if (dto.getAdmissionTicketRules() == null) event.setAdmissionTicketRules(oldEventState.getAdmissionTicketRules());
         eventMapper.updateById(event);
@@ -240,6 +246,7 @@ public class EventController {
         Event event = eventMapper.selectById(eventId);
         if (event == null) return Result.error("赛事不存在");
 
+        if (EventRosterService.isRoster(event) && !eventRoster.eligible(eventId,userId)) return Result.error(403,"当前实名身份未匹配到确定名单");
         if (event.getIsTeam() == 0) {
             SignupPersonal signup = signupPersonalMapper.selectOne(new QueryWrapper<SignupPersonal>().eq("event_id", eventId).eq("user_id", userId));
             return Result.success(signup == null ? "none" : signup.getStatus());
@@ -256,6 +263,7 @@ public class EventController {
         Long userId = currentUserId;
         Event event = eventMapper.selectById(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event) && !eventRoster.eligible(eventId, userId)) return Result.error(403, "当前实名身份未匹配到确定名单");
 
         MySignupInfoVO vo = new MySignupInfoVO();
 
@@ -363,6 +371,7 @@ public class EventController {
 
         Event event = eventMapper.selectById(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         MySignupInfoVO vo = new MySignupInfoVO();
         vo.setIsRanking(isRanking);
@@ -427,6 +436,7 @@ public class EventController {
             if (userId == null) return ResponseEntity.status(401).contentType(MediaType.TEXT_PLAIN).body("未登录或会话已失效");
             Event event = eventMapper.selectById(eventId);
             if (event == null) return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("赛事不存在");
+            if (EventRosterService.isRoster(event) && !eventRoster.eligible(eventId,userId)) return ResponseEntity.status(403).contentType(MediaType.TEXT_PLAIN).body("当前实名身份未匹配到确定名单");
             Users user = userMapper.selectById(userId);
             if (user == null) return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("用户不存在");
             if (!Boolean.TRUE.equals(event.getAdmissionTicketOpen())) {
@@ -521,6 +531,7 @@ public class EventController {
 
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         String eventType = event.getType();
 
@@ -531,7 +542,7 @@ public class EventController {
 
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(event.getSignupStart())) return Result.error("报名未开始");
-        if (!now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
+        if (event.getSignupEnd() != null && !now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
 
         if (event.getIsTeam() == 0) {
             String finalPersonalType = null;
@@ -558,7 +569,7 @@ public class EventController {
             }
 
             Long count = signupPersonalMapper.countApproved(eventId);
-            if (count >= event.getMaxSignup()) return Result.error("名额已满");
+            if (event.getMaxSignup() != null && count >= event.getMaxSignup()) return Result.error("名额已满");
 
             if (signupTeamMapper.countActiveByMember(eventId, userId) > 0) {
                 return Result.error("您已随队伍报名此比赛");
@@ -646,7 +657,7 @@ public class EventController {
             if (memberConflict != null) return Result.error(memberConflict);
 
             Long count = signupTeamMapper.countApproved(eventId);
-            if (count >= event.getMaxSignup()) return Result.error("队伍名额已满");
+            if (event.getMaxSignup() != null && count >= event.getMaxSignup()) return Result.error("队伍名额已满");
 
             SignupTeam signup;
             try {
@@ -704,6 +715,7 @@ public class EventController {
 
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         LocalDateTime now = LocalDateTime.now();
         if (signupPolicy.isCancellationClosed(event, now)) {
@@ -742,6 +754,7 @@ public class EventController {
 
         current = SecurityUtils.normalizePage(current);
         size = SecurityUtils.clampPageSize(size);
+        if (EventRosterService.isRoster(event)) return Result.success(eventRoster.publicPage(eventId,current,size,keyword,teamType));
         Page<EventSignupVO> resultPage = new Page<>(current, size);
         List<EventSignupVO> voList = new ArrayList<>();
         Map<EventSignupVO, Long> organizationUsers = new LinkedHashMap<>();
@@ -1005,6 +1018,7 @@ public class EventController {
         boolean preview = Boolean.parseBoolean(String.valueOf(params.getOrDefault("preview", false)));
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         // Run exactly the real import path, including member replacements and DB
         // constraints. The preview transaction (including its outbox) never commits.
@@ -1211,16 +1225,19 @@ public class EventController {
     }
 
     private Result<String> validateEventDTO(EventDTO dto) {
+        if (dto != null && dto.getSignupMode() != null && !List.of("open","roster").contains(dto.getSignupMode())) return Result.error("无效的报名方式");
+        if (dto != null && "roster".equals(dto.getSignupMode()) && !Integer.valueOf(0).equals(dto.getIsTeam())) return Result.error("固定名单仅支持个人赛");
+
         if (dto == null) return Result.error("参数不能为空");
         if (dto.getCategoryId() == null) return Result.error("赛事分类不能为空");
         if (dto.getTermId() == null) return Result.error("学期不能为空");
         if (!StringUtils.hasText(dto.getName()) || dto.getName().trim().length() > 100) return Result.error("赛事名称不能为空且不能超过100字");
         dto.setName(dto.getName().trim());
         if (dto.getIsTeam() == null || (dto.getIsTeam() != 0 && dto.getIsTeam() != 1)) return Result.error("赛事报名类型不合法");
-        if (dto.getSignupStart() == null || dto.getSignupEnd() == null || dto.getEventStart() == null || dto.getEventEnd() == null) {
+        if (dto.getSignupStart() == null || dto.getEventStart() == null || dto.getEventEnd() == null) {
             return Result.error("时间信息不能为空");
         }
-        if (!dto.getSignupStart().isBefore(dto.getSignupEnd())) return Result.error("报名开始时间必须早于报名结束时间");
+        if (dto.getSignupEnd() != null && !dto.getSignupStart().isBefore(dto.getSignupEnd())) return Result.error("报名开始时间必须早于报名结束时间");
         if (!dto.getEventStart().isBefore(dto.getEventEnd())) return Result.error("比赛开始时间必须早于比赛结束时间");
         if (dto.getMaxSignup() != null && (dto.getMaxSignup() < 1 || dto.getMaxSignup() > 100000)) return Result.error("报名人数上限不合法");
         if (dto.getIsTeam() == 1) {
@@ -1684,7 +1701,7 @@ public class EventController {
             }
             if (signupTimeChanged) {
                 if (sb.length() > 0) sb.append("<br/>");
-                sb.append("报名时间调整为：").append(newEvent.getSignupStart() != null ? newEvent.getSignupStart().format(dtf) : "待定").append(" 至 ").append(newEvent.getSignupEnd() != null ? newEvent.getSignupEnd().format(dtf) : "待定").append("。");
+                sb.append("报名时间调整为：").append(newEvent.getSignupStart() != null ? newEvent.getSignupStart().format(dtf) : "待定").append(newEvent.getSignupEnd() != null ? " 至 " + newEvent.getSignupEnd().format(dtf) : " 起，不设截止时间").append("。");
             }
 
             emailService.sendEventTimeChangeEmail(targets, newEvent.getName(), sb.toString());

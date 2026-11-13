@@ -6,6 +6,7 @@ import { ArrowLeftOutlined, ReloadOutlined, SearchOutlined, FileExcelOutlined, U
 import { useParams, useNavigate } from '@/app/admin/_legacy/router';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import EventRosterManager from './EventRosterManager';
 import ImportPreview, { ImportPreviewData } from '../components/ImportPreview';
 import { downloadExcelTemplate, readExcelRows, rowsToTsv } from '@/utils/excelImport';
 
@@ -396,6 +397,8 @@ const EventSignupManager: React.FC = () => {
             )
         }
     );
+
+    if (eventInfo.signupMode === 'roster') return <EventRosterManager eventId={String(eventId)} name={eventInfo.name} />;
 
     return (
         <div>

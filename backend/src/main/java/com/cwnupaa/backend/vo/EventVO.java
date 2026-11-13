@@ -15,6 +15,10 @@ public class EventVO {
     private String name;
 
     private String type;
+    private String signupMode;
+    public String getSignupMode() { return signupMode; }
+    public void setSignupMode(String signupMode) { this.signupMode = signupMode; }
+
     private Boolean externalOpen;
     private Boolean unfrozen;
     private Boolean admissionTicketOpen;

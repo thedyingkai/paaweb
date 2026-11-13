@@ -38,7 +38,7 @@ const SchoolSignupManager: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [form] = Form.useForm();
   const [now, setNow] = useState(() => dayjs());
-  const canCancel = !!eventInfo.eventId && !!eventInfo.signupEnd && now.isBefore(eventInfo.signupEnd);
+  const canCancel = !!eventInfo.eventId && eventInfo.signupMode !== 'roster' && (!eventInfo.signupEnd || now.isBefore(eventInfo.signupEnd));
   const signupEnded = !!eventInfo.signupEnd && !now.isBefore(eventInfo.signupEnd);
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const SchoolSignupManager: React.FC = () => {
   };
 
   const handleBatchAction = async (action: 'cancel' | 'reapply', ids?: React.Key[]) => {
-    if (action === 'cancel' && (!eventInfo.signupEnd || !dayjs().isBefore(eventInfo.signupEnd))) {
+    if (action === 'cancel' && eventInfo.signupEnd && !dayjs().isBefore(eventInfo.signupEnd)) {
       setNow(dayjs());
       return message.warning('报名已结束，无法取消报名');
     }
@@ -228,7 +228,7 @@ const SchoolSignupManager: React.FC = () => {
         </Space>
         <Space>
           <Button icon={<ReloadOutlined />} onClick={refreshAll}>刷新</Button>
-          <Button type="primary" icon={<SendOutlined />} onClick={openSignup}>批量报名</Button>
+          <Button type="primary" icon={<SendOutlined />} disabled={eventInfo.signupMode === 'roster'} onClick={openSignup}>批量报名</Button>
         </Space>
       </div>
 
@@ -237,7 +237,7 @@ const SchoolSignupManager: React.FC = () => {
         type="info"
         showIcon
         style={{ marginBottom: 16 }}
-        message="学校管理员提交的报名会进入待审核状态，审核通过后才计入正式报名名单。"
+        message={eventInfo.signupMode === 'roster' ? '本场比赛按确定名单参赛，不开放代报名、重报或自行取消。名单调整请联系赛事管理员。' : '学校管理员提交的报名会进入待审核状态，审核通过后才计入正式报名名单。'}
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -262,7 +262,7 @@ const SchoolSignupManager: React.FC = () => {
               <Radio.Button value="detail">按成员</Radio.Button>
             </Radio.Group>
           )}
-          <Button disabled={!selectedRowKeys.length} onClick={() => handleBatchAction('reapply')}>批量重报</Button>
+          <Button disabled={!selectedRowKeys.length || eventInfo.signupMode === 'roster'} onClick={() => handleBatchAction('reapply')}>批量重报</Button>
           <Button danger disabled={!selectedRowKeys.length || !canCancel} onClick={() => handleBatchAction('cancel')}>批量取消</Button>
         </Space>
       </div>

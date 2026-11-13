@@ -43,6 +43,7 @@ interface SearchEventItem {
   type: string;
   signupStart: string;
   signupEnd: string;
+  signupMode?: string;
   eventStart: string;
   eventEnd: string;
 }
@@ -147,13 +148,14 @@ const SearchPageContent = () => {
   const getStatusTag = (item: SearchEventItem, type: 'signup' | 'board') => {
     const now = new Date().getTime();
 
+    if (type === 'signup' && item.signupMode === 'roster') return <Tag color="blue">固定名单参赛</Tag>;
     if (type === 'signup') {
       const start = item.signupStart ? new Date(item.signupStart).getTime() : 0;
-      const end = item.signupEnd ? new Date(item.signupEnd).getTime() : 0;
+      const end = item.signupEnd ? new Date(item.signupEnd).getTime() : Infinity;
 
       if (now < start) {
         return <Tag color="orange">报名未开始</Tag>;
-      } else if (now > end) {
+      } else if (now >= end) {
         return <Tag color="default">报名已截止</Tag>;
       } else {
         return <Tag color="green">报名进行中</Tag>;
@@ -166,7 +168,7 @@ const SearchPageContent = () => {
 
       if (now < start) {
         return <Tag color="orange">比赛未开始</Tag>;
-      } else if (now > end) {
+      } else if (now >= end) {
         return <Tag color="blue">比赛已结束</Tag>;
       } else {
         return <Tag color="processing" icon={<Spin size="small" />}> 比赛进行中</Tag>;

@@ -1,6 +1,7 @@
 package com.cwnupaa.backend.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,6 +18,10 @@ public class Event {
     private String name;
 
     private String type;
+    private String signupMode;
+    public String getSignupMode() { return signupMode; }
+    public void setSignupMode(String signupMode) { this.signupMode = signupMode; }
+
 
     private Integer isTeam;
     private Integer minMember;
@@ -26,6 +31,7 @@ public class Event {
     private LocalDateTime signupStart;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private LocalDateTime signupEnd;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -35,6 +41,7 @@ public class Event {
     private LocalDateTime eventEnd;
 
     private Integer status;
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private Integer maxSignup;
     private String description;
 

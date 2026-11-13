@@ -52,6 +52,7 @@ interface PublicSignup {
 }
 
 interface EventInfo {
+  signupMode?: string;
   name?: string;
   type?: string;
   isTeam?: number;
@@ -140,9 +141,9 @@ export default function SignupPublicListPage() {
           <header className={styles.hero}>
             <div className={styles.heading}>
               <div className={styles.eyebrow}><TrophyOutlined /> 赛事报名公示</div>
-              <h1>报名名单公示</h1>
+              <h1>{eventInfo?.signupMode === 'roster' ? '确定参赛名单' : '报名名单公示'}</h1>
               {eventInfo ? <p className={styles.eventName}>{eventInfo.name}</p> : <Skeleton.Input active size="small" />}
-              <div className={styles.approvedNote}><CheckCircleOutlined /> 仅公示已审核通过的报名信息</div>
+              <div className={styles.approvedNote}><CheckCircleOutlined /> {eventInfo?.signupMode === 'roster' ? '以赛事管理员导入的确定名单为准' : '仅公示已审核通过的报名信息'}</div>
             </div>
             <div className={styles.summary}>
               <span className={styles.summaryIcon}>{isTeam ? <TeamOutlined /> : <UserOutlined />}</span>

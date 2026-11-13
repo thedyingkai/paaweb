@@ -275,11 +275,11 @@ CREATE TABLE public.event (
     min_member integer DEFAULT 1,
     max_member integer DEFAULT 1,
     signup_start timestamp without time zone NOT NULL,
-    signup_end timestamp without time zone NOT NULL,
+    signup_end timestamp without time zone,
     event_start timestamp without time zone NOT NULL,
     event_end timestamp without time zone NOT NULL,
     status smallint DEFAULT 1,
-    max_signup integer NOT NULL,
+    max_signup integer,
     description text NOT NULL,
     is_external_open boolean DEFAULT false,
     is_unfrozen boolean DEFAULT false,
@@ -1829,3 +1829,24 @@ CREATE TABLE IF NOT EXISTS besti_team_application (
     UNIQUE (window_id,user_id)
 );
 CREATE INDEX IF NOT EXISTS idx_besti_application_review ON besti_team_application(window_id,status,id);
+
+-- Fixed-roster event registration
+BEGIN;
+-- Fixed-roster events can collect confirmations without inventing a deadline or quota.
+ALTER TABLE event ALTER COLUMN signup_end DROP NOT NULL;
+ALTER TABLE event ALTER COLUMN max_signup DROP NOT NULL;
+ALTER TABLE event ADD COLUMN IF NOT EXISTS signup_mode varchar(16) NOT NULL DEFAULT 'open'
+    CHECK (signup_mode IN ('open', 'roster'));
+CREATE TABLE IF NOT EXISTS event_roster (
+    roster_id bigserial PRIMARY KEY,
+    event_id bigint NOT NULL REFERENCES event(event_id) ON DELETE CASCADE,
+    university_name varchar(100) NOT NULL,
+    number_id varchar(64) NOT NULL,
+    real_name varchar(100) NOT NULL,
+    group_label varchar(100) NOT NULL DEFAULT '',
+    seat_number varchar(100) NOT NULL DEFAULT '',
+    is_ranking integer NOT NULL DEFAULT 1 CHECK (is_ranking IN (0, 1)),
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (event_id, university_name, number_id)
+);
+COMMIT;

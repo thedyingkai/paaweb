@@ -7,6 +7,7 @@ import { Button, Card, Input, Table, Tag } from 'antd';
 import { ReloadOutlined, SearchOutlined, TeamOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { eventSignupPeriod, eventSignupCount } from '@/utils/eventSignup';
 import { useNavigate } from '@/app/admin/_legacy/router';
 import { contestTypeText } from '@/utils/contestDisplay';
 
@@ -32,8 +33,10 @@ const SchoolSignupEventList: React.FC = () => {
 
   const getStatus = (item: any) => {
     const now = dayjs();
+  if (item.signupMode === 'roster' && now.isBefore(item.eventStart)) return { text: '名单已确定', color: 'blue', status: 'waiting', order: 3 };
+  if (item.signupMode === 'roster') return now.isBefore(item.eventEnd) ? { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 } : { text: '已结束', color: 'default', status: 'ended', order: 5 };
     if (now.isBefore(item.signupStart)) return { text: '报名未开始', color: 'orange' };
-    if (now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green' };
+    if (!item.signupEnd || now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green' };
     if (now.isBefore(item.eventStart)) return { text: '等待开赛', color: 'blue' };
     if (now.isBefore(item.eventEnd)) return { text: '正在比赛中', color: 'red' };
     return { text: '已结束', color: 'default' };
@@ -48,9 +51,9 @@ const SchoolSignupEventList: React.FC = () => {
   const columns = [
     { title: '赛事名称', dataIndex: 'name', ellipsis: true },
     { title: '赛制', dataIndex: 'type', width: 190, render: (type: string, record: any) => <Tag color={record.isTeam === 1 ? 'purple' : 'blue'}>{contestTypeText(type, record.isTeam === 1 ? '团队赛' : '个人赛')}</Tag> },
-    { title: '报名时间', width: 260, render: (_: any, record: any) => `${dayjs(record.signupStart).format('YYYY-MM-DD HH:mm')} 至 ${dayjs(record.signupEnd).format('YYYY-MM-DD HH:mm')}` },
+    { title: '报名时间', width: 260, render: (_: any, record: any) => eventSignupPeriod(record.signupStart, record.signupEnd) },
     { title: '状态', width: 120, render: (_: any, record: any) => { const status = getStatus(record); return <Tag color={status.color}>{status.text}</Tag>; } },
-    { title: '报名名额', width: 120, render: (_: any, record: any) => `${record.signupCount || 0} / ${record.maxSignup}` },
+    { title: '报名名额', width: 120, render: (_: any, record: any) => eventSignupCount(record.signupCount,record.maxSignup) },
     {
       title: '操作',
       width: 130,

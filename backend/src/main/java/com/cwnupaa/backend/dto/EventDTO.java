@@ -12,6 +12,10 @@ public class EventDTO {
     private String name;
 
     private String type;
+    private String signupMode;
+    public String getSignupMode() { return signupMode; }
+    public void setSignupMode(String signupMode) { this.signupMode = signupMode; }
+
 
     private Integer isTeam;
     private Integer minMember;

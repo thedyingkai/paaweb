@@ -27,9 +27,9 @@ public class EventSignupPolicy {
         return event.getMaxSignup() != null && proposedApprovedCount > event.getMaxSignup();
     }
 
-    /** Use the locked event's deadline; the exact cutoff is already closed. */
+    /** A null deadline is open-ended; a configured exact cutoff is already closed. */
     public boolean isCancellationClosed(Event event, LocalDateTime now) {
-        return event.getSignupEnd() == null || !now.isBefore(event.getSignupEnd());
+        return event.getSignupEnd() != null && !now.isBefore(event.getSignupEnd());
     }
 
     public String memberConflict(Long eventId, List<Long> memberIds, Long personalId, Long teamId) {

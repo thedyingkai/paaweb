@@ -11,6 +11,7 @@ import com.cwnupaa.backend.entity.*;
 import com.cwnupaa.backend.mapper.*;
 import com.cwnupaa.backend.service.EventSignupNotificationService;
 import com.cwnupaa.backend.service.EventSignupPolicy;
+import com.cwnupaa.backend.service.EventRosterService;
 import com.cwnupaa.backend.service.SignupTeamIdentityService;
 import com.cwnupaa.backend.service.SignupCredentialService;
 import com.cwnupaa.backend.utils.Md5Util;
@@ -631,10 +632,11 @@ public class SchoolSignupAdminController {
         Long eventId = Long.valueOf(params.get("eventId").toString());
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(event.getSignupStart())) return Result.error("报名未开始");
-        if (!now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
+        if (event.getSignupEnd() != null && !now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
 
         Integer isRanking = params.get("isRanking") == null ? 1 : Integer.valueOf(params.get("isRanking").toString());
         String advisor = AdvisorNames.normalize(params.get("advisor"));
@@ -682,6 +684,7 @@ public class SchoolSignupAdminController {
         Long eventId = Long.valueOf(params.get("eventId").toString());
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
         if (signupPolicy.isCancellationClosed(event, LocalDateTime.now()))
             return Result.error("报名已结束，无法取消报名");
         List<Long> signupIds = parseLongList(params.get("signupIds"));
@@ -729,10 +732,11 @@ public class SchoolSignupAdminController {
         Long eventId = Long.valueOf(params.get("eventId").toString());
         Event event = eventMapper.selectForSignupUpdate(eventId);
         if (event == null) return Result.error("赛事不存在");
+        if (EventRosterService.isRoster(event)) return Result.error(403, EventRosterService.LOCKED_MESSAGE);
 
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(event.getSignupStart())) return Result.error("报名未开始");
-        if (!now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
+        if (event.getSignupEnd() != null && !now.isBefore(event.getSignupEnd())) return Result.error("报名已截止");
 
         List<Long> signupIds = parseLongList(params.get("signupIds"));
         if (signupIds.isEmpty()) return Result.error("请选择报名记录");
@@ -764,7 +768,7 @@ public class SchoolSignupAdminController {
         if (user == null) throw new IllegalArgumentException("学生不存在、非本校学生或账号状态异常：" + userId);
         requireIdPhoto(user);
         String finalType = resolvePersonalType(event, user, inputType);
-        if (signupPersonalMapper.countApproved(event.getEventId()) >= event.getMaxSignup()) throw new IllegalArgumentException(user.getRealName() + "：名额已满");
+        if (event.getMaxSignup() != null && signupPersonalMapper.countApproved(event.getEventId()) >= event.getMaxSignup()) throw new IllegalArgumentException(user.getRealName() + "：名额已满");
         if (signupTeamMapper.countActiveByMember(event.getEventId(), userId) > 0) throw new IllegalArgumentException(user.getRealName() + "：已随队伍报名");
         SignupPersonal signup = signupPersonalMapper.selectOne(new QueryWrapper<SignupPersonal>().eq("event_id", event.getEventId()).eq("user_id", userId));
         if (signup != null && ("approved".equals(signup.getStatus()) || "pending".equals(signup.getStatus()))) {
@@ -800,7 +804,7 @@ public class SchoolSignupAdminController {
         validateTeamSignupMembers(event, members, team.getTeamName());
         requireMembersIdPhoto(members, team.getTeamName());
         String finalType = resolveTeamType(event, members, inputType);
-        if (signupTeamMapper.countApproved(event.getEventId()) >= event.getMaxSignup()) throw new IllegalArgumentException(team.getTeamName() + "：队伍名额已满");
+        if (event.getMaxSignup() != null && signupTeamMapper.countApproved(event.getEventId()) >= event.getMaxSignup()) throw new IllegalArgumentException(team.getTeamName() + "：队伍名额已满");
         checkTeamConflicts(event.getEventId(), memberIds, team.getTeamName());
 
         String teamName = normalizeTeamName(team.getTeamName());

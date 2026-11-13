@@ -31,6 +31,7 @@ import {
 } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { eventSignupPeriod, eventSignupCount } from '@/utils/eventSignup';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import AdvisorInput, { advisorText } from '@/app/components/AdvisorInput';
@@ -73,6 +74,7 @@ const previewMembers = (previewData: Record<string, unknown> | null) => {
 };
 
 interface EventDetail {
+  signupMode?: string;
   eventId: number;
   name: string;
   type?: string;
@@ -80,11 +82,11 @@ interface EventDetail {
   termName?: string;
   categoryName?: string;
   signupStart: string;
-  signupEnd: string;
+  signupEnd: string | null;
   eventStart: string;
   eventEnd: string;
   signupCount: number;
-  maxSignup: number;
+  maxSignup: number | null;
   minMember?: number;
   maxMember?: number;
   description?: string;
@@ -128,8 +130,9 @@ export default function SignupDetailPage() {
 
   const status = useMemo(() => {
     if (!data) return null;
+    if (data.signupMode === 'roster') return <Tag color="blue">{now.isBefore(data.eventStart) ? '名单已确定' : now.isBefore(data.eventEnd) ? '正在比赛中' : '比赛已结束'}</Tag>;
     if (now.isBefore(data.signupStart)) return <Tag color="orange">报名未开始</Tag>;
-    if (now.isBefore(data.signupEnd)) return <Tag color="green">报名进行中</Tag>;
+    if (!data.signupEnd || now.isBefore(data.signupEnd)) return <Tag color="green">报名进行中</Tag>;
     if (now.isBefore(data.eventStart)) return <Tag color="blue">等待开赛</Tag>;
     if (now.isBefore(data.eventEnd)) return <Tag color="red">正在比赛中</Tag>;
     return <Tag>已结束</Tag>;
@@ -190,7 +193,7 @@ export default function SignupDetailPage() {
 
   const cancelSignup = async () => {
     if (!data || !user) return;
-    if (!dayjs().isBefore(data.signupEnd)) {
+    if (data.signupEnd && !dayjs().isBefore(data.signupEnd)) {
       setNow(dayjs());
       return message.warning('报名已结束，无法取消报名');
     }
@@ -202,8 +205,8 @@ export default function SignupDetailPage() {
     } else message.error(res.data.msg || '取消失败');
   };
 
-  const canSignup = data && now.isAfter(data.signupStart) && now.isBefore(data.signupEnd) && data.signupCount < data.maxSignup;
-  const signupEnded = data ? !now.isBefore(data.signupEnd) : false;
+  const canSignup = data && data.signupMode !== 'roster' && !now.isBefore(data.signupStart) && (!data.signupEnd || now.isBefore(data.signupEnd)) && (data.maxSignup == null || data.signupCount < data.maxSignup);
+  const signupEnded = !!data?.signupEnd && !now.isBefore(data.signupEnd);
   const eventEnded = data ? !now.isBefore(data.eventEnd) : false;
   const signupStatus = String(signupInfo?.status || 'none');
   const signed = signupStatus === 'approved' || signupStatus === 'pending';
@@ -211,7 +214,7 @@ export default function SignupDetailPage() {
   const signupButtonText = data
     ? signupEnded
       ? '已结束'
-      : data.signupCount >= data.maxSignup
+      : data.maxSignup != null && data.signupCount >= data.maxSignup
         ? '名额已满'
         : '立即报名'
     : '立即报名';
@@ -261,13 +264,13 @@ export default function SignupDetailPage() {
                 <Tag color={data.isTeam ? 'purple' : 'blue'}>{data.isTeam ? '团队赛' : '个人赛'}</Tag>
                 {data.type && <Tag color="cyan">{contestTypeText(data.type)}</Tag>}
                 <span><TrophyOutlined /> 分类：{data.categoryName || '校内赛'}</span>
-                <span><TeamOutlined /> 报名：{data.signupCount}/{data.maxSignup}</span>
+                <span><TeamOutlined /> 报名：{eventSignupCount(data.signupCount,data.maxSignup)}</span>
               </Space>
               
               <Divider style={{ margin: '0 0 24px 0' }} />
               
               <Descriptions bordered column={1} style={{ marginBottom: 24 }}>
-                <Descriptions.Item label="报名时间">{dayjs(data.signupStart).format('YYYY-MM-DD HH:mm')} 至 {dayjs(data.signupEnd).format('YYYY-MM-DD HH:mm')}</Descriptions.Item>
+                <Descriptions.Item label="参赛方式">{data.signupMode === 'roster' ? '按确定名单导入，不开放自主报名' : eventSignupPeriod(data.signupStart, data.signupEnd)}</Descriptions.Item>
                 <Descriptions.Item label="比赛时间">{dayjs(data.eventStart).format('YYYY-MM-DD HH:mm')} 至 {dayjs(data.eventEnd).format('YYYY-MM-DD HH:mm')}</Descriptions.Item>
                 {data.isTeam === 1 && <Descriptions.Item label="队伍人数限制">{data.minMember} - {data.maxMember} 人</Descriptions.Item>}
               </Descriptions>
@@ -287,23 +290,23 @@ export default function SignupDetailPage() {
               <Divider style={{ margin: '24px 0' }} />
               
               <div className="signup-action-zone">
-                {!user ? <Button className="bits-primary-button" onClick={() => router.push('/login')}>请登录后报名</Button> : signed ? (
+                {!user ? <Button className="bits-primary-button" onClick={() => router.push('/login')}>{data.signupMode === 'roster' ? '登录查看本人参赛信息' : '请登录后报名'}</Button> : signed ? (
                   <Result
                     status="success"
                     icon={<SmileOutlined />}
-                    title={signupStatus === 'approved' ? '您已成功报名' : '报名审核中'}
-                    subTitle={<Space wrap>{signupInfo?.teamName ? <Tag>{String(signupInfo.teamName)}</Tag> : null}{signupInfo?.advisor ? <span>指导老师：{String(signupInfo.advisor)}</span> : null}</Space>}
+                    title={signupStatus === 'approved' ? (data.signupMode === 'roster' ? '您已在确定参赛名单中' : '您已成功报名') : '报名审核中'}
+                    subTitle={<Space wrap>{signupInfo?.seatNumber ? <span>座位：{String(signupInfo.seatNumber)}</span> : null}{signupInfo?.teamTypeDisplay ? <Tag>{groupText(signupInfo.teamTypeDisplay)}</Tag> : null}{signupInfo?.teamName ? <Tag>{String(signupInfo.teamName)}</Tag> : null}{signupInfo?.advisor ? <span>指导老师：{String(signupInfo.advisor)}</span> : null}</Space>}
                     extra={
                       <Space wrap>
                         {hasAdmissionTicketInfo && <Button type="primary" icon={<DownloadOutlined />} onClick={downloadAdmissionTicket}>下载参赛证明 PDF</Button>}
-                        {signupEnded ? <Button disabled>报名已结束</Button> : <Popconfirm title="确定取消报名？" onConfirm={cancelSignup}><Button danger>取消报名</Button></Popconfirm>}
+                        {data.signupMode !== 'roster' && (signupEnded ? <Button disabled>报名已结束</Button> : <Popconfirm title="确定取消报名？" onConfirm={cancelSignup}><Button danger>取消报名</Button></Popconfirm>)}
                       </Space>
                     }
                   />
                 ) : (
                   <>
-                    {signupStatus === 'rejected' && <Alert type="error" showIcon message="报名已拒绝，可重新提交报名。" />}
-                    <Button className="bits-primary-button" disabled={!canSignup} onClick={openSignup}>{signupButtonText}</Button>
+                    {data.signupMode === 'roster' ? <Alert showIcon type="info" message={user.accountStatus === 'normal' ? '当前实名身份未匹配到确定参赛名单' : '请先完成实名核验以关联参赛名单'} description="名单由赛事管理员统一导入，名单外不能报名。如信息有误，请联系赛事管理员。" /> : <>{signupStatus === 'rejected' && <Alert type="error" showIcon message="报名已拒绝，可重新提交报名。" />}
+                    <Button className="bits-primary-button" disabled={!canSignup} onClick={openSignup}>{signupButtonText}</Button></>}
                   </>
                 )}
               </div>

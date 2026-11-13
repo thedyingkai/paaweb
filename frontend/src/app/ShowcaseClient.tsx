@@ -54,6 +54,7 @@ export interface NoticeItem {
 }
 
 export interface EventItem {
+    signupMode?: string;
     eventId: number;
     name: string;
     signupStart: string;
@@ -138,8 +139,10 @@ const getTrainingStatus = (item: TrainingItem) => {
 
 const getEventStatus = (item: EventItem) => {
     const now = dayjs();
+  if (item.signupMode === 'roster' && now.isBefore(item.eventStart)) return { text: '名单已确定', color: 'blue', status: 'waiting', order: 3 };
+  if (item.signupMode === 'roster') return now.isBefore(item.eventEnd) ? { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 } : { text: '已结束', color: 'default', status: 'ended', order: 5 };
     if (now.isBefore(item.signupStart)) return { text: '报名未开始', color: 'orange', order: 2 };
-    if (now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', order: 1 };
+    if (!item.signupEnd || now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', order: 1 };
     if (now.isBefore(item.eventStart)) return { text: '等待开赛', color: 'blue', order: 3 };
     if (now.isBefore(item.eventEnd)) return { text: '正在比赛中', color: 'red', order: 4 };
     return { text: '比赛已结束', color: 'default', order: 5 };

@@ -14,6 +14,7 @@ const { RangePicker } = DatePicker;
 
 const EventPublish: React.FC = () => {
     const [form] = Form.useForm();
+    const noSignupDeadline = Form.useWatch('noSignupDeadline', form);
     const navigate = useNavigate();
     const { id } = useParams();
     
@@ -80,11 +81,14 @@ const EventPublish: React.FC = () => {
                     termId: data.termId,
                     categoryId: data.categoryId,
                     isTeam: data.isTeam,
+                    signupMode: data.signupMode || 'open',
                     rankType: data.type || 'XCPC', 
                     maxSignup: data.maxSignup,
                     minMember: min,
                     maxMember: max,
-                    signupTime: [dayjs(data.signupStart), dayjs(data.signupEnd)],
+                    signupStart: dayjs(data.signupStart),
+                    signupEnd: data.signupEnd ? dayjs(data.signupEnd) : null,
+                    noSignupDeadline: !data.signupEnd,
                     eventTime: [dayjs(data.eventStart), dayjs(data.eventEnd)],
                 });
                 setDescription(data.description);
@@ -152,12 +156,13 @@ const EventPublish: React.FC = () => {
                 termId: values.termId,
                 categoryId: values.categoryId,
                 isTeam: values.isTeam,
-                type: values.rankType, 
+                type: values.rankType,
+                signupMode: values.signupMode || 'open',
                 minMember: values.isTeam === 1 ? values.minMember : 1,
                 maxMember: values.isTeam === 1 ? values.maxMember : 1,
-                maxSignup: values.maxSignup,
-                signupStart: values.signupTime[0].format('YYYY-MM-DD HH:mm:ss'),
-                signupEnd: values.signupTime[1].format('YYYY-MM-DD HH:mm:ss'),
+                maxSignup: values.maxSignup ?? null,
+                signupStart: values.signupStart.format('YYYY-MM-DD HH:mm:ss'),
+                signupEnd: values.noSignupDeadline ? null : values.signupEnd.format('YYYY-MM-DD HH:mm:ss'),
                 eventStart: values.eventTime[0].format('YYYY-MM-DD HH:mm:ss'),
                 eventEnd: values.eventTime[1].format('YYYY-MM-DD HH:mm:ss'),
                 description: description,
@@ -190,14 +195,18 @@ const EventPublish: React.FC = () => {
                     form={form} 
                     layout="vertical" 
                     onFinish={onFinish} 
-                    initialValues={{ 
+                    initialValues={{ signupMode: 'open',
                         isTeam: 0, 
                         rankType: 'XCPC',
                         maxSignup: 100,
+                        noSignupDeadline: false,
                         minMember: 1, 
                         maxMember: 3
                     }}
                 >
+                    <Form.Item name="signupMode" label="参赛方式">
+                        <Radio.Group options={[{label:'自主报名',value:'open'},{label:'按确定名单导入',value:'roster'}]} />
+                    </Form.Item>
                     <Row gutter={24}>
                         <Col span={12}>
                             <Form.Item name="name" label="赛事名称" rules={[{ required: true }]}>
@@ -263,16 +272,22 @@ const EventPublish: React.FC = () => {
                         )}
                         
                         <Col span={6}>
-                            <Form.Item name="maxSignup" label={isTeam === 1 ? "最大队伍数" : "最大人数"} rules={[{ required: true }]}>
-                                <InputNumber style={{ width: '100%' }} size="large" />
+                            <Form.Item name="maxSignup" label={isTeam === 1 ? "最大队伍数" : "最大人数"} extra="可留空，按审核确认名单统计人数。">
+                                <InputNumber min={1} max={100000} placeholder="不限制名额" style={{ width: '100%' }} size="large" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={24}>
                         <Col span={12}>
-                            <Form.Item name="signupTime" label="报名起止时间" rules={[{ required: true }]}>
-                                <RangePicker showTime format="YYYY-MM-DD HH:mm" style={{ width: '100%' }} size="large" />
+                            <Form.Item name="signupStart" label="报名开始时间" rules={[{ required: true }]}>
+                                <DatePicker showTime format="YYYY-MM-DD HH:mm" style={{ width: '100%' }} size="large" />
                             </Form.Item>
+                            <Form.Item name="noSignupDeadline" label="报名截止设置">
+                                <Radio.Group options={[{label:'设置截止时间',value:false},{label:'不设截止时间',value:true}]} />
+                            </Form.Item>
+                            {!noSignupDeadline && <Form.Item name="signupEnd" label="报名截止时间" rules={[{required:true}]}>
+                                <DatePicker showTime format="YYYY-MM-DD HH:mm" style={{width:'100%'}} size="large" />
+                            </Form.Item>}
                         </Col>
                         <Col span={12}>
                              <Form.Item name="eventTime" label="比赛起止时间" rules={[{ required: true }]}>

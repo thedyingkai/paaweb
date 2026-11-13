@@ -6,6 +6,7 @@ import { PlusOutlined, SearchOutlined, EditOutlined, TeamOutlined, DeleteOutline
 import { useNavigate } from '@/app/admin/_legacy/router';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { eventSignupPeriod, eventSignupCount } from '@/utils/eventSignup';
 import ExternalBoardManagerModal from './ExternalBoardManagerModal';
 import { contestTypeText } from '@/utils/contestDisplay';
 
@@ -23,8 +24,10 @@ const EventManager: React.FC = () => {
 
     const getEventStatus = (item: any) => {
         const now = dayjs();
+  if (item.signupMode === 'roster' && now.isBefore(item.eventStart)) return { text: '名单已确定', color: 'blue', status: 'waiting', order: 3 };
+  if (item.signupMode === 'roster') return now.isBefore(item.eventEnd) ? { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 } : { text: '已结束', color: 'default', status: 'ended', order: 5 };
         if (now.isBefore(item.signupStart)) return { text: '报名未开始', color: 'orange', status: 'pending', order: 2 };
-        if (now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', status: 'registering', order: 1 };
+        if (!item.signupEnd || now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', status: 'registering', order: 1 };
         if (now.isBefore(item.eventStart)) return { text: '等待开赛', color: 'blue', status: 'waiting', order: 3 };
         if (now.isBefore(item.eventEnd)) return { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 };
         return { text: '比赛已结束', color: 'default', status: 'ended', order: 5 };
@@ -46,7 +49,7 @@ const EventManager: React.FC = () => {
                     }
                     
                     if (statusA.status === 'registering') {
-                         return dayjs(a.signupEnd).valueOf() - dayjs(b.signupEnd).valueOf();
+                         return (a.signupEnd ? dayjs(a.signupEnd).valueOf() : Number.MAX_SAFE_INTEGER) - (b.signupEnd ? dayjs(b.signupEnd).valueOf() : Number.MAX_SAFE_INTEGER);
                     } else if (statusA.status === 'pending') {
                          return dayjs(a.signupStart).valueOf() - dayjs(b.signupStart).valueOf();
                     } else if (statusA.status === 'waiting') {
@@ -115,7 +118,7 @@ const EventManager: React.FC = () => {
             title: '报名', 
             width: 120,
             render: (_: any, record: any) => (
-                <span>{record.signupCount || 0} / {record.maxSignup}</span>
+                <span>{eventSignupCount(record.signupCount,record.maxSignup)}</span>
             )
         },
         {

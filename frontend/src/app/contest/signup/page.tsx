@@ -4,6 +4,7 @@ import { Badge, Card, Col, Empty, Input, List, Progress, Row, Skeleton, Space, T
 import { CalendarOutlined, ClockCircleOutlined, SearchOutlined, TrophyOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { eventSignupPeriod, eventSignupCount } from '@/utils/eventSignup';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import ActivityLayout from '../ContestNav';
@@ -11,22 +12,25 @@ import ActivityLayout from '../ContestNav';
 const { Title, Text } = Typography;
 
 interface EventItem {
+    signupMode?: string;
   eventId: number;
   name: string;
   categoryName?: string;
   isTeam?: number;
   signupStart: string;
-  signupEnd: string;
+  signupEnd: string | null;
   eventStart: string;
   eventEnd: string;
   signupCount: number;
-  maxSignup: number;
+  maxSignup: number | null;
 }
 
 const getEventStatus = (item: EventItem) => {
   const now = dayjs();
+  if (item.signupMode === 'roster' && now.isBefore(item.eventStart)) return { text: '名单已确定', color: 'blue', status: 'waiting', order: 3 };
+  if (item.signupMode === 'roster') return now.isBefore(item.eventEnd) ? { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 } : { text: '已结束', color: 'default', status: 'ended', order: 5 };
   if (now.isBefore(item.signupStart)) return { text: '报名未开始', color: 'orange', status: 'pending', order: 2 };
-  if (now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', status: 'registering', order: 1 };
+  if (!item.signupEnd || now.isBefore(item.signupEnd)) return { text: '报名进行中', color: 'green', status: 'registering', order: 1 };
   if (now.isBefore(item.eventStart)) return { text: '等待开赛', color: 'blue', status: 'waiting', order: 3 };
   if (now.isBefore(item.eventEnd)) return { text: '正在比赛中', color: 'red', status: 'ongoing', order: 4 };
   return { text: '已结束', color: 'default', status: 'ended', order: 5 };
@@ -65,7 +69,7 @@ export default function ActivitySignupPage() {
           {filtered.length ? (
             <List dataSource={filtered} renderItem={item => {
               const status = getEventStatus(item);
-              const percent = item.maxSignup > 0 ? Math.min(100, Math.round((item.signupCount / item.maxSignup) * 100)) : 0;
+              const percent = item.maxSignup != null && item.maxSignup > 0 ? Math.min(100, Math.round((item.signupCount / item.maxSignup) * 100)) : 0;
               return (
                 <List.Item style={{ width: '100%', padding: '12px 0' }}>
                   <div style={{ width: '100%' }}>
@@ -81,12 +85,12 @@ export default function ActivitySignupPage() {
                               {item.categoryName && <Tag style={{ margin: 0 }}>{item.categoryName}</Tag>}
                             </div>
                             <Space className="activity-time-row" direction="vertical" style={{ display: 'flex', marginTop: 0 }}>
-                              <span><ClockCircleOutlined /> 报名：{dayjs(item.signupStart).format('YYYY-MM-DD HH:mm')} ~ {dayjs(item.signupEnd).format('YYYY-MM-DD HH:mm')}</span>
+                              <span><ClockCircleOutlined /> {item.signupMode === 'roster' ? '参赛：按确定名单导入，不开放自主报名' : `报名：${eventSignupPeriod(item.signupStart, item.signupEnd)}`}</span>
                               <span><CalendarOutlined /> 比赛：{dayjs(item.eventStart).format('YYYY-MM-DD HH:mm')} ~ {dayjs(item.eventEnd).format('YYYY-MM-DD HH:mm')}</span>
                             </Space>
                           </Col>
                           <Col xs={24} md={6}>
-                            <div className="signup-progress"><span>{item.signupCount}/{item.maxSignup}</span><Progress percent={percent} showInfo={false} /></div>
+                            <div className="signup-progress"><span>{eventSignupCount(item.signupCount,item.maxSignup)}</span>{item.maxSignup != null && <Progress percent={percent} showInfo={false} />}</div>
                           </Col>
                         </Row>
                       </Card>
